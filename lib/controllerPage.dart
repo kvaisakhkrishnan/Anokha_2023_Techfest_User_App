@@ -1,4 +1,5 @@
  import 'package:anokha_home/homePage.dart';
+import 'package:anokha_home/registerPage.dart';
 import 'package:anokha_home/rive_assets.dart';
 import 'package:anokha_home/user_profile.dart';
 import 'package:anokha_home/utils.dart';
@@ -55,7 +56,7 @@ class _ControllerPageState extends State<ControllerPage> {
 
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
 
               ...List.generate(
@@ -117,12 +118,14 @@ class _ControllerPageState extends State<ControllerPage> {
     switch (index){
       case 0:
         return HomeWidget(gravatar_url: gravatar_url,);
-        break;
-      case 4:
+      case 1:
+        return Text("OK");
+      case 2:
+        return RegisterPage();
+      case 3:
         return userProf(avatarLink: gravatar_url,);
-        break;
       default:
-        return Text("OK@");
+        return Text("Dummy Widget");
     }
   }
 
