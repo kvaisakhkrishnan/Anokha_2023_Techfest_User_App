@@ -11,6 +11,7 @@ import 'package:rive/rive.dart';
 import 'package:simple_gravatar/simple_gravatar.dart';
 
 import 'animated_bar.dart';
+import 'crew_members.dart';
 
 
 class ControllerPage extends StatefulWidget {
@@ -126,6 +127,8 @@ class _ControllerPageState extends State<ControllerPage> {
         return RegisteredEvents();
       case 3:
         return userProf(avatarLink: gravatar_url,);
+      case 4:
+        return GetCrew();
       default:
         return Text("Dummy Widget");
     }

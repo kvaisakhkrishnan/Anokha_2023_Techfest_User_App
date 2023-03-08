@@ -14,9 +14,10 @@ class RiveAsset{
   }
 }
 
-List<RiveAsset> bottomNavs = [
+List bottomNavs = [
   RiveAsset(artboard: "HOME", stateMachineName: "HOME_interactivity", title: "Home"),
   RiveAsset(artboard: "LIKE/STAR", stateMachineName: "STAR_Interactivity", title: "Search"),
   RiveAsset(artboard: "TIMER", stateMachineName: "TIMER_Interactivity", title: "Timer"),
   RiveAsset(artboard: "USER", stateMachineName: "USER_Interactivity", title: "Profile"),
+  RiveAsset(artboard: "SETTINGS", stateMachineName: "SETTINGS_Interactivity", title: "Crew")
 ];
