@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'Loading_Screens/events_loading.dart';
+
 String host = "http://18.183.52.0:3060";
 
 class events {
@@ -82,11 +84,7 @@ class _HomeBodyState extends State<HomeBody> {
       future: getEvents(),
       builder: (BuildContext ctx, AsyncSnapshot snapshot) {
         if (snapshot.data == null) {
-          return Container(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
+          return Events_Loading_screen();
         } else {
           return ListView.builder(
               itemCount: snapshot.data.length,

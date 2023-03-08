@@ -5,7 +5,6 @@ import 'package:anokha_home/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'Loading_Screens/events_loading.dart';
 import 'controllerPage.dart';
 import 'homePage.dart';
 
@@ -39,7 +38,7 @@ class _myAppState extends State<myApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Anokha 2023",
-      home: Scaffold(body: Events_Loading_screen()),
+      home: ControllerPage(),
       // home: Stack(
       //   children: [
       //     SplashScreen(),
