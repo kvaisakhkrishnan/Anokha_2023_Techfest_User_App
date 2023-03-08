@@ -4,14 +4,14 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class StarredEvents extends StatefulWidget {
+  const StarredEvents({Key? key}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<StarredEvents> createState() => _StarredEvents();
 }
 
-class _HomeState extends State<Home> {
+class _StarredEvents extends State<StarredEvents> {
   String url = "http://192.168.193.228:3000/api/events/all";
 
   Future<List> getData() async {

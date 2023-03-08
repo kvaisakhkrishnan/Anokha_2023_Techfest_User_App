@@ -2,6 +2,7 @@
 import 'package:anokha_home/registerPage.dart';
 import 'package:anokha_home/registeredEvents.dart';
 import 'package:anokha_home/rive_assets.dart';
+import 'package:anokha_home/starred_events.dart';
 import 'package:anokha_home/user_profile.dart';
 import 'package:anokha_home/utils.dart';
 import 'package:flutter/material.dart';
@@ -120,7 +121,7 @@ class _ControllerPageState extends State<ControllerPage> {
       case 0:
         return HomeWidget(gravatar_url: gravatar_url,);
       case 1:
-        return Text("OK");
+        return StarredEvents();
       case 2:
         return RegisteredEvents();
       case 3:
