@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'controllerPage.dart';
 import 'homePage.dart';
 
+import 'login.dart';
 import 'onBoard.dart';
 
 void main() => runApp(myApp());
@@ -38,7 +39,7 @@ class _myAppState extends State<myApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Anokha 2023",
-      home: ControllerPage(),
+      home: loginPage(),
       // home: Stack(
       //   children: [
       //     SplashScreen(),
