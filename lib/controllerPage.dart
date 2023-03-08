@@ -1,5 +1,6 @@
  import 'package:anokha_home/homePage.dart';
 import 'package:anokha_home/registerPage.dart';
+import 'package:anokha_home/registeredEvents.dart';
 import 'package:anokha_home/rive_assets.dart';
 import 'package:anokha_home/user_profile.dart';
 import 'package:anokha_home/utils.dart';
@@ -121,7 +122,7 @@ class _ControllerPageState extends State<ControllerPage> {
       case 1:
         return Text("OK");
       case 2:
-        return RegisterPage();
+        return RegisteredEvents();
       case 3:
         return userProf(avatarLink: gravatar_url,);
       default:
