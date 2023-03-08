@@ -40,8 +40,8 @@ class _userProfState extends State<userProf> {
     return Scaffold(
         backgroundColor: islight ? Color(0xFFFFFFFC) : Color(0xFF002845),
         appBar: AppBar(
-// toolbarHeight: 10,
-          backgroundColor: Colors.transparent,
+
+          backgroundColor: Colors.white,
           elevation: 0.0,
           actions: [
             Container(
@@ -79,9 +79,8 @@ class _userProfState extends State<userProf> {
                           children: [
                             Container(
                               margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
-                              height: MediaQuery.of(context).size.height * 0.06,
-                              child: Image.asset(
-                                  'Images/anokha_circle.png'),
+                              height: MediaQuery.of(context).size.height * 0.08,
+                              child: Image(image: AssetImage('Images/anokha_circle.png'),),
                             ),
                             Container(
                               margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
@@ -165,7 +164,7 @@ class _userProfState extends State<userProf> {
                               ),
                             ),
                             Container(
-                              height: MediaQuery.of(context).size.height * 0.27,
+                              height: MediaQuery.of(context).size.height * 0.22,
                               child: GestureDetector(
                                 onTap: () {
                                   _showImageDialog(context);
