@@ -39,7 +39,7 @@ class _myAppState extends State<myApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Anokha 2023",
-      home: ControllerPage(),
+      home: loginPage(),
       // home: Stack(
       //   children: [
       //     SplashScreen(),
