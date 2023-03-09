@@ -60,8 +60,8 @@ class _HomeWidgetState extends State<HomeWidget> {
 
             },
             child: Padding(
-              child: Image(image: NetworkImage(widget.gravatar_url),
-              width: 40.0,
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(widget.gravatar_url),
               ),
               padding:  EdgeInsets.only(right: 20.0, left: 20.0, bottom: 20.0),
 

@@ -11,6 +11,8 @@ class loginPage extends StatefulWidget {
 class _loginPageState extends State<loginPage> {
   bool _obscureText = true;
 
+  bool logged_in = false;
+
   void _toggle() {
     setState(() {
       _obscureText = !_obscureText;
@@ -30,7 +32,7 @@ class _loginPageState extends State<loginPage> {
                   flex: 7,
                   child: Container(
                     alignment: Alignment.bottomCenter,
-                    child: Image.asset('assets/images/anokha_logo_login_page.png'),
+                    child: Image.asset('Images/logo.png'),
                   ),
                 ),
                 Expanded(
