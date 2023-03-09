@@ -7,9 +7,9 @@ import 'dart:convert';
 
 import 'Loading_Screens/events_loading.dart';
 
-String host = "http://18.183.52.0:3060";
+final String host = "http://18.183.52.0:3060";
 
-class events {
+class event_list {
   final int eventId;
   final String name;
   final String description;
@@ -21,7 +21,7 @@ class events {
   final String department;
   final String day;
 
-  events(
+  event_list(
       {required this.eventId,
       required this.name,
       required this.description,
@@ -36,7 +36,7 @@ class events {
 
 class events_grouped_by_category {
   final String title;
-  final List<events> events_list;
+  final List<event_list> events_list;
 
   events_grouped_by_category({required this.title, required this.events_list});
 }
@@ -56,9 +56,9 @@ class _HomeBodyState extends State<HomeBody> {
     List<events_grouped_by_category> list_of_events = [];
     for (var individual_data in responseData) {
       String temp_title = individual_data["department"];
-      List<events> temp_event_list = [];
+      List<event_list> temp_event_list = [];
       for (var events_in_a_row in individual_data["events"]) {
-        events temp_event_data = events(
+        event_list temp_event_data = event_list(
             eventId: events_in_a_row["eventId"],
             name: events_in_a_row["name"],
             description: events_in_a_row["description"],

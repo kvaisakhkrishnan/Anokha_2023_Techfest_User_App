@@ -5,7 +5,7 @@ import 'homeBody.dart';
 import 'homeEventCard.dart';
 
 class CardRow extends StatefulWidget {
-  List<events> list_of_events;
+  List<event_list> list_of_events;
   CardRow({
     Key? key,
     required this.list_of_events,

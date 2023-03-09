@@ -1,15 +1,52 @@
 import 'package:anokha_home/rive_assets.dart';
 import 'package:anokha_home/rowOfCards.dart';
+import 'package:anokha_home/searchResults.dart';
 import 'package:anokha_home/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rive/rive.dart';
 import 'package:simple_gravatar/simple_gravatar.dart';
 
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'animated_bar.dart';
 import 'homeBody.dart';
 import 'homeEventCard.dart';
+
+
+final String host = "http://18.183.52.0:3060";
+
+List<String> search_match = [];
+
+class events {
+  final int eventId;
+  final String name;
+  final String description;
+  final String date;
+  final String type;
+  final String venue;
+  final String startTime;
+  final String endTime;
+  final String department;
+  final String day;
+
+  events(
+      {required this.eventId,
+        required this.name,
+        required this.description,
+        required this.date,
+        required this.type,
+        required this.venue,
+        required this.startTime,
+        required this.endTime,
+        required this.department,
+        required this.day});
+}
+
+
+
+List<events> list_of_events_organized = [];
+
 
 class HomeWidget extends StatefulWidget {
   String gravatar_url;
@@ -21,6 +58,29 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
+
+
+  Future<void> get_events_list() async{
+    String url = host + "/api/events/all";
+    final response = await http.get(Uri.parse(url));
+    var responseData = json.decode(response.body);
+    for(var individual_event in responseData){
+      events temp_event = events(
+          eventId: individual_event["eventId"],
+          name: individual_event["name"],
+          description: individual_event["description"],
+          date: individual_event["date"],
+          type: individual_event["type"],
+          venue: individual_event["venue"],
+          startTime: individual_event["startTime"],
+          endTime: individual_event["endTime"],
+          department: individual_event["department"],
+          day: individual_event["day"]);
+      list_of_events_organized.add(temp_event);
+
+
+    }
+  }
 
 
 
@@ -46,6 +106,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                 showSearch(
                     context: context,
                     delegate: CustomSearchDelegate());
+                get_events_list();
 
               },
             )
@@ -70,6 +131,23 @@ class _HomeWidgetState extends State<HomeWidget> {
         ],
       ),
       body: HomeBody()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     );
   }
 
@@ -84,8 +162,21 @@ class CustomSearchDelegate extends SearchDelegate {
     "Day 1 Events",
     "Day 2 Events",
     "Day 3 Events",
-    "Workshops",
-    "Technical Events"
+    "AEE Department",
+    "AIE Department",
+    "ARE Department",
+    "CCE Department",
+    "CHE Department",
+    "CIE Department",
+    "CVI Department",
+    "CSE Department",
+    "CYS Department",
+    "EAC Department",
+    "ECE Department",
+    "EEE Department",
+    "EIE Department",
+    "ELC Department",
+    "MEE Department"
   ];
 
   String _query = '';
@@ -95,20 +186,7 @@ class CustomSearchDelegate extends SearchDelegate {
   }
 
   void _onQueryChanged() {
-    if(query == "")
-      {
-        searchTerms = [
-          "Popular Events",
-          "Day 1 Events",
-          "Day 2 Events",
-          "Day 3 Events",
-          "Workshops",
-          "Technical Events"
-        ];
-      }
-    else{
-      searchTerms.add(query);
-    }
+
   }
 
   @override
@@ -151,7 +229,10 @@ class CustomSearchDelegate extends SearchDelegate {
       itemBuilder: (context, index){
         var result = searchTerms[index];
         return TextButton(
-            onPressed: (){},
+            onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                  SearchResults(list_of_events_organized: list_of_events_organized, index: index)));
+            },
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
               child: Container(

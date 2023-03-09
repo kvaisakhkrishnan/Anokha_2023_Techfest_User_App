@@ -11,8 +11,6 @@ class loginPage extends StatefulWidget {
 class _loginPageState extends State<loginPage> {
   bool _obscureText = true;
 
-  bool logged_in = false;
-
   void _toggle() {
     setState(() {
       _obscureText = !_obscureText;

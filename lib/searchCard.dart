@@ -1,19 +1,20 @@
+import 'package:anokha_home/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'homeBody.dart';
 
-class EventCard extends StatefulWidget {
-  final event_list event_data;
+class SearchCard extends StatefulWidget {
+  final events event_data;
 
-  EventCard({Key? key, required this.event_data}) : super(key: key);
+  SearchCard({Key? key, required this.event_data}) : super(key: key);
 
 
   @override
-  State<EventCard> createState() => _EventCardState();
+  State<SearchCard> createState() => _SearchCard();
 }
 
-class _EventCardState extends State<EventCard> {
+class _SearchCard extends State<SearchCard> {
   bool starred = false;
   @override
   Widget build(BuildContext context) {
@@ -24,22 +25,22 @@ class _EventCardState extends State<EventCard> {
           children: [
             Container(
               decoration: BoxDecoration(
-                boxShadow: [
-            BoxShadow(
-            color: Colors.grey,
-            spreadRadius: 1.0,
-            blurRadius: 10.0
-        )
-          ],
-                image: DecorationImage(
-                  image: NetworkImage('https://play-lh.googleusercontent.com/VojafVZNddI6JvdDGWFrRmxc-prrcInL2AuBymsqGoeXjT4f9sv7KnetB-v3iLxk_Koi'),
-                  fit: BoxFit.fill
-                ),
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0))
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey,
+                        spreadRadius: 1.0,
+                        blurRadius: 10.0
+                    )
+                  ],
+                  image: DecorationImage(
+                      image: NetworkImage('https://play-lh.googleusercontent.com/VojafVZNddI6JvdDGWFrRmxc-prrcInL2AuBymsqGoeXjT4f9sv7KnetB-v3iLxk_Koi'),
+                      fit: BoxFit.fill
+                  ),
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0))
               ),
               constraints: BoxConstraints.expand(
-                height: MediaQuery.of(context).size.width * 0.4 * 1.0,
-                width: MediaQuery.of(context).size.width * 0.4
+                  height: MediaQuery.of(context).size.width * 0.4 * 1.0,
+                  width: MediaQuery.of(context).size.width * 0.4
               ),
 
 
@@ -55,10 +56,10 @@ class _EventCardState extends State<EventCard> {
                     children: [
                       Text(widget.event_data.name,
 
-                      style: TextStyle(
+                        style: TextStyle(
 
-                        fontSize: 20.0,
-                      ),),
+                          fontSize: 20.0,
+                        ),),
                       Text(widget.event_data.type,
                         style: TextStyle(
 
@@ -81,7 +82,7 @@ class _EventCardState extends State<EventCard> {
                       icon: Icon(
                           Icons.star_border
                       ))
-                  :
+                      :
                   IconButton(
                       iconSize: 30.0,
                       alignment: Alignment.centerRight,
@@ -101,24 +102,24 @@ class _EventCardState extends State<EventCard> {
                   width: MediaQuery.of(context).size.width * 0.4
               ),
               decoration: (
-              BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    spreadRadius: 1.0,
-                    blurRadius: 10.0
+                  BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey,
+                            spreadRadius: 1.0,
+                            blurRadius: 10.0
+                        )
+                      ],
+                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(25.0), bottomRight: Radius.circular(25.0))
                   )
-                ],
-                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(25.0), bottomRight: Radius.circular(25.0))
-              )
               ),
 
-              )
+            )
 
           ],
 
-    ),
+        ),
       );
   }
 }
