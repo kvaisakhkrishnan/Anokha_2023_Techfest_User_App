@@ -6,6 +6,8 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'Loading_Screens/events_loading.dart';
+
 class GetCrew extends StatefulWidget {
   const GetCrew({Key? key}) : super(key: key);
 
@@ -33,7 +35,7 @@ class _GetCrewState extends State<GetCrew> {
               if (ss.hasData) {
                 return CrewMembers(list: ss.data);
               } else {
-                return CircularProgressIndicator();
+                return Events_Loading_screen();
               }
             }));
   }
@@ -72,11 +74,13 @@ class _CrewMembersState extends State<CrewMembers> {
     final List<int> a = List.generate(crew_list.length, (index) => index);
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Container(
           child: Scaffold(
-            backgroundColor: HexColor("#002845"),
+            backgroundColor: Colors.white,
             appBar: AppBar(
-              backgroundColor: HexColor("#002845"),
+              toolbarHeight: 0,
+              backgroundColor: Colors.white,
               elevation: 0,
               leading: IconButton(
                   onPressed: () {},
@@ -85,9 +89,7 @@ class _CrewMembersState extends State<CrewMembers> {
                     Icons.arrow_back_ios,
                     color: HexColor("#FFFFFC"),
                   )),
-              title: Text("Crew Members",
-                  style: GoogleFonts.dmSans(color: Colors.white)),
-              centerTitle: true,
+
             ),
             body: Column(
               children: [

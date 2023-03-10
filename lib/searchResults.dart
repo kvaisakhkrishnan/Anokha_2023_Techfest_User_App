@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'Loading_Screens/events_loading.dart';
+import 'event_info.dart';
 import 'homeEventCard.dart';
 import 'homePage.dart';
 
@@ -50,6 +51,202 @@ class _SearchResultsState extends State<SearchResults> {
     List<events> filtered_events = [];
 
   if(searchTerms.contains(widget.index)){
+
+    if(widget.index == "Popular Events"){
+
+    }
+
+    else if(widget.index == "Day 1 Events"){
+      for(var event_data in widget.list_of_events_organized){
+        if(
+            event_data.day.contains("Day1")
+        ){
+          filtered_events.add(event_data);
+        }
+      }
+    }
+
+    else if(widget.index == "Day 2 Events"){
+      for(var event_data in widget.list_of_events_organized){
+        if(
+        event_data.day.contains("Day2")
+        ){
+          filtered_events.add(event_data);
+        }
+      }
+    }
+
+    else if(widget.index == "Day 3 Events"){
+      for(var event_data in widget.list_of_events_organized){
+        if(
+        event_data.day.contains("Day3")
+        ){
+          filtered_events.add(event_data);
+        }
+      }
+    }
+
+    else if(widget.index == "AEE Department"){
+      for(var event_data in widget.list_of_events_organized){
+        if(
+        event_data.department.contains("AEE")
+        ){
+          filtered_events.add(event_data);
+        }
+      }
+    }
+
+
+    else if(widget.index == "AIE Department"){
+      for(var event_data in widget.list_of_events_organized){
+        if(
+        event_data.department.contains("AIE")
+        ){
+          filtered_events.add(event_data);
+        }
+      }
+    }
+
+    else if(widget.index == "ARE Department"){
+      for(var event_data in widget.list_of_events_organized){
+        if(
+        event_data.department.contains("ARE")
+        ){
+          filtered_events.add(event_data);
+        }
+      }
+    }
+
+    else if(widget.index == "CCE Department"){
+      for(var event_data in widget.list_of_events_organized){
+        if(
+        event_data.department.contains("CCE")
+        ){
+          filtered_events.add(event_data);
+        }
+      }
+    }
+
+    else if(widget.index == "CHE Department"){
+      for(var event_data in widget.list_of_events_organized){
+        if(
+        event_data.department.contains("CHE")
+        ){
+          filtered_events.add(event_data);
+        }
+      }
+    }
+
+    else if(widget.index == "CIE Department"){
+      for(var event_data in widget.list_of_events_organized){
+        if(
+        event_data.department.contains("CIE")
+        ){
+          filtered_events.add(event_data);
+        }
+      }
+    }
+
+    else if(widget.index == "CVI Department"){
+      for(var event_data in widget.list_of_events_organized){
+        if(
+        event_data.department.contains("CVI")
+        ){
+          filtered_events.add(event_data);
+        }
+      }
+    }
+
+
+    else if(widget.index == "CSE Department"){
+      for(var event_data in widget.list_of_events_organized){
+        if(
+        event_data.department.contains("CSE")
+        ){
+          filtered_events.add(event_data);
+        }
+      }
+    }
+
+    else if(widget.index == "CYS Department"){
+      for(var event_data in widget.list_of_events_organized){
+        if(
+        event_data.department.contains("CYS")
+        ){
+          filtered_events.add(event_data);
+        }
+      }
+    }
+
+    else if(widget.index == "EAC Department"){
+      for(var event_data in widget.list_of_events_organized){
+        if(
+        event_data.department.contains("EAC")
+        ){
+          filtered_events.add(event_data);
+        }
+      }
+    }
+
+    else if(widget.index == "ECE Department"){
+      for(var event_data in widget.list_of_events_organized){
+        if(
+        event_data.department.contains("ECE")
+        ){
+          filtered_events.add(event_data);
+        }
+      }
+    }
+
+    else if(widget.index == "EEE Department"){
+      for(var event_data in widget.list_of_events_organized){
+        if(
+        event_data.department.contains("EEE")
+        ){
+          filtered_events.add(event_data);
+        }
+      }
+    }
+
+    else if(widget.index == "EIE Department"){
+
+      for(var event_data in widget.list_of_events_organized){
+        if(
+        event_data.department.contains("EIE")
+        ){
+          filtered_events.add(event_data);
+        }
+      }
+
+    }
+
+
+
+
+    else if(widget.index == "ELC Department"){
+      for(var event_data in widget.list_of_events_organized){
+        if(
+        event_data.department.contains("ELC")
+        ){
+          filtered_events.add(event_data);
+        }
+      }
+
+    }
+
+    else if(widget.index == "MEE Department"){
+      for(var event_data in widget.list_of_events_organized){
+        if(
+        event_data.department.contains("MEE")
+        ){
+          filtered_events.add(event_data);
+        }
+      }
+
+    }
+
+
+
 
   }
 
@@ -102,10 +299,17 @@ class _SearchResultsState extends State<SearchResults> {
                 mainAxisSpacing: 70,
                 children: List.generate(filteredEvents.length, (index) {
                   events event = filteredEvents[index];
-                  return SearchCard(event_data: filteredEvents[index]);
+                  return IntrinsicHeight(
+                    child: InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => EventInfo()));
+                        },
+                        child: SearchCard(event_data: filteredEvents[index])),
+                  );
                 }),
               );
-            }
+
+          }
           },
         )
 

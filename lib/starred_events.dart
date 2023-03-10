@@ -4,6 +4,8 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'Loading_Screens/events_loading.dart';
+
 class StarredEvents extends StatefulWidget {
   const StarredEvents({Key? key}) : super(key: key);
 
@@ -31,7 +33,7 @@ class _StarredEvents extends State<StarredEvents> {
             if (ss.hasData) {
               return Wheel(list: ss.data);
             } else {
-              return CircularProgressIndicator();
+              return Events_Loading_screen();
             }
           }),
     );
