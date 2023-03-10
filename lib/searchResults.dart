@@ -7,9 +7,35 @@ import 'Loading_Screens/events_loading.dart';
 import 'homeEventCard.dart';
 import 'homePage.dart';
 
+
+
+
+List<String> searchTerms = [
+  "Popular Events",
+  "Day 1 Events",
+  "Day 2 Events",
+  "Day 3 Events",
+  "AEE Department",
+  "AIE Department",
+  "ARE Department",
+  "CCE Department",
+  "CHE Department",
+  "CIE Department",
+  "CVI Department",
+  "CSE Department",
+  "CYS Department",
+  "EAC Department",
+  "ECE Department",
+  "EEE Department",
+  "EIE Department",
+  "ELC Department",
+  "MEE Department"
+];
+
+
 class SearchResults extends StatefulWidget {
   final List<events> list_of_events_organized;
-  final int index;
+  final String index;
   SearchResults({Key? key,
   required this.list_of_events_organized,
   required this.index}) : super(key: key);
@@ -23,17 +49,24 @@ class _SearchResultsState extends State<SearchResults> {
   Future<List<events>> getEvents() async{
     List<events> filtered_events = [];
 
+  if(searchTerms.contains(widget.index)){
 
-    //Required updation
+  }
 
-
-
-
-    for (var event_data in list_of_events_organized){
-      if(event_data.department == "CIE"){
+  else{
+    for(var event_data in widget.list_of_events_organized){
+      if(
+      event_data.name.toLowerCase().contains(widget.index.toLowerCase()) ||
+      event_data.type.toLowerCase().contains(widget.index.toLowerCase()) ||
+      event_data.day.toLowerCase().contains(widget.index.toLowerCase()) ||
+      event_data.department.toLowerCase().contains(widget.index.toLowerCase()) ||
+      event_data.venue.toLowerCase().contains(widget.index.toLowerCase())
+      ){
         filtered_events.add(event_data);
       }
     }
+  }
+
     return filtered_events;
   }
 
