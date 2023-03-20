@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import 'confirmPassword.dart';
+
 
 class forgotPassword extends StatefulWidget {
   const forgotPassword({Key? key}) : super(key: key);
@@ -8,6 +13,23 @@ class forgotPassword extends StatefulWidget {
 }
 
 class _forgotPasswordState extends State<forgotPassword> {
+  Future<int> emailExists(String email) async {
+    final response = await http.get(
+      Uri.parse('http://192.168.38.227:3000/mithundeandi'), // Replace with your API URL
+      // body: jsonEncode({'email': email}),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      // print("in");
+      final responseBody = jsonDecode(response.body);
+      // print(responseBody['exist']);
+      return responseBody['exist']; // Replace 'exists' with the appropriate key from your API response
+    } else {
+      throw Exception('Failed to check email');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +48,7 @@ class _forgotPasswordState extends State<forgotPassword> {
             Container(
               height: MediaQuery.of(context).size.height * 0.4,
               width: MediaQuery.of(context).size.width,
-              child: Image.asset('assets/images/forgotpasswordimage.jpg'),
+              // child: Image.asset('assets/images/forgotpasswordimage.jpg'),
             ),
             SizedBox(height: MediaQuery.of(context).size.width * 0.05,),
             Center(
@@ -82,7 +104,22 @@ class _forgotPasswordState extends State<forgotPassword> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () async {
+                            final emailController = TextEditingController();
+                            int exists = await emailExists(emailController.text);
+                            print(exists);
+                            if (exists == 1) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => confirmPassword()), // Replace NextScreen with the target screen widget
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Email not found')),
+                              );
+                            }
+                          },
+
                           child: Text('SUBMIT'),
                         ),
                       ),

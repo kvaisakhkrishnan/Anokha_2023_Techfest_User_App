@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'controllerPage.dart';
+import 'forgotPassword.dart';
 import 'homePage.dart';
 
 import 'login.dart';
@@ -39,7 +40,7 @@ class _myAppState extends State<myApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Anokha 2023",
-      home: ControllerPage(),
+      home: forgotPassword(),
       // home: Stack(
       //   children: [
       //     SplashScreen(),
