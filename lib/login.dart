@@ -1,5 +1,53 @@
+import 'package:anokha_home/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:async';
+
+// import 'package:shared_preferences/shared_preferences.dart';
+
+class User {
+  final String userEmail;
+  final String fullName;
+  final int activePassport;
+  final int isAmritaCBE;
+  final String collegeName;
+  final String district;
+  final String state;
+  final String country;
+
+  @override
+  String toString() {
+    return 'User{userEmail: $userEmail, fullName: $fullName, activePassport: $activePassport, isAmritaCBE: $isAmritaCBE, collegeName: $collegeName, district: $district, state: $state, country: $country}';
+  }
+  User({
+    required this.userEmail,
+    required this.fullName,
+    required this.activePassport,
+    required this.isAmritaCBE,
+    required this.collegeName,
+    required this.district,
+    required this.state,
+    required this.country,
+
+
+  });
+
+  // factory User.fromJson(Map<String, dynamic> json) {
+  //   return User(
+  //     userEmail: json['userEmail'],
+  //     fullName: json['fullName'],
+  //     activePassport: json['activePassport'],
+  //     isAmritaCBE: json['isAmritaCBE'],
+  //     collegeName: json['collegeName'],
+  //     district: json['district'],
+  //     state: json['state'],
+  //     country: json['country'],
+  //   );
+  // }
+}
+
 
 class loginPage extends StatefulWidget {
   const loginPage({Key? key}) : super(key: key);
@@ -9,6 +57,57 @@ class loginPage extends StatefulWidget {
 }
 
 class _loginPageState extends State<loginPage> {
+
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  Future<int> loginUser(String username, String password) async {
+    // print(username);
+    final response = await http.get(
+      Uri.parse('http://18.182.1.81:3000/userApp/login/$username/$password'),
+    );
+    // print(response.body);
+    if (response.statusCode == 200) {
+      var jsonResponse = jsonDecode(response.body);
+      // var userDetails = jsonResponse['details'];
+      // if (userDetails != null) {
+      //   User user = User(
+      //     userEmail: userDetails['userEmail'],
+      //     fullName: userDetails['fullName'],
+      //     activePassport: userDetails['activePassport'],
+      //     isAmritaCBE: userDetails['isAmritaCBE'],
+      //     collegeName: userDetails['collegeName'],
+      //     district: userDetails['district'],
+      //     state: userDetails['state'],
+      //     country: userDetails['country'],
+      //   );
+      //   print(user);
+      // }
+      if (jsonResponse['status'] == 1) {
+        var userDetails = jsonResponse['details'];
+        if (userDetails != null) {
+          User user = User(
+            userEmail: userDetails['userEmail'],
+            fullName: userDetails['fullName'],
+            activePassport: userDetails['activePassport'],
+            isAmritaCBE: userDetails['isAmritaCBE'],
+            collegeName: userDetails['collegeName'],
+            district: userDetails['district'],
+            state: userDetails['state'],
+            country: userDetails['country'],
+          );
+          print(user);
+        }
+
+        return 1;
+      } else {
+        return 0;
+      }
+    } else {
+      throw Exception('Failed to load login data');
+    }
+  }
+
   bool _obscureText = true;
 
   void _toggle() {
@@ -20,6 +119,7 @@ class _loginPageState extends State<loginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldMessengerKey,
       backgroundColor: Color(0xFFFFFFFC),
       body: Column(
         children: [
@@ -70,6 +170,7 @@ class _loginPageState extends State<loginPage> {
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.7,
                             child: TextFormField(
+                              controller: _usernameController,
                               decoration: InputDecoration(
                                 hintText: 'Username',
                               ),
@@ -78,6 +179,7 @@ class _loginPageState extends State<loginPage> {
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.7,
                             child: TextFormField(
+                              controller: _passwordController,
                               decoration: InputDecoration(
                                 hintText: 'Password',
                                 suffixIcon: IconButton(
@@ -106,9 +208,44 @@ class _loginPageState extends State<loginPage> {
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () async {
+                                try {
+                                  int status = await loginUser(
+                                    _usernameController.text,
+                                    _passwordController.text,
+                                  );
+                                  // print;
+
+                                  if (status == 1) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => userProf(avatarLink: '',)), // Replace NextScreen with the target screen widget
+                                    );
+                                  } else {
+                                    // print("in sn");
+                                    // _scaffoldMessengerKey.currentState?.showSnackBar(
+                                    //   SnackBar(content: Text('Invalid login details')),
+                                    // );
+
+                                    void _showSnackBar(BuildContext context, String message) {
+                                      final snackBar = SnackBar(
+                                        content: Text(message),
+                                        backgroundColor: Colors.grey,
+                                      );
+                                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                    }
+                                    _showSnackBar(context, "Invalid login details");
+                                  }
+                                } catch (e) {
+                                  print("Error: $e");
+                                  _scaffoldMessengerKey.currentState?.showSnackBar(
+                                    SnackBar(content: Text('An error occurred while logging in')),
+                                  );
+                                }
+                              },
                               child: Text('LOGIN'),
                             ),
+
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.02,
