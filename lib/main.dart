@@ -40,11 +40,10 @@ class _myAppState extends State<myApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Anokha 2023",
-<<<<<<< HEAD
+
       home: ControllerPage()
-=======
-      home: forgotPassword(),
->>>>>>> e668aa2f74b18addfcf6a6ccbb0b5bdf1903306b
+
+
       // home: Stack(
       //   children: [
       //     SplashScreen(),

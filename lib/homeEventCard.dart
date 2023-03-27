@@ -66,7 +66,7 @@ class _EventCardState extends State<EventCard> {
 
                           fontSize: 20.0,
                         ),),
-                        Text(widget.event_data.type,
+                        Text(widget.event_data.type.toString() ,
                           style: TextStyle(
 
                           ),)
