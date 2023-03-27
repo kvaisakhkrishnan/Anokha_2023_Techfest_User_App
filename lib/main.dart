@@ -6,6 +6,7 @@ import 'package:anokha_home/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'controllerPage.dart';
+import 'forgotPassword.dart';
 import 'homePage.dart';
 
 import 'login.dart';
@@ -39,7 +40,11 @@ class _myAppState extends State<myApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Anokha 2023",
+<<<<<<< HEAD
       home: ControllerPage()
+=======
+      home: forgotPassword(),
+>>>>>>> e668aa2f74b18addfcf6a6ccbb0b5bdf1903306b
       // home: Stack(
       //   children: [
       //     SplashScreen(),
