@@ -20,7 +20,7 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
 
   bool get isDestinationTimeReached {
     final DateTime now = DateTime.now();
-    final DateTime destination = DateTime(2023, 3, 31, 1, 19, 20);
+    final DateTime destination = DateTime(2023, 4, 2, 17, 55, 20);
     return now.isAfter(destination);
   }
   double _position = 0.0;
@@ -35,6 +35,7 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
   void _handleCountdownComplete() {
     Future.delayed(Duration(seconds: 1), () {
       setState(() {
+        // print("inside flase timer");
         _showTimer = false;
       });
       Future.delayed(Duration(seconds: 2), () {
@@ -53,38 +54,18 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
   @override
   void initState() {
     super.initState();
-    // Trigger the animation after 1 second
-    // Future.delayed(Duration(seconds: 9), () {
-    //   setState(() {
-    //     _position = -0.35 * MediaQuery.of(context).size.height;
-    //
-    //
-    //   });
-    // });
-
-    // Future.delayed(Duration(seconds: 11), () {
-    //   setState(() {
-    //     _showText = true;
-    //
-    //   });
-    // });
-
     Future.delayed(Duration(seconds: 3), () {
       setState(() {
         _showImage = true;
-
       });
     });
 
-    // Future.delayed(Duration(seconds: 13), () {
-    //   setState(() {
-    //     _showText = false;
-    //   });
-    // });
 
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(Duration(seconds: 2), () {
       setState(() {
+        // print(!isDestinationTimeReached);
         if (!isDestinationTimeReached) {
+          print("inside timer");
           _showTimer = true;
         }
       });
@@ -133,29 +114,6 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
             ),
           ),
 
-          // Text
-          // Positioned(
-          //   left: 0,
-          //   right: 0,
-          //   top: -0.40 * MediaQuery.of(context).size.height,
-          //   bottom: 0,
-          //   child: Center(
-          //     child: AnimatedOpacity(
-          //       duration: Duration(seconds: 3),
-          //       curve: Curves.easeInOut,
-          //       opacity: _showText ? 1.0 : 0.0,
-          //       child: Center(
-          //         child: Text(
-          //           "anokha 2023",
-          //           style: TextStyle(
-          //             fontFamily: "SpinCycle",
-          //             fontSize: MediaQuery.of(context).size.width * 0.13,
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
 
 
           Positioned(
