@@ -112,7 +112,7 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
           AnimatedContainer(
             margin: EdgeInsets.only(
               left: 0.18 * MediaQuery.of(context).size.width,
-              top : 0.07 * MediaQuery.of(context).size.height,
+              top : 0.10 * MediaQuery.of(context).size.height,
             ),
             duration: Duration(seconds: 3),
             curve: Curves.easeInOut,

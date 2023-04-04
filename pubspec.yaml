@@ -81,7 +81,6 @@ flutter:
      - Images/anokha_circle.svg
      - Images/Anokha Animated Logo fin 2.gif
      - Images/anokha_circle.png
-     - assets/payment_form.html
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
