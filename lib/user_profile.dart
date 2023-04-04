@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class userProf extends StatefulWidget {
   String avatarLink;
+  final data;
   userProf({Key? key,
-  required this.avatarLink}) : super(key: key);
+  required this.avatarLink, required this.data}) : super(key: key);
 
   @override
   State<userProf> createState() => _userProfState();
@@ -110,7 +111,7 @@ class _userProfState extends State<userProf> {
                             Container(
                               margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
                               child: Text(
-                                "Name",
+                                widget.data.fullName,
                                 style: TextStyle(
                                     fontSize: 35.0,
                                     color: islight

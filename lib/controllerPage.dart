@@ -127,7 +127,7 @@ class _ControllerPageState extends State<ControllerPage> {
       case 3:
         return RegisteredEvents();
       case 4:
-        return userProf(avatarLink: gravatar_url,);
+        return userProf(avatarLink: gravatar_url,data: data,);
       case 5:
         return GetCrew();
       default:
