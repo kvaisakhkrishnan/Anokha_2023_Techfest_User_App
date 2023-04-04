@@ -79,14 +79,14 @@ class _userProfState extends State<userProf> {
                         child: Column(
                           children: [
                             Container(
-                              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
+                              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.09),
                               height: MediaQuery.of(context).size.height * 0.08,
                               child: Image(image: AssetImage('Images/anokha_circle.png'),),
                             ),
                             Container(
                               margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
                               child: Text(
-                                "PASSPORT",
+                                widget.data.activePassport == 1 ? 'PASSPORT' : 'WELCOME',
                                 style: TextStyle(
                                     fontSize: 30.0,
                                     color: islight
@@ -113,7 +113,7 @@ class _userProfState extends State<userProf> {
                               child: Text(
                                 widget.data.fullName,
                                 style: TextStyle(
-                                    fontSize: 35.0,
+                                    fontSize: 0.029 * MediaQuery.of(context).size.height,
                                     color: islight
                                         ? Color(0xFFFFFFFC)
                                         : Color(0xFF002845),
@@ -121,11 +121,11 @@ class _userProfState extends State<userProf> {
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.0),
+                              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
                               child: Text(
-                                "name@gmail.com",
+                                widget.data.userEmail,
                                 style: TextStyle(
-                                    fontSize: 18.0,
+                                    fontSize: 0.018 * MediaQuery.of(context).size.height,
                                     color: islight
                                         ? Color(0xFFFFFFFC)
                                         : Color(0xFF002845),
@@ -195,6 +195,7 @@ class _userProfState extends State<userProf> {
                       ),
                     ),
                     Positioned(
+                      top: MediaQuery.of(context).size.width * 0.9,
                         left: MediaQuery.of(context).size.width * -0.095,
                         child: Container(
                           height: 50,
@@ -206,6 +207,7 @@ class _userProfState extends State<userProf> {
                               shape: BoxShape.circle),
                         )),
                     Positioned(
+                      top: MediaQuery.of(context).size.width * 0.9,
                       right: MediaQuery.of(context).size.width * -0.095,
                       child: Container(
                         height: 50,
