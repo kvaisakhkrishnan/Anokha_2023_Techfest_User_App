@@ -17,7 +17,7 @@ class homepageWithTImer extends StatefulWidget {
 class _homepageWithTImerState extends State<homepageWithTImer> {
   bool get isDestinationTimeReached {
     final DateTime now = DateTime.now();
-    final DateTime destination = DateTime(2023, 4, 4, 13, 35, 0);
+    final DateTime destination = DateTime(2023, 4, 4, 13, 45, 0);
     return now.isAfter(destination);
   }
 
