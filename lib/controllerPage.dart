@@ -26,13 +26,12 @@ class ControllerPage extends StatefulWidget {
 class _ControllerPageState extends State<ControllerPage> {
   RiveAsset selectedBottomNav = bottomNavs.first;
   int selectedIndex = 0;
-  var gravatar = Gravatar('cb.en.u4cse20142@cb.students.amrita.edu');
   var gravatar_url = "";
 
 
   @override
   void initState() {
-
+    var gravatar = Gravatar(widget.data.userEmail);
     var url = gravatar.imageUrl(
       size: 100,
       defaultImage: GravatarImage.identicon,
@@ -111,12 +110,12 @@ class _ControllerPageState extends State<ControllerPage> {
 
         ),
       ),
-      body: navigationDecider(selectedIndex),
+      body: navigationDecider(selectedIndex, widget.data),
     );
   }
 
 
-  Widget navigationDecider(int index){
+  Widget navigationDecider(int index, data){
     switch (index){
       case 0:
         return HomeWidget();
