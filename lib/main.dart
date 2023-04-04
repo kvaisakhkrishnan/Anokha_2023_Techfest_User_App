@@ -9,6 +9,7 @@ import 'controllerPage.dart';
 import 'forgotPassword.dart';
 import 'homePage.dart';
 
+import 'homepageWithTImer.dart';
 import 'login.dart';
 import 'onBoard.dart';
 
@@ -41,7 +42,9 @@ class _myAppState extends State<myApp> {
       debugShowCheckedModeBanner: false,
       title: "Anokha 2023",
 
-      home: MyApp()
+
+      home: homepageWithTImer()
+
 
 
       // home: Stack(
