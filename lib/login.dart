@@ -6,7 +6,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 
+import 'controllerPage.dart';
 
+var userData;
 
 class User {
   final String userEmail;
@@ -71,10 +73,9 @@ class _loginPageState extends State<loginPage> {
       );
 
       // Check the response status
-      print(response.body);
       if (response.statusCode == 200) {
         var userDetails = jsonDecode(response.body);
-        User user = User(
+        userData = User(
           userEmail: userDetails['userEmail'],
           fullName: userDetails['fullName'],
           activePassport: userDetails['activePassport'],
@@ -91,7 +92,7 @@ class _loginPageState extends State<loginPage> {
         return 0;
       }
     } catch (e) {
-      print('You are an attacker mister!');
+      print('Server is down!');
       return 0;
     }
 
@@ -207,15 +208,9 @@ class _loginPageState extends State<loginPage> {
                                   // print;
 
                                   if (status == 1) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => userProf(avatarLink: '',)), // Replace NextScreen with the target screen widget
-                                    );
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ControllerPage(data: userData)));
+
                                   } else {
-                                    // print("in sn");
-                                    // _scaffoldMessengerKey.currentState?.showSnackBar(
-                                    //   SnackBar(content: Text('Invalid login details')),
-                                    // );
 
                                     void _showSnackBar(BuildContext context, String message) {
                                       final snackBar = SnackBar(
