@@ -37,7 +37,6 @@ dependencies:
   google_fonts: ^4.0.3
   simple_gravatar: ^1.0.4
   g_recaptcha_v3: ^0.0.5
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -47,6 +46,9 @@ dependencies:
   font_awesome_flutter: ^10.4.0
   shimmer: ^2.0.0
   payu_checkoutpro_flutter: ^1.0.2
+  qr: ^3.0.1
+  webview_flutter: ^2.3.0
+  flutter_inappwebview: ^5.7.2+3
 
 dev_dependencies:
   flutter_test:
@@ -79,6 +81,7 @@ flutter:
      - Images/anokha_circle.svg
      - Images/Anokha Animated Logo fin 2.gif
      - Images/anokha_circle.png
+     - assets/payment_form.html
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

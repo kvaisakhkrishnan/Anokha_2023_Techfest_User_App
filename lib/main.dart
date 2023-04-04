@@ -1,10 +1,10 @@
 import 'package:anokha_home/otpValidation.dart';
-import 'package:anokha_home/paymentGateway.dart';
 import 'package:anokha_home/registerPage.dart';
 import 'package:anokha_home/registeredEvents.dart';
 import 'package:anokha_home/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'Loading_Screens/PayUPayment.dart';
 import 'controllerPage.dart';
 import 'forgotPassword.dart';
 import 'homePage.dart';
@@ -41,7 +41,7 @@ class _myAppState extends State<myApp> {
       debugShowCheckedModeBanner: false,
       title: "Anokha 2023",
 
-      home: ControllerPage()
+      home: MyApp()
 
 
       // home: Stack(
