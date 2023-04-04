@@ -17,6 +17,7 @@ class User {
   final String district;
   final String state;
   final String country;
+  final String SECRET_TOKEN;
 
   @override
   String toString() {
@@ -31,6 +32,7 @@ class User {
     required this.district,
     required this.state,
     required this.country,
+    required this.SECRET_TOKEN
 
 
   });
@@ -81,6 +83,7 @@ class _loginPageState extends State<loginPage> {
           district: userDetails['district'],
           state: userDetails['state'],
           country: userDetails['country'],
+          SECRET_TOKEN: userDetails['SECRET_TOKEN']
         );
         return 1;
 
