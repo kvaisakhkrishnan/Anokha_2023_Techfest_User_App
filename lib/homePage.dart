@@ -41,7 +41,8 @@ class events {
 
 
 class HomeWidget extends StatefulWidget {
-  HomeWidget({Key? key}) : super(key: key);
+  var data;
+  HomeWidget({Key? key, required this.data}) : super(key: key);
 
   @override
   State<HomeWidget> createState() => _HomeWidgetState();
@@ -56,8 +57,9 @@ class _HomeWidgetState extends State<HomeWidget> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
+          toolbarHeight: 0.0,
 
         ),
-        body: HomeBody());
+        body: HomeBody(data: widget.data));
   }
 }

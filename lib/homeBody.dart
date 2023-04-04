@@ -1,4 +1,5 @@
 import 'package:anokha_home/rowOfCards.dart';
+import 'package:anokha_home/serverUrl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -8,7 +9,7 @@ import 'dart:convert';
 import 'Loading_Screens/events_loading.dart';
 import 'anokhaCards.dart';
 
-final String host = "http://18.182.1.81:3000";
+final __url = serverUrl().url;
 
 class event_list {
   final int eventId;
@@ -37,11 +38,13 @@ class events_grouped_by_category {
   final String title;
   final List<event_list> events_list;
 
+
   events_grouped_by_category({required this.title, required this.events_list});
 }
 
 class HomeBody extends StatefulWidget {
-  HomeBody({Key? key}) : super(key: key);
+  final data;
+  HomeBody({Key? key, required this.data}) : super(key: key);
 
   @override
   State<HomeBody> createState() => _HomeBodyState();
@@ -49,8 +52,8 @@ class HomeBody extends StatefulWidget {
 
 class _HomeBodyState extends State<HomeBody> {
   Future<List<events_grouped_by_category>> getEvents() async {
-    String url = host + "/userApp/events/groupByDepartment";
-    final token = 'v4.public.eyJ1c2VyRW1haWwiOiJjYi5lbi51NGNzZTIwMDEwQGNiLnN0dWRlbnRzLmFtcml0YS5lZHUiLCJwYXNzd29yZCI6IlNBRkVQQVNTV09SRDAiLCJpYXQiOiIyMDIzLTAzLTI3VDE4OjA4OjQxLjkzOFoiLCJleHAiOiIyMDIzLTAzLTI3VDE4OjIzOjQxLjkzOFoifRxY5sN5s31faWFKumLGZ3UQMIVqldd9qb4KUEk_2jSwad8qhkeX5SUd9n_8tVSD8_wp_J9EoBGLGAX8Aj4MgQw';
+    String url = __url + "userApp/events/groupByDepartment";
+    final token = widget.data.SECRET_TOKEN;
     final response = await http.get(
         Uri.parse(url),
       headers: {'Authorization': 'Bearer $token'});
@@ -98,7 +101,7 @@ class _HomeBodyState extends State<HomeBody> {
           return Events_Loading_screen();
         } else {
           return ListView.builder(
-            itemCount: snapshot.data.length + 1, // add 1 for the static widget
+            itemCount: snapshot.data.length + 2, // add 1 for the static widget
             itemBuilder: (ctx, index) {
               if (index == 0) {
                 return Column(
@@ -106,11 +109,51 @@ class _HomeBodyState extends State<HomeBody> {
                     Padding(
                       padding: EdgeInsets.only(
                           left: 20.0, top: 20.0, bottom: 20.0),
-                      child: AnokhaCards()
+                      child: Container(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "Trending Now",
+                          style: TextStyle(
+                              fontSize: 25.0, fontWeight: FontWeight.w600),
+                        ),
+                      ),
                     ),
+                  AnokhaCards()
+
                   ],
                 );
-              } else {
+
+              }
+
+              else if(index == 1) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Color(0xFFF5F5F5),
+                        borderRadius: BorderRadius.circular(30.0)
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 10, top: 3, bottom: 3),
+                      child: TextFormField(
+                        style: TextStyle(
+                            fontSize: 19
+                        ),
+
+                        decoration: InputDecoration(
+                          hintText: 'Search Events, Departments, Tags',
+                          prefixIcon: Icon(Icons.search, color: Colors.grey),
+                          border: InputBorder.none,
+
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              }
+
+
+              else {
                 return Column(
                   children: [
                     Padding(
@@ -121,7 +164,7 @@ class _HomeBodyState extends State<HomeBody> {
                         child: Text(
                           "${snapshot.data[index - 1].title}",
                           style: TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.w600),
+                              fontSize: 20.0, fontWeight: FontWeight.w500),
                         ),
                       ),
                     ),

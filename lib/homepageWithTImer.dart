@@ -1,6 +1,7 @@
 // import 'dart:html';
 import 'dart:ui';
 import 'dart:async';
+import 'package:anokha_home/ticketSample.dart';
 import 'package:anokha_home/timer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class homepageWithTImer extends StatefulWidget {
 class _homepageWithTImerState extends State<homepageWithTImer> {
   bool get isDestinationTimeReached {
     final DateTime now = DateTime.now();
-    final DateTime destination = DateTime(2023,4, 27, 0, 0, 0);
+    final DateTime destination = DateTime(2023, 4, 4, 23, 10, 0);
     return now.isAfter(destination);
   }
 
@@ -169,7 +170,7 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
                 curve: Curves.easeInOut,
                 opacity: _showNewWidget ? 1.0 : 0.0,
                 child:
-                    TicketShape(), // Replace with the new widget you want to show
+                MyTicketView() // Replace with the new widget you want to show
               ),
             ),
           ),
@@ -180,23 +181,3 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
   }
 }
 
-class TicketShape extends StatefulWidget {
-  const TicketShape({Key? key}) : super(key: key);
-
-  @override
-  State<TicketShape> createState() => _TicketShapeState();
-}
-
-class _TicketShapeState extends State<TicketShape> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Color(0xFF002845),
-      height: 150.0,
-      width: 300.0,
-      child: Center(
-        child: Text("Ticket", style: TextStyle(color: Colors.white),),
-      ),
-    );
-  }
-}

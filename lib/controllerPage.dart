@@ -121,7 +121,7 @@ class _ControllerPageState extends State<ControllerPage> {
       case 0:
         return homepageWithTImer();
       case 1:
-        return HomeWidget();
+        return HomeWidget(data: data);
       case 2:
         return StarredEvents();
       case 3:
