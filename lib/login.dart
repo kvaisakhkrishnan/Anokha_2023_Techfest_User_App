@@ -1,3 +1,4 @@
+import 'package:anokha_home/serverUrl.dart';
 import 'package:anokha_home/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -5,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 
-// import 'package:shared_preferences/shared_preferences.dart';
+
 
 class User {
   final String userEmail;
@@ -34,20 +35,9 @@ class User {
 
   });
 
-  // factory User.fromJson(Map<String, dynamic> json) {
-  //   return User(
-  //     userEmail: json['userEmail'],
-  //     fullName: json['fullName'],
-  //     activePassport: json['activePassport'],
-  //     isAmritaCBE: json['isAmritaCBE'],
-  //     collegeName: json['collegeName'],
-  //     district: json['district'],
-  //     state: json['state'],
-  //     country: json['country'],
-  //   );
-  // }
 }
 
+final __url = serverUrl().url;
 
 class loginPage extends StatefulWidget {
   const loginPage({Key? key}) : super(key: key);
@@ -62,51 +52,48 @@ class _loginPageState extends State<loginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   Future<int> loginUser(String username, String password) async {
-    // print(username);
-    final response = await http.get(
-      Uri.parse('http://18.182.1.81:3000/userApp/login/$username/$password'),
-    );
-    // print(response.body);
-    if (response.statusCode == 200) {
-      var jsonResponse = jsonDecode(response.body);
-      // var userDetails = jsonResponse['details'];
-      // if (userDetails != null) {
-      //   User user = User(
-      //     userEmail: userDetails['userEmail'],
-      //     fullName: userDetails['fullName'],
-      //     activePassport: userDetails['activePassport'],
-      //     isAmritaCBE: userDetails['isAmritaCBE'],
-      //     collegeName: userDetails['collegeName'],
-      //     district: userDetails['district'],
-      //     state: userDetails['state'],
-      //     country: userDetails['country'],
-      //   );
-      //   print(user);
-      // }
-      if (jsonResponse['status'] == 1) {
-        var userDetails = jsonResponse['details'];
-        if (userDetails != null) {
-          User user = User(
-            userEmail: userDetails['userEmail'],
-            fullName: userDetails['fullName'],
-            activePassport: userDetails['activePassport'],
-            isAmritaCBE: userDetails['isAmritaCBE'],
-            collegeName: userDetails['collegeName'],
-            district: userDetails['district'],
-            state: userDetails['state'],
-            country: userDetails['country'],
-          );
-          print(user);
-        }
 
+    String url = __url + 'userApp/login';
+    Map<String, String> data = {
+      'userEmail': username,
+      'password': password,
+    };
+    String body = json.encode(data);
+
+    try {
+      //Make the POST request
+      http.Response response = await http.post(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json'},
+        body: body,
+      );
+
+      // Check the response status
+      print(response.body);
+      if (response.statusCode == 200) {
+        var userDetails = jsonDecode(response.body);
+        User user = User(
+          userEmail: userDetails['userEmail'],
+          fullName: userDetails['fullName'],
+          activePassport: userDetails['activePassport'],
+          isAmritaCBE: userDetails['isAmritaCBE'],
+          collegeName: userDetails['collegeName'],
+          district: userDetails['district'],
+          state: userDetails['state'],
+          country: userDetails['country'],
+        );
         return 1;
+
       } else {
         return 0;
       }
-    } else {
-      throw Exception('Failed to load login data');
+    } catch (e) {
+      print('You are an attacker mister!');
+      return 0;
     }
-  }
+
+
+      }
 
   bool _obscureText = true;
 
