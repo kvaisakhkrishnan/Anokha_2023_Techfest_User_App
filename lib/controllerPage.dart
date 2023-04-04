@@ -14,38 +14,9 @@ import 'animated_bar.dart';
 import 'crew_members.dart';
 
 
- class User {
-   final String userEmail;
-   final String fullName;
-   final int activePassport;
-   final int isAmritaCBE;
-   final String collegeName;
-   final String district;
-   final String state;
-   final String country;
-   final String SECRET_TOKEN;
 
-   @override
-   String toString() {
-     return 'User{userEmail: $userEmail, fullName: $fullName, activePassport: $activePassport, isAmritaCBE: $isAmritaCBE, collegeName: $collegeName, district: $district, state: $state, country: $country}';
-   }
-
-   User({
-     required this.userEmail,
-     required this.fullName,
-     required this.activePassport,
-     required this.isAmritaCBE,
-     required this.collegeName,
-     required this.district,
-     required this.state,
-     required this.country,
-     required this.SECRET_TOKEN
-
-
-   });
- }
 class ControllerPage extends StatefulWidget {
-  final User data;
+  final data;
   ControllerPage({required this.data});
 
   @override
