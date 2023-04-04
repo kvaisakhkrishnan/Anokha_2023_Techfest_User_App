@@ -17,7 +17,7 @@ class homepageWithTImer extends StatefulWidget {
 class _homepageWithTImerState extends State<homepageWithTImer> {
   bool get isDestinationTimeReached {
     final DateTime now = DateTime.now();
-    final DateTime destination = DateTime(2023, 4, 2, 20, 34, 0);
+    final DateTime destination = DateTime(2023, 4, 4, 13, 35, 0);
     return now.isAfter(destination);
   }
 
@@ -73,6 +73,7 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF002845),
       body: Stack(
         children: [
           Positioned(
@@ -142,6 +143,20 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
           //     ),
           //   ),
           // ),
+
+          Container(
+            height: MediaQuery.of(context).size.height, // set height to the screen height
+            width: MediaQuery.of(context).size.width, // set width to the screen width
+            // color: Colors.white,
+            child: AnimatedOpacity(
+              duration: Duration(seconds: 5),
+              curve: Curves.easeInOut,
+              opacity: _showNewWidget ? 1.0 : 0.0,
+              child: Container(
+                color: Colors.white,
+              ),
+            ),
+          ),
           Positioned(
             left: 0,
             right: 0,
@@ -157,6 +172,7 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
               ),
             ),
           ),
+
         ],
       ),
     );
@@ -174,11 +190,11 @@ class _TicketShapeState extends State<TicketShape> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Color(0xFF002845),
       height: 150.0,
       width: 300.0,
       child: Center(
-        child: Text("Ticket"),
+        child: Text("Ticket", style: TextStyle(color: Colors.white),),
       ),
     );
   }
