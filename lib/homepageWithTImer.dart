@@ -17,7 +17,7 @@ class homepageWithTImer extends StatefulWidget {
 class _homepageWithTImerState extends State<homepageWithTImer> {
   bool get isDestinationTimeReached {
     final DateTime now = DateTime.now();
-    final DateTime destination = DateTime(2023, 4, 4, 13, 45, 0);
+    final DateTime destination = DateTime(2023,4, 27, 0, 0, 0);
     return now.isAfter(destination);
   }
 
@@ -73,7 +73,7 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF002845),
+
       body: Stack(
         children: [
           Positioned(
@@ -112,6 +112,7 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
           AnimatedContainer(
             margin: EdgeInsets.only(
               left: 0.18 * MediaQuery.of(context).size.width,
+              top : 0.07 * MediaQuery.of(context).size.height,
             ),
             duration: Duration(seconds: 3),
             curve: Curves.easeInOut,

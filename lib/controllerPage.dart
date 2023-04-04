@@ -1,4 +1,5 @@
  import 'package:anokha_home/homePage.dart';
+import 'package:anokha_home/homepageWithTImer.dart';
 import 'package:anokha_home/registerPage.dart';
 import 'package:anokha_home/registeredEvents.dart';
 import 'package:anokha_home/rive_assets.dart';
@@ -118,14 +119,16 @@ class _ControllerPageState extends State<ControllerPage> {
   Widget navigationDecider(int index, data){
     switch (index){
       case 0:
-        return HomeWidget();
+        return homepageWithTImer();
       case 1:
-        return StarredEvents();
+        return HomeWidget();
       case 2:
-        return RegisteredEvents();
+        return StarredEvents();
       case 3:
-        return userProf(avatarLink: gravatar_url,);
+        return RegisteredEvents();
       case 4:
+        return userProf(avatarLink: gravatar_url,);
+      case 5:
         return GetCrew();
       default:
         return Text("Dummy Widget");
