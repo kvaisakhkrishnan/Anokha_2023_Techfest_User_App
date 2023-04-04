@@ -45,15 +45,11 @@ dependencies:
   faded_widget: ^2.0.0
   font_awesome_flutter: ^10.4.0
   shimmer: ^2.0.0
-<<<<<<< HEAD
   payu_checkoutpro_flutter: ^1.0.2
   qr: ^3.0.1
   webview_flutter: ^2.3.0
   flutter_inappwebview: ^5.7.2+3
-=======
   flutter_ticket_widget: ^0.0.1
->>>>>>> a3ad3ad5235e58b643028ded8d4b73f160903dc4
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
