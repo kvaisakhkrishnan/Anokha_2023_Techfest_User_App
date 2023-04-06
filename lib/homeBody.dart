@@ -134,7 +134,7 @@ class _HomeBodyState extends State<HomeBody> {
                         borderRadius: BorderRadius.circular(30.0)
                     ),
                     child: Padding(
-                      padding: EdgeInsets.only(left: 10, top: 3, bottom: 3),
+                      padding: EdgeInsets.only(left: 10, top: 3, bottom: 3, right: 20),
                       child: TextFormField(
                         style: TextStyle(
                             fontSize: 19

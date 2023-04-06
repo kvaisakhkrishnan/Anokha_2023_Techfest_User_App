@@ -10,6 +10,7 @@ import 'forgotPassword.dart';
 import 'homePage.dart';
 
 import 'homepageWithTImer.dart';
+import 'individualRegister.dart';
 import 'login.dart';
 
 void main() => runApp(myApp());
