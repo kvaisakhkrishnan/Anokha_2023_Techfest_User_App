@@ -18,7 +18,7 @@ class homepageWithTImer extends StatefulWidget {
 class _homepageWithTImerState extends State<homepageWithTImer> {
   bool get isDestinationTimeReached {
     final DateTime now = DateTime.now();
-    final DateTime destination = DateTime(2024, 5,4, 12, 27, 0);
+    final DateTime destination = DateTime(2023, 4, 5, 12, 27, 0);
     return now.isAfter(destination);
   }
 
@@ -162,7 +162,7 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
           Positioned(
             left: 0,
             right: 0,
-            top: -0.65 * MediaQuery.of(context).size.height,
+            top: 0.0 * MediaQuery.of(context).size.height,
             bottom: 0,
             child: Center(
               child: AnimatedOpacity(

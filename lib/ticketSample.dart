@@ -20,17 +20,16 @@ class MyTicketView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Center(
         child: TicketWidget(
-          width: 350,
-          height: 500,
+          color: Colors.tealAccent,
+          width: 0.93 * MediaQuery.of(context).size.width,
+          height: 0.61 * MediaQuery.of(context).size.height,
           isCornerRounded: true,
           padding: EdgeInsets.all(20),
           child: TicketData(),
         ),
-      ),
-    );
+      );
   }
 }
 
