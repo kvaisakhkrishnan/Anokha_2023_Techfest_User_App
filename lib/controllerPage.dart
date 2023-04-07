@@ -1,5 +1,6 @@
  import 'package:anokha_home/homePage.dart';
 import 'package:anokha_home/homepageWithTImer.dart';
+import 'package:anokha_home/login.dart';
 import 'package:anokha_home/registerPage.dart';
 import 'package:anokha_home/registeredEvents.dart';
 import 'package:anokha_home/rive_assets.dart';
@@ -18,7 +19,9 @@ import 'crew_members.dart';
 
 class ControllerPage extends StatefulWidget {
   final data;
-  ControllerPage({required this.data});
+
+  var eventsList;
+  ControllerPage({required this.data, required this.eventsList});
 
   @override
   State<ControllerPage> createState() => _ControllerPageState();
@@ -111,17 +114,17 @@ class _ControllerPageState extends State<ControllerPage> {
 
         ),
       ),
-      body: navigationDecider(selectedIndex, widget.data),
+      body: navigationDecider(selectedIndex, widget.data, widget.eventsList),
     );
   }
 
 
-  Widget navigationDecider(int index, data){
+  Widget navigationDecider(int index, data, eventsList){
     switch (index){
       case 0:
         return homepageWithTImer(avatarLink: gravatar_url);
       case 1:
-        return HomeWidget(data: data);
+        return HomeWidget(data: data, eventsList : eventsList);
       case 2:
         return StarredEvents(data: data);
       case 3:

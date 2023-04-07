@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'event_info.dart';
 import 'homeBody.dart';
+import 'login.dart';
 
 class EventCard extends StatefulWidget {
   final event_list event_data;

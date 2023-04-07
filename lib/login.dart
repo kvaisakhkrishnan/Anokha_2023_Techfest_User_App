@@ -12,6 +12,44 @@ import 'forgotPassword.dart';
 
 var userData;
 
+
+
+
+class event_list {
+  final int eventId;
+  final String name;
+  final String description;
+  final String date;
+  final int type;
+  final String venue;
+  final String time;
+  final String department;
+  final String day;
+
+  event_list(
+      {required this.eventId,
+        required this.name,
+        required this.description,
+        required this.date,
+        required this.type,
+        required this.venue,
+        required this.time,
+        required this.department,
+        required this.day});
+}
+class events_grouped_by_category {
+  final String title;
+  final List<event_list> events_list;
+
+
+  events_grouped_by_category({required this.title, required this.events_list});
+}
+
+
+
+
+
+
 class User {
   final String userEmail;
   final String fullName;
@@ -48,12 +86,13 @@ final __url = serverUrl().url;
 class loginPage extends StatefulWidget {
   const loginPage({Key? key}) : super(key: key);
 
+
   @override
   State<loginPage> createState() => _loginPageState();
 }
 
 class _loginPageState extends State<loginPage> {
-
+  List<events_grouped_by_category> list_of_events = [];
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -77,19 +116,56 @@ class _loginPageState extends State<loginPage> {
       // Check the response status
       if (response.statusCode == 200) {
         var userDetails = jsonDecode(response.body);
+
         userData = User(
-          userEmail: userDetails['userEmail'],
-          fullName: userDetails['fullName'],
-          activePassport: userDetails['activePassport'],
-          isAmritaCBE: userDetails['isAmritaCBE'],
-          collegeName: userDetails['collegeName'],
-          district: userDetails['district'],
-          state: userDetails['state'],
-          country: userDetails['country'],
-          SECRET_TOKEN: userDetails['SECRET_TOKEN']
+          userEmail: userDetails["userData"]['userEmail'],
+          fullName: userDetails["userData"]['fullName'],
+          activePassport: userDetails["userData"]['activePassport'],
+          isAmritaCBE: userDetails["userData"]['isAmritaCBE'],
+          collegeName: userDetails["userData"]['collegeName'],
+          district: userDetails["userData"]['district'],
+          state: userDetails["userData"]['state'],
+          country: userDetails["userData"]['country'],
+          SECRET_TOKEN: userDetails["userData"]['SECRET_TOKEN']
         );
 
-        print('SECRET_TOKEN: ${userData.SECRET_TOKEN}');
+
+
+
+
+        for (var individual_data in userDetails["events"]) {
+
+          String temp_title = individual_data["department"];
+          List<event_list> temp_event_list = [];
+          for (var events_in_a_row in individual_data["events"]) {
+
+
+            event_list temp_event_data = event_list(
+                eventId: events_in_a_row["eventId"],
+                name: events_in_a_row["eventName"],
+                description: events_in_a_row["description"],
+                date: events_in_a_row["date"],
+                type: events_in_a_row["eventOrWorkshop"],
+                venue: events_in_a_row["venue"],
+                time: events_in_a_row["eventTime"],
+                department: events_in_a_row["departmentAbbr"],
+                day: events_in_a_row["date"]);
+
+
+
+            temp_event_list.add(temp_event_data);
+
+          }
+
+
+          events_grouped_by_category temp_data_row = events_grouped_by_category(
+              title: temp_title, events_list: temp_event_list);
+          list_of_events.add(temp_data_row);
+
+        }
+
+
+
         return 1;
 
       } else {
@@ -212,7 +288,7 @@ class _loginPageState extends State<loginPage> {
                                   // print;
 
                                   if (status == 1) {
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ControllerPage(data: userData)));
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ControllerPage(data: userData, eventsList : list_of_events)));
 
                                   } else {
 
