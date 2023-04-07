@@ -1,3 +1,4 @@
+import 'package:anokha_home/serverUrl.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
@@ -6,18 +7,27 @@ import 'dart:convert';
 
 import 'Loading_Screens/events_loading.dart';
 
-class StarredEvents extends StatefulWidget {
-  const StarredEvents({Key? key}) : super(key: key);
+final __url = serverUrl().url;
 
+
+
+class StarredEvents extends StatefulWidget {
+  final data;
+  const StarredEvents({Key? key, required this.data}) : super(key: key);
   @override
   State<StarredEvents> createState() => _StarredEvents();
 }
 
 class _StarredEvents extends State<StarredEvents> {
-  String url = "http://192.168.193.228:3000/api/events/all";
-
   Future<List> getData() async {
-    final response = await http.get(Uri.parse(url));
+    String url = __url + "userApp/getStarredEvents";
+    final token = widget.data.SECRET_TOKEN;
+    final response = await http.get(
+        Uri.parse(url),
+        headers: {'Authorization': 'Bearer $token'}
+    );
+    print("tokena :" +token);
+    print(response.body);
     return json.decode(response.body);
   }
 
@@ -26,12 +36,13 @@ class _StarredEvents extends State<StarredEvents> {
     return Scaffold(
       body: FutureBuilder<List>(
           future: getData(),
-          builder: (context, ss) {
-            if (ss.hasError) {
-              print("error");
+          builder: (BuildContext ctx, AsyncSnapshot snapshot) {
+            if (snapshot.hasError) {
+              print(snapshot.error);
+              print("error1");
             }
-            if (ss.hasData) {
-              return Wheel(list: ss.data);
+            if (snapshot.hasData) {
+              return Wheel(list: snapshot.data);
             } else {
               return Events_Loading_screen();
             }
@@ -112,7 +123,7 @@ class New_Widget extends StatelessWidget {
                           height: 120,
                           width: 120,
                           image:
-                              AssetImage("images/anokha_2023_black_small.png"))
+                              AssetImage("Images/anokha_2023_black_small.png"))
                     ],
                   ),
                   Text(

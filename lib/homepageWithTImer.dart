@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rive/rive.dart';
 
+
 class homepageWithTImer extends StatefulWidget {
   homepageWithTImer({Key? key}) : super(key: key);
 
@@ -48,6 +49,9 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
   @override
   void initState() {
     super.initState();
+    if(isDestinationTimeReached){
+      _showImage = true;
+    }
     Future.delayed(Duration(seconds: 3), () {
       setState(() {
         _showImage = true;
