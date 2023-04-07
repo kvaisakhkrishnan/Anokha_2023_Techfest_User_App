@@ -48,6 +48,7 @@ class events_grouped_by_category {
 class HomeBody extends StatefulWidget {
 
   final data;
+  final _textFieldValue = TextEditingController();
   HomeBody({Key? key, required this.data}) : super(key: key);
 
   @override
@@ -55,9 +56,8 @@ class HomeBody extends StatefulWidget {
 }
 
 class _HomeBodyState extends State<HomeBody> {
-  int view = 0;
   late List<events_grouped_by_category> _eventsData;
-  late List<event_list> _searchData;
+
   Future<List<events_grouped_by_category>> getEvents() async {
     String url = __url + "userApp/events/groupByDepartment";
     final token = widget.data.SECRET_TOKEN;
@@ -103,10 +103,12 @@ class _HomeBodyState extends State<HomeBody> {
   void search(String search){
     if(search == "")
       {
-        view = 0;
+        _eventsData.forEach((data) {
+
+        });
       }
     else{
-        view = 1;
+
     }
   }
 
@@ -119,7 +121,7 @@ class _HomeBodyState extends State<HomeBody> {
           return Events_Loading_screen();
         } else {
           return ListView.builder(
-            itemCount: _eventsData.length + 2,
+            itemCount: _eventsData.length + 1,
             itemBuilder: (ctx, index) {
               if (index == 0) {
                 return Column(
@@ -164,29 +166,28 @@ class _HomeBodyState extends State<HomeBody> {
                     ),
                   ),
                 );
+              } else {
+                return Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: 20.0, top: 20.0, bottom: 20.0),
+                      child: Container(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "${_eventsData[index - 2].title}",
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                    CardRow(
+                      list_of_events:
+                      _eventsData[index - 2].events_list,
+                    ),
+                  ],
+                );
               }
-                 return Column(
-                   children: [
-                     Padding(
-                       padding: EdgeInsets.only(
-                           left: 20.0, top: 20.0, bottom: 20.0),
-                       child: Container(
-                         alignment: Alignment.topLeft,
-                         child: Text(
-                           "${_eventsData[index - 2].title}",
-                           style: TextStyle(
-                               fontSize: 20.0, fontWeight: FontWeight.w500),
-                         ),
-                       ),
-                     ),
-                     CardRow(
-                       list_of_events:
-                       _eventsData[index - 2].events_list,
-                     ),
-                   ],
-                 );
-
-
             },
           );
         }
