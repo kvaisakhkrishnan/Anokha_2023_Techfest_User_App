@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'homeBody.dart';
 import 'homeEventCard.dart';
+import 'login.dart';
 
 class CardRow extends StatefulWidget {
   List<event_list> list_of_events;

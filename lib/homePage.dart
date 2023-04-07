@@ -42,7 +42,9 @@ class events {
 
 class HomeWidget extends StatefulWidget {
   var data;
-  HomeWidget({Key? key, required this.data}) : super(key: key);
+
+  var eventsList;
+  HomeWidget({Key? key, required this.data, required this.eventsList}) : super(key: key);
 
   @override
   State<HomeWidget> createState() => _HomeWidgetState();
@@ -60,6 +62,6 @@ class _HomeWidgetState extends State<HomeWidget> {
           toolbarHeight: 0.0,
 
         ),
-        body: HomeBody(data: widget.data));
+        body: HomeBody(data: widget.data, eventsList: widget.eventsList));
   }
 }
