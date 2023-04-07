@@ -25,7 +25,7 @@ class MyTicketView extends StatelessWidget {
           width: 0.85 * MediaQuery.of(context).size.width,
           height: 0.60 * MediaQuery.of(context).size.height,
           isCornerRounded: true,
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.009),
           child: TicketData(),
         );
 
@@ -69,7 +69,7 @@ class TicketData extends StatelessWidget {
         ),
 
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height * 0.03, vertical: MediaQuery.of(context).size.height * 0.03),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -77,28 +77,28 @@ class TicketData extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 5.0),
+                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
                     child: Text("Name", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 15.0),
+                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
                     child: Text("Vaisakhkrishnan K", style: TextStyle(fontSize: 15.0, color: Colors.white),),
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 5.0),
+                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
                     child: Text("Program Name", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 15.0),
+                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
                     child: Text("Treasure Hunt", style: TextStyle(fontSize: 15.0,color: Colors.white),),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 5.0),
+                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
                     child: Text("Type", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 15.0),
+                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
                     child: Text("Workshop", style: TextStyle(fontSize: 15.0,color: Colors.white),),
                   ),
 
@@ -108,28 +108,28 @@ class TicketData extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 5.0),
+                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
                     child: Text("Date", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 15.0),
+                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
                     child: Text("28-Mar-2023", style: TextStyle(fontSize: 15.0,color: Colors.white),),
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 5.0),
+                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
                     child: Text("Time", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 15.0),
+                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
                     child: Text("12:00 PM", style: TextStyle(fontSize: 15.0,color: Colors.white),),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 5.0),
+                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
                     child: Text("Venue", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 15.0),
+                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
                     child: Text("AB1", style: TextStyle(fontSize: 15.0,color: Colors.white),),
                   ),
 

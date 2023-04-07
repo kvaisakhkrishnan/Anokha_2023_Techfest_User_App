@@ -61,14 +61,14 @@ class _userProfState extends State<userProf> {
             Expanded(
               child: Container(
                 margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.00, left: MediaQuery.of(context).size.width * 0.09, right: MediaQuery.of(context).size.width * 0.09, bottom: MediaQuery.of(context).size.height * 0.01),
+                    top: MediaQuery.of(context).size.height * 0.00, left: MediaQuery.of(context).size.width * 0.05, right: MediaQuery.of(context).size.width * 0.05, bottom: MediaQuery.of(context).size.height * 0.01),
                 alignment: Alignment.center,
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
                     Container(
                       height: MediaQuery.of(context).size.height * 0.8,
-                      width: MediaQuery.of(context).size.height * 0.5,
+                      width: MediaQuery.of(context).size.width,
                       margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
@@ -90,7 +90,7 @@ class _userProfState extends State<userProf> {
                                 style: TextStyle(
                                     fontSize: 30.0,
                                     color: islight
-                                        ? Color(0xFFFFFFFC)
+                                        ? Color(0xFFBEB7AA)
                                         : Color(0xFF002845),
                                     fontFamily: 'Roboto'),
                               ),
@@ -113,7 +113,7 @@ class _userProfState extends State<userProf> {
                               child: Text(
                                 widget.data.fullName,
                                 style: TextStyle(
-                                    fontSize: 0.029 * MediaQuery.of(context).size.height,
+                                    fontSize: 0.027 * MediaQuery.of(context).size.height,
                                     color: islight
                                         ? Color(0xFFFFFFFC)
                                         : Color(0xFF002845),
@@ -127,7 +127,7 @@ class _userProfState extends State<userProf> {
                                 style: TextStyle(
                                     fontSize: 0.018 * MediaQuery.of(context).size.height,
                                     color: islight
-                                        ? Color(0xFFFFFFFC)
+                                        ? Color(0xFFBEB7AA)
                                         : Color(0xFF002845),
                                     fontFamily: "Roboto"),
                               ),
@@ -176,7 +176,7 @@ class _userProfState extends State<userProf> {
                                     child: Image.network(
                                         'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png',
                                         color: islight
-                                            ? Color(0xFFFFFFFC)
+                                            ? Color(0xFFBEB7AA)
                                             : Color(0xFF002845)),
                                   ),
                                 ),
