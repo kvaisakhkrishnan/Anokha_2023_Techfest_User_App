@@ -18,7 +18,7 @@ class homepageWithTImer extends StatefulWidget {
 class _homepageWithTImerState extends State<homepageWithTImer> {
   bool get isDestinationTimeReached {
     final DateTime now = DateTime.now();
-    final DateTime destination = DateTime(2023, 4, 5, 12, 27, 0);
+    final DateTime destination = DateTime(2023, 4, 7, 21, 23, 0);
     return now.isAfter(destination);
   }
 
@@ -50,23 +50,26 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
     super.initState();
     if(isDestinationTimeReached){
       _showImage = true;
+      _showNewWidget = true;
     }
-    Future.delayed(Duration(seconds: 3), () {
-      setState(() {
-        _showImage = true;
+    else {
+      Future.delayed(Duration(seconds: 3), () {
+        setState(() {
+          _showImage = true;
+        });
       });
-    });
 
-    Future.delayed(Duration(seconds: 4), () {
-      setState(() {
-        // print(!isDestinationTimeReached);
-        if (!isDestinationTimeReached) {
-          print("inside timer");
-          _showTimer = true;
-        }
+
+      Future.delayed(Duration(seconds: 4), () {
+        setState(() {
+          // print(!isDestinationTimeReached);
+          if (!isDestinationTimeReached) {
+            print("inside timer");
+            _showTimer = true;
+          }
+        });
       });
-    });
-
+    }
     Future.delayed(Duration(seconds: 7), () {
       setState(() {
         _position2 = -0.22 * MediaQuery.of(context).size.height;

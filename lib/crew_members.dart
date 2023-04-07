@@ -1,3 +1,4 @@
+import 'package:anokha_home/serverUrl.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -8,6 +9,8 @@ import 'dart:convert';
 
 import 'Loading_Screens/events_loading.dart';
 
+final __url = serverUrl().url;
+
 class GetCrew extends StatefulWidget {
   const GetCrew({Key? key}) : super(key: key);
 
@@ -16,7 +19,7 @@ class GetCrew extends StatefulWidget {
 }
 
 class _GetCrewState extends State<GetCrew> {
-  String url = "http://18.183.52.0:3060/api/crews/all/groupbyrole";
+  String url = __url + "userApp/getCrew";
 
   Future<List> getData() async {
     final response = await http.get(Uri.parse(url));
