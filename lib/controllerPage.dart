@@ -119,7 +119,7 @@ class _ControllerPageState extends State<ControllerPage> {
   Widget navigationDecider(int index, data){
     switch (index){
       case 0:
-        return homepageWithTImer();
+        return homepageWithTImer(avatarLink: gravatar_url);
       case 1:
         return HomeWidget(data: data);
       case 2:

@@ -9,7 +9,8 @@ import 'package:rive/rive.dart';
 
 
 class homepageWithTImer extends StatefulWidget {
-  homepageWithTImer({Key? key}) : super(key: key);
+  final String avatarLink;
+  homepageWithTImer({Key? key, required this.avatarLink}) : super(key: key);
 
   @override
   State<homepageWithTImer> createState() => _homepageWithTImerState();
@@ -180,21 +181,17 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
 
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.08, vertical: MediaQuery.of(context).size.height*0.008),
+                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.08, vertical: MediaQuery.of(context).size.height*0.005),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
 
-                            Text("About Anokha",
-                              style: TextStyle(color: Color(0xFFFF7F11),
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 15.0),
-
-                            ),
+                            Image(image: AssetImage('Images/anokha_circle.png'),
+                            height: MediaQuery.of(context).size.width * 0.08,),
 
                             ClipOval(
                               child: Image(
-                                image: NetworkImage("https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80"),
+                                image: NetworkImage(widget.avatarLink),
                                 fit: BoxFit.cover,
                                 width: 40.0, // set the width and height to make the image circular
                                 height: 40.0,
@@ -206,19 +203,20 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
                       ),
 
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.07, vertical: 15),
+                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.07, vertical: MediaQuery.of(context).size.height*0.01),
                         child: Container(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "Up Next for you",
+                            "Up Next For You",
                             style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
+                                fontSize: 25.0, fontWeight: FontWeight.w600),
+                          )
                         ),
                       ),
-                      MyTicketView(),
+                      Padding(
+                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.015),
+                        child: MyTicketView(),
+                      ),
                     ],
                   ),
                 )
