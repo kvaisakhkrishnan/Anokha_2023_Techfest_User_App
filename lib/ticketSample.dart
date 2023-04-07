@@ -141,14 +141,25 @@ class TicketData extends StatelessWidget {
         ),
 
         QrImage(
-          data: 'This QR code has an embedded image as well',
+          foregroundColor : Colors.white,
+          data: "{json data to be passed}",
           version: QrVersions.auto,
           size: MediaQuery.of(context).size.height * 0.2,
           gapless: false,
-          embeddedImage: AssetImage('/Images/logo.png'),
+
           embeddedImageStyle: QrEmbeddedImageStyle(
-            size: Size(80, 80),
+            size: Size(MediaQuery.of(context).size.height * 0.05, MediaQuery.of(context).size.height * 0.05),
           ),
+          errorStateBuilder: (cxt, err) {
+            return Container(
+              child: Center(
+                child: Text(
+                  "Please Conatct User App Developers",
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            );
+          },
         )
 
 

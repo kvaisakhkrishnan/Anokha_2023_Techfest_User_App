@@ -182,7 +182,12 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
 
+                            Text("About Anokha",
+                              style: TextStyle(color: Color(0xFFFF7F11),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15.0),
 
+                            ),
 
                             ClipOval(
                               child: Image(
@@ -192,12 +197,7 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
                                 height: 40.0,
                               ),
                             ),
-                            Text("About Anokha",
-                              style: TextStyle(color: Color(0xFFFF7F11),
-                              fontWeight: FontWeight.w500,
-                              fontSize: 15.0),
 
-                            )
                           ],
                         ),
                       ),
