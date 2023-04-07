@@ -1,3 +1,4 @@
+import 'package:anokha_home/registerPage.dart';
 import 'package:anokha_home/serverUrl.dart';
 import 'package:anokha_home/user_profile.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'dart:convert';
 import 'dart:async';
 
 import 'controllerPage.dart';
+import 'forgotPassword.dart';
 
 var userData;
 
@@ -241,7 +243,12 @@ class _loginPageState extends State<loginPage> {
                             width: MediaQuery.of(context).size.width * 0.7,
                             height: MediaQuery.of(context).size.height * 0.06,
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => RegisterPage()),
+                                );
+                              },
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -280,7 +287,12 @@ class _loginPageState extends State<loginPage> {
                             width: MediaQuery.of(context).size.width * 0.7,
                             height: MediaQuery.of(context).size.height * 0.06,
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => forgotPassword()),
+                                );
+                              },
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
