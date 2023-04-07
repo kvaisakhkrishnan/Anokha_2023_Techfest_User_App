@@ -52,6 +52,9 @@ PODS:
   - PayUIndia-UPICore (7.1.1):
     - PayUIndia-Networking (~> 4.0)
     - PayUIndia-PayUParams (~> 4.5)
+  - shared_preferences_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
   - webview_flutter_wkwebview (0.0.1):
     - Flutter
 
@@ -60,6 +63,7 @@ DEPENDENCIES:
   - flutter_inappwebview (from `.symlinks/plugins/flutter_inappwebview/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
   - payu_checkoutpro_flutter (from `.symlinks/plugins/payu_checkoutpro_flutter/ios`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
 SPEC REPOS:
@@ -89,6 +93,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider_foundation/ios"
   payu_checkoutpro_flutter:
     :path: ".symlinks/plugins/payu_checkoutpro_flutter/ios"
+  shared_preferences_foundation:
+    :path: ".symlinks/plugins/shared_preferences_foundation/ios"
   webview_flutter_wkwebview:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
@@ -112,6 +118,7 @@ SPEC CHECKSUMS:
   PayUIndia-PayUParams: ccbe8b24328efae18e494b129c71761d5e3c4335
   PayUIndia-PG-SDK: 4d01dcbd29259f778eca78ae780b3022b4ab44b1
   PayUIndia-UPICore: 5b1e5e4acbfff3fc5fa253c9219b7e1deb89bd41
+  shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472
   webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
 
 PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3

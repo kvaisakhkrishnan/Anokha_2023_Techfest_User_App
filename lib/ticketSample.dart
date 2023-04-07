@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_widget/ticket_widget.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -139,9 +140,27 @@ class TicketData extends StatelessWidget {
           ),
         ),
 
-        Image(image: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png'),
-        height: 0.20 * MediaQuery.of(context).size.height,
-        color: Color(0xFFBEB7AA),)
+        QrImage(
+          foregroundColor : Colors.white,
+          data: "{json data to be passed}",
+          version: QrVersions.auto,
+          size: MediaQuery.of(context).size.height * 0.2,
+          gapless: false,
+
+          embeddedImageStyle: QrEmbeddedImageStyle(
+            size: Size(MediaQuery.of(context).size.height * 0.05, MediaQuery.of(context).size.height * 0.05),
+          ),
+          errorStateBuilder: (cxt, err) {
+            return Container(
+              child: Center(
+                child: Text(
+                  "Please Conatct User App Developers",
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            );
+          },
+        )
 
 
       ],

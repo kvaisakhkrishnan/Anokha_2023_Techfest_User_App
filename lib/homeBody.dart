@@ -11,6 +11,9 @@ import 'anokhaCards.dart';
 
 final __url = serverUrl().url;
 
+
+
+
 class event_list {
   final int eventId;
   final String name;
@@ -43,7 +46,9 @@ class events_grouped_by_category {
 }
 
 class HomeBody extends StatefulWidget {
+
   final data;
+  final _textFieldValue = TextEditingController();
   HomeBody({Key? key, required this.data}) : super(key: key);
 
   @override
@@ -51,6 +56,8 @@ class HomeBody extends StatefulWidget {
 }
 
 class _HomeBodyState extends State<HomeBody> {
+  late List<events_grouped_by_category> _eventsData;
+
   Future<List<events_grouped_by_category>> getEvents() async {
     String url = __url + "userApp/events/groupByDepartment";
     final token = widget.data.SECRET_TOKEN;
@@ -89,7 +96,20 @@ class _HomeBodyState extends State<HomeBody> {
       list_of_events.add(temp_data_row);
 
     }
+    _eventsData = list_of_events;
     return list_of_events;
+  }
+
+  void search(String search){
+    if(search == "")
+      {
+        _eventsData.forEach((data) {
+
+        });
+      }
+    else{
+
+    }
   }
 
   @override
@@ -97,11 +117,11 @@ class _HomeBodyState extends State<HomeBody> {
     return FutureBuilder(
       future: getEvents(),
       builder: (BuildContext ctx, AsyncSnapshot snapshot) {
-        if (snapshot.data == null) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return Events_Loading_screen();
         } else {
           return ListView.builder(
-            itemCount: snapshot.data.length + 2, // add 1 for the static widget
+            itemCount: _eventsData.length + 1,
             itemBuilder: (ctx, index) {
               if (index == 0) {
                 return Column(
@@ -118,42 +138,35 @@ class _HomeBodyState extends State<HomeBody> {
                         ),
                       ),
                     ),
-                  AnokhaCards()
-
+                    AnokhaCards(),
                   ],
                 );
-
-              }
-
-              else if(index == 1) {
+              } else if (index == 1) {
                 return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 15.0, horizontal: 20.0),
                   child: Container(
                     decoration: BoxDecoration(
                         color: Color(0xFFF5F5F5),
-                        borderRadius: BorderRadius.circular(30.0)
-                    ),
+                        borderRadius: BorderRadius.circular(30.0)),
                     child: Padding(
-                      padding: EdgeInsets.only(left: 10, top: 3, bottom: 3, right: 20),
+                      padding: EdgeInsets.only(
+                          left: 10, top: 3, bottom: 3, right: 20),
                       child: TextFormField(
-                        style: TextStyle(
-                            fontSize: 19
-                        ),
-
+                        onChanged: (value) {
+                          search(value);
+                        },
+                        style: TextStyle(fontSize: 19),
                         decoration: InputDecoration(
                           hintText: 'Search Events, Departments, Tags',
                           prefixIcon: Icon(Icons.search, color: Colors.grey),
                           border: InputBorder.none,
-
                         ),
                       ),
                     ),
                   ),
                 );
-              }
-
-
-              else {
+              } else {
                 return Column(
                   children: [
                     Padding(
@@ -162,14 +175,15 @@ class _HomeBodyState extends State<HomeBody> {
                       child: Container(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "${snapshot.data[index - 1].title}",
+                          "${_eventsData[index - 2].title}",
                           style: TextStyle(
                               fontSize: 20.0, fontWeight: FontWeight.w500),
                         ),
                       ),
                     ),
                     CardRow(
-                      list_of_events: snapshot.data[index - 1].events_list,
+                      list_of_events:
+                      _eventsData[index - 2].events_list,
                     ),
                   ],
                 );
@@ -180,5 +194,4 @@ class _HomeBodyState extends State<HomeBody> {
       },
     );
   }
-
 }
