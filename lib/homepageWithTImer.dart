@@ -1,4 +1,3 @@
-// import 'dart:html';
 import 'dart:ui';
 import 'dart:async';
 import 'package:anokha_home/ticketSample.dart';
@@ -169,8 +168,54 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
                 duration: Duration(seconds: 5),
                 curve: Curves.easeInOut,
                 opacity: _showNewWidget ? 1.0 : 0.0,
-                child:
-                MyTicketView() // Replace with the new widget you want to show
+                child:SafeArea(
+                  child: Column(
+
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.08, vertical: MediaQuery.of(context).size.height*0.008),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+
+
+
+                            ClipOval(
+                              child: Image(
+                                image: NetworkImage("https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80"),
+                                fit: BoxFit.cover,
+                                width: 40.0, // set the width and height to make the image circular
+                                height: 40.0,
+                              ),
+                            ),
+                            Text("About Anokha",
+                              style: TextStyle(color: Color(0xFFFF7F11),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15.0),
+
+                            )
+                          ],
+                        ),
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.07, vertical: 15),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Up Next for you",
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                      MyTicketView(),
+                    ],
+                  ),
+                )
+
               ),
             ),
           ),
