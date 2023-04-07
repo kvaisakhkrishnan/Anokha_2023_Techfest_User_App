@@ -12,37 +12,40 @@ import 'Loading_Screens/events_loading.dart';
 final __url = serverUrl().url;
 
 class GetCrew extends StatefulWidget {
-  const GetCrew({Key? key}) : super(key: key);
+  final data;
+  GetCrew({Key? key, required this.data}) : super(key: key);
 
   @override
   State<GetCrew> createState() => _GetCrewState();
 }
 
 class _GetCrewState extends State<GetCrew> {
-  String url = __url + "userApp/getCrew";
+  late Future<List?> _crewDataFuture;
 
-  Future<List> getData() async {
-    final response = await http.get(Uri.parse(url));
-    return json.decode(response.body);
+  @override
+  void initState() {
+    super.initState();
+    _crewDataFuture = CrewDataManager().getCrewData(token: widget.data.SECRET_TOKEN);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: FutureBuilder<List>(
-            future: getData(),
-            builder: (context, ss) {
-              if (ss.hasError) {
+        body: FutureBuilder<List?>(
+            future: _crewDataFuture,
+            builder: (BuildContext ctx, AsyncSnapshot snapshot) {
+              if (snapshot.hasError) {
                 print("error");
               }
-              if (ss.hasData) {
-                return CrewMembers(list: ss.data);
+              if (snapshot.hasData) {
+                return CrewMembers(list: snapshot.data);
               } else {
                 return Events_Loading_screen();
               }
             }));
   }
 }
+
 
 class CrewMembers extends StatefulWidget {
   List? list;
@@ -72,8 +75,7 @@ class _CrewMembersState extends State<CrewMembers> {
   int numbers = 1;
   @override
   Widget build(BuildContext context) {
-    final List<String> items =
-    List.generate(crew_list.length, (index) => crew_list[index]["role"]);
+    final List<String> items = List.generate(crew_list.length, (index) => crew_list[index]["role"] ?? "");
     final List<int> a = List.generate(crew_list.length, (index) => index);
 
     return MaterialApp(
@@ -147,9 +149,7 @@ class _CrewMembersState extends State<CrewMembers> {
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                           ),
-                          itemCount: (selected_index == 1)
-                              ? crew_list[0]["crews"].length
-                              : numbers,
+                          itemCount: (selected_index == 1) ? (crew_list[0]["crews"]?.length ?? 0) : numbers,
                           padding: EdgeInsets.only(
                               left: 20, right: 10, top: 10, bottom: 10),
                           itemBuilder: (context, index) {
@@ -280,5 +280,38 @@ class ImageDialog extends StatelessWidget {
                 fit: BoxFit.fill)),
       ),
     );
+  }
+}
+
+
+class CrewDataManager {
+  static final CrewDataManager _singleton = CrewDataManager._internal();
+
+  factory CrewDataManager() {
+    return _singleton;
+  }
+
+  CrewDataManager._internal();
+
+  List? _crewData;
+
+  Future<List?> getCrewData({required String token}) async {
+    if (_crewData == null) {
+      await _fetchCrewData(token: token);
+    }
+    return _crewData;
+  }
+
+  Future<void> _fetchCrewData({required String token}) async {
+    String url = __url + "userApp/getCrew";
+    final response = await http.get(
+        Uri.parse(url),
+        headers: {'Authorization': 'Bearer $token'}
+    );
+    _crewData = json.decode(response.body);
+  }
+
+  void clearData() {
+    _crewData = null;
   }
 }

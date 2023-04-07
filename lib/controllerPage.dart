@@ -129,7 +129,7 @@ class _ControllerPageState extends State<ControllerPage> {
       case 4:
         return userProf(avatarLink: gravatar_url,data: data,);
       case 5:
-        return GetCrew();
+        return GetCrew(data: data);
       default:
         return Text("Dummy Widget");
     }
