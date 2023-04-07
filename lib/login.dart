@@ -86,6 +86,8 @@ class _loginPageState extends State<loginPage> {
           country: userDetails['country'],
           SECRET_TOKEN: userDetails['SECRET_TOKEN']
         );
+
+        print('SECRET_TOKEN: ${userData.SECRET_TOKEN}');
         return 1;
 
       } else {
