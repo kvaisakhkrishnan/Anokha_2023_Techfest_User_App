@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'login.dart';
+
 class userProf extends StatefulWidget {
   String avatarLink;
   final data;
@@ -50,7 +52,13 @@ class _userProfState extends State<userProf> {
               child: themeChangeIcon(notifyParent: refresh),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (BuildContext context) => loginPage()),
+                      (Route<dynamic> route) => false,
+                );
+              },
               icon: Icon(Icons.power_settings_new),
               color: Color(0xFFFF3F00),
             ),

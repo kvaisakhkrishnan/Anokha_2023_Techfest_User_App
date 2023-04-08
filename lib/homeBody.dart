@@ -44,9 +44,9 @@ class _HomeBodyState extends State<HomeBody> {
 
         for (var eventDetail in eventUnderDept.events_list) {
           if (eventDetail.eventId
-                  .toString()
-                  .toLowerCase()
-                  .contains(search.toLowerCase()) ||
+              .toString()
+              .toLowerCase()
+              .contains(search.toLowerCase()) ||
               eventDetail.name.toLowerCase().contains(search.toLowerCase()) ||
               eventDetail.description
                   .toLowerCase()
@@ -70,67 +70,16 @@ class _HomeBodyState extends State<HomeBody> {
   @override
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    return ListView.builder(
-        itemCount: widget.eventsList.length + 2,
-        itemBuilder: (ctx, index) {
-          if (index == 0) {
-            return Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0),
-                  child: Container(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      "Trending Now",
-                      style: TextStyle(
-                          fontSize: 25.0, fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                ),
-                AnokhaCards(),
-              ],
-            );
-          } else if (index == 1) {
-            return Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Color(0xFFF5F5F5),
-                    borderRadius: BorderRadius.circular(30.0)),
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(left: 10, top: 3, bottom: 3, right: 20),
-                  child: TextFormField(
-                    onChanged: (value) {
-                      search(value);
-                    },
-                    style: TextStyle(fontSize: 19),
-                    decoration: InputDecoration(
-                      hintText: 'Search Events, Departments, Tags',
-                      prefixIcon: Icon(Icons.search, color: Colors.grey),
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-              ),
-            );
-          } else {
-            if (searchInitiated == 0) {
-              return Column(
-=======
     return CustomScrollView(
       slivers: <Widget>[
         SliverList(
           delegate: SliverChildListDelegate(
             [
               Column(
->>>>>>> dcbcee9f32a5a61741e7a1060720f519ec438ee1
                 children: [
                   Padding(
                     padding:
-                        EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0),
+                    EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0),
                     child: Container(
                       alignment: Alignment.topLeft,
                       child: Text(
@@ -140,21 +89,6 @@ class _HomeBodyState extends State<HomeBody> {
                       ),
                     ),
                   ),
-<<<<<<< HEAD
-                  CardRow(
-                    list_of_events: widget.eventsList[index - 2].events_list,
-                  ),
-                ],
-              );
-            } else {
-              if (index == 2) {
-                return Text("OK");
-              }
-            }
-          }
-        });
-  }
-=======
                   AnokhaCards(),
                 ],
               ),
@@ -167,7 +101,7 @@ class _HomeBodyState extends State<HomeBody> {
                       borderRadius: BorderRadius.circular(30.0)),
                   child: Padding(
                     padding:
-                        EdgeInsets.only(left: 10, top: 3, bottom: 3, right: 20),
+                    EdgeInsets.only(left: 10, top: 3, bottom: 3, right: 20),
                     child: TextFormField(
                       onChanged: (value) {
                         search(value);
@@ -188,12 +122,12 @@ class _HomeBodyState extends State<HomeBody> {
         if (searchInitiated == 0)
           SliverList(
             delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
+                  (BuildContext context, int index) {
                 return Column(
                   children: [
                     Padding(
                       padding:
-                          EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0),
+                      EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0),
                       child: Container(
                         alignment: Alignment.topLeft,
                         child: Text(
@@ -225,10 +159,10 @@ class _HomeBodyState extends State<HomeBody> {
           crossAxisCount: 2,
           crossAxisSpacing: 10.0,
           mainAxisSpacing: 10.0,
-          childAspectRatio: 3 / 2,
+          childAspectRatio: 3 / 4,
         ),
         delegate: SliverChildBuilderDelegate(
-          (BuildContext context, int index) {
+              (BuildContext context, int index) {
             return _buildEventCard(eventsSearch[index]);
           },
           childCount: eventsSearch.length,
@@ -240,5 +174,4 @@ class _HomeBodyState extends State<HomeBody> {
   Widget _buildEventCard(event_list event) {
     return EventCard(event_data: event);
   }
->>>>>>> dcbcee9f32a5a61741e7a1060720f519ec438ee1
 }
