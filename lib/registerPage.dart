@@ -1,16 +1,105 @@
+import 'dart:convert';
+import 'package:anokha_home/serverUrl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
+
+
+
+final __url = serverUrl().url;
+
+class College {
+  final int collegeId;
+  final String universityName;
+  final String collegeName;
+  final String district;
+  final String state;
+  final String country;
+
+  College({
+    required this.collegeId,
+    required this.universityName,
+    required this.collegeName,
+    required this.district,
+    required this.state,
+    required this.country,
+  });
+
+  factory College.fromJson(Map<String, dynamic> json) {
+    return College(
+      collegeId: json['collegeId'],
+      universityName: json['universityName'],
+      collegeName: json['collegeName'],
+      district: json['district'],
+      state: json['state'],
+      country: json['country'],
+    );
+  }
+}
+
 
 class RegisterPage extends StatefulWidget {
-  RegisterPage({Key? key}) : super(key: key);
+  final data;
+  RegisterPage({Key? key, required this.data}) : super(key: key);
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+
+
+  List<College> parseColleges(String jsonData) {
+    final List parsedJson = jsonDecode(jsonData);
+    return parsedJson.map((college) => College.fromJson(college)).toList();
+  }
+
+
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController collegeNameController = TextEditingController();
+  College? _selectedCollege;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.data.isNotEmpty) {
+      List<College> colleges = parseColleges(widget.data);
+      _selectedCollege = colleges.first;
+      collegeNameController.text = _selectedCollege!.collegeName;
+    }
+  }
+
+  Future<void> registerUser() async {
+    print(widget.data);
+    String url = __url + 'userApp/register';
+    print(fullNameController.text);
+    var response = await http.post(
+      Uri.parse(url),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({
+        "fullName": fullNameController.text,
+        "email": emailController.text,
+        "password": passwordController.text,
+        "confirmPassword": confirmPasswordController.text,
+        "collegeName": collegeNameController.text,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      // Registration successful
+      // Navigate to another page or show success message
+    } else {
+      // Registration failed
+      // Show error message
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<College> colleges = parseColleges(widget.data);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -72,10 +161,11 @@ class _RegisterPageState extends State<RegisterPage> {
                               children: [
                                 Padding(
                                   padding:
-                                      EdgeInsets.symmetric(horizontal: 10.0),
+                                  EdgeInsets.symmetric(horizontal: 10.0),
                                   child: TextField(
+                                    controller: fullNameController,
                                     decoration: InputDecoration(
-                                      hintText: "First Name",
+                                      hintText: "Full Name",
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                             width: 1, color: Color(0xffF3F2F7)),
@@ -85,21 +175,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                                 Padding(
                                   padding:
-                                      EdgeInsets.symmetric(horizontal: 10.0),
+                                  EdgeInsets.symmetric(horizontal: 10.0),
                                   child: TextField(
-                                    decoration: InputDecoration(
-                                      hintText: "Last Name",
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            width: 1, color: Color(0xffF3F2F7)),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 10.0),
-                                  child: TextField(
+                                    controller: emailController,
                                     decoration: InputDecoration(
                                       hintText: "Email Address",
                                       enabledBorder: UnderlineInputBorder(
@@ -111,8 +189,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                                 Padding(
                                   padding:
-                                      EdgeInsets.symmetric(horizontal: 10.0),
+                                  EdgeInsets.symmetric(horizontal: 10.0),
                                   child: TextField(
+                                    controller: passwordController,
                                     decoration: InputDecoration(
                                       hintText: "Password",
                                       enabledBorder: UnderlineInputBorder(
@@ -124,8 +203,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                                 Padding(
                                   padding:
-                                      EdgeInsets.symmetric(horizontal: 10.0),
+                                  EdgeInsets.symmetric(horizontal: 10.0),
                                   child: TextField(
+                                    controller: confirmPasswordController,
                                     decoration: InputDecoration(
                                       hintText: "Confirm Password",
                                       enabledBorder: UnderlineInputBorder(
@@ -136,22 +216,75 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                 ),
                                 Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 10.0),
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      hintText: "College Name",
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            width: 1, color: Color(0xffF3F2F7)),
-                                      ),
-                                    ),
+                                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                                  child: Autocomplete<College>(
+                                    optionsBuilder: (TextEditingValue textEditingValue) {
+                                      if (textEditingValue.text == '') {
+                                        return const Iterable<College>.empty();
+                                      }
+                                      return colleges.where((College college) {
+                                        return college.collegeName
+                                            .toLowerCase()
+                                            .contains(textEditingValue.text.toLowerCase());
+                                      });
+                                    },
+                                    onSelected: (College newValue) {
+                                      setState(() {
+                                        _selectedCollege = newValue;
+                                        collegeNameController.text = _selectedCollege!.collegeName;
+                                      });
+                                    },
+                                    displayStringForOption: (College option) =>
+                                    '${option.collegeName}, ${option.district}, ${option.state}',
+                                    fieldViewBuilder: (BuildContext context,
+                                        TextEditingController fieldTextEditingController,
+                                        FocusNode fieldFocusNode,
+                                        VoidCallback onFieldSubmitted) {
+                                      return TextField(
+                                        controller: fieldTextEditingController,
+                                        focusNode: fieldFocusNode,
+                                        decoration: InputDecoration(
+                                          hintText: "College Name",
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(width: 1, color: Color(0xffF3F2F7)),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    optionsViewBuilder: (BuildContext context, AutocompleteOnSelected<College> onSelected, Iterable<College> options) {
+                                      return Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Material(
+                                          elevation: 4.0,
+                                          child: SizedBox(
+                                            height: 200,
+                                            child: ListView.builder(
+                                              itemCount: options.length,
+                                              itemBuilder: (BuildContext context, int index) {
+                                                final College option = options.elementAt(index);
+                                                return ListTile(
+                                                  title: Text(
+                                                    '${option.collegeName}, ${option.district}, ${option.state}',
+                                                  ),
+                                                  onTap: () {
+                                                    onSelected(option);
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
+
+
+
                                 Padding(
                                   padding: EdgeInsets.symmetric(vertical: 30.0),
                                   child: OutlinedButton(
-                                    onPressed: () {},
+                                    onPressed: registerUser,
                                     child: Text(
                                       "REGISTER",
                                       style: TextStyle(
@@ -161,12 +294,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                       backgroundColor: Color(0xFFFF7F11),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
-                                              BorderRadius.circular(10.0)),
+                                          BorderRadius.circular(10.0)),
                                       padding: EdgeInsets.symmetric(
                                           vertical: 13.0,
                                           horizontal: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
+                                              .size
+                                              .width *
                                               0.3),
                                     ),
                                   ),
@@ -187,7 +320,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       child: Text(
                                         "LOGIN",
                                         style:
-                                            TextStyle(color: Color(0xFFFF7F11)),
+                                        TextStyle(color: Color(0xFFFF7F11)),
                                       )),
                                 )
                               ],
