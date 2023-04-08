@@ -116,7 +116,7 @@ class _ControllerPageState extends State<ControllerPage> {
       case 1:
         return HomeWidget(data: data, eventsList: eventsList);
       case 2:
-      //return StarredEvents(data: data);
+        return GetStarrs(data: data);
       case 3:
         return RegisteredEvents();
       case 4:

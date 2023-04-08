@@ -18,27 +18,29 @@ class GetStarrs extends StatefulWidget {
 }
 
 class _GetStarrsState extends State<GetStarrs> {
-  String url = "http://52.66.236.118:3060/userApp/getStarredEvents";
+  Future<List> getData() async {
+    String url = "http://52.66.236.118:3000/userApp/getStarredEvents";
 
-  Future<Map<String, dynamic>> getData() async {
     final response = await http.get(Uri.parse(url),
         headers: {'authorization': 'Bearer ${widget.data}'});
+    print("hello");
     return json.decode(response.body);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<Map<String, dynamic>>(
+      body: FutureBuilder<List>(
           future: getData(),
           builder: (context, ss) {
             if (ss.hasError) {
+              print(ss.error);
               print("error");
             }
             if (ss.hasData) {
               return Wheel(starr_map: ss.data);
             } else {
-              return CircularProgressIndicator();
+              return Center(child: Text("Error"));
             }
           }),
     );
@@ -46,7 +48,7 @@ class _GetStarrsState extends State<GetStarrs> {
 }
 
 class Wheel extends StatefulWidget {
-  Map<String, dynamic>? starr_map;
+  List? starr_map;
 
   Wheel({Key? key, required this.starr_map}) : super(key: key);
 
@@ -66,7 +68,9 @@ class _WheelState extends State<Wheel> {
         title: Text(
           "Starred Events",
           style: GoogleFonts.dmSans(
-              color: HexColor("#002845"), fontWeight: FontWeight.bold),
+              color: HexColor("#002845"),
+              fontWeight: FontWeight.bold,
+              fontSize: 30),
         ),
         backgroundColor: Colors.white,
         centerTitle: true,
@@ -78,7 +82,8 @@ class _WheelState extends State<Wheel> {
                 return Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: InkWell(
-                    child: New_Widget(index: index, starrs: widget.starr_map),
+                    child: New_Widget(
+                        index: index, starrs: widget.starr_map![index]),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -89,7 +94,7 @@ class _WheelState extends State<Wheel> {
                   ),
                 );
               }),
-              itemCount: widget.starr_map?["nonstarredEvents"].length,
+              itemCount: widget.starr_map?.length,
               /*child: ListWheelScrollView.useDelegate(
                 physics: FixedExtentScrollPhysics(),
                 itemExtent: MediaQuery.of(context).size.height * 0.26,
@@ -129,8 +134,8 @@ class _New_WidgetState extends State<New_Widget> {
                   gradient: LinearGradient(
                       colors: [HexColor("#193d57"), HexColor("#002845")]),
                   borderRadius: BorderRadius.all(Radius.circular(30))),
-              height: 150,
-              width: 100,
+              height: MediaQuery.of(context).size.height * 0.2,
+              width: MediaQuery.of(context).size.width * 0.9,
               child: Column(
                 children: [
                   Row(
@@ -139,26 +144,34 @@ class _New_WidgetState extends State<New_Widget> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                         child: Text(
-                          widget.starrs!["nonstarredEvents"][widget.index]
-                              ["name"],
+                          widget.starrs!["eventName"],
                           maxLines: 4,
                           style: GoogleFonts.dmSans(
-                              fontSize: 20, color: Colors.white),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.white),
                         ),
                       ),
                       Image(
-                          height: 100,
-                          width: 100,
+                          height: MediaQuery.of(context).size.height * 0.1,
+                          width: MediaQuery.of(context).size.width * 0.25,
                           image:
-                              AssetImage("images/anokha_2023_white_small.png"))
+                              AssetImage("Images/anokha_2023_white_small.png"))
                     ],
                   ),
                   Text(
-                    "${widget.starrs!["nonstarredEvents"][widget.index]["department"]} | ${widget.starrs!["nonstarredEvents"][widget.index]["type"]}",
+                    "${widget.starrs!["date"]}",
+                    textAlign: TextAlign.left,
                     style: GoogleFonts.dmSans(
-                        fontWeight: FontWeight.bold,
-                        color: HexColor("#FF7F11"),
-                        fontSize: 25),
+                        color: HexColor("BEB7A4"), fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.01,
+                  ),
+                  Text(
+                    "${widget.starrs!["departmentabbr"]} | ${widget.starrs!["venue"]}",
+                    style: GoogleFonts.dmSans(
+                        color: HexColor("#FF7F11"), fontSize: 20),
                   )
                 ],
               )),
