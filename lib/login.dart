@@ -201,7 +201,7 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
             child: Column(
               children: [
                 Expanded(
-                  flex: 3,
+                  flex: 5,
                   child: Container(
                     alignment: Alignment.bottomCenter,
                     child: RotationTransition(
@@ -223,11 +223,11 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
                 ),
 
                 Expanded(
-                  flex: 3,
+                  flex: 2,
                   child: Container(
                     alignment: Alignment.bottomCenter,
                     margin: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).size.height * 0.03),
+                        bottom: MediaQuery.of(context).size.height * 0.0),
                     child: Text(
                       "Login",
                       style: TextStyle(
@@ -238,181 +238,185 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
               ],
             ),
           ),
+          SizedBox(height: MediaQuery.of(context).size.height*0.06,),
           Expanded(
+            flex: 2,
             child: Stack(
               children: [
                 Container(
                   color: Color(0xFFf3f2f7),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(30.0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 1,
-                    height: MediaQuery.of(context).size.height * 1,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                      color: Color(0xFFFFFFFC),
-                    ),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.7,
-                            child: TextFormField(
-                              controller: _usernameController,
-                              decoration: InputDecoration(
-                                hintText: 'Username',
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.7,
-                            child: TextFormField(
-                              controller: _passwordController,
-                              decoration: InputDecoration(
-                                hintText: 'Password',
-                                suffixIcon: IconButton(
-                                  iconSize: 20.0,
-                                  icon: _obscureText
-                                      ? Icon(FontAwesomeIcons.eye)
-                                      : Icon(FontAwesomeIcons.eyeSlash),
-                                  onPressed: () {
-                                    _toggle();
-                                  },
+                  padding: EdgeInsets.all(33.0),
+                  child: Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      height: MediaQuery.of(context).size.height * 0.43,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.0),
+                        color: Color(0xFFFFFFFC),
+                      ),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.7,
+                              child: TextFormField(
+                                controller: _usernameController,
+                                decoration: InputDecoration(
+                                  hintText: 'Email',
                                 ),
                               ),
-                              obscureText: _obscureText,
                             ),
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.03,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.7,
-                            height: MediaQuery.of(context).size.height * 0.06,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Color(0xFFFF7F11),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.7,
+                              child: TextFormField(
+                                controller: _passwordController,
+                                decoration: InputDecoration(
+                                  hintText: 'Password',
+                                  suffixIcon: IconButton(
+                                    iconSize: 20.0,
+                                    icon: _obscureText
+                                        ? Icon(FontAwesomeIcons.eye)
+                                        : Icon(FontAwesomeIcons.eyeSlash),
+                                    onPressed: () {
+                                      _toggle();
+                                    },
+                                  ),
                                 ),
+                                obscureText: _obscureText,
                               ),
-                              onPressed: () async {
-                                try {
-                                  int status = await loginUser(
-                                    _usernameController.text,
-                                    _passwordController.text,
-                                  );
-                                  // print;
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.03,
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.7,
+                              height: MediaQuery.of(context).size.height * 0.06,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Color(0xFFFF7F11),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                ),
+                                onPressed: () async {
+                                  try {
+                                    int status = await loginUser(
+                                      _usernameController.text,
+                                      _passwordController.text,
+                                    );
+                                    // print;
 
-                                  if (status == 1) {
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ControllerPage(data: userData, eventsList : list_of_events)));
+                                    if (status == 1) {
+                                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ControllerPage(data: userData, eventsList : list_of_events)));
 
-                                  } else {
+                                    } else {
 
-                                    void _showSnackBar(BuildContext context, String message) {
-                                      final snackBar = SnackBar(
-                                        content: Text(message),
-                                        backgroundColor: Colors.grey,
-                                      );
-                                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                      void _showSnackBar(BuildContext context, String message) {
+                                        final snackBar = SnackBar(
+                                          content: Text(message),
+                                          backgroundColor: Colors.grey,
+                                        );
+                                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                      }
+                                      _showSnackBar(context, "Invalid login details");
                                     }
-                                    _showSnackBar(context, "Invalid login details");
+                                  } catch (e) {
+                                    print("Error: $e");
+                                    _scaffoldMessengerKey.currentState?.showSnackBar(
+                                      SnackBar(content: Text('An error occurred while logging in')),
+                                    );
                                   }
-                                } catch (e) {
-                                  print("Error: $e");
-                                  _scaffoldMessengerKey.currentState?.showSnackBar(
-                                    SnackBar(content: Text('An error occurred while logging in')),
-                                  );
-                                }
-                              },
-                              child: Text('LOGIN'),
-                            ),
+                                },
+                                child: Text('LOGIN'),
+                              ),
 
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.02,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.7,
-                            height: MediaQuery.of(context).size.height * 0.06,
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => RegisterPage()),
-                                );
-                              },
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      margin: EdgeInsets.only(
-                                          left: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.06),
-                                      child: Text(
-                                        'REGISTER',
-                                        style: TextStyle(
-                                          color: (Color(0xFFFF7F11)),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.02,
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.7,
+                              height: MediaQuery.of(context).size.height * 0.06,
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => RegisterPage()),
+                                  );
+                                },
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        margin: EdgeInsets.only(
+                                            left: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.06),
+                                        child: Text(
+                                          'REGISTER',
+                                          style: TextStyle(
+                                            color: (Color(0xFFFF7F11)),
+                                          ),
                                         ),
                                       ),
+                                      flex: 9,
                                     ),
-                                    flex: 9,
-                                  ),
-                                  Expanded(
-                                      child: Icon(
-                                    size: 18.0,
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.grey,
-                                  )),
-                                ],
+                                    Expanded(
+                                        child: Icon(
+                                      size: 18.0,
+                                      Icons.arrow_forward_ios,
+                                      color: Colors.grey,
+                                    )),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.07,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.7,
-                            height: MediaQuery.of(context).size.height * 0.06,
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => forgotPassword()),
-                                );
-                              },
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      child: Text(
-                                        'Forgot Password',
-                                        style: TextStyle(
-                                          color: (Colors.black),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.07,
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.7,
+                              height: MediaQuery.of(context).size.height * 0.06,
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => forgotPassword()),
+                                  );
+                                },
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        child: Text(
+                                          'Forgot Password',
+                                          style: TextStyle(
+                                            color: (Colors.black),
+                                          ),
                                         ),
                                       ),
+                                      flex: 9,
                                     ),
-                                    flex: 9,
-                                  ),
-                                  Expanded(
-                                      child: Icon(
-                                        size: 18.0,
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.grey,
-                                  )),
-                                ],
+                                    Expanded(
+                                        child: Icon(
+                                          size: 18.0,
+                                      Icons.arrow_forward_ios,
+                                      color: Colors.grey,
+                                    )),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
