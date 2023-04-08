@@ -84,15 +84,14 @@ class User {
 final __url = serverUrl().url;
 
 class loginPage extends StatefulWidget {
-  final dynamic data;
-  const loginPage({Key? key, this.data}) : super(key: key);
+  const loginPage({Key? key}) : super(key: key);
 
 
   @override
   State<loginPage> createState() => _loginPageState();
 }
 
-class _loginPageState extends State<loginPage> {
+class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
   List<events_grouped_by_category> list_of_events = [];
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
   final TextEditingController _usernameController = TextEditingController();
@@ -119,15 +118,15 @@ class _loginPageState extends State<loginPage> {
         var userDetails = jsonDecode(response.body);
 
         userData = User(
-            userEmail: userDetails["userData"]['userEmail'],
-            fullName: userDetails["userData"]['fullName'],
-            activePassport: userDetails["userData"]['activePassport'],
-            isAmritaCBE: userDetails["userData"]['isAmritaCBE'],
-            collegeName: userDetails["userData"]['collegeName'],
-            district: userDetails["userData"]['district'],
-            state: userDetails["userData"]['state'],
-            country: userDetails["userData"]['country'],
-            SECRET_TOKEN: userDetails["userData"]['SECRET_TOKEN']
+          userEmail: userDetails["userData"]['userEmail'],
+          fullName: userDetails["userData"]['fullName'],
+          activePassport: userDetails["userData"]['activePassport'],
+          isAmritaCBE: userDetails["userData"]['isAmritaCBE'],
+          collegeName: userDetails["userData"]['collegeName'],
+          district: userDetails["userData"]['district'],
+          state: userDetails["userData"]['state'],
+          country: userDetails["userData"]['country'],
+          SECRET_TOKEN: userDetails["userData"]['SECRET_TOKEN']
         );
 
 
@@ -178,7 +177,7 @@ class _loginPageState extends State<loginPage> {
     }
 
 
-  }
+      }
 
   bool _obscureText = true;
 
@@ -187,6 +186,9 @@ class _loginPageState extends State<loginPage> {
       _obscureText = !_obscureText;
     });
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -202,9 +204,24 @@ class _loginPageState extends State<loginPage> {
                   flex: 7,
                   child: Container(
                     alignment: Alignment.bottomCenter,
-                    child: Image.asset('Images/logo.png'),
+                    child: RotationTransition(
+                      turns: Tween(begin: 0.0, end: 1.0).animate(
+                        CurvedAnimation(
+                          parent: AnimationController(
+                            vsync: this,
+                            duration: Duration(seconds: 2), // Set the duration of the rotation
+                          )..repeat(), // Repeat the rotation indefinitely
+                          curve: Curves.linear,
+                        ),
+                      ),
+                      child: Image(
+                        image: AssetImage('Images/anokha_circle.png'),
+                        width: MediaQuery.of(context).size.width * 0.3,
+                      ),
+                    ),
                   ),
                 ),
+
                 Expanded(
                   flex: 3,
                   child: Container(
@@ -289,7 +306,7 @@ class _loginPageState extends State<loginPage> {
                                   // print;
 
                                   if (status == 1) {
-                                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ControllerPage(data: userData, eventsList : list_of_events)));
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ControllerPage(data: userData, eventsList : list_of_events)));
 
                                   } else {
 
@@ -321,23 +338,22 @@ class _loginPageState extends State<loginPage> {
                             height: MediaQuery.of(context).size.height * 0.06,
                             child: TextButton(
                               onPressed: () {
-                                print(widget.data);
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => RegisterPage(data: widget.data)),
+                                  MaterialPageRoute(builder: (context) => RegisterPage()),
                                 );
                               },
                               child: Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     child: Container(
                                       alignment: Alignment.center,
                                       margin: EdgeInsets.only(
                                           left: MediaQuery.of(context)
-                                              .size
-                                              .width *
+                                                  .size
+                                                  .width *
                                               0.06),
                                       child: Text(
                                         'REGISTER',
@@ -350,10 +366,10 @@ class _loginPageState extends State<loginPage> {
                                   ),
                                   Expanded(
                                       child: Icon(
-                                        size: 18.0,
-                                        Icons.arrow_forward_ios,
-                                        color: Colors.grey,
-                                      )),
+                                    size: 18.0,
+                                    Icons.arrow_forward_ios,
+                                    color: Colors.grey,
+                                  )),
                                 ],
                               ),
                             ),
@@ -373,7 +389,7 @@ class _loginPageState extends State<loginPage> {
                               },
                               child: Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     child: Container(
@@ -389,9 +405,9 @@ class _loginPageState extends State<loginPage> {
                                   Expanded(
                                       child: Icon(
                                         size: 18.0,
-                                        Icons.arrow_forward_ios,
-                                        color: Colors.grey,
-                                      )),
+                                    Icons.arrow_forward_ios,
+                                    color: Colors.grey,
+                                  )),
                                 ],
                               ),
                             ),
