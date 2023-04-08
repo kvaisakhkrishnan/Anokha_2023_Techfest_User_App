@@ -1,4 +1,4 @@
- import 'package:anokha_home/homePage.dart';
+import 'package:anokha_home/homePage.dart';
 import 'package:anokha_home/homepageWithTImer.dart';
 import 'package:anokha_home/login.dart';
 import 'package:anokha_home/registerPage.dart';
@@ -15,8 +15,6 @@ import 'package:simple_gravatar/simple_gravatar.dart';
 import 'animated_bar.dart';
 import 'crew_members.dart';
 
-
-
 class ControllerPage extends StatefulWidget {
   final data;
 
@@ -32,7 +30,6 @@ class _ControllerPageState extends State<ControllerPage> {
   int selectedIndex = 0;
   var gravatar_url = "";
 
-
   @override
   void initState() {
     var gravatar = Gravatar(widget.data.userEmail);
@@ -44,8 +41,6 @@ class _ControllerPageState extends State<ControllerPage> {
     );
 
     gravatar_url = url;
-
-
   }
 
   @override
@@ -58,84 +53,81 @@ class _ControllerPageState extends State<ControllerPage> {
           decoration: BoxDecoration(
             color: Color(0xFF203354),
             borderRadius: BorderRadius.all(Radius.circular(24)),
-
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-
               ...List.generate(
                 bottomNavs.length,
-                    (index) => GestureDetector(
-                  onTap: (){
+                (index) => GestureDetector(
+                  onTap: () {
                     bottomNavs[index].input!.change(true);
-                    if(bottomNavs[index] != selectedBottomNav)
-                    {
+                    if (bottomNavs[index] != selectedBottomNav) {
                       setState(() {
-
                         selectedBottomNav = bottomNavs[index];
                         selectedIndex = index;
                       });
                     }
-                    Future.delayed(Duration(seconds: 1), (){
+                    Future.delayed(Duration(seconds: 1), () {
                       bottomNavs[index].input!.change(false);
                     });
                   },
-                  child:Column(
+                  child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      AnimatedBar(isActive: bottomNavs[index] == selectedBottomNav),
+                      AnimatedBar(
+                          isActive: bottomNavs[index] == selectedBottomNav),
                       SizedBox(
                         height: 36,
                         width: 36,
                         child: Opacity(
-                          opacity: bottomNavs[index] == selectedBottomNav ?
-                          1 : 0.5,
-                          child: RiveAnimation.asset("./RiveAssets/icons.riv",
+                          opacity:
+                              bottomNavs[index] == selectedBottomNav ? 1 : 0.5,
+                          child: RiveAnimation.asset(
+                            "./RiveAssets/icons.riv",
                             artboard: bottomNavs[index].artboard,
-                            onInit: (artboard){
-                              StateMachineController controller = RiverUtils.getRiveController(
-                                  artboard,
-                                  stateMachineName: bottomNavs[index].stateMachineName);
-                              bottomNavs[index].input = controller.findSMI("active") as SMIBool;
-
+                            onInit: (artboard) {
+                              StateMachineController controller =
+                                  RiverUtils.getRiveController(artboard,
+                                      stateMachineName:
+                                          bottomNavs[index].stateMachineName);
+                              bottomNavs[index].input =
+                                  controller.findSMI("active") as SMIBool;
                             },
                           ),
                         ),
-
                       ),
                     ],
                   ),
                 ),
               )
-
             ],
           ),
-
         ),
       ),
       body: navigationDecider(selectedIndex, widget.data, widget.eventsList),
     );
   }
 
-
-  Widget navigationDecider(int index, data, eventsList){
-    switch (index){
+  Widget navigationDecider(int index, data, eventsList) {
+    switch (index) {
       case 0:
         return homepageWithTImer(avatarLink: gravatar_url);
       case 1:
-        return HomeWidget(data: data, eventsList : eventsList);
+        return HomeWidget(data: data, eventsList: eventsList);
       case 2:
-        return StarredEvents(data: data);
+      //return StarredEvents(data: data);
       case 3:
         return RegisteredEvents();
       case 4:
-        return userProf(avatarLink: gravatar_url,data: data,);
+        return userProf(
+          avatarLink: gravatar_url,
+          data: data,
+        );
       case 5:
         return GetCrew(data: data);
       default:
         return Text("Dummy Widget");
     }
   }
-
 }

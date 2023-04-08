@@ -1,6 +1,5 @@
 import 'package:anokha_home/rive_assets.dart';
 import 'package:anokha_home/rowOfCards.dart';
-import 'package:anokha_home/searchResults.dart';
 import 'package:anokha_home/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
