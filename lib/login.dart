@@ -201,7 +201,7 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
             child: Column(
               children: [
                 Expanded(
-                  flex: 7,
+                  flex: 3,
                   child: Container(
                     alignment: Alignment.bottomCenter,
                     child: RotationTransition(

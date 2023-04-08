@@ -14,7 +14,7 @@ class RegisterPage extends StatefulWidget {
 final __url = serverUrl().url;
 var collegeData;
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMixin{
 
 
 
@@ -67,18 +67,27 @@ class _RegisterPageState extends State<RegisterPage> {
                   Padding(
                     padding: EdgeInsets.only(left: 20.0, right: 20.0),
                     child: Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('./Images/logo.png'),
-                            fit: BoxFit.contain,
-                            alignment: Alignment.bottomCenter),
+                    child: RotationTransition(
+                      turns: Tween(begin: 0.0, end: 1.0).animate(
+                        CurvedAnimation(
+                          parent: AnimationController(
+                            vsync: this,
+                            duration: Duration(seconds: 2), // Set the duration of the rotation
+                          )..repeat(), // Repeat the rotation indefinitely
+                          curve: Curves.linear,
+                        ),
                       ),
+                      child: Image(
+                        image: AssetImage('Images/anokha_circle.png'),
+                        width: MediaQuery.of(context).size.width * 0.3,
+                      ),
+                    ),
                       constraints: BoxConstraints.expand(
-                          height: MediaQuery.of(context).size.width * 0.2),
+                          height: MediaQuery.of(context).size.width * 0.25),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                    padding: EdgeInsets.only(top: 40.0, bottom: 20.0),
                     child: Text(
                       "Register",
                       style: TextStyle(
