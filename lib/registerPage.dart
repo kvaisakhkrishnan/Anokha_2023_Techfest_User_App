@@ -72,7 +72,7 @@ class _RegisterPageState extends State<RegisterPage> with TickerProviderStateMix
                         CurvedAnimation(
                           parent: AnimationController(
                             vsync: this,
-                            duration: Duration(seconds: 2), // Set the duration of the rotation
+                            duration: Duration(seconds: 1), // Set the duration of the rotation
                           )..repeat(), // Repeat the rotation indefinitely
                           curve: Curves.linear,
                         ),

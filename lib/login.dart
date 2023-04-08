@@ -209,14 +209,14 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
                         CurvedAnimation(
                           parent: AnimationController(
                             vsync: this,
-                            duration: Duration(seconds: 2), // Set the duration of the rotation
+                            duration: Duration(seconds: 1), // Set the duration of the rotation
                           )..repeat(), // Repeat the rotation indefinitely
                           curve: Curves.linear,
                         ),
                       ),
                       child: Image(
                         image: AssetImage('Images/anokha_circle.png'),
-                        width: MediaQuery.of(context).size.width * 0.3,
+                        width: MediaQuery.of(context).size.width * 0.25,
                       ),
                     ),
                   ),
