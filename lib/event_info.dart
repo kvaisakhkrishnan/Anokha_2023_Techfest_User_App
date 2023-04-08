@@ -8,13 +8,10 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-
-
-
 class EventInfo extends StatefulWidget {
   bool txt_visible = false;
-
-  EventInfo({Key? key}) : super(key: key) {
+  Map<String, dynamic> event_map;
+  EventInfo({Key? key, required this.event_map}) : super(key: key) {
     txt_visible = false;
   }
 
