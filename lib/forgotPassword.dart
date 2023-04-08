@@ -39,7 +39,9 @@ class _forgotPasswordState extends State<forgotPassword> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios),
             color: Colors.black,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
           )),
       backgroundColor: Color(0xFFFFFFFC),
       body: SingleChildScrollView(
