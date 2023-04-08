@@ -52,7 +52,9 @@ class _EventCardState extends State<EventCard> {
 
 
               ),
-              Container(child:
+              Container(
+
+                child:
               Row(
 
                 children: [
