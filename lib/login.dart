@@ -118,15 +118,15 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
         var userDetails = jsonDecode(response.body);
 
         userData = User(
-          userEmail: userDetails["userData"]['userEmail'],
-          fullName: userDetails["userData"]['fullName'],
-          activePassport: userDetails["userData"]['activePassport'],
-          isAmritaCBE: userDetails["userData"]['isAmritaCBE'],
-          collegeName: userDetails["userData"]['collegeName'],
-          district: userDetails["userData"]['district'],
-          state: userDetails["userData"]['state'],
-          country: userDetails["userData"]['country'],
-          SECRET_TOKEN: userDetails["userData"]['SECRET_TOKEN']
+            userEmail: userDetails["userData"]['userEmail'],
+            fullName: userDetails["userData"]['fullName'],
+            activePassport: userDetails["userData"]['activePassport'],
+            isAmritaCBE: userDetails["userData"]['isAmritaCBE'],
+            collegeName: userDetails["userData"]['collegeName'],
+            district: userDetails["userData"]['district'],
+            state: userDetails["userData"]['state'],
+            country: userDetails["userData"]['country'],
+            SECRET_TOKEN: userDetails["userData"]['SECRET_TOKEN']
         );
 
 
@@ -177,7 +177,7 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
     }
 
 
-      }
+  }
 
   bool _obscureText = true;
 
@@ -192,240 +192,206 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldMessengerKey,
-      backgroundColor: Color(0xFFFFFFFC),
-      body: Column(
-        children: [
-          Expanded(
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 5,
-                  child: Container(
-                    alignment: Alignment.bottomCenter,
-                    child: RotationTransition(
-                      turns: Tween(begin: 0.0, end: 1.0).animate(
-                        CurvedAnimation(
-                          parent: AnimationController(
-                            vsync: this,
-                            duration: Duration(seconds: 1), // Set the duration of the rotation
-                          )..repeat(), // Repeat the rotation indefinitely
-                          curve: Curves.linear,
-                        ),
-                      ),
-                      child: Image(
-                        image: AssetImage('Images/anokha_circle.png'),
-                        width: MediaQuery.of(context).size.width * 0.25,
-                      ),
-                    ),
-                  ),
-                ),
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          appBar: AppBar(
+            elevation: 0.0,
+            backgroundColor: Colors.transparent,
 
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    alignment: Alignment.bottomCenter,
-                    margin: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).size.height * 0.0),
-                    child: Text(
-                      "Login",
-                      style: TextStyle(
-                          fontSize: 30.0, fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                )
-              ],
-            ),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height*0.06,),
-          Expanded(
-            flex: 2,
-            child: Stack(
-              children: [
-                Container(
-                  color: Color(0xFFf3f2f7),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(33.0),
-                  child: Center(
+          body: Column(
+            children: [
+              Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 20.0, right: 20.0),
                     child: Container(
-                      width: MediaQuery.of(context).size.width * 1,
-                      height: MediaQuery.of(context).size.height * 0.43,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: Color(0xFFFFFFFC),
-                      ),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.7,
-                              child: TextFormField(
-                                controller: _usernameController,
-                                decoration: InputDecoration(
-                                  hintText: 'Email',
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.7,
-                              child: TextFormField(
-                                controller: _passwordController,
-                                decoration: InputDecoration(
-                                  hintText: 'Password',
-                                  suffixIcon: IconButton(
-                                    iconSize: 20.0,
-                                    icon: _obscureText
-                                        ? Icon(FontAwesomeIcons.eye)
-                                        : Icon(FontAwesomeIcons.eyeSlash),
-                                    onPressed: () {
-                                      _toggle();
-                                    },
-                                  ),
-                                ),
-                                obscureText: _obscureText,
-                              ),
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.03,
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.7,
-                              height: MediaQuery.of(context).size.height * 0.06,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color(0xFFFF7F11),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                ),
-                                onPressed: () async {
-                                  try {
-                                    int status = await loginUser(
-                                      _usernameController.text,
-                                      _passwordController.text,
-                                    );
-                                    // print;
-
-                                    if (status == 1) {
-                                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ControllerPage(data: userData, eventsList : list_of_events)));
-
-                                    } else {
-
-                                      void _showSnackBar(BuildContext context, String message) {
-                                        final snackBar = SnackBar(
-                                          content: Text(message),
-                                          backgroundColor: Colors.grey,
-                                        );
-                                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                      }
-                                      _showSnackBar(context, "Invalid login details");
-                                    }
-                                  } catch (e) {
-                                    print("Error: $e");
-                                    _scaffoldMessengerKey.currentState?.showSnackBar(
-                                      SnackBar(content: Text('An error occurred while logging in')),
-                                    );
-                                  }
-                                },
-                                child: Text('LOGIN'),
-                              ),
-
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.02,
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.7,
-                              height: MediaQuery.of(context).size.height * 0.06,
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => RegisterPage()),
-                                  );
-                                },
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        margin: EdgeInsets.only(
-                                            left: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.06),
-                                        child: Text(
-                                          'REGISTER',
-                                          style: TextStyle(
-                                            color: (Color(0xFFFF7F11)),
-                                          ),
-                                        ),
-                                      ),
-                                      flex: 9,
-                                    ),
-                                    Expanded(
-                                        child: Icon(
-                                      size: 18.0,
-                                      Icons.arrow_forward_ios,
-                                      color: Colors.grey,
-                                    )),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.07,
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.7,
-                              height: MediaQuery.of(context).size.height * 0.06,
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => forgotPassword()),
-                                  );
-                                },
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        child: Text(
-                                          'Forgot Password',
-                                          style: TextStyle(
-                                            color: (Colors.black),
-                                          ),
-                                        ),
-                                      ),
-                                      flex: 9,
-                                    ),
-                                    Expanded(
-                                        child: Icon(
-                                          size: 18.0,
-                                      Icons.arrow_forward_ios,
-                                      color: Colors.grey,
-                                    )),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
+                      child: RotationTransition(
+                        turns: Tween(begin: 0.0, end: 1.0).animate(
+                          CurvedAnimation(
+                            parent: AnimationController(
+                              vsync: this,
+                              duration: Duration(seconds: 1), // Set the duration of the rotation
+                            )..repeat(), // Repeat the rotation indefinitely
+                            curve: Curves.linear,
+                          ),
                         ),
+                        child: Image(
+                          image: AssetImage('Images/anokha_circle.png'),
+                          width: MediaQuery.of(context).size.width * 0.3,
+                        ),
+                      ),
+                      constraints: BoxConstraints.expand(
+                          height: MediaQuery.of(context).size.width * 0.25),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 40.0, bottom: 20.0),
+                    child: Text(
+                      "Login Portal",
+                      style: TextStyle(
+                        fontSize: 30.0,
                       ),
                     ),
                   ),
-                )
-              ],
-            ),
+                ],
+              ),
+              Expanded(
+                child: Stack(
+                  children: [
+                    Container(
+                      color: Color(0xffF3F2F7),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 25.0, vertical: 40.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20.0)),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+
+                                SizedBox(),
+                                Padding(
+                                  padding:
+                                  EdgeInsets.symmetric(horizontal: 10.0),
+                                  child: TextFormField(
+                                    controller: _usernameController,
+                                    decoration: InputDecoration(
+                                      hintText: "Registered Email",
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 1, color: Color(0xffF3F2F7)),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                  EdgeInsets.symmetric(horizontal: 10.0),
+                                  child: TextFormField(
+                                    controller: _passwordController,
+                                    decoration: InputDecoration(
+                                      hintText: "Password",
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 1, color: Color(0xffF3F2F7)),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 30.0),
+                                  child: OutlinedButton(
+                                    onPressed: () async {
+                                      try {
+                                        int status = await loginUser(
+                                          _usernameController.text,
+                                          _passwordController.text,
+                                        );
+                                        // print;
+
+                                        if (status == 1) {
+                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ControllerPage(data: userData, eventsList : list_of_events)));
+
+                                        } else {
+                                          void _showSnackBar(
+                                              BuildContext context,
+                                              String message) {
+                                            //Implement River asset
+                                          }
+                                        }
+                                      } catch (e) {
+                                        print("Error: $e");
+                                        _scaffoldMessengerKey.currentState?.showSnackBar(
+                                          SnackBar(content: Text('An error occurred while logging in')),
+                                        );
+                                      }
+
+                                    },
+                                    child: Text(
+                                      "LOGIN",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 15.0),
+                                    ),
+                                    style: OutlinedButton.styleFrom(
+                                      backgroundColor: Color(0xFFFF7F11),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(10.0)),
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 13.0,
+                                          horizontal: MediaQuery.of(context)
+                                              .size
+                                              .width *
+                                              0.3),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 20.0),
+                                  child: Text(
+                                    "New to Anokha 2023?",
+                                    style: TextStyle(fontSize: 17.0),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(bottom: 1.0),
+                                  child: TextButton(
+                                      onPressed: () {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage(),));
+                                      },
+                                      child: Text(
+                                        "REGISTER",
+                                        style:
+                                        TextStyle(color: Color(0xFFFF7F11)),
+                                      )),
+                                ),
+
+
+                                SizedBox(),
+
+                                Padding(
+                                  padding: EdgeInsets.only(bottom: 1.0),
+                                  child: TextButton(
+                                      onPressed: () {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage(),));
+                                      },
+                                      child: Text(
+                                        "Forgot Password",
+                                        style:
+                                        TextStyle(color: Color(0xFFFF7F11)),
+                                      )),
+                                ),
+                                SizedBox()
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+              ),
+
+                  Container(
+                    alignment: Alignment.topCenter,
+                    height: MediaQuery.of(context).size.height * 0.1,
+                    child: Text(
+                      'Made with ♥️ by WMD',
+                      style: TextStyle(fontSize: 16.0,
+                      color: Colors.red),
+
+                    ),
+                  ),
+
+            ],
           ),
-        ],
-      ),
-    );
+        ));
   }
 }
+
