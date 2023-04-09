@@ -25,6 +25,8 @@ class event_list {
   final String time;
   final String department;
   final String day;
+  final int technical;
+  final int noOfRegistrations;
 
   event_list(
       {required this.eventId,
@@ -35,7 +37,9 @@ class event_list {
         required this.venue,
         required this.time,
         required this.department,
-        required this.day});
+        required this.day,
+        required this.technical,
+        required this.noOfRegistrations});
 }
 class events_grouped_by_category {
   final String title;
@@ -89,6 +93,9 @@ class loginPage extends StatefulWidget {
 
   @override
   State<loginPage> createState() => _loginPageState();
+
+
+
 }
 
 class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
@@ -149,7 +156,9 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
                 venue: events_in_a_row["venue"],
                 time: events_in_a_row["eventTime"],
                 department: events_in_a_row["departmentAbbr"],
-                day: events_in_a_row["date"]);
+                day: events_in_a_row["date"],
+                technical: events_in_a_row["technical"],
+                noOfRegistrations: events_in_a_row["noOfRegistrations"]);
 
 
 
@@ -383,8 +392,7 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
                     height: MediaQuery.of(context).size.height * 0.1,
                     child: Text(
                       'Made with ♥️ by WMD',
-                      style: TextStyle(fontSize: 16.0,
-                      color: Colors.red),
+                      style: TextStyle(fontSize: 17.0),
 
                     ),
                   ),

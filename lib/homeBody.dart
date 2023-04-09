@@ -26,6 +26,7 @@ class HomeBody extends StatefulWidget {
 
 class _HomeBodyState extends State<HomeBody> {
   var searchInitiated = 0;
+  var allEvents = [];
   List<event_list> eventsSearch = [];
   void search(String search) {
     if (search.isEmpty) {
@@ -67,7 +68,24 @@ class _HomeBodyState extends State<HomeBody> {
     }
   }
 
-  @override
+  void sortEventsByRegistrations() {
+    allEvents.sort((a, b) => b.registrations.compareTo(a.registrations));
+  }
+
+
+
+  // @override
+  // void initState() {
+  //   for(var eventsUnderDept in widget.eventsList)
+  //     {
+  //       for(var events in eventsUnderDept)
+  //         {
+  //           allEvents.add(events);
+  //         }
+  //     }
+  //   allEvents.sort();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(

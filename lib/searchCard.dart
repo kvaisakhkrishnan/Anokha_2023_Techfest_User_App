@@ -60,7 +60,7 @@ class _SearchCard extends State<SearchCard> {
 
                           fontSize: 20.0,
                         ),),
-                      Text(widget.event_data.type,
+                      Text(widget.event_data.type.toString(),
                         style: TextStyle(
 
                         ),)

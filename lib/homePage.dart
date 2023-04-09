@@ -25,6 +25,7 @@ class events {
   final String department;
   final String day;
 
+
   events(
       {required this.eventId,
       required this.name,
