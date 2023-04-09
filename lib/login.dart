@@ -12,9 +12,6 @@ import 'forgotPassword.dart';
 
 var userData;
 
-
-
-
 class event_list {
   final int eventId;
   final String name;
@@ -34,33 +31,28 @@ class event_list {
 
   event_list(
       {required this.eventId,
-        required this.name,
-        required this.description,
-        required this.date,
-        required this.type,
-        required this.venue,
-        required this.time,
-        required this.department,
-        required this.day,
-        required this.technical,
-        required this.noOfRegistrations,
+      required this.name,
+      required this.description,
+      required this.date,
+      required this.type,
+      required this.venue,
+      required this.time,
+      required this.department,
+      required this.day,
+      required this.technical,
+      required this.noOfRegistrations,
       required this.url,
       required this.individualOrGroup,
       required this.maxCount,
       required this.isStarred});
 }
+
 class events_grouped_by_category {
   final String title;
   final List<event_list> events_list;
 
-
   events_grouped_by_category({required this.title, required this.events_list});
 }
-
-
-
-
-
 
 class User {
   final String userEmail;
@@ -77,20 +69,17 @@ class User {
   String toString() {
     return 'User{userEmail: $userEmail, fullName: $fullName, activePassport: $activePassport, isAmritaCBE: $isAmritaCBE, collegeName: $collegeName, district: $district, state: $state, country: $country}';
   }
-  User({
-    required this.userEmail,
-    required this.fullName,
-    required this.activePassport,
-    required this.isAmritaCBE,
-    required this.collegeName,
-    required this.district,
-    required this.state,
-    required this.country,
-    required this.SECRET_TOKEN
 
-
-  });
-
+  User(
+      {required this.userEmail,
+      required this.fullName,
+      required this.activePassport,
+      required this.isAmritaCBE,
+      required this.collegeName,
+      required this.district,
+      required this.state,
+      required this.country,
+      required this.SECRET_TOKEN});
 }
 
 final __url = serverUrl().url;
@@ -98,29 +87,25 @@ final __url = serverUrl().url;
 class loginPage extends StatefulWidget {
   const loginPage({Key? key}) : super(key: key);
 
-
   @override
   State<loginPage> createState() => _loginPageState();
-
-
-
 }
 
-class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
+class _loginPageState extends State<loginPage> with TickerProviderStateMixin {
   List<events_grouped_by_category> list_of_events = [];
-  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool isValidEmail(String email) {
-    final RegExp emailRegex = RegExp(
-        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    final RegExp emailRegex =
+        RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
     return emailRegex.hasMatch(email);
   }
 
   Future<int> loginUser(String username, String password) async {
-
     String url = __url + 'userApp/login';
     Map<String, String> data = {
       'userEmail': username,
@@ -149,20 +134,12 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
             district: userDetails["userData"]['district'],
             state: userDetails["userData"]['state'],
             country: userDetails["userData"]['country'],
-            SECRET_TOKEN: userDetails["userData"]['SECRET_TOKEN']
-        );
-
-
-
-
+            SECRET_TOKEN: userDetails["userData"]['SECRET_TOKEN']);
 
         for (var individual_data in userDetails["events"]) {
-
           String temp_title = individual_data["department"];
           List<event_list> temp_event_list = [];
           for (var events_in_a_row in individual_data["events"]) {
-
-
             event_list temp_event_data = event_list(
                 eventId: events_in_a_row["eventId"],
                 name: events_in_a_row["eventName"],
@@ -180,23 +157,15 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
                 maxCount: events_in_a_row["maxCount"],
                 isStarred: events_in_a_row["isStarred"]);
 
-
-
             temp_event_list.add(temp_event_data);
-
           }
-
 
           events_grouped_by_category temp_data_row = events_grouped_by_category(
               title: temp_title, events_list: temp_event_list);
           list_of_events.add(temp_data_row);
-
         }
 
-
-
         return 1;
-
       } else {
         return 0;
       }
@@ -204,8 +173,6 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
       print('Server is down!');
       return 0;
     }
-
-
   }
 
   bool _obscureText = true;
@@ -216,18 +183,15 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
     });
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
             elevation: 0.0,
             backgroundColor: Colors.transparent,
-
           ),
           body: Column(
             children: [
@@ -241,7 +205,9 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
                           CurvedAnimation(
                             parent: AnimationController(
                               vsync: this,
-                              duration: Duration(seconds: 1), // Set the duration of the rotation
+                              duration: Duration(
+                                  seconds:
+                                      1), // Set the duration of the rotation
                             )..repeat(), // Repeat the rotation indefinitely
                             curve: Curves.linear,
                           ),
@@ -285,17 +251,18 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
                             child: SingleChildScrollView(
                               child: Column(
                                 children: [
-
                                   SizedBox(),
                                   Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10.0),
                                     child: TextFormField(
                                       controller: _usernameController,
                                       decoration: InputDecoration(
                                         hintText: "Registered Email",
                                         enabledBorder: UnderlineInputBorder(
-                                          borderSide:
-                                          BorderSide(width: 1, color: Color(0xffF3F2F7)),
+                                          borderSide: BorderSide(
+                                              width: 1,
+                                              color: Color(0xffF3F2F7)),
                                         ),
                                       ),
                                       validator: (value) {
@@ -308,10 +275,9 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
                                       },
                                     ),
                                   ),
-
                                   Padding(
                                     padding:
-                                    EdgeInsets.symmetric(horizontal: 10.0),
+                                        EdgeInsets.symmetric(horizontal: 10.0),
                                     child: TextFormField(
                                       controller: _passwordController,
                                       obscureText: _obscureText,
@@ -322,24 +288,25 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
                                           icon: _obscureText
                                               ? Icon(FontAwesomeIcons.eye)
                                               : Icon(FontAwesomeIcons.eyeSlash),
-
                                           onPressed: () {
                                             _toggle();
                                           },
                                         ),
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              width: 1, color: Color(0xffF3F2F7)),
+                                              width: 1,
+                                              color: Color(0xffF3F2F7)),
                                         ),
                                       ),
                                     ),
                                   ),
-
                                   Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 30.0),
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 30.0),
                                     child: OutlinedButton(
                                       onPressed: () async {
-                                        if (_formKey.currentState!.validate()) { // Add this line
+                                        if (_formKey.currentState!.validate()) {
+                                          // Add this line
                                           try {
                                             int status = await loginUser(
                                               _usernameController.text,
@@ -347,36 +314,49 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
                                             );
 
                                             if (status == 1) {
-                                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ControllerPage(data: userData, eventsList : list_of_events)));
+                                              Navigator.pushReplacement(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          ControllerPage(
+                                                              data: userData,
+                                                              eventsList:
+                                                                  list_of_events)));
                                             } else {
-                                              _scaffoldMessengerKey.currentState?.showSnackBar(
-                                                SnackBar(content: Text('Invalid login credentials')),
+                                              _scaffoldMessengerKey.currentState
+                                                  ?.showSnackBar(
+                                                SnackBar(
+                                                    content: Text(
+                                                        'Invalid login credentials')),
                                               );
                                             }
                                           } catch (e) {
                                             print("Error: $e");
-                                            _scaffoldMessengerKey.currentState?.showSnackBar(
-                                              SnackBar(content: Text('An error occurred while logging in')),
+                                            _scaffoldMessengerKey.currentState
+                                                ?.showSnackBar(
+                                              SnackBar(
+                                                  content: Text(
+                                                      'An error occurred while logging in')),
                                             );
                                           }
                                         }
                                       },
-
                                       child: Text(
                                         "LOGIN",
                                         style: TextStyle(
-                                            color: Colors.white, fontSize: 15.0),
+                                            color: Colors.white,
+                                            fontSize: 15.0),
                                       ),
                                       style: OutlinedButton.styleFrom(
                                         backgroundColor: Color(0xFFFF7F11),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
-                                            BorderRadius.circular(10.0)),
+                                                BorderRadius.circular(10.0)),
                                         padding: EdgeInsets.symmetric(
                                             vertical: 13.0,
                                             horizontal: MediaQuery.of(context)
-                                                .size
-                                                .width *
+                                                    .size
+                                                    .width *
                                                 0.3),
                                       ),
                                     ),
@@ -392,28 +372,35 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
                                     padding: EdgeInsets.only(bottom: 1.0),
                                     child: TextButton(
                                         onPressed: () {
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage(),));
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    RegisterPage(),
+                                              ));
                                         },
                                         child: Text(
                                           "REGISTER",
-                                          style:
-                                          TextStyle(color: Color(0xFFFF7F11)),
+                                          style: TextStyle(
+                                              color: Color(0xFFFF7F11)),
                                         )),
                                   ),
-
-
                                   SizedBox(),
-
                                   Padding(
                                     padding: EdgeInsets.only(bottom: 1.0),
                                     child: TextButton(
                                         onPressed: () {
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage(),));
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    RegisterPage(),
+                                              ));
                                         },
                                         child: Text(
                                           "Forgot Password",
-                                          style:
-                                          TextStyle(color: Color(0xFFFF7F11)),
+                                          style: TextStyle(
+                                              color: Color(0xFFFF7F11)),
                                         )),
                                   ),
                                   SizedBox()
@@ -426,22 +413,17 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
                     ),
                   ],
                 ),
-
               ),
-
-                  Container(
-                    alignment: Alignment.topCenter,
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    child: Text(
-                      'Made with ♥️ by WMD',
-                      style: TextStyle(fontSize: 17.0),
-
-                    ),
-                  ),
-
+              Container(
+                alignment: Alignment.topCenter,
+                height: MediaQuery.of(context).size.height * 0.1,
+                child: Text(
+                  'Made with ♥️ by WMD',
+                  style: TextStyle(fontSize: 17.0),
+                ),
+              ),
             ],
           ),
         ));
   }
 }
-
