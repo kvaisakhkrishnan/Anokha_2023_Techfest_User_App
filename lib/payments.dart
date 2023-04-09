@@ -20,12 +20,10 @@ late String name,
     state,
     country,
     zipcode;
-void main() {
-  runApp(const MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class PayU extends StatelessWidget {
+  var data;
+  PayU({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
