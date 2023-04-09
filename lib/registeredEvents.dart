@@ -66,14 +66,14 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
             padding: EdgeInsets.only(top: 5),
             child: Container(
               decoration: BoxDecoration(
-                color: Color(0xFFF5F5F5),
-               borderRadius: BorderRadius.circular(30.0)
+                  color: Color(0xFFF5F5F5),
+                  borderRadius: BorderRadius.circular(30.0)
               ),
               child: Padding(
                 padding: EdgeInsets.only(left: 20, top: 3, bottom: 3),
                 child: TextFormField(
                   style: TextStyle(
-                    fontSize: 19
+                      fontSize: 19
                   ),
                   controller: searchController,
                   decoration: InputDecoration(
@@ -92,7 +92,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                 iconSize: 30,
                 onPressed: onSearch,
                 icon: Icon(Icons.search,
-                color: Colors.black,),
+                  color: Colors.black,),
               ),
             ),
           ],
