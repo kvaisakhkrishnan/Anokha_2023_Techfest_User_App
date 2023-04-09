@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 //import 'package:anokha_app/thememode.dart';
+import 'package:anokha_home/payments.dart';
 import 'package:faded_widget/faded_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -14,7 +15,8 @@ class EventInfo extends StatefulWidget {
   bool txt_visible = false;
   var event_map;
   var data;
-  EventInfo({Key? key, required this.event_map, var this.data}) : super(key: key) {
+  EventInfo({Key? key, required this.event_map, var this.data})
+      : super(key: key) {
     txt_visible = false;
   }
 
@@ -23,7 +25,6 @@ class EventInfo extends StatefulWidget {
 }
 
 class _EventInfoState extends State<EventInfo> {
-
   ScrollController _controller = ScrollController();
   bool liked = false;
   //var a = new DarkTheme();
@@ -339,7 +340,14 @@ class _EventInfoState extends State<EventInfo> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => EventRegistrationForm(jsonData: widget.event_map, data: widget.data),
+                                          builder: (context) => (widget
+                                                          .event_map[
+                                                      "groupOrIndividual"] ==
+                                                  1)
+                                              ? EventRegistrationForm(
+                                                  jsonData: widget.event_map,
+                                                  data: widget.data)
+                                              : PayU(data: widget.data),
                                         ),
                                       );
                                     },
