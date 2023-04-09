@@ -8,6 +8,8 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'eventregistrationForm.dart';
+
 class EventInfo extends StatefulWidget {
   bool txt_visible = false;
   Map<String, dynamic> event_map;
@@ -20,6 +22,23 @@ class EventInfo extends StatefulWidget {
 }
 
 class _EventInfoState extends State<EventInfo> {
+  Map<String, dynamic> yourJsonData = {
+    "name": "John Doe",
+    "maximum_number_of_participants" : 5,
+    "age": 30,
+    "isMarried": false,
+    "address": {
+      "street": "123 Main St",
+      "city": "New York",
+      "state": "NY",
+      "zipCode": "10001"
+    },
+    "phoneNumbers": [
+      {"type": "home", "number": "555-1234"},
+      {"type": "work", "number": "555-5678"}
+    ]
+  };
+
   ScrollController _controller = ScrollController();
   bool liked = false;
   //var a = new DarkTheme();
@@ -331,7 +350,14 @@ class _EventInfoState extends State<EventInfo> {
                                     shape: StadiumBorder(),
                                     color: Colors.white),
                                 child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => EventRegistrationForm(jsonData: yourJsonData),
+                                        ),
+                                      );
+                                    },
                                     child: Center(
                                         child: Text("Register",
                                             style: TextStyle(
