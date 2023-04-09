@@ -74,7 +74,7 @@ class _EventCardState extends State<EventCard> {
         child: InkWell(
           onTap: (){
 
-            Navigator.push(context, MaterialPageRoute(builder: (context) => EventInfo(event_map: {},)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => EventInfo(event_map: widget.event_data)));
 
           },
           child: Column(
