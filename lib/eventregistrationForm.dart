@@ -43,15 +43,19 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
           ),
           child: Column(
             children: [
-              TextField(
+              TextFormField(
                 controller: _emailControllers[i],
                 decoration: InputDecoration(
                   hintText: 'Email address',
-                  errorText: isValidEmail(_emailControllers[i].text)
-                      ? null
-                      : "Invalid email address",
                 ),
+                validator: (value) {
+                  if (!isValidEmail(value ?? '')) {
+                    return 'Invalid email address';
+                  }
+                  return null;
+                },
               ),
+
               TextField(
                 decoration: InputDecoration(
                   hintText: i == 0 ? 'Leader' : 'Member',
@@ -76,6 +80,7 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
   bool _formIsValid() {
     return _formKey.currentState?.validate() ?? false;
   }
+
 
   Future<void> _submitData() async {
     if (!_formIsValid()) {
@@ -199,7 +204,10 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
               SizedBox(height: MediaQuery.of(context).size.height * 0.05),
               ElevatedButton(
                 onPressed: () {
-                  _submitData();
+                  if (_formIsValid()) {
+                    _formKey.currentState?.save();
+                    _submitData();
+                  }
                 },
                 child: Text(
                   "Submit",
@@ -216,6 +224,7 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
                   ),
                 ),
               ),
+
             ],
           ),
         ),
