@@ -1,41 +1,47 @@
+import 'dart:convert';
+
+import 'package:anokha_home/serverUrl.dart';
 import 'package:flutter/material.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+import 'Loading_Screens/events_loading.dart';
+import 'homePage.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return  MyTicketView();
 
-  }
-}
+
 
 class MyTicketView extends StatelessWidget {
-  const MyTicketView({Key? key}) : super(key: key);
+  var data;
+  var event;
+  MyTicketView({Key? key, required this.data, required this.event}) : super(key: key);
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
-    return  TicketWidget(
-          color: Color(0xFF203354),
-          width: 0.85 * MediaQuery.of(context).size.width,
-          height: 0.60 * MediaQuery.of(context).size.height,
-          isCornerRounded: true,
-          padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.009),
-          child: TicketData(),
-        );
+    return TicketWidget(
+              color: Color(0xFF203354),
+              width: 0.85 * MediaQuery.of(context).size.width,
+              height: 0.60 * MediaQuery.of(context).size.height,
+              isCornerRounded: true,
+              padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.009),
+              child: TicketData(data: data, event: event),
+
+    );
 
   }
 }
 
 class TicketData extends StatelessWidget {
-  const TicketData({
-    Key? key,
+  var data;
+  var event;
+  TicketData({
+
+    Key? key, required this.data, required this.event,
   }) : super(key: key);
 
   @override
@@ -83,7 +89,7 @@ class TicketData extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                    child: Text("Vaisakhkrishnan K", style: TextStyle(fontSize: 15.0, color: Colors.white),),
+                    child: Text(data.fullName, style: TextStyle(fontSize: 15.0, color: Colors.white),),
                   ),
 
                   Padding(
@@ -92,7 +98,7 @@ class TicketData extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                    child: Text("Treasure Hunt", style: TextStyle(fontSize: 15.0,color: Colors.white),),
+                    child: Text(event[0]["eventName"], style: TextStyle(fontSize: 15.0,color: Colors.white),),
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
@@ -100,7 +106,7 @@ class TicketData extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                    child: Text("Workshop", style: TextStyle(fontSize: 15.0,color: Colors.white),),
+                    child: Text(event[0]["type"] == 0 ? "Event" : "Workshop", style: TextStyle(fontSize: 15.0,color: Colors.white),),
                   ),
 
                 ],
@@ -114,7 +120,7 @@ class TicketData extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                    child: Text("28-Mar-2023", style: TextStyle(fontSize: 15.0,color: Colors.white),),
+                    child: Text(event[0]["date"], style: TextStyle(fontSize: 15.0,color: Colors.white),),
                   ),
 
                   Padding(
@@ -123,7 +129,7 @@ class TicketData extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                    child: Text("12:00 PM", style: TextStyle(fontSize: 15.0,color: Colors.white),),
+                    child: Text(event[0]["eventTime"], style: TextStyle(fontSize: 15.0,color: Colors.white),),
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
@@ -131,7 +137,7 @@ class TicketData extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                    child: Text("AB1", style: TextStyle(fontSize: 15.0,color: Colors.white),),
+                    child: Text(event[0]["venue"], style: TextStyle(fontSize: 15.0,color: Colors.white),),
                   ),
 
                 ],

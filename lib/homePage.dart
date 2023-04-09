@@ -13,30 +13,34 @@ import 'homeBody.dart';
 import 'homeEventCard.dart';
 
 
+
 class events {
   final int eventId;
   final String name;
   final String description;
   final String date;
-  final String type;
+  final int type;
   final String venue;
-  final String startTime;
-  final String endTime;
+  final String time;
   final String department;
   final String day;
-
+  final int technical;
+  final int noOfRegistrations;
+  final String url;
 
   events(
       {required this.eventId,
-      required this.name,
-      required this.description,
-      required this.date,
-      required this.type,
-      required this.venue,
-      required this.startTime,
-      required this.endTime,
-      required this.department,
-      required this.day});
+        required this.name,
+        required this.description,
+        required this.date,
+        required this.type,
+        required this.venue,
+        required this.time,
+        required this.department,
+        required this.day,
+        required this.technical,
+        required this.noOfRegistrations,
+        required this.url});
 }
 
 

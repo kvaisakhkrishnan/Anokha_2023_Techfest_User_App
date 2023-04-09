@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:anokha_home/event_info.dart';
+import 'package:anokha_home/serverUrl.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,6 +9,9 @@ import 'package:hexcolor/hexcolor.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+
+final __url = serverUrl().url;
 
 class GetStarrs extends StatefulWidget {
   var data;
@@ -19,11 +23,10 @@ class GetStarrs extends StatefulWidget {
 
 class _GetStarrsState extends State<GetStarrs> {
   Future<List> getData() async {
-    String url = "http://52.66.236.118:3000/userApp/getStarredEvents";
+    String url = __url + "userApp/getStarredEvents";
 
     final response = await http.get(Uri.parse(url),
         headers: {'authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
-    print("hello");
     return json.decode(response.body);
   }
 

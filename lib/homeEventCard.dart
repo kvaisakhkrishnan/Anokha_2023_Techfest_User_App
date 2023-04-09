@@ -40,7 +40,7 @@ class _EventCardState extends State<EventCard> {
           )
             ],
                   image: DecorationImage(
-                    image: NetworkImage('https://play-lh.googleusercontent.com/VojafVZNddI6JvdDGWFrRmxc-prrcInL2AuBymsqGoeXjT4f9sv7KnetB-v3iLxk_Koi'),
+                    image: NetworkImage(widget.event_data.url),
                     fit: BoxFit.fill
                   ),
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0))
@@ -62,16 +62,18 @@ class _EventCardState extends State<EventCard> {
                   Padding(
                     padding: EdgeInsets.only(left: 10.0),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(widget.event_data.name,
 
                         style: TextStyle(
-
+                          color: Color(0xFF002845),
                           fontSize: 20.0,
+                          fontWeight: FontWeight.w500,
                         ),),
-                        Text(widget.event_data.type.toString() ,
+                        Text(widget.event_data.type == 0 ? "Event" : "Workshop" ,
                           style: TextStyle(
-
+                          color: Color(0xFFFF7F11)
                           ),)
                       ],
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -89,11 +91,12 @@ class _EventCardState extends State<EventCard> {
                           });
                         },
                         icon: Icon(
-                            Icons.star_border
+                            Icons.star_border,
                         ))
                     :
                     IconButton(
                         iconSize: 30.0,
+                        color: Color(0xFFFF7F11),
                         alignment: Alignment.centerRight,
                         onPressed: (){
                           setState(() {

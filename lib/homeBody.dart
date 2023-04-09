@@ -69,22 +69,21 @@ class _HomeBodyState extends State<HomeBody> {
   }
 
   void sortEventsByRegistrations() {
-    allEvents.sort((a, b) => b.registrations.compareTo(a.registrations));
+    allEvents.sort((a, b) => b.noOfRegistrations.compareTo(a.noOfRegistrations));
   }
 
 
 
-  // @override
-  // void initState() {
-  //   for(var eventsUnderDept in widget.eventsList)
-  //     {
-  //       for(var events in eventsUnderDept)
-  //         {
-  //           allEvents.add(events);
-  //         }
-  //     }
-  //   allEvents.sort();
-  // }
+  @override
+  void initState() {
+    for(var eventsUnderDept in widget.eventsList)
+      {
+        for (var eventDetail in eventsUnderDept.events_list) {
+          allEvents.add(eventDetail);
+        }
+      }
+    sortEventsByRegistrations();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +106,7 @@ class _HomeBodyState extends State<HomeBody> {
                       ),
                     ),
                   ),
-                  AnokhaCards(),
+                  AnokhaCards(data: allEvents),
                 ],
               ),
               Padding(

@@ -1,16 +1,24 @@
+import 'dart:convert';
 import 'dart:ui';
 import 'dart:async';
+import 'package:anokha_home/serverUrl.dart';
 import 'package:anokha_home/ticketSample.dart';
 import 'package:anokha_home/timer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rive/rive.dart';
+import 'package:http/http.dart' as http;
 
+import 'Loading_Screens/events_loading.dart';
+
+
+final __url = serverUrl().url;
 
 class homepageWithTImer extends StatefulWidget {
   final String avatarLink;
-  homepageWithTImer({Key? key, required this.avatarLink}) : super(key: key);
+  var data;
+  homepageWithTImer({Key? key, required this.avatarLink, required this.data}) : super(key: key);
 
   @override
   State<homepageWithTImer> createState() => _homepageWithTImerState();
@@ -77,6 +85,15 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
       });
     });
   }
+
+
+  Future getEntryCard() async{
+    String url = __url + "userApp/events/nextEvent";
+    final response = await http.get(Uri.parse(url),
+        headers: {'authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
+    return json.decode(response.body);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -166,68 +183,86 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
               ),
             ),
           ),
-          Positioned(
-            left: 0,
-            right: 0,
-            top: 0.0 * MediaQuery.of(context).size.height,
-            bottom: 0,
-            child: Center(
-              child: AnimatedOpacity(
-                duration: Duration(seconds: 5),
-                curve: Curves.easeInOut,
-                opacity: _showNewWidget ? 1.0 : 0.0,
-                child:SafeArea(
-                  child: Column(
 
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.08, vertical: MediaQuery.of(context).size.height*0.005),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
 
-                            Image(image: AssetImage('Images/anokha_circle.png'),
-                            height: MediaQuery.of(context).size.width * 0.08,),
+          FutureBuilder(
+              future: getEntryCard(),
+              builder: (BuildContext ctx, AsyncSnapshot snapshot) {
+                if (snapshot.hasError) {
+                  print("error");
+                }
+                if (snapshot.hasData) {
+                  return Positioned(
+                    left: 0,
+                    right: 0,
+                    top: 0.0 * MediaQuery.of(context).size.height,
+                    bottom: 0,
+                    child: Center(
+                      child: AnimatedOpacity(
+                          duration: Duration(seconds: 5),
+                          curve: Curves.easeInOut,
+                          opacity: _showNewWidget ? 1.0 : 0.0,
+                          child:SafeArea(
+                            child: Column(
 
-                            ClipOval(
-                              child: Image(
-                                image: NetworkImage(widget.avatarLink),
-                                fit: BoxFit.cover,
-                                width: 40.0, // set the width and height to make the image circular
-                                height: 40.0,
-                              ),
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.08, vertical: MediaQuery.of(context).size.height*0.005),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+
+                                      Image(image: AssetImage('Images/anokha_circle.png'),
+                                        height: MediaQuery.of(context).size.width * 0.08,),
+
+                                      ClipOval(
+                                        child: Image(
+                                          image: NetworkImage(widget.avatarLink),
+                                          fit: BoxFit.cover,
+                                          width: 40.0, // set the width and height to make the image circular
+                                          height: 40.0,
+                                        ),
+                                      ),
+
+                                    ],
+                                  ),
+                                ),
+
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.07, vertical: MediaQuery.of(context).size.height*0.01),
+                                  child: Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        "Up Next For You",
+                                        style: TextStyle(
+                                            fontSize: 25.0, fontWeight: FontWeight.w600),
+                                      )
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.015),
+                                  child: MyTicketView(data: widget.data, event: snapshot.data),
+                                ),
+                              ],
                             ),
-
-                          ],
-                        ),
-                      ),
-
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.07, vertical: MediaQuery.of(context).size.height*0.01),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Up Next For You",
-                            style: TextStyle(
-                                fontSize: 25.0, fontWeight: FontWeight.w600),
                           )
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.015),
-                        child: MyTicketView(),
-                      ),
-                    ],
-                  ),
-                )
 
-              ),
-            ),
-          ),
+                      ),
+                    ),
+                  );
+
+                } else {
+                  return Events_Loading_screen();
+                }
+              }
+          )
+
 
         ],
       ),
     );
   }
 }
+
+
 

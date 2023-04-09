@@ -27,6 +27,7 @@ class event_list {
   final String day;
   final int technical;
   final int noOfRegistrations;
+  final String url;
 
   event_list(
       {required this.eventId,
@@ -39,7 +40,8 @@ class event_list {
         required this.department,
         required this.day,
         required this.technical,
-        required this.noOfRegistrations});
+        required this.noOfRegistrations,
+      required this.url});
 }
 class events_grouped_by_category {
   final String title;
@@ -158,7 +160,8 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
                 department: events_in_a_row["departmentAbbr"],
                 day: events_in_a_row["date"],
                 technical: events_in_a_row["technical"],
-                noOfRegistrations: events_in_a_row["noOfRegistrations"]);
+                noOfRegistrations: events_in_a_row["noOfRegistrations"],
+                url: events_in_a_row["url"]);
 
 
 

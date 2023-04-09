@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AnokhaCards extends StatefulWidget {
-  const AnokhaCards({Key? key}) : super(key: key);
+  var data;
+  AnokhaCards({Key? key, required List<dynamic> this.data}) : super(key: key);
 
   @override
   State<AnokhaCards> createState() => _AnokhaCardsState();
@@ -25,7 +26,7 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage('https://www.whats-on-netflix.com/wp-content/uploads/2023/02/renewed-netflix-shows-2023-beyond-jpg.webp'),
+                    image: DecorationImage(image: NetworkImage(widget.data[0].url),
                       fit: BoxFit.cover,),
                     borderRadius: BorderRadius.circular(20.0),
                     color: Color(0xFFFEFECF0),
@@ -43,7 +44,7 @@ class _AnokhaCardsState extends State<AnokhaCards> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 15.0),
-                child: Text("Event Name",
+                child: Text(widget.data[0].name,
                 style: TextStyle(fontSize: 20.0,
                 fontWeight: FontWeight.w500),
                 ),
@@ -57,7 +58,7 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage('https://www.whats-on-netflix.com/wp-content/uploads/2023/02/renewed-netflix-shows-2023-beyond-jpg.webp'),
+                    image: DecorationImage(image: NetworkImage(widget.data[1].url),
                       fit: BoxFit.cover,),
                     borderRadius: BorderRadius.circular(20.0),
                     color: Color(0xFFFEFECF0),
@@ -75,7 +76,7 @@ class _AnokhaCardsState extends State<AnokhaCards> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 15.0),
-                child: Text("Event Name",
+                child: Text(widget.data[1].name,
                   style: TextStyle(fontSize: 20.0,
                       fontWeight: FontWeight.w500),
                 ),
@@ -89,7 +90,7 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage('https://www.whats-on-netflix.com/wp-content/uploads/2023/02/renewed-netflix-shows-2023-beyond-jpg.webp'),
+                    image: DecorationImage(image: NetworkImage(widget.data[2].url),
                       fit: BoxFit.cover,),
                     borderRadius: BorderRadius.circular(20.0),
                     color: Color(0xFFFEFECF0),
@@ -107,7 +108,7 @@ class _AnokhaCardsState extends State<AnokhaCards> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 15.0),
-                child: Text("Event Name",
+                child: Text(widget.data[2].name,
                   style: TextStyle(fontSize: 20.0,
                       fontWeight: FontWeight.w500),
                 ),
@@ -121,7 +122,7 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage('https://www.whats-on-netflix.com/wp-content/uploads/2023/02/renewed-netflix-shows-2023-beyond-jpg.webp'),
+                    image: DecorationImage(image: NetworkImage(widget.data[3].url),
                       fit: BoxFit.cover,),
                     borderRadius: BorderRadius.circular(20.0),
                     color: Color(0xFFFEFECF0),
@@ -139,7 +140,7 @@ class _AnokhaCardsState extends State<AnokhaCards> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 15.0),
-                child: Text("Event Name",
+                child: Text(widget.data[3].name,
                   style: TextStyle(fontSize: 20.0,
                       fontWeight: FontWeight.w500),
                 ),
@@ -153,8 +154,7 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage('https://www.whats-on-netflix.com/wp-content/uploads/2023/02/renewed-netflix-shows-2023-beyond-jpg.webp'),
-                      fit: BoxFit.cover,),
+                    image: DecorationImage(image: NetworkImage(widget.data[4].url),                      fit: BoxFit.cover,),
                     borderRadius: BorderRadius.circular(20.0),
                     color: Color(0xFFFEFECF0),
                     boxShadow: [
@@ -171,7 +171,7 @@ class _AnokhaCardsState extends State<AnokhaCards> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 15.0),
-                child: Text("Event Name",
+                child: Text(widget.data[4].name,
                   style: TextStyle(fontSize: 20.0,
                       fontWeight: FontWeight.w500),
                 ),
