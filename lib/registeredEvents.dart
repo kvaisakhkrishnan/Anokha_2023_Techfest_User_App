@@ -21,10 +21,45 @@ class RegisteredEvents extends StatefulWidget {
 }
 
 class _RegisteredEventsState extends State<RegisteredEvents> {
+  var registeredEvents = [
+    {
+      "EventId": "EVT001",
+      "EventName": "Flutter Workshop",
+      "Venue": "Room 101",
+      "Date": "2023-04-15",
+      "Time": "10:00 AM",
+      "Department": "CSE",
+      "Type": "Workshop",
+      "logo": "https://your_logo_url.com/logo1.png"
+    },
+    {
+      "EventId": "EVT002",
+      "EventName": "React Workshop",
+      "Venue": "Room 102",
+      "Date": "2023-04-16",
+      "Time": "11:00 AM",
+      "Department": "CSE",
+      "Type": "Workshop",
+      "logo": "https://your_logo_url.com/logo2.png"
+    },
+    {
+      "EventId": "EVT003",
+      "EventName": "Python Workshop",
+      "Venue": "Room 103",
+      "Date": "2023-04-17",
+      "Time": "12:00 PM",
+      "Department": "CSE",
+      "Type": "Workshop",
+      "logo": "https://your_logo_url.com/logo3.png"
+    },
+
+  ];
+
+
   final scrollController = ScrollController();
   final searchController = TextEditingController();
 
-  var registeredEvents;
+  // var registeredEvents;
 
   void onListen() {
     setState(() {});
@@ -34,7 +69,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
   void initState() {
     scrollController.addListener(onListen);
     super.initState();
-    getRegistered();
+    // getRegistered();
   }
 
   @override
@@ -119,30 +154,36 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                    final itemPositionOffset = index * itemSize * 0.7;
-                    final difference =
-                        scrollController.offset - itemPositionOffset;
-                    if (index == 0) print("UFF ${difference }");
-                    final percent = 1.2 - difference / itemSize * 0.7;
-                    double opacity = percent;
-                    double scale = percent;
-                    if (opacity >= 1.0) opacity = 1.0;
-                    if (opacity < 0.0) opacity = 0.0;
-                    if (percent >= 1.0) scale = 1.0;
-                    return Align(
-                      heightFactor: 0.7,
-                      child: Opacity(
-                        opacity: opacity,
-                        child: Transform(
-                          alignment: Alignment.center,
-                          transform: Matrix4.identity()..scale(scale, 1.0),
-                          child: RegisteredEventCard(),
+                    if (index < registeredEvents.length) {
+                      final itemPositionOffset = index * itemSize * 0.7;
+                      final difference = scrollController.offset - itemPositionOffset;
+                      final percent = 1.2 - difference / itemSize * 0.7;
+                      double opacity = percent;
+                      double scale = percent;
+                      if (opacity >= 1.0) opacity = 1.0;
+                      if (opacity < 0.0) opacity = 0.0;
+                      if (percent >= 1.0) scale = 1.0;
+
+                      return Align(
+                        heightFactor: 0.7,
+                        child: Opacity(
+                          opacity: opacity,
+                          child: Transform(
+                            alignment: Alignment.center,
+                            transform: Matrix4.identity()..scale(scale, 1.0),
+                            child: RegisteredEventCard(
+                              event: registeredEvents[index],
+                            ),
+                          ),
                         ),
-                      ),
-                    );
+                      );
+                    } else {
+                      return null;
+                    }
                   },
-                  childCount: 10
+                  childCount: registeredEvents.length,
                 ),
+
               ),
             ],
           ),

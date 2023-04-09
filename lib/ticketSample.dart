@@ -24,12 +24,14 @@ class MyTicketView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TicketWidget(
+
               color: Color(0xFF002845),
               width: 0.85 * MediaQuery.of(context).size.width,
               height: 0.60 * MediaQuery.of(context).size.height,
               isCornerRounded: true,
               padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.009),
               child: TicketData(data: data, event: event),
+
 
     );
 
@@ -48,29 +50,29 @@ class TicketData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-          Row(
-            children: [
+        Row(
+          children: [
 
-              Expanded(
-                child: Text(
-                  "",
-                  style: TextStyle(fontSize: 20.0,
-                  fontWeight: FontWeight.w500),
-                  textAlign: TextAlign.left,
-                ),
+            Expanded(
+              child: Text(
+                "",
+                style: TextStyle(fontSize: 20.0,
+                    fontWeight: FontWeight.w500),
+                textAlign: TextAlign.left,
               ),
-              Image(image: AssetImage('./Images/anokha_2023_white_small.png'),
-                  width: 120.0),
-            ],
-          ),
+            ),
+            Image(image: AssetImage('./Images/anokha_2023_white_small.png'),
+                width: 120.0),
+          ],
+        ),
 
         Container(
           width: double.infinity,
           child: Text(
             "Entry Ticket",
             style: TextStyle(fontSize: 23.0,
-            color: Color(0xFFBEB7AA),
-            fontWeight: FontWeight.w700),
+                color: Color(0xFFBEB7AA),
+                fontWeight: FontWeight.w700),
             textAlign: TextAlign.left,
           ),
         ),
@@ -80,67 +82,84 @@ class TicketData extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
-                    child: Text("Name", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                    child: Text(data.fullName, style: TextStyle(fontSize: 15.0, color: Colors.white),),
-                  ),
+              Expanded(
 
-                  Padding(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
-                    child: Text("Program Name", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                    child: Text(event[0]["eventName"], style: TextStyle(fontSize: 15.0,color: Colors.white),),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
-                    child: Text("Type", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                    child: Text(event[0]["type"] == 0 ? "Event" : "Workshop", style: TextStyle(fontSize: 15.0,color: Colors.white),),
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
+                      child: Text("Name", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
+                      child: Wrap(
+                        direction: Axis.horizontal,
+                        children: data.fullName.split(' ').map<Widget>((word) {
+                          return Padding(
+                            padding: EdgeInsets.only(right: 4.0),
+                            child: Text(
+                              word,
+                              style: TextStyle(fontSize: 15.0, color: Colors.white),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
 
-                ],
+                    Padding(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
+                      child: Text("Program Name", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
+                      child: Text(event[0]["eventName"], style: TextStyle(fontSize: 15.0,color: Colors.white),),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
+                      child: Text("Type", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
+                      child: Text(event[0]["type"] == 0 ? "Event" : "Workshop", style: TextStyle(fontSize: 15.0,color: Colors.white),),
+                    ),
+
+                  ],
+                ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
-                    child: Text("Date", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                    child: Text(event[0]["date"], style: TextStyle(fontSize: 15.0,color: Colors.white),),
-                  ),
+              Expanded(
 
-                  Padding(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
-                    child: Text("Time", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                    child: Text(event[0]["eventTime"], style: TextStyle(fontSize: 15.0,color: Colors.white),),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
-                    child: Text("Venue", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                    child: Text(event[0]["venue"], style: TextStyle(fontSize: 15.0,color: Colors.white),),
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
+                      child: Text("Date", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
+                      child: Text(event[0]["date"], style: TextStyle(fontSize: 15.0,color: Colors.white),),
+                    ),
 
-                ],
+                    Padding(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
+                      child: Text("Time", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
+                      child: Text(event[0]["eventTime"], style: TextStyle(fontSize: 15.0,color: Colors.white),),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
+                      child: Text("Venue", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
+                      child: Text(event[0]["venue"], style: TextStyle(fontSize: 15.0,color: Colors.white),),
+                    ),
+
+                  ],
+                ),
               ),
             ],
           ),
@@ -173,4 +192,3 @@ class TicketData extends StatelessWidget {
     );
   }
 }
-
