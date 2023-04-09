@@ -13,7 +13,8 @@ import 'eventregistrationForm.dart';
 class EventInfo extends StatefulWidget {
   bool txt_visible = false;
   var event_map;
-  EventInfo({Key? key, required this.event_map}) : super(key: key) {
+  var data;
+  EventInfo({Key? key, required this.event_map, var this.data}) : super(key: key) {
     txt_visible = false;
   }
 
@@ -338,7 +339,7 @@ class _EventInfoState extends State<EventInfo> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => EventRegistrationForm(jsonData: widget.event_map),
+                                          builder: (context) => EventRegistrationForm(jsonData: widget.event_map, data: widget.data),
                                         ),
                                       );
                                     },
