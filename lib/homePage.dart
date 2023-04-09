@@ -14,6 +14,7 @@ import 'homeEventCard.dart';
 
 
 
+
 class events {
   final int eventId;
   final String name;
@@ -27,6 +28,9 @@ class events {
   final int technical;
   final int noOfRegistrations;
   final String url;
+  final int individualOrGroup;
+  final int maxCount;
+  int isStarred;
 
   events(
       {required this.eventId,
@@ -40,9 +44,11 @@ class events {
         required this.day,
         required this.technical,
         required this.noOfRegistrations,
-        required this.url});
+        required this.url,
+        required this.individualOrGroup,
+        required this.maxCount,
+        required this.isStarred});
 }
-
 
 class HomeWidget extends StatefulWidget {
   var data;

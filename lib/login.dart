@@ -28,6 +28,9 @@ class event_list {
   final int technical;
   final int noOfRegistrations;
   final String url;
+  final int individualOrGroup;
+  final int maxCount;
+  int isStarred;
 
   event_list(
       {required this.eventId,
@@ -41,7 +44,10 @@ class event_list {
         required this.day,
         required this.technical,
         required this.noOfRegistrations,
-      required this.url});
+      required this.url,
+      required this.individualOrGroup,
+      required this.maxCount,
+      required this.isStarred});
 }
 class events_grouped_by_category {
   final String title;
@@ -169,7 +175,10 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
                 day: events_in_a_row["date"],
                 technical: events_in_a_row["technical"],
                 noOfRegistrations: events_in_a_row["noOfRegistrations"],
-                url: events_in_a_row["url"]);
+                url: events_in_a_row["url"],
+                individualOrGroup: events_in_a_row["groupOrIndividual"],
+                maxCount: events_in_a_row["maxCount"],
+                isStarred: events_in_a_row["isStarred"]);
 
 
 

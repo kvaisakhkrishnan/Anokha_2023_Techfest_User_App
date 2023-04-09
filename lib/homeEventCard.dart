@@ -21,7 +21,6 @@ class EventCard extends StatefulWidget {
 }
 
 class _EventCardState extends State<EventCard> {
-  bool starred = false;
 
   Future<void> addStarred(String url)async {
     final response = await http.post(
@@ -132,14 +131,14 @@ class _EventCardState extends State<EventCard> {
                   ),
 
                   Expanded(
-                    child: !starred? IconButton(
+                    child: widget.event_data.isStarred == 0 ? IconButton(
                         iconSize: 30.0,
                         alignment: Alignment.centerRight,
                         onPressed: (){
                           setState(() {
-                            starred  = !starred;
+                            widget.event_data.isStarred = 1;
                           });
-                          if(starred == true)
+                          if(widget.event_data.isStarred == 1)
                             {
                               String url =  __url + "userApp/insertStarrs";
                               addStarred(url);
@@ -157,8 +156,8 @@ class _EventCardState extends State<EventCard> {
                         alignment: Alignment.centerRight,
                         onPressed: (){
                           setState(() {
-                            starred  = !starred;
-                            if(starred == false)
+                            widget.event_data.isStarred  = 0;
+                            if(widget.event_data.isStarred == 0)
                             {
                               String url =  __url + "userApp/dropStarrs";
                               removeStarred(url);
