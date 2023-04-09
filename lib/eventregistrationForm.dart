@@ -48,9 +48,9 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
                     child: Text("Participant ${i+1}",
-                    style: TextStyle(
-                      fontSize: 16.0
-                    ),),
+                      style: TextStyle(
+                          fontSize: 16.0
+                      ),),
                   )),
               TextFormField(
                 controller: i == 0
@@ -178,25 +178,25 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
                           onPressed: _numOfParticipants <= 1
                               ? null
                               : () {
-                                  int newValue = _numOfParticipants - 1;
-                                  _updateControllers(newValue);
-                                },
+                            int newValue = _numOfParticipants - 1;
+                            _updateControllers(newValue);
+                          },
                         ),
                         SizedBox(width: 10),
                         Text("Number of Participants: $_numOfParticipants",
-                        style: TextStyle(
-                          fontSize: 15.0
-                        )),
+                            style: TextStyle(
+                                fontSize: 15.0
+                            )),
                         SizedBox(width: 10),
                         IconButton(
                           icon: Icon(Icons.add),
                           onPressed:
-                              _numOfParticipants >= widget.jsonData.maxCount
-                                  ? null
-                                  : () {
-                                      int newValue = _numOfParticipants + 1;
-                                      _updateControllers(newValue);
-                                    },
+                          _numOfParticipants >= widget.jsonData.maxCount
+                              ? null
+                              : () {
+                            int newValue = _numOfParticipants + 1;
+                            _updateControllers(newValue);
+                          },
                         ),
                       ],
                     ),
@@ -214,13 +214,14 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
                   }
                 },
                 child: Text(
-                  "Submit",
+                  "SUBMIT",
                   style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
+                  minimumSize: Size(MediaQuery.of(context).size.width * 0.7, MediaQuery.of(context).size.height * 0.06),
                   foregroundColor: Colors.white,
                   backgroundColor: Color(0xFFFF7F11),
                   shape: RoundedRectangleBorder(
