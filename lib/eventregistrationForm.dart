@@ -5,7 +5,8 @@ import 'dart:convert';
 
 class EventRegistrationForm extends StatefulWidget {
   final jsonData;
-  const EventRegistrationForm({Key? key, required this.jsonData})
+  final data;
+  const EventRegistrationForm({Key? key, required this.jsonData, required this.data})
       : super(key: key);
 
   @override
@@ -44,10 +45,13 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
           child: Column(
             children: [
               TextFormField(
-                controller: _emailControllers[i],
+                controller: i == 0
+                    ? TextEditingController(text: widget.data.userEmail)
+                    : _emailControllers[i],
                 decoration: InputDecoration(
                   hintText: 'Email address',
                 ),
+                enabled: i != 0,
                 validator: (value) {
                   if (!isValidEmail(value ?? '')) {
                     return 'Invalid email address';
@@ -55,7 +59,6 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
                   return null;
                 },
               ),
-
               TextField(
                 decoration: InputDecoration(
                   hintText: i == 0 ? 'Leader' : 'Member',
@@ -73,6 +76,7 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
     return participantFields;
   }
 
+
   bool isValidEmail(String email) {
     return RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
   }
@@ -83,6 +87,7 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
 
 
   Future<void> _submitData() async {
+    print(widget.data);
     if (!_formIsValid()) {
       return;
     }
@@ -92,7 +97,7 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
 
     for (int i = 0; i < _numOfParticipants; i++) {
       participants.add({
-        'email': _emailControllers[i].text,
+        'email': i == 0 ? widget.data.userEmail : _emailControllers[i].text,
         'role': i == 0 ? 'Leader' : 'Member',
       });
     }
@@ -118,6 +123,7 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,7 +134,7 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
             children: [
               Container(
                 margin: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.05,
+                    left: MediaQuery.of(context).size.width * 0.0,
                     top: MediaQuery.of(context).size.height * 0.07),
                 alignment: Alignment.center,
                 height: MediaQuery.of(context).size.height * 0.07,
@@ -160,7 +166,7 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
               SizedBox(height: MediaQuery.of(context).size.height * 0.03),
               Container(
                 margin: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.05),
+                    left: MediaQuery.of(context).size.width * 0.0),
                 decoration: BoxDecoration(
                     color: Color(0xffF3F2F7),
                     borderRadius: BorderRadius.circular(10)),
