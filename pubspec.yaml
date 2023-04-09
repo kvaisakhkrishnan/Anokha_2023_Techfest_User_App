@@ -49,6 +49,8 @@ dependencies:
   ticket_widget: ^0.0.1
   qr_flutter: ^4.0.0
   shared_preferences: ^2.1.0
+  flutter_inappwebview: ^5.7.2+3
+  awesome_card: ^1.1.7
 dev_dependencies:
   flutter_test:
     sdk: flutter
