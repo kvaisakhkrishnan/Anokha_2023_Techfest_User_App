@@ -118,7 +118,7 @@ class _ControllerPageState extends State<ControllerPage> {
       case 2:
         return GetStarrs(data: data);
       case 3:
-        return RegisteredEvents();
+        return RegisteredEvents(data: data);
       case 4:
         return userProf(
           avatarLink: gravatar_url,

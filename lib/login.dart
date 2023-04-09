@@ -261,6 +261,8 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
                       "Login Portal",
                       style: TextStyle(
                         fontSize: 30.0,
+                        color: Color(0xFF002845),
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),

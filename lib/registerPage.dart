@@ -79,7 +79,7 @@ class _RegisterPageState extends State<RegisterPage>
                           CurvedAnimation(
                             parent: AnimationController(
                               vsync: this,
-                              duration: Duration(seconds: 2),
+                              duration: Duration(seconds: 1),
                             )..repeat(),
                             curve: Curves.linear,
                           ),
@@ -99,6 +99,8 @@ class _RegisterPageState extends State<RegisterPage>
                       "Register",
                       style: TextStyle(
                         fontSize: 30.0,
+                        color: Color(0xFF002845),
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),

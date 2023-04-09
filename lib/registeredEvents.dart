@@ -1,11 +1,19 @@
+import 'dart:convert';
+
 import 'package:anokha_home/registeredEventsCard.dart';
+import 'package:anokha_home/serverUrl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
+import 'homePage.dart';
 
 const itemSize = 280.0;
 
+final __url = serverUrl().url;
+
 class RegisteredEvents extends StatefulWidget {
-  RegisteredEvents({Key? key}) : super(key: key);
+  var data;
+  RegisteredEvents({Key? key, required this.data}) : super(key: key);
 
   @override
   State<RegisteredEvents> createState() => _RegisteredEventsState();
@@ -36,6 +44,15 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
     // Perform search using the searchController.text value
     print('Performing search for ${searchController.text}');
   }
+
+  Future<events> getRegistered() async {
+    String url = __url + "userApp/events/myRegistered";
+    final response = await http.get(Uri.parse(url),
+        headers: {'authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
+    print(json.decode(response.body));
+    return json.decode(response.body);
+  }
+
 
   @override
   Widget build(BuildContext context) {
