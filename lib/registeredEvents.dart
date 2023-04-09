@@ -55,7 +55,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
         headers: {'authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
     print(json.decode(response.body));
     registeredEvents =  json.decode(response.body);
-    print(registeredEvents.length.toString());
+
   }
 
 
@@ -141,6 +141,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                       ),
                     );
                   },
+                  childCount: 10
                 ),
               ),
             ],

@@ -177,7 +177,7 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
                 noOfRegistrations: events_in_a_row["noOfRegistrations"],
                 url: events_in_a_row["url"],
                 individualOrGroup: events_in_a_row["groupOrIndividual"],
-                maxCount: events_in_a_row["maxCount"],
+                maxCount: 10,
                 isStarred: events_in_a_row["isStarred"]);
 
 

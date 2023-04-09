@@ -1,3 +1,4 @@
+import 'package:anokha_home/serverUrl.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -5,6 +6,10 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'Loading_Screens/events_loading.dart';
+
+final __url = serverUrl().url;
 
 class GetCrew extends StatefulWidget {
   const GetCrew({Key? key}) : super(key: key);
@@ -14,7 +19,7 @@ class GetCrew extends StatefulWidget {
 }
 
 class _GetCrewState extends State<GetCrew> {
-  String url = "http://52.66.236.118:3000/userApp/getCrew";
+  String url = __url + "userApp/getCrew";
 
   Future<List> getData() async {
     final response = await http.get(Uri.parse(url));
@@ -33,7 +38,7 @@ class _GetCrewState extends State<GetCrew> {
               if (ss.hasData) {
                 return CrewMembers(list: ss.data);
               } else {
-                return CircularProgressIndicator();
+                return Events_Loading_screen();
               }
             }));
   }
@@ -71,26 +76,16 @@ class _CrewMembersState extends State<CrewMembers> {
         crew_list.length, (index) => crew_list[index]["teamName"]);
     final List<int> a = List.generate(crew_list.length, (index) => index);
 
-    return MaterialApp(
-      home: Container(
+    return  Container(
           child: Scaffold(
-        backgroundColor: HexColor("#002845"),
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: HexColor("#002845"),
-          elevation: 0,
-          leading: IconButton(
-              onPressed: () {},
-              splashRadius: 20,
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: HexColor("#FFFFFC"),
-              )),
-          title: Text("Crew Members",
-              style: GoogleFonts.dmSans(color: Colors.white)),
-          centerTitle: true,
-        ),
+          toolbarHeight: 0,
+          backgroundColor: Colors.white,
+          elevation: 0),
         body: Column(
           children: [
+
             Container(
               height: 120,
               child: GridView.count(
@@ -253,8 +248,7 @@ class _CrewMembersState extends State<CrewMembers> {
             ),
           ],
         ),
-      )),
-    );
+      ));
     ;
   }
 }
