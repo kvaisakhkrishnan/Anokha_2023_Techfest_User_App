@@ -125,7 +125,7 @@ class _ControllerPageState extends State<ControllerPage> {
           data: data,
         );
       case 5:
-        return GetCrew(data: data);
+        return GetCrew();
       default:
         return Text("Dummy Widget");
     }
