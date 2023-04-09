@@ -24,7 +24,7 @@ class MyTicketView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TicketWidget(
-              color: Color(0xFF203354),
+              color: Color(0xFF002845),
               width: 0.85 * MediaQuery.of(context).size.width,
               height: 0.60 * MediaQuery.of(context).size.height,
               isCornerRounded: true,
