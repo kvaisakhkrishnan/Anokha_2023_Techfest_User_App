@@ -10,6 +10,8 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'Loading_Screens/events_loading.dart';
+
 
 final __url = serverUrl().url;
 
@@ -43,7 +45,7 @@ class _GetStarrsState extends State<GetStarrs> {
             if (ss.hasData) {
               return Wheel(starr_map: ss.data);
             } else {
-              return Center(child: Text("Error"));
+              return Events_Loading_screen();
             }
           }),
     );
@@ -67,14 +69,8 @@ class _WheelState extends State<Wheel> {
     ctx1 = context;
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 0,
         elevation: 0,
-        title: Text(
-          "Starred Events",
-          style: GoogleFonts.dmSans(
-              color: HexColor("#002845"),
-              fontWeight: FontWeight.bold,
-              fontSize: 30),
-        ),
         backgroundColor: Colors.white,
         centerTitle: true,
       ),
@@ -134,11 +130,10 @@ class _New_WidgetState extends State<New_Widget> {
           borderRadius: BorderRadius.circular(30),
           child: Container(
               decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [HexColor("#193d57"), HexColor("#002845")]),
+                  color: Color(0xff002845),
                   borderRadius: BorderRadius.all(Radius.circular(30))),
-              height: MediaQuery.of(context).size.height * 0.2,
-              width: MediaQuery.of(context).size.width * 0.9,
+              height: MediaQuery.of(context).size.height * 0.25,
+              width: MediaQuery.of(context).size.width * 0.8,
               child: Column(
                 children: [
                   Row(

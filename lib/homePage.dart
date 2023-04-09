@@ -31,6 +31,7 @@ class events {
   final int individualOrGroup;
   final int maxCount;
   int isStarred;
+  int fees;
 
   events(
       {required this.eventId,
@@ -47,7 +48,8 @@ class events {
         required this.url,
         required this.individualOrGroup,
         required this.maxCount,
-        required this.isStarred});
+        required this.isStarred,
+        required this.fees});
 }
 
 class HomeWidget extends StatefulWidget {

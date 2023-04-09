@@ -28,6 +28,7 @@ class event_list {
   final int individualOrGroup;
   final int maxCount;
   int isStarred;
+  int fees;
 
   event_list(
       {required this.eventId,
@@ -44,7 +45,8 @@ class event_list {
       required this.url,
       required this.individualOrGroup,
       required this.maxCount,
-      required this.isStarred});
+      required this.isStarred,
+      required this.fees});
 }
 
 class events_grouped_by_category {
@@ -154,8 +156,9 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin {
                 noOfRegistrations: events_in_a_row["noOfRegistrations"],
                 url: events_in_a_row["url"],
                 individualOrGroup: events_in_a_row["groupOrIndividual"],
-                maxCount: 10,
-                isStarred: events_in_a_row["isStarred"]);
+                maxCount: events_in_a_row["maxCount"],
+                isStarred: events_in_a_row["isStarred"],
+                fees: events_in_a_row["fees"]);
 
             temp_event_list.add(temp_event_data);
           }
