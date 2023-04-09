@@ -20,10 +20,26 @@ late String name,
     state,
     country,
     zipcode;
+var user_data;
+var event_details;
+
+final _formKey = GlobalKey<FormState>();
+final _nameController = TextEditingController();
+final _phoneController = TextEditingController();
+final _emailController = TextEditingController();
+final _addressController = TextEditingController();
+final _cityController = TextEditingController();
+final _stateController = TextEditingController();
+final _countryController = TextEditingController();
+final _zipController = TextEditingController();
 
 class PayU extends StatelessWidget {
   var data;
-  PayU({super.key, required this.data});
+  var event_data;
+  PayU({super.key, required this.data, this.event_data}) {
+    user_data = data;
+    event_details = event_data;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -184,8 +200,7 @@ class _MyCardWidgetState extends State<MyCardWidget> {
     showAlertDialog();
     String url =
         "http://52.66.236.118:3000/userApp/transaction/moveToTransaction";
-    String user_token =
-        "v4.public.eyJ1c2VyRW1haWwiOiJjYi5lbi51NGNzZTIwMDEwQGNiLnN0dWRlbnRzLmFtcml0YS5lZHUiLCJmdWxsTmFtZSI6IkZJUlNUTkFNRTAgTEFTVE5BTUUwIiwiY29sbGVnZU5hbWUiOiJBYXphZCBDb2xsZWdlIG9mIEVkdWNhdGlvbiAoSWQ6IEMtMzkyMzApIiwiZGlzdHJpY3QiOiJQcmFrYXNhbSIsImNvdW50cnkiOiJJTkRJQSIsInJvbGUiOiJVU0VSIiwic2VjcmV0X2tleSI6IkUpSEBNY1FmVGpXblpyNHU3eCFBJUQqRy1KYU5kUmdVa1hwMnM1djh5L0I_RShIK01iUGVTaFZtWXEzdDZ3OXokQyZGKUpATmNSZlRqV25acjR1N3ghQSVEKkctS2FQZFNnVmtYcDJzNXY4eS9CP0UoSCtNYlFlVGhXbVpxM3Q2dzl6JEMmRilKQE5jUmZValhuMnI1dTd4IUElRCpHLUthUGRTZ1ZrWXAzczZ2OXkkQj9FKEgrTWJRZVRoV21acTR0N3cheiVDKkYpSkBOY1JmVWpYbjJyNXU4eC9BP0QoRytLYVBkU2dWa1lwM3M2djl5JEImRSlIQE1jUWVUaFdtWnE0dDd3IXolQypGLUphTmRSZ1VqWG4ycjV1OHgvQT9EKEcrS2JQZVNoVm1ZcDNzNnY5eSRCJkUpSEBNY1FmVGpXblpyNHQ3dyF6JUMqRi1KYU5kUmdVa1hwMnM1djh4L0E_RChHK0tiUGVTaFZtWXEzdDZ3OXokQiZFKUhATWNRZlRqV25acjR1N3ghQSVEKkYtSmFOZFJnVWtYcDJzNXY4eS9CP0UoSCtLYlBlU2hWbVlxM3Q2dzl6JEMmRilKQE5jUWZUalduWnI0dTd4IUElRCpHLUthUGRTZ1VrWHAyczV2OHkvQj9FKEgrTWJRZVRoV21ZcTN0Nnc5eiRDJEImRShIK01iUWVUaFdtWnE0dDd3IXolQypGLUpATmNSZlVqWG4ycjV1OHgvQT9EKEcrS2JQZFNnVmtZcDNzNnY5eSRCJkUpSEBNY1FmVGhXbVpxNHQ3dyF6JUMqRi1KYU5kUmdVa1huMnI1dTh4L0E_RChHK0tiUGVTaFZtWXEzczZ2OXkkQiZFKUhATWNRZlRqV25acjR1N3cheiVDKkYtSmFOZFJnVWtYcDJzNXY4eS9BP0QoRytLYlBlU2hWbVlxM3Q2dzl6JEMmRSlIQE1jUWZUalduWnI0dTd4IUElRCpHLUphTmRSZ1VrWHAyczV2OHkvQj9FKEgrTWJQZVNoVm1ZcTN0Nnc5eiRDJkYpSkBOY1JmVGpXblpyNHU3eCFBJUQqRy1LYVBkU2dWa1lwMnM1djh5L0I_RShIK01iUWVUaFdtWnE0dDZ3OXokQyZGKUpATmNSZlVqWG4ycjV1OHghQSVEKkctS2FQZFNnVmtZcDNzNnY5eSRCP0UoSCtNYlFlVGhXbVpxNHQ3dyF6JUMqRilKQE5jUmZValhuMnI1dTh4L0E_RChHK0thUGRTZ1ZrWXAzczZ2OXkkQiZFKUhATWNRZVRoV21acTR0N3cheiVDKkYtSmFOZFJnVWpYbjJyNXU4eC9BP0QoRytLYlBlU2hWbVlwM3M2djl2OHkvQj9FKEcrS2JQZVNoVm1ZcTN0Nnc5eiRDJkYpSkBNY1FmVGpXblpyNHU3eCFBJUQqRy1LYVBkUmdVa1hwMnM1djh5L0I_RShIK01iUWVUaFZtWXEzdDZ3OXokQyZGKUpATmNSZlVqWG5acjR1N3ghQSVEKkctS2FQZFNnVmtZcDNzNXY4eS9CP0UoSCtNYlFlVGhXbVpxNHQ3dzl6JEMmRilKQE5jUmZValhuMnI1dTh4L0ElRCpHLUthUGRTZ1ZrWXAzczZ2OXkkQiZFKEgrTWJRZVRoV21acTR0N3cheiVDKkYtSkBOY1JmVWpYbjJyNXU4eC9BP0QoRytLYlBkU2dWa1lwM3M2djl5JEImRSlIQE1jUWZUaFdtWnE0dDd3IXolQypGLUphTmRSZ1VrWG4ycjV1OHgvQT9EKEcrS2JQZVNoVm1ZcTNzNnY5eSRCJkUpSEBNY1FmVGpXblpyNHU3dyF6JUMqRi1KYU5kUmdVa1hwMnM1djh5L0E_RChHK0tiUGVTaFZtWXEzdDZ3OXokQyZFKUhATWNRZlRqV25acjR1N3ghQSVEKkctS2FOZFJnVWtYcDJzNXY4eS9CP0UoSCtNYlFlU2hWbVlxM3Q2dzl6JEMmRilKQE5jUmZValduWnI0dTd4IUElRCpHLUthUGRTZ1ZrWXAyczJyNXU4eC9BP0QoRy1LYVBkU2dWa1lwM3M2djl5JEImRSlIQE1iUWVUaFdtWnE0dDd3IXolQypGLUphTmRSZlVqWG4ycjV1OHgvQT9EKEcrS2JQZVNoVmtZcDNzNnY5eSRCJkUpSEBNY1FmVGpXblpxNHQ3dyF6JUMqRi1KYU5kUmdVa1hwMnM1dTh4L0E_RChHK0tiUGVTaFZtWXEzdDZ3OXkkQiZFKUhATWNRZlRqV25acjR1N3ghQSVDKkYtSmFOZFJnVWtYcDJzNXY4eS9CP0UoRytLYlBlU2hWbVlxM3Q2dzl6JEMmRilKQE1jUWZUalduWnI0dTd4IUElRCpHLUthUGRSZ1VrWHAyczV2OHkvQj9FKEgrTWJRZVRoVm1ZcTN0Nnc5eiRDJkYpSkBOY1JmVWpYblpyNHU3eCFBJUQqRy1LYVBkU2dWa1lwM3M1djh5L0I_RShIK01iUWVUaFdtWnE0dDd3OXokQyZGKUpATmNSZlVqWG4ycjV1OHgvQSVEKkctS2FQZFNnVmtZcDNzNnY5eSRCJkUoSCtNYlFlVGhXbVpxNHQ3dyF6JUMqRi1KQE5jUmZValhuMnI1dTh4L0E_RChHK0tiUGRTZ1ZrWXAzczZ2OXkkQiZFKUhATWNRZlRoV21acTR0N3cheiVDKkYtSmFOZFJnVWtYaXdoamRqd2lkanFzcW93YmR4aGpXblpyNHU3eCFBJUQqRi1KYU5kUmdVa1hwMnM1djh5L0I_RShIK0tiUGVTaFZtWXEzdDZ3OXokQyZGKUpATmNRZlRqV25acjR1N3ghQSVEKkctS2FQZFNnVWtYcDJzNXY4eS9CP0UoSCtNYlFlVGhXbVlxM3Q2dzl6JEMmRilKQE5jUmZValhuMnI1dTd4IUElRCpHLUthUGRTZ1ZrWXAzczZ2OXkvQj9FKEgrTWJRZVRoV21acTR0N3cheiVDJkYpSkBOY1JmVWpYbjJyNXU4eC9BP0QoRy1LYVBkU2dWa1lwM3M2djl5JEImRSlIQE1iUWVUaFdtWnE0dDd3IXolQypGLUphTmRSZlVqWG4ycjV1OHgvQT9EKEcrS2JQZVNoVmtZcDNzNnY5eSRCJkUpSEBNY1FmVGpXblpxNHQ3dyF6JUMqRi1KYU5kUmdVa1hwMnM1dTh4L0E_RChHK0tiUGVTaFZtWXEzdDZ3OXkkQiZFKUhATWNRZlRqV25acjR1N3ghQSVDKkYtSmFOZFJnVWtYcDJzNXY4dyIsImlhdCI6IjIwMjMtMDQtMDlUMTQ6NTM6MDguOTUxWiIsImV4cCI6IjIwMjMtMDQtMDlUMTU6NTM6MDguOTUxWiJ9akjiABQxihjCSgQtuz8vDwof5zaG0OpD3sajvZv9JztaXUMKNvyUb6xnMZvgal_XtLjosFog0hW_CrJBkMwWAw";
+    String user_token = user_data.SECRET_TOKEN;
 
     final response = await http
         .post(Uri.parse(url), headers: {'authorization': 'Bearer $user_token'});
@@ -263,15 +278,15 @@ class _PaymentPageState extends State<PaymentPage> {
     String url =
         "http://52.66.236.118:3000/userApp/transaction/initiateTransaction";
     Map<String, String> body = {
-      "productId": "E1",
-      "firstName": "FIRSTNAME0",
-      "userEmail": "cb.en.u4cse20010@cb.students.amrita.edu",
-      "address": "ADDRESS0",
-      "city": "CITY0",
-      "state": "STATE0",
-      "country": "COUNTRY0",
-      "zipcode": "123",
-      "phoneNumber": "1234567890"
+      "productId": "E${event_details.eventId}",
+      "firstName": _nameController.text,
+      "userEmail": user_data.userEmail,
+      "address": _addressController.text,
+      "city": _cityController.text,
+      "state": _stateController.text,
+      "country": _countryController.text,
+      "zipcode": _zipController.text,
+      "phoneNumber": _phoneController.text
     };
 
     var json_body = jsonEncode(body);
@@ -325,12 +340,12 @@ class _NextpageState extends State<Nextpage> {
   @override
   void initState() {
     postbody = {
-      "productInfo": "E1",
+      "productInfo": "E${event_details.eventId}",
       "txnid": widget.trans_map?["txid"],
       "amount": "${widget.trans_map?["amount"]}",
-      "firstname": "FIRSTNAME0",
-      "Lastname": "LASTNAME0",
-      "email": "cb.en.u4cse20010@cb.students.amrita.edu",
+      "firstname": user_data.fullName,
+      "Lastname": user_data.fullName,
+      "email": user_data.userEmail,
       "phone": phoneNumber,
       "address1": address,
       "address2": "",
@@ -399,37 +414,21 @@ class UserForm extends StatefulWidget {
 }
 
 class _UserFormState extends State<UserForm> {
-  final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _addressController = TextEditingController();
-  final _cityController = TextEditingController();
-  final _stateController = TextEditingController();
-  final _countryController = TextEditingController();
-  final _zipController = TextEditingController();
   @override
   void dispose() {
-    _nameController.dispose();
-    _phoneController.dispose();
-    _emailController.dispose();
-    _addressController.dispose();
-    _cityController.dispose();
-    _stateController.dispose();
-    _countryController.dispose();
     super.dispose();
   }
 
   @override
   void initState() {
-    _nameController.text = "Sharath";
-    _phoneController.text = "9597197934";
-    _emailController.text = "cb.en.u4cse20010@cb.students.amrita.edu";
-    _addressController.text = "address0";
+    _nameController.text = user_data.fullName;
+    // _phoneController.text = "9597197934";
+    _emailController.text = user_data.userEmail;
+    /*_addressController.text = "address0";
     _cityController.text = "city0";
     _stateController.text = "state0";
     _zipController.text = "123";
-    _countryController.text = "India";
+    _countryController.text = "India";*/
 
     name = _nameController.text;
     phoneNumber = _phoneController.text;
