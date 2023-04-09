@@ -39,11 +39,19 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
         Container(
           padding: EdgeInsets.all(5),
           decoration: BoxDecoration(
-            color: Colors.grey[200],
             borderRadius: BorderRadius.circular(10),
           ),
           child: Column(
             children: [
+              Container(
+                  alignment:Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
+                    child: Text("Participant ${i+1}",
+                    style: TextStyle(
+                      fontSize: 16.0
+                    ),),
+                  )),
               TextFormField(
                 controller: i == 0
                     ? TextEditingController(text: widget.data.userEmail)
@@ -127,27 +135,14 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(elevation: 0, toolbarHeight: 0, backgroundColor: Colors.white,),
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
           child: Column(
             children: [
-              Container(
-                margin: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.0,
-                    top: MediaQuery.of(context).size.height * 0.07),
-                alignment: Alignment.center,
-                height: MediaQuery.of(context).size.height * 0.07,
-                width: MediaQuery.of(context).size.width * 0.9,
-                decoration: BoxDecoration(
-                  color: Color(0xFFFF7F11),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(
-                  'Registration Of Event',
-                  style: TextStyle(fontSize: 30, color: Colors.white),
-                ),
-              ),
+
               SizedBox(height: MediaQuery.of(context).size.height * 0.03),
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -163,15 +158,15 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
                   },
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.05),
               Container(
                 margin: EdgeInsets.only(
                     left: MediaQuery.of(context).size.width * 0.0),
                 decoration: BoxDecoration(
                     color: Color(0xffF3F2F7),
-                    borderRadius: BorderRadius.circular(10)),
-                height: MediaQuery.of(context).size.height * 0.6,
-                width: MediaQuery.of(context).size.width * 0.9,
+                    borderRadius: BorderRadius.circular(30)),
+                height: MediaQuery.of(context).size.height * 0.66,
+                width: MediaQuery.of(context).size.width * 0.90,
                 child: ListView(
                   padding: EdgeInsets.all(10),
                   children: [
@@ -188,7 +183,10 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
                                 },
                         ),
                         SizedBox(width: 10),
-                        Text("Number of Participants: $_numOfParticipants"),
+                        Text("Number of Participants: $_numOfParticipants",
+                        style: TextStyle(
+                          fontSize: 15.0
+                        )),
                         SizedBox(width: 10),
                         IconButton(
                           icon: Icon(Icons.add),
@@ -207,7 +205,7 @@ class _EventRegistrationFormState extends State<EventRegistrationForm> {
                   ],
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
               ElevatedButton(
                 onPressed: () {
                   if (_formIsValid()) {
