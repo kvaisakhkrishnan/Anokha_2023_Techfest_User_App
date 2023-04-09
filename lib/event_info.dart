@@ -47,6 +47,7 @@ class _EventInfoState extends State<EventInfo> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.event_map);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -131,11 +132,12 @@ class _EventInfoState extends State<EventInfo> {
                                         padding: EdgeInsets.fromLTRB(
                                             20.0, 0.0, 40.0, 10.0),
                                         child: Text(
-                                          "Machine Learning\nWorkshop",
+                                          widget.event_map.name,
                                           style: TextStyle(
-                                            fontSize: 18.0,
+                                            fontSize: 15.0,
                                             fontWeight: FontWeight.bold,
                                           ),
+                                          maxLines: 4,
                                         ),
                                       ),
                                       SizedBox(
@@ -198,7 +200,7 @@ class _EventInfoState extends State<EventInfo> {
                                         width: 15.0,
                                       ),
                                       Text(
-                                        "AB3 Block A203",
+                                        widget.event_map.venue,
                                         style: TextStyle(
                                             color: HexColor("#A0A0A0"),
                                             fontWeight: FontWeight.bold,
@@ -235,7 +237,7 @@ class _EventInfoState extends State<EventInfo> {
                                                   height: 10,
                                                 ),
                                                 Text(
-                                                  "6\nAvailable Seats",
+                                                  "${widget.event_map.maxCount - widget.event_map.noOfRegistrations}\nAvailable Seats",
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       color: Colors.white,
@@ -276,7 +278,7 @@ class _EventInfoState extends State<EventInfo> {
                                                   height: 10,
                                                 ),
                                                 Text(
-                                                  "March 31",
+                                                  widget.event_map.date,
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       color: Colors.white,
@@ -294,7 +296,7 @@ class _EventInfoState extends State<EventInfo> {
                                   Padding(
                                     padding: const EdgeInsets.all(15.0),
                                     child: Text(
-                                      "Simply put, a paragraph is a collection of sentences all related to a central topic, idea, or theme. Paragraphs act as structural tools for writers to organize their thoughts into an ideal progression, and they also help readers process those thoughts effortlessly. Imagine how much harder reading and writing would be if everything was just one long block of text.There’s a lot of flexibility when it comes to writing paragraphs, but if there’s one steadfast rule, it’s this: Paragraphs should relate to one main topic or point. The paragraph itself often contains multiple points spanning several sentences, but they should all revolve around one core theme. Just as sentences build upon each other to communicate the paragraph’s core theme, paragraphs work together to communicate the core theme of the writing as a whole. ",
+                                      widget.event_map.description,
                                       textDirection: TextDirection.ltr,
                                     ),
                                   )
@@ -341,13 +343,16 @@ class _EventInfoState extends State<EventInfo> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => (widget
-                                                          .event_map[
-                                                      "groupOrIndividual"] ==
+                                                      .event_map
+                                                      .individualOrGroup ==
                                                   1)
                                               ? EventRegistrationForm(
                                                   jsonData: widget.event_map,
                                                   data: widget.data)
-                                              : PayU(data: widget.data),
+                                              : PayU(
+                                                  data: widget.data,
+                                                  event_data: widget.event_map,
+                                                ),
                                         ),
                                       );
                                     },
