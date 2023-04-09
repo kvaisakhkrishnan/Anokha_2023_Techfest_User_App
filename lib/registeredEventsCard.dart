@@ -61,7 +61,7 @@ class _RegisteredEventCardState extends State<RegisteredEventCard> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20.0, top: 20.0),
                         child: Text(
-                          event['EventName'],
+                          event['EventName']  ?? 'Unknown Event',
                           style: TextStyle(
                             fontSize: 23.0,
                           ),
@@ -83,7 +83,7 @@ class _RegisteredEventCardState extends State<RegisteredEventCard> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20.0),
                         child: Text(
-                          '${event['Department']} | ${event['Type']}',
+                          '${event['Department']} | ${event['Type']}'  ?? 'Unknown Event',
                           style: TextStyle(color: Color(0xFFFF3F11)),
                         ),
                       ),
@@ -93,7 +93,7 @@ class _RegisteredEventCardState extends State<RegisteredEventCard> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: Text(
-                    event['Venue'],
+                    event['Venue']  ?? 'Unknown Event',
                     style: TextStyle(
                       fontSize: 23.0,
                     ),
@@ -106,7 +106,7 @@ class _RegisteredEventCardState extends State<RegisteredEventCard> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 50.0),
                           child: Text(
-                            'Valid on\n${event['Date']}',
+                            'Valid on\n${event['Date']}'  ?? 'Unknown Event',
                             style: TextStyle(),
                           ),
                         ),
