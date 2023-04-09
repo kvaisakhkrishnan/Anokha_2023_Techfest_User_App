@@ -12,7 +12,7 @@ import 'eventregistrationForm.dart';
 
 class EventInfo extends StatefulWidget {
   bool txt_visible = false;
-  Map<String, dynamic> event_map;
+  var event_map;
   EventInfo({Key? key, required this.event_map}) : super(key: key) {
     txt_visible = false;
   }
@@ -22,22 +22,6 @@ class EventInfo extends StatefulWidget {
 }
 
 class _EventInfoState extends State<EventInfo> {
-  Map<String, dynamic> yourJsonData = {
-    "name": "John Doe",
-    "maximum_number_of_participants" : 5,
-    "age": 30,
-    "isMarried": false,
-    "address": {
-      "street": "123 Main St",
-      "city": "New York",
-      "state": "NY",
-      "zipCode": "10001"
-    },
-    "phoneNumbers": [
-      {"type": "home", "number": "555-1234"},
-      {"type": "work", "number": "555-5678"}
-    ]
-  };
 
   ScrollController _controller = ScrollController();
   bool liked = false;
@@ -354,7 +338,7 @@ class _EventInfoState extends State<EventInfo> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => EventRegistrationForm(jsonData: yourJsonData),
+                                          builder: (context) => EventRegistrationForm(jsonData: widget.event_map),
                                         ),
                                       );
                                     },
