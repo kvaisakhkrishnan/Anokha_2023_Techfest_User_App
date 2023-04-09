@@ -13,6 +13,7 @@ final __url = serverUrl().url;
 
 class RegisteredEvents extends StatefulWidget {
   var data;
+
   RegisteredEvents({Key? key, required this.data}) : super(key: key);
 
   @override
@@ -23,6 +24,8 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
   final scrollController = ScrollController();
   final searchController = TextEditingController();
 
+  var registeredEvents;
+
   void onListen() {
     setState(() {});
   }
@@ -31,6 +34,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
   void initState() {
     scrollController.addListener(onListen);
     super.initState();
+    getRegistered();
   }
 
   @override
@@ -45,13 +49,16 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
     print('Performing search for ${searchController.text}');
   }
 
-  Future<events> getRegistered() async {
+  Future<void> getRegistered() async {
     String url = __url + "userApp/events/myRegistered";
     final response = await http.get(Uri.parse(url),
         headers: {'authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
     print(json.decode(response.body));
-    return json.decode(response.body);
+    registeredEvents =  json.decode(response.body);
+    print(registeredEvents.length.toString());
   }
+
+
 
 
   @override
@@ -134,7 +141,6 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                       ),
                     );
                   },
-                  childCount: 10,
                 ),
               ),
             ],
