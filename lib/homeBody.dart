@@ -156,6 +156,7 @@ class _HomeBodyState extends State<HomeBody> {
                     ),
                     CardRow(
                       list_of_events: widget.eventsList[index].events_list,
+                      data: widget.data
                     ),
                   ],
                 );
@@ -189,6 +190,6 @@ class _HomeBodyState extends State<HomeBody> {
   }
 
   Widget _buildEventCard(event_list event) {
-    return EventCard(event_data: event);
+    return EventCard(event_data: event, data: widget.data,);
   }
 }

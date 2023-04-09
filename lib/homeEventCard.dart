@@ -1,14 +1,19 @@
+import 'dart:convert';
+
+import 'package:anokha_home/serverUrl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-
+import 'package:http/http.dart' as http;
 import 'event_info.dart';
 import 'homeBody.dart';
 import 'login.dart';
 
+final __url = serverUrl().url;
+
 class EventCard extends StatefulWidget {
   final event_list event_data;
-
-  EventCard({Key? key, required this.event_data}) : super(key: key);
+  var data;
+  EventCard({Key? key, required this.event_data, required this.data}) : super(key: key);
 
 
   @override
@@ -17,6 +22,51 @@ class EventCard extends StatefulWidget {
 
 class _EventCardState extends State<EventCard> {
   bool starred = false;
+
+  Future<void> addStarred(String url)async {
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${widget.data.SECRET_TOKEN}',
+      },
+      body: jsonEncode({
+        "eventId" : widget.event_data.eventId
+      }),
+
+    );
+    if (response.statusCode == 200) {
+      // Successful response
+      print('POST request successful: ${response.body}');
+    } else {
+      // Error response
+      print('POST request failed: ${response.statusCode} - ${response.body}');
+    }
+  }
+
+
+  Future<void> removeStarred(String url)async {
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${widget.data.SECRET_TOKEN}',
+      },
+      body: jsonEncode({
+        "eventId" : widget.event_data.eventId
+      }),
+
+    );
+    if (response.statusCode == 200) {
+      // Successful response
+      print('POST request successful: ${response.body}');
+    } else {
+      // Error response
+      print('POST request failed: ${response.statusCode} - ${response.body}');
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return
@@ -89,6 +139,13 @@ class _EventCardState extends State<EventCard> {
                           setState(() {
                             starred  = !starred;
                           });
+                          if(starred == true)
+                            {
+                              String url =  __url + "userApp/insertStarrs";
+                              addStarred(url);
+                            }
+
+
                         },
                         icon: Icon(
                             Icons.star_border,
@@ -101,6 +158,11 @@ class _EventCardState extends State<EventCard> {
                         onPressed: (){
                           setState(() {
                             starred  = !starred;
+                            if(starred == false)
+                            {
+                              String url =  __url + "userApp/dropStarrs";
+                              removeStarred(url);
+                            }
                           });
                         },
                         icon: Icon(
