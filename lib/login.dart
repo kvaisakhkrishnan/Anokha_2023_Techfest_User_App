@@ -285,8 +285,19 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
                                   EdgeInsets.symmetric(horizontal: 10.0),
                                   child: TextFormField(
                                     controller: _passwordController,
+                                    obscureText: _obscureText,
                                     decoration: InputDecoration(
                                       hintText: "Password",
+                                      suffixIcon: IconButton(
+                                        iconSize: 20.0,
+                                        icon: _obscureText
+                                            ? Icon(FontAwesomeIcons.eye)
+                                            : Icon(FontAwesomeIcons.eyeSlash),
+
+                                        onPressed: () {
+                                          _toggle();
+                                        },
+                                      ),
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                             width: 1, color: Color(0xffF3F2F7)),
