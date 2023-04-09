@@ -105,6 +105,14 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  bool isValidEmail(String email) {
+    final RegExp emailRegex = RegExp(
+        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    return emailRegex.hasMatch(email);
+  }
+
   Future<int> loginUser(String username, String password) async {
 
     String url = __url + 'userApp/login';
@@ -261,136 +269,145 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin{
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(20.0)),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
+                          child: Form(
+                            key: _formKey,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
 
-                                SizedBox(),
-                                Padding(
-                                  padding:
-                                  EdgeInsets.symmetric(horizontal: 10.0),
-                                  child: TextFormField(
-                                    controller: _usernameController,
-                                    decoration: InputDecoration(
-                                      hintText: "Registered Email",
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            width: 1, color: Color(0xffF3F2F7)),
+                                  SizedBox(),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                                    child: TextFormField(
+                                      controller: _usernameController,
+                                      decoration: InputDecoration(
+                                        hintText: "Registered Email",
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide:
+                                          BorderSide(width: 1, color: Color(0xffF3F2F7)),
+                                        ),
+                                      ),
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter an email address';
+                                        } else if (!isValidEmail(value)) {
+                                          return 'Please enter a valid email address';
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ),
+
+                                  Padding(
+                                    padding:
+                                    EdgeInsets.symmetric(horizontal: 10.0),
+                                    child: TextFormField(
+                                      controller: _passwordController,
+                                      obscureText: _obscureText,
+                                      decoration: InputDecoration(
+                                        hintText: "Password",
+                                        suffixIcon: IconButton(
+                                          iconSize: 20.0,
+                                          icon: _obscureText
+                                              ? Icon(FontAwesomeIcons.eye)
+                                              : Icon(FontAwesomeIcons.eyeSlash),
+
+                                          onPressed: () {
+                                            _toggle();
+                                          },
+                                        ),
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 1, color: Color(0xffF3F2F7)),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding:
-                                  EdgeInsets.symmetric(horizontal: 10.0),
-                                  child: TextFormField(
-                                    controller: _passwordController,
-                                    obscureText: _obscureText,
-                                    decoration: InputDecoration(
-                                      hintText: "Password",
-                                      suffixIcon: IconButton(
-                                        iconSize: 20.0,
-                                        icon: _obscureText
-                                            ? Icon(FontAwesomeIcons.eye)
-                                            : Icon(FontAwesomeIcons.eyeSlash),
 
-                                        onPressed: () {
-                                          _toggle();
-                                        },
-                                      ),
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            width: 1, color: Color(0xffF3F2F7)),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 30.0),
+                                    child: OutlinedButton(
+                                      onPressed: () async {
+                                        if (_formKey.currentState!.validate()) { // Add this line
+                                          try {
+                                            int status = await loginUser(
+                                              _usernameController.text,
+                                              _passwordController.text,
+                                            );
 
-                                Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 30.0),
-                                  child: OutlinedButton(
-                                    onPressed: () async {
-                                      try {
-                                        int status = await loginUser(
-                                          _usernameController.text,
-                                          _passwordController.text,
-                                        );
-                                        // print;
-
-                                        if (status == 1) {
-                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ControllerPage(data: userData, eventsList : list_of_events)));
-
-                                        } else {
-                                          void _showSnackBar(
-                                              BuildContext context,
-                                              String message) {
-                                            //Implement River asset
+                                            if (status == 1) {
+                                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ControllerPage(data: userData, eventsList : list_of_events)));
+                                            } else {
+                                              _scaffoldMessengerKey.currentState?.showSnackBar(
+                                                SnackBar(content: Text('Invalid login credentials')),
+                                              );
+                                            }
+                                          } catch (e) {
+                                            print("Error: $e");
+                                            _scaffoldMessengerKey.currentState?.showSnackBar(
+                                              SnackBar(content: Text('An error occurred while logging in')),
+                                            );
                                           }
                                         }
-                                      } catch (e) {
-                                        print("Error: $e");
-                                        _scaffoldMessengerKey.currentState?.showSnackBar(
-                                          SnackBar(content: Text('An error occurred while logging in')),
-                                        );
-                                      }
+                                      },
 
-                                    },
+                                      child: Text(
+                                        "LOGIN",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 15.0),
+                                      ),
+                                      style: OutlinedButton.styleFrom(
+                                        backgroundColor: Color(0xFFFF7F11),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(10.0)),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 13.0,
+                                            horizontal: MediaQuery.of(context)
+                                                .size
+                                                .width *
+                                                0.3),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 20.0),
                                     child: Text(
-                                      "LOGIN",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 15.0),
-                                    ),
-                                    style: OutlinedButton.styleFrom(
-                                      backgroundColor: Color(0xFFFF7F11),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                          BorderRadius.circular(10.0)),
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 13.0,
-                                          horizontal: MediaQuery.of(context)
-                                              .size
-                                              .width *
-                                              0.3),
+                                      "New to Anokha 2023?",
+                                      style: TextStyle(fontSize: 17.0),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 20.0),
-                                  child: Text(
-                                    "New to Anokha 2023?",
-                                    style: TextStyle(fontSize: 17.0),
+                                  Padding(
+                                    padding: EdgeInsets.only(bottom: 1.0),
+                                    child: TextButton(
+                                        onPressed: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage(),));
+                                        },
+                                        child: Text(
+                                          "REGISTER",
+                                          style:
+                                          TextStyle(color: Color(0xFFFF7F11)),
+                                        )),
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(bottom: 1.0),
-                                  child: TextButton(
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage(),));
-                                      },
-                                      child: Text(
-                                        "REGISTER",
-                                        style:
-                                        TextStyle(color: Color(0xFFFF7F11)),
-                                      )),
-                                ),
 
 
-                                SizedBox(),
+                                  SizedBox(),
 
-                                Padding(
-                                  padding: EdgeInsets.only(bottom: 1.0),
-                                  child: TextButton(
-                                      onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage(),));
-                                      },
-                                      child: Text(
-                                        "Forgot Password",
-                                        style:
-                                        TextStyle(color: Color(0xFFFF7F11)),
-                                      )),
-                                ),
-                                SizedBox()
-                              ],
+                                  Padding(
+                                    padding: EdgeInsets.only(bottom: 1.0),
+                                    child: TextButton(
+                                        onPressed: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage(),));
+                                        },
+                                        child: Text(
+                                          "Forgot Password",
+                                          style:
+                                          TextStyle(color: Color(0xFFFF7F11)),
+                                        )),
+                                  ),
+                                  SizedBox()
+                                ],
+                              ),
                             ),
                           ),
                         ),
