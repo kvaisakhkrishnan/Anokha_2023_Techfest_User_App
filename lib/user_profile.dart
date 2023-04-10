@@ -3,14 +3,21 @@ import 'package:flutter/material.dart';
 import 'login.dart';
 
 class userProf extends StatefulWidget {
-  String avatarLink;
+  final String avatarLink;
   final data;
-  userProf({Key? key,
-  required this.avatarLink, required this.data}) : super(key: key);
+  final VoidCallback onLogout;
+
+  userProf({
+    Key? key,
+    required this.avatarLink,
+    required this.data,
+    required this.onLogout,
+  }) : super(key: key);
 
   @override
   State<userProf> createState() => _userProfState();
 }
+
 
 class _userProfState extends State<userProf> {
   bool islight = true;
@@ -47,9 +54,10 @@ class _userProfState extends State<userProf> {
           backgroundColor: Colors.white,
           elevation: 0.0,
           actions: [
-          
+
             IconButton(
               onPressed: () {
+                widget.onLogout(); // Call the callback function
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (BuildContext context) => loginPage()),
@@ -59,6 +67,7 @@ class _userProfState extends State<userProf> {
               icon: Icon(Icons.power_settings_new),
               color: Color(0xFFFF3F00),
             ),
+
           ],
         ),
         body: Column(
