@@ -95,21 +95,22 @@ class _RegisterPageState extends State<RegisterPage>
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
-        body: jsonEncode(<String, String>{
+        body: jsonEncode(<String, dynamic>{
           'fullName': _fullNameController.text,
           'userEmail': _emailController.text,
           'password': _passwordController.text,
-          'collegeId': _collegeController.text,
+          'collegeId': int.parse(_collegeController.text.split("-")[0].trim()),
         }),
       );
       // Handle the response as needed
-
+      print(_collegeController.text);
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
     } catch (e) {
       print('Error: $e');
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
