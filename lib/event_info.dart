@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:anokha_home/payments.dart';
 import 'package:faded_widget/faded_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -54,7 +55,7 @@ class _EventInfoState extends State<EventInfo> {
                         width: MediaQuery.of(context).size.width * 1,
                         child: Image(
                             fit: BoxFit.fill,
-                            image: AssetImage("images/mount.jpg"))),
+                            image: NetworkImage(widget.event_map.url))),
                     Align(
                       alignment: Alignment.center,
                       child: IconButton(
@@ -143,9 +144,9 @@ class _EventInfoState extends State<EventInfo> {
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.45,
+                                              0.4,
                                           child: Text(
-                                            "rbfgmbgmln tgm t ntlkrmnmth",
+                                            widget.event_map.name,
                                             maxLines: 3,
                                             style: TextStyle(
                                               fontSize: 18.0,
@@ -158,7 +159,7 @@ class _EventInfoState extends State<EventInfo> {
                                         width: 50.0,
                                       ),
                                       Text(
-                                        "₹200",
+                                        "₹${widget.event_map.fees}",
                                         style: TextStyle(
                                             backgroundColor: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -179,7 +180,10 @@ class _EventInfoState extends State<EventInfo> {
                                           width: 10,
                                         ),
                                         Container(
-                                          width: 140,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.33,
                                           decoration: BoxDecoration(
                                               gradient: LinearGradient(colors: [
                                                 HexColor("#FF7F11"),
@@ -220,7 +224,7 @@ class _EventInfoState extends State<EventInfo> {
                                         Container(
                                           width: 200,
                                           child: Text(
-                                            "efbglm bmb tgbberg bet",
+                                            widget.event_map.venue,
                                             maxLines: 3,
                                             style: TextStyle(
                                                 color: HexColor("#A0A0A0"),
@@ -260,7 +264,7 @@ class _EventInfoState extends State<EventInfo> {
                                                   height: 10,
                                                 ),
                                                 Text(
-                                                  "6\nAvailable Seats",
+                                                  "${widget.event_map.maxCount - widget.event_map.noOfRegistrations}\nAvailable Seats",
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       color: Colors.white,
@@ -370,7 +374,11 @@ class _EventInfoState extends State<EventInfo> {
                                     shape: StadiumBorder(),
                                     color: Colors.white),
                                 child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      PayU(
+                                          data: widget.data,
+                                          event_data: widget.event_map);
+                                    },
                                     child: Center(
                                         child: Text("Register",
                                             style: TextStyle(
