@@ -20,7 +20,7 @@ class userProf extends StatefulWidget {
 
 
 class _userProfState extends State<userProf> {
-  bool islight = true;
+  bool islight = false;
 
   refresh() {
     setState(() {
@@ -51,7 +51,7 @@ class _userProfState extends State<userProf> {
         backgroundColor: islight ? Color(0xFFFFFFFC) : Color(0xFF002845),
         appBar: AppBar(
 
-          backgroundColor: Colors.white,
+          backgroundColor: Color(0xff002845),
           elevation: 0.0,
           actions: [
 
@@ -146,38 +146,7 @@ class _userProfState extends State<userProf> {
                                     fontFamily: "Roboto"),
                               ),
                             ),
-                            Container(
-                              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
-                              child: Text(
-                                "Account Balance",
-                                style: TextStyle(
-                                    fontSize: 25.0,
-                                    color: islight
-                                        ? Color(0xFFFFFFFC)
-                                        : Color(0xFF002845),
-                                    fontFamily: "Roboto"),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.0),
-                              child: Text.rich(
-                                TextSpan(
-                                    text: "₹",
-                                    style: (TextStyle(
-                                        fontSize: 35.0,
-                                        color: islight
-                                            ? Color(0xFFFFFFFC)
-                                            : Color(0xFF002845),
-                                        fontFamily: "Roboto")),
-                                    children: <InlineSpan>[
-                                      TextSpan(
-                                          text: "0.0",
-                                          style: TextStyle(
-                                              fontSize: 27,
-                                              color: Color(0xFFFF7F11)))
-                                    ]),
-                              ),
-                            ),
+                           SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                             Container(
                               height: MediaQuery.of(context).size.height * 0.22,
                               child: GestureDetector(

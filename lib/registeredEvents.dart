@@ -66,12 +66,13 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Color(0xff002845),
           elevation: 0,
           toolbarHeight: 0,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xff002845),
         body: _isLoading
             ? Center(child: Events_Loading_screen())
             : Padding(

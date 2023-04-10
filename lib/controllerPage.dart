@@ -14,6 +14,7 @@ import 'package:simple_gravatar/simple_gravatar.dart';
 
 import 'animated_bar.dart';
 import 'crew_members.dart';
+import 'mainPage.dart';
 
 class ControllerPage extends StatefulWidget {
   final data;
@@ -48,12 +49,13 @@ class _ControllerPageState extends State<ControllerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff002845),
       bottomNavigationBar: SafeArea(
         child: Container(
           padding: EdgeInsets.all(12),
           margin: EdgeInsets.only(left: 24, right: 24),
           decoration: BoxDecoration(
-            color: Color(0xFF203354),
+            color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(24)),
           ),
           child: Row(
@@ -85,17 +87,20 @@ class _ControllerPageState extends State<ControllerPage> {
                         child: Opacity(
                           opacity:
                               bottomNavs[index] == selectedBottomNav ? 1 : 0.5,
-                          child: RiveAnimation.asset(
-                            "./RiveAssets/icons.riv",
-                            artboard: bottomNavs[index].artboard,
-                            onInit: (artboard) {
-                              StateMachineController controller =
-                                  RiverUtils.getRiveController(artboard,
-                                      stateMachineName:
-                                          bottomNavs[index].stateMachineName);
-                              bottomNavs[index].input =
-                                  controller.findSMI("active") as SMIBool;
-                            },
+                          child: ColorFiltered(
+                            colorFilter: ColorFilter.mode(Color(0xff002845), BlendMode.srcIn),
+                            child: RiveAnimation.asset(
+                              "./RiveAssets/icons.riv",
+                              artboard: bottomNavs[index].artboard,
+                              onInit: (artboard) {
+                                StateMachineController controller =
+                                    RiverUtils.getRiveController(artboard,
+                                        stateMachineName:
+                                            bottomNavs[index].stateMachineName);
+                                bottomNavs[index].input =
+                                    controller.findSMI("active") as SMIBool;
+                              },
+                            ),
                           ),
                         ),
                       ),
@@ -114,7 +119,7 @@ class _ControllerPageState extends State<ControllerPage> {
   Widget navigationDecider(int index, data, eventsList) {
     switch (index) {
       case 0:
-        return homepageWithTImer(avatarLink: gravatar_url, data: data);
+        return MainPage();
       case 1:
         return HomeWidget(data: data, eventsList: eventsList);
       case 2:
