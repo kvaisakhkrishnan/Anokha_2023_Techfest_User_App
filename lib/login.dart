@@ -93,7 +93,7 @@ class loginPage extends StatefulWidget {
   State<loginPage> createState() => _loginPageState();
 }
 
-class _loginPageState extends State<loginPage> with TickerProviderStateMixin {
+class _loginPageState extends State<loginPage>{
   List<events_grouped_by_category> list_of_events = [];
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
@@ -203,22 +203,9 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin {
                   Padding(
                     padding: EdgeInsets.only(left: 20.0, right: 20.0),
                     child: Container(
-                      child: RotationTransition(
-                        turns: Tween(begin: 0.0, end: 1.0).animate(
-                          CurvedAnimation(
-                            parent: AnimationController(
-                              vsync: this,
-                              duration: Duration(
-                                  seconds:
-                                      1), // Set the duration of the rotation
-                            )..repeat(), // Repeat the rotation indefinitely
-                            curve: Curves.linear,
-                          ),
-                        ),
-                        child: Image(
-                          image: AssetImage('Images/anokha_circle.png'),
-                          width: MediaQuery.of(context).size.width * 0.3,
-                        ),
+                      child: Image(
+                        image: AssetImage('Images/anokha_circle.png'),
+                        width: MediaQuery.of(context).size.width * 0.3,
                       ),
                       constraints: BoxConstraints.expand(
                           height: MediaQuery.of(context).size.width * 0.25),
@@ -397,7 +384,7 @@ class _loginPageState extends State<loginPage> with TickerProviderStateMixin {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    RegisterPage(),
+                                                forgotPassword(),
                                               ));
                                         },
                                         child: Text(

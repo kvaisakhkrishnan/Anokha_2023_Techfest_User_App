@@ -29,6 +29,7 @@ class _GetStarrsState extends State<GetStarrs> {
 
     final response = await http.get(Uri.parse(url),
         headers: {'authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
+
     return json.decode(response.body);
   }
 
