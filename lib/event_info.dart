@@ -150,7 +150,7 @@ class _EventInfoState extends State<EventInfo> {
                                       SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width *
-                                                0.75,
+                                                0.7,
                                       ),
                                       Text(
                                         "₹${widget.event_map.fees}",
@@ -170,9 +170,6 @@ class _EventInfoState extends State<EventInfo> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                        SizedBox(
-                                          width: 10,
-                                        ),
                                         Container(
                                           width: MediaQuery.of(context)
                                                   .size
@@ -186,6 +183,8 @@ class _EventInfoState extends State<EventInfo> {
                                               borderRadius:
                                                   BorderRadius.circular(10)),
                                           child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
                                             children: [
                                               Padding(
                                                 padding: EdgeInsets.fromLTRB(
@@ -197,7 +196,11 @@ class _EventInfoState extends State<EventInfo> {
                                                     color: Colors.white,
                                                   ),
                                                   SizedBox(
-                                                    width: 7,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.001,
                                                   ),
                                                   Text(
                                                     "Location",
@@ -213,7 +216,10 @@ class _EventInfoState extends State<EventInfo> {
                                           ),
                                         ),
                                         SizedBox(
-                                          width: 15.0,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.05,
                                         ),
                                         Container(
                                           width: MediaQuery.of(context)
