@@ -7,6 +7,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:anokha_home/eventregistrationForm.dart';
 
 class EventInfo extends StatefulWidget {
   bool txt_visible = false;
@@ -375,9 +376,13 @@ class _EventInfoState extends State<EventInfo> {
                                     color: Colors.white),
                                 child: TextButton(
                                     onPressed: () {
-                                      PayU(
-                                          data: widget.data,
-                                          event_data: widget.event_map);
+                                      (widget.event_map.individualOrGroup == 1)
+                                          ? EventRegistrationForm(
+                                              jsonData: widget.event_map,
+                                              data: widget.data)
+                                          : PayU(
+                                              data: widget.data,
+                                              event_data: widget.event_map);
                                     },
                                     child: Center(
                                         child: Text("Register",
