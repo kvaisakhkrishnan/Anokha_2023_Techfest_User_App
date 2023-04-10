@@ -59,8 +59,7 @@ class _EventInfoState extends State<EventInfo> {
                     width: MediaQuery.of(context).size.width * 1,
                     child: Image(
                         fit: BoxFit.fill,
-                        image: NetworkImage(
-                            "https://www.atlasandboots.com/wp-content/uploads/2019/05/ama-dablam2-most-beautiful-mountains-in-the-world.jpg"))),
+                        image: NetworkImage(widget.event_map.url))),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
