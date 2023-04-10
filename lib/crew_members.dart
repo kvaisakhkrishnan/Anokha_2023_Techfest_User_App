@@ -4,6 +4,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
+import 'package:anokha_home/Loading_Screens/events_loading.dart';
 import 'dart:convert';
 
 class GetCrew extends StatefulWidget {
@@ -33,7 +34,7 @@ class _GetCrewState extends State<GetCrew> {
               if (ss.hasData) {
                 return CrewMembers(list: ss.data);
               } else {
-                return CircularProgressIndicator();
+                return Events_Loading_screen();
               }
             }));
   }
