@@ -54,7 +54,8 @@ class _EventInfoState extends State<EventInfo> {
                         width: MediaQuery.of(context).size.width * 1,
                         child: Image(
                             fit: BoxFit.fill,
-                            image: AssetImage("images/mount.jpg"))),
+
+                            image: NetworkImage(widget.event_map.url))),
                     Align(
                       alignment: Alignment.center,
                       child: IconButton(
