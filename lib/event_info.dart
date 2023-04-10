@@ -110,7 +110,7 @@ class _EventInfoState extends State<EventInfo> {
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *
-                                                  0.4,
+                                                  0.5,
                                               child: Text(
                                                 widget.event_map.name,
                                                 maxLines: 3,
@@ -227,7 +227,7 @@ class _EventInfoState extends State<EventInfo> {
                                                   .width *
                                               0.5,
                                           child: Text(
-                                            "DSVCKDB NB SAF LKSNDVL SLDN ",
+                                            widget.event_map.venue,
                                             maxLines: 3,
                                             style: TextStyle(
                                                 color: HexColor("#A0A0A0"),
