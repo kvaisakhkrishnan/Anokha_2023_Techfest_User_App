@@ -73,7 +73,7 @@ class _MyCardWidgetState extends State<MyCardWidget> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         SizedBox(
-          height: 30,
+          height: MediaQuery.of(context).size.height * 0.05,
         ),
         Stack(
           children: [

@@ -56,7 +56,6 @@ class _EventInfoState extends State<EventInfo> {
                         width: MediaQuery.of(context).size.width * 1,
                         child: Image(
                             fit: BoxFit.fill,
-
                             image: NetworkImage(widget.event_map.url))),
                     Align(
                       alignment: Alignment.center,
@@ -104,13 +103,22 @@ class _EventInfoState extends State<EventInfo> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Visibility(
-                                            visible: false,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.fromLTRB(
-                                                      10, 0, 0, 0),
-                                              child: Icon(Icons.message),
+                                          Padding(
+                                            padding: EdgeInsets.fromLTRB(
+                                                40.0, 0.0, 40.0, 10.0),
+                                            child: Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.4,
+                                              child: Text(
+                                                widget.event_map.name,
+                                                maxLines: 3,
+                                                style: TextStyle(
+                                                  fontSize: 18.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                           Padding(
@@ -139,26 +147,10 @@ class _EventInfoState extends State<EventInfo> {
                                   ),
                                   Row(
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsets.fromLTRB(
-                                            40.0, 0.0, 40.0, 10.0),
-                                        child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
-                                          child: Text(
-                                            widget.event_map.name,
-                                            maxLines: 3,
-                                            style: TextStyle(
-                                              fontSize: 18.0,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
                                       SizedBox(
-                                        width: 50.0,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.75,
                                       ),
                                       Text(
                                         "₹${widget.event_map.fees}",
@@ -224,14 +216,17 @@ class _EventInfoState extends State<EventInfo> {
                                           width: 15.0,
                                         ),
                                         Container(
-                                          width: 200,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.5,
                                           child: Text(
-                                            widget.event_map.venue,
+                                            "DSVCKDB NB SAF LKSNDVL SLDN ",
                                             maxLines: 3,
                                             style: TextStyle(
                                                 color: HexColor("#A0A0A0"),
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 20),
+                                                fontSize: 15),
                                           ),
                                         )
                                       ],
@@ -250,8 +245,14 @@ class _EventInfoState extends State<EventInfo> {
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(20)),
                                         child: Container(
-                                          height: 120,
-                                          width: 120,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.15,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.35,
                                           child: Padding(
                                             padding: const EdgeInsets.fromLTRB(
                                                 15, 10, 10, 10),
@@ -289,8 +290,14 @@ class _EventInfoState extends State<EventInfo> {
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(20))),
                                         child: Container(
-                                          height: 120,
-                                          width: 120,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.15,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.35,
                                           child: Padding(
                                             padding: const EdgeInsets.fromLTRB(
                                                 15, 10, 10, 10),
@@ -307,7 +314,7 @@ class _EventInfoState extends State<EventInfo> {
                                                   height: 10,
                                                 ),
                                                 Text(
-                                                  "erfbgf g rgbgelrm tegln gt",
+                                                  "${widget.event_map.date}\n${widget.event_map.time}",
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       color: Colors.white,
@@ -334,7 +341,7 @@ class _EventInfoState extends State<EventInfo> {
                                   Padding(
                                     padding: const EdgeInsets.all(15.0),
                                     child: Text(
-                                      "Simply put, a paragraph is a collection of sentences all related to a central topic, idea, or theme. Paragraphs act as structural tools for writers to organize their thoughts into an ideal progression, and they also help readers process those thoughts effortlessly. Imagine how much harder reading and writing would be if everything was just one long block of text.There’s a lot of flexibility when it comes to writing paragraphs, but if there’s one steadfast rule, it’s this: Paragraphs should relate to one main topic or point. The paragraph itself often contains multiple points spanning several sentences, but they should all revolve around one core theme. Just as sentences build upon each other to communicate the paragraph’s core theme, paragraphs work together to communicate the core theme of the writing as a whole. ",
+                                      widget.event_map.description,
                                       textDirection: TextDirection.ltr,
                                     ),
                                   )
@@ -358,7 +365,7 @@ class _EventInfoState extends State<EventInfo> {
                 ),
                 SizedBox(height: 0),
                 Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 780, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(0, 760, 0, 0),
                     child: Container(
                         decoration: BoxDecoration(
                             color: HexColor("#002845"),
@@ -369,21 +376,26 @@ class _EventInfoState extends State<EventInfo> {
                           child: Visibility(
                             visible: widget.txt_visible,
                             child: SizedBox(
-                              height: 50,
-                              width: 200,
+                              height: MediaQuery.of(context).size.height * 0.07,
+                              width: MediaQuery.of(context).size.width * 0.45,
                               child: Container(
                                 decoration: ShapeDecoration(
                                     shape: StadiumBorder(),
                                     color: Colors.white),
                                 child: TextButton(
                                     onPressed: () {
-                                      (widget.event_map.individualOrGroup == 1)
-                                          ? EventRegistrationForm(
-                                              jsonData: widget.event_map,
-                                              data: widget.data)
-                                          : PayU(
-                                              data: widget.data,
-                                              event_data: widget.event_map);
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return (widget.event_map
+                                                    .individualOrGroup ==
+                                                1)
+                                            ? EventRegistrationForm(
+                                                jsonData: widget.event_map,
+                                                data: widget.data)
+                                            : PayU(
+                                                data: widget.data,
+                                                event_data: widget.event_map);
+                                      }));
                                     },
                                     child: Center(
                                         child: Text("Register",
