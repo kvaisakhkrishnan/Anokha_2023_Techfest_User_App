@@ -15,10 +15,10 @@ class MyClass {
     now = DateTime.now(); // initialize in separate method
   }
 }class MyClass2 {
-  DateTime destination = DateTime(2023, 4, 10, 17, 24, 0); // instance member
+  DateTime destination = DateTime(2023, 4, 27, 9, 0, 0); // instance member
 
   MyClass2() {
-    destination = DateTime(2023, 4, 10, 17, 24, 0); // initialize in constructor
+    destination = DateTime(2023, 4, 27, 9, 0, 0); // initialize in constructor
   }
 
   void someMethod() {

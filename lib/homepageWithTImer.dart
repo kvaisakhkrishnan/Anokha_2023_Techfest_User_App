@@ -29,7 +29,7 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
   static bool _hasLoadedBefore = false;
   bool get isDestinationTimeReached {
     final DateTime now = DateTime.now();
-    final DateTime destination = DateTime(2023, 4, 10, 17, 24, 0);
+    final DateTime destination = DateTime(2023, 4, 27, 9, 0, 0);
     return now.isAfter(destination);
   }
 
