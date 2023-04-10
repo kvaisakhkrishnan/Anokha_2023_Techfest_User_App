@@ -91,15 +91,15 @@ class _RegisterPageState extends State<RegisterPage>
   Future<void> _sendDataToBackend() async {
     try {
       final response = await http.post(
-        Uri.parse('__your_backend_api_url_here__'),
+        Uri.parse(__url + "userApp/registerUser"),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(<String, String>{
           'fullName': _fullNameController.text,
-          'email': _emailController.text,
+          'userEmail': _emailController.text,
           'password': _passwordController.text,
-          'college': _collegeController.text,
+          'collegeId': _collegeController.text,
         }),
       );
       // Handle the response as needed
