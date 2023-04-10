@@ -17,13 +17,15 @@ import 'crew_members.dart';
 
 class ControllerPage extends StatefulWidget {
   final data;
-
+  final VoidCallback onLogout;
   var eventsList;
-  ControllerPage({required this.data, required this.eventsList});
+
+  ControllerPage({required this.data, required this.eventsList, required this.onLogout});
 
   @override
   State<ControllerPage> createState() => _ControllerPageState();
 }
+
 
 class _ControllerPageState extends State<ControllerPage> {
   RiveAsset selectedBottomNav = bottomNavs.first;
@@ -123,7 +125,9 @@ class _ControllerPageState extends State<ControllerPage> {
         return userProf(
           avatarLink: gravatar_url,
           data: data,
+          onLogout: widget.onLogout,
         );
+
       case 5:
         return GetCrew();
       default:

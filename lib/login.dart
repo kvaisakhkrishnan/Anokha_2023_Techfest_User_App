@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'controllerPage.dart';
 import 'forgotPassword.dart';
@@ -100,6 +101,33 @@ class _loginPageState extends State<loginPage>{
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  Future<void> saveLoginCredentials(String email, String password) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('email', email);
+    await prefs.setString('password', password);
+  }
+
+  Future<void> removeLoginCredentials() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('email');
+    await prefs.remove('password');
+  }
+
+  Future<void> loadLoginCredentials() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? email = prefs.getString('email');
+    String? password = prefs.getString('password');
+    if (email != null && password != null) {
+      _usernameController.text = email;
+      _passwordController.text = password;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadLoginCredentials();
+  }
 
   bool isValidEmail(String email) {
     final RegExp emailRegex =
@@ -304,14 +332,20 @@ class _loginPageState extends State<loginPage>{
                                             );
 
                                             if (status == 1) {
+                                              await saveLoginCredentials(
+                                                _usernameController.text,
+                                                _passwordController.text,
+                                              );
                                               Navigator.pushReplacement(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          ControllerPage(
-                                                              data: userData,
-                                                              eventsList:
-                                                                  list_of_events)));
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => ControllerPage(
+                                                    data: userData,
+                                                    eventsList: list_of_events,
+                                                    onLogout: removeLoginCredentials,
+                                                  ),
+                                                ),
+                                              );
                                             } else {
                                               _scaffoldMessengerKey.currentState
                                                   ?.showSnackBar(
