@@ -72,8 +72,7 @@ class _CrewMembersState extends State<CrewMembers> {
         crew_list.length, (index) => crew_list[index]["teamName"]);
     final List<int> a = List.generate(crew_list.length, (index) => index);
 
-    return MaterialApp(
-      home: Container(
+    return  Container(
           child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -261,8 +260,7 @@ class _CrewMembersState extends State<CrewMembers> {
             ),
           ],
         ),
-      )),
-    );
+      ));
     ;
   }
 }

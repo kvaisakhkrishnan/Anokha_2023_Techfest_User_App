@@ -374,7 +374,7 @@ class _NextpageState extends State<Nextpage> {
         width: MediaQuery.of(context).size.width,
         child: InAppWebView(
           initialUrlRequest: URLRequest(
-              url: Uri.parse("https://test.payu.in/_payment"),
+              url: Uri.parse("https://secure.payu.in/_payment"),
               method: 'POST',
               body: Uint8List.fromList(utf8.encode(encodedBody)),
               headers: {'Content-Type': 'application/x-www-form-urlencoded'}),
