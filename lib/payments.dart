@@ -392,7 +392,7 @@ class _NextpageState extends State<Nextpage> {
   _loadHtmlFromAssets() async {
     final url = Uri.parse("https://test.payu.in/_payment");
 
-    final headers = {'Content-Type': 'text/html'};
+    //final headers = {'Content-Type': 'text/html'};
     final encodedBody = postbody.keys
         .map((key) =>
             '${Uri.encodeQueryComponent(key)}=${Uri.encodeQueryComponent(postbody[key]!)}')
