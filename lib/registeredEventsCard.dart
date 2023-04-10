@@ -132,4 +132,3 @@ class _RegisteredEventCardState extends State<RegisteredEventCard> {
     );
   }
 }
-

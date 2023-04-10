@@ -49,10 +49,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
     super.dispose();
   }
 
-  void onSearch() {
-    // Perform search using the searchController.text value
-    print('Performing search for ${searchController.text}');
-  }
+
 
   Future<void> getRegistered() async {
     String url = __url + "userApp/events/myRegistered";
@@ -72,38 +69,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          title: Padding(
-            padding: EdgeInsets.only(top: 5),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Color(0xFFF5F5F5),
-                  borderRadius: BorderRadius.circular(30.0)),
-              child: Padding(
-                padding: EdgeInsets.only(left: 20, top: 3, bottom: 3),
-                child: TextFormField(
-                  style: TextStyle(fontSize: 19),
-                  controller: searchController,
-                  decoration: InputDecoration(
-                    hintText: 'Search Card',
-                    border: InputBorder.none,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(right: 20),
-              child: IconButton(
-                iconSize: 30,
-                onPressed: onSearch,
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ],
+          toolbarHeight: 0,
         ),
         backgroundColor: Colors.white,
         body: _isLoading

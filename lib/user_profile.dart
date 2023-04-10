@@ -47,10 +47,7 @@ class _userProfState extends State<userProf> {
           backgroundColor: Colors.white,
           elevation: 0.0,
           actions: [
-            Container(
-              alignment: Alignment.centerLeft,
-              child: themeChangeIcon(notifyParent: refresh),
-            ),
+          
             IconButton(
               onPressed: () {
                 Navigator.pushAndRemoveUntil(
@@ -232,41 +229,5 @@ class _userProfState extends State<userProf> {
             ),
           ],
         ));
-  }
-}
-
-class themeChangeIcon extends StatefulWidget {
-  final Function() notifyParent;
-  const themeChangeIcon({Key? key, required this.notifyParent})
-      : super(key: key);
-
-  @override
-  State<themeChangeIcon> createState() => _themeChangeIconState();
-}
-
-class _themeChangeIconState extends State<themeChangeIcon> {
-  bool lightTheme = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: IconButton(
-        icon: lightTheme
-            ? Icon(
-          Icons.sunny,
-          // color: Colors.white,
-        )
-            : Icon(Icons.nightlight, color: Colors.black),
-        onPressed: () {
-          widget.notifyParent();
-          setState(() {
-            if (lightTheme)
-              lightTheme = false;
-            else
-              lightTheme = true;
-          });
-        },
-      ),
-    );
   }
 }

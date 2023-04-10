@@ -132,45 +132,91 @@ class _New_WidgetState extends State<New_Widget> {
               decoration: BoxDecoration(
                   color: Color(0xff002845),
                   borderRadius: BorderRadius.all(Radius.circular(30))),
-              height: MediaQuery.of(context).size.height * 0.25,
-              width: MediaQuery.of(context).size.width * 0.8,
+              height: MediaQuery.of(context).size.height * 0.28,
+              width: MediaQuery.of(context).size.width * 0.9,
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child: Text(
-                          widget.starrs!["eventName"],
-                          maxLines: 4,
-                          style: GoogleFonts.dmSans(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.white),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Starred Card",
+
+                         style: TextStyle(
+                           color: Color(0xffbeb7a4),
+                           fontSize: 18.0,
+                           fontWeight: FontWeight.w500
+                         ),
                         ),
-                      ),
-                      Image(
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          width: MediaQuery.of(context).size.width * 0.25,
-                          image:
-                              AssetImage("Images/anokha_2023_white_small.png"))
+                        Image(
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            width: MediaQuery.of(context).size.width * 0.2,
+                            image:
+                                AssetImage("Images/anokha_2023_white_small.png"))
+                      ],
+                    ),
+                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Event Name",
+                        style: TextStyle(
+                            color: Color(0xffbeb7a4)
+                        ),),
+                      Text(widget.starrs!["eventName"]
+                          ,style: TextStyle(
+                              color: Colors.white
+                          )),
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.01,),
+                      Text("Date",
+                        style: TextStyle(
+                            color: Color(0xffbeb7a4)
+                        ),),
+                      Text(widget.starrs!["date"]
+                          ,style: TextStyle(
+                              color: Colors.white
+                          )),
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.01,),
+                      Text("Venue",
+                        style: TextStyle(
+                            color: Color(0xffbeb7a4)
+                        ),),
+                      Text(widget.starrs!["venue"]
+                          ,style: TextStyle(
+                              color: Colors.white
+                          )),
                     ],
                   ),
-                  Text(
-                    "${widget.starrs!["date"]}",
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.dmSans(
-                        color: HexColor("BEB7A4"), fontSize: 20),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Event Type",
+                        style: TextStyle(
+                            color: Color(0xffbeb7a4)
+                        ),),
+                      Text(widget.starrs!["eventOrWorkshop"] == 0 ? "Event" : "Workshop"
+                          ,style: TextStyle(
+                              color: Colors.white
+                          )),
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.01,),
+                      Text("Time",
+                        style: TextStyle(
+                            color: Color(0xffbeb7a4)
+                        ),),
+                      Text(widget.starrs!["eventTime"]
+                          ,style: TextStyle(
+                              color: Colors.white
+                          ))
+                    ],
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.01,
-                  ),
-                  Text(
-                    "${widget.starrs!["departmentabbr"]} | ${widget.starrs!["venue"]}",
-                    style: GoogleFonts.dmSans(
-                        color: HexColor("#FF7F11"), fontSize: 20),
-                  )
+
+                ],)
                 ],
               )),
         ));
