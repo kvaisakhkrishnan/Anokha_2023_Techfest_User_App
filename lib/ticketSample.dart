@@ -27,7 +27,7 @@ class MyTicketView extends StatelessWidget {
 
               color: Color(0xFF002845),
               width: 0.85 * MediaQuery.of(context).size.width,
-              height: 0.60 * MediaQuery.of(context).size.height,
+              height: 0.633 * MediaQuery.of(context).size.height,
               isCornerRounded: true,
               padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.009),
               child: TicketData(data: data, event: event),

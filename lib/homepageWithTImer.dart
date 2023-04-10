@@ -25,9 +25,11 @@ class homepageWithTImer extends StatefulWidget {
 }
 
 class _homepageWithTImerState extends State<homepageWithTImer> {
+
+  static bool _hasLoadedBefore = false;
   bool get isDestinationTimeReached {
     final DateTime now = DateTime.now();
-    final DateTime destination = DateTime(2024, 4, 7, 21, 23, 0);
+    final DateTime destination = DateTime(2023, 4, 27, 9, 0, 0);
     return now.isAfter(destination);
   }
 
@@ -57,27 +59,29 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
   @override
   void initState() {
     super.initState();
-    if(isDestinationTimeReached){
+    if (isDestinationTimeReached) {
       _showImage = true;
       _showNewWidget = true;
-    }
-    else {
-      Future.delayed(Duration(seconds: 3), () {
-        setState(() {
-          _showImage = true;
+    } else {
+      if (!_hasLoadedBefore) {
+        Future.delayed(Duration(seconds: 3), () {
+          setState(() {
+            _showImage = true;
+          });
         });
-      });
 
-
-      Future.delayed(Duration(seconds: 4), () {
-        setState(() {
-          // print(!isDestinationTimeReached);
-          if (!isDestinationTimeReached) {
-            print("inside timer");
-            _showTimer = true;
-          }
+        Future.delayed(Duration(seconds: 4), () {
+          setState(() {
+            if (!isDestinationTimeReached) {
+              _showTimer = true;
+            }
+          });
         });
-      });
+        _hasLoadedBefore = true;
+      } else {
+        _showImage = true;
+        _showTimer = true;
+      }
     }
     Future.delayed(Duration(seconds: 7), () {
       setState(() {
@@ -85,6 +89,7 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
       });
     });
   }
+
 
 
   Future getEntryCard() async{
@@ -186,7 +191,7 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
 
 
           FutureBuilder(
-              future: getEntryCard(),
+              future: isDestinationTimeReached ? getEntryCard() : null,
               builder: (BuildContext ctx, AsyncSnapshot snapshot) {
                 if (snapshot.hasError) {
                   print("error");
@@ -252,7 +257,7 @@ class _homepageWithTImerState extends State<homepageWithTImer> {
                   );
 
                 } else {
-                  return Events_Loading_screen();
+                  return isDestinationTimeReached ? Events_Loading_screen() : Container();
                 }
               }
           )
