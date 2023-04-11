@@ -418,7 +418,7 @@ class _loginPageState extends State<loginPage>{
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                forgotPassword(),
+                                                    forgotPasswordclass(),
                                               ));
                                         },
                                         child: Text(
