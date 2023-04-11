@@ -30,13 +30,7 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                       fit: BoxFit.cover,),
                     borderRadius: BorderRadius.circular(20.0),
                     color: Color(0xFFFEFECF0),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey,
-                          spreadRadius: 1.0,
-                          blurRadius: 10.0
-                      )
-                    ],
+
                   ),
                   width: MediaQuery.of(context).size.width * 0.80,
                   height: MediaQuery.of(context).size.width * 0.50,
@@ -46,7 +40,8 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                 padding: const EdgeInsets.only(top: 15.0),
                 child: Text(widget.data[0].name,
                 style: TextStyle(fontSize: 20.0,
-                fontWeight: FontWeight.w500),
+                fontWeight: FontWeight.w500,
+                  color: Color(0xffbeb7a4),),
                 ),
               )
             ],
@@ -62,13 +57,7 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                       fit: BoxFit.cover,),
                     borderRadius: BorderRadius.circular(20.0),
                     color: Color(0xFFFEFECF0),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey,
-                          spreadRadius: 1.0,
-                          blurRadius: 10.0
-                      )
-                    ],
+
                   ),
                   width: MediaQuery.of(context).size.width * 0.80,
                   height: MediaQuery.of(context).size.width * 0.50,
@@ -78,7 +67,8 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                 padding: const EdgeInsets.only(top: 15.0),
                 child: Text(widget.data[1].name,
                   style: TextStyle(fontSize: 20.0,
-                      fontWeight: FontWeight.w500),
+                      fontWeight: FontWeight.w500,
+                    color: Color(0xffbeb7a4),),
                 ),
               )
             ],
@@ -94,13 +84,7 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                       fit: BoxFit.cover,),
                     borderRadius: BorderRadius.circular(20.0),
                     color: Color(0xFFFEFECF0),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey,
-                          spreadRadius: 1.0,
-                          blurRadius: 10.0
-                      )
-                    ],
+
                   ),
                   width: MediaQuery.of(context).size.width * 0.80,
                   height: MediaQuery.of(context).size.width * 0.50,
@@ -110,7 +94,8 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                 padding: const EdgeInsets.only(top: 15.0),
                 child: Text(widget.data[2].name,
                   style: TextStyle(fontSize: 20.0,
-                      fontWeight: FontWeight.w500),
+                      fontWeight: FontWeight.w500,
+                    color: Color(0xffbeb7a4),),
                 ),
               )
             ],
@@ -126,13 +111,7 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                       fit: BoxFit.cover,),
                     borderRadius: BorderRadius.circular(20.0),
                     color: Color(0xFFFEFECF0),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey,
-                          spreadRadius: 1.0,
-                          blurRadius: 10.0
-                      )
-                    ],
+
                   ),
                   width: MediaQuery.of(context).size.width * 0.80,
                   height: MediaQuery.of(context).size.width * 0.50,
@@ -142,7 +121,9 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                 padding: const EdgeInsets.only(top: 15.0),
                 child: Text(widget.data[3].name,
                   style: TextStyle(fontSize: 20.0,
-                      fontWeight: FontWeight.w500),
+                    color: Color(0xffbeb7a4),
+                      fontWeight: FontWeight.w500,
+                  ),
                 ),
               )
             ],
@@ -157,13 +138,6 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                     image: DecorationImage(image: NetworkImage(widget.data[4].url),                      fit: BoxFit.cover,),
                     borderRadius: BorderRadius.circular(20.0),
                     color: Color(0xFFFEFECF0),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey,
-                          spreadRadius: 1.0,
-                          blurRadius: 10.0
-                      )
-                    ],
                   ),
                   width: MediaQuery.of(context).size.width * 0.80,
                   height: MediaQuery.of(context).size.width * 0.50,
@@ -173,7 +147,9 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                 padding: const EdgeInsets.only(top: 15.0),
                 child: Text(widget.data[4].name,
                   style: TextStyle(fontSize: 20.0,
-                      fontWeight: FontWeight.w500),
+                      fontWeight: FontWeight.w500,
+                    color: Color(0xffbeb7a4),
+    ),
                 ),
               )
             ],

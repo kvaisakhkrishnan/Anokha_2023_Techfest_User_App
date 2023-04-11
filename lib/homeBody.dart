@@ -102,7 +102,9 @@ class _HomeBodyState extends State<HomeBody> {
                       child: Text(
                         "Trending Now",
                         style: TextStyle(
+                          color: Color(0xffbeb7a4),
                             fontSize: 25.0, fontWeight: FontWeight.w600),
+
                       ),
                     ),
                   ),
@@ -114,18 +116,28 @@ class _HomeBodyState extends State<HomeBody> {
                     vertical: 15.0, horizontal: 20.0),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Color(0xFFF5F5F5),
-                      borderRadius: BorderRadius.circular(30.0)),
+                      color: Color(0xff002845),
+                      borderRadius: BorderRadius.circular(30.0),
+                      border: Border.all(
+                      color: Color(0xffbeb7a4), // set the desired border color here
+                      width: 2.0, // set the desired border width here
+                    ),),
+
                   child: Padding(
                     padding:
                     EdgeInsets.only(left: 10, top: 3, bottom: 3, right: 20),
                     child: TextFormField(
+
                       onChanged: (value) {
                         search(value);
                       },
-                      style: TextStyle(fontSize: 19),
+                      style: TextStyle(fontSize: 18),
                       decoration: InputDecoration(
-                        hintText: 'Search Events, Departments, Tags',
+
+                        hintText: 'Search Events, Departments',
+                        hintStyle: TextStyle(
+                          color: Color(0xffbeb7a4), // set the desired hint text color here
+                        ),
                         prefixIcon: Icon(Icons.search, color: Colors.grey),
                         border: InputBorder.none,
                       ),
@@ -150,6 +162,7 @@ class _HomeBodyState extends State<HomeBody> {
                         child: Text(
                           "${widget.eventsList[index].title}",
                           style: TextStyle(
+                              color: Color(0xffbeb7a4),
                               fontSize: 20.0, fontWeight: FontWeight.w500),
                         ),
                       ),
@@ -177,7 +190,7 @@ class _HomeBodyState extends State<HomeBody> {
           crossAxisCount: 2,
           crossAxisSpacing: 10.0,
           mainAxisSpacing: 10.0,
-          childAspectRatio: 3 / 4,
+          childAspectRatio: 2 / 3,
         ),
         delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {

@@ -32,7 +32,7 @@ dependencies:
     sdk: flutter
   inview_notifier_list: ^3.0.0
   rive: ^0.9.1
-  flutter_svg: ^1.1.6
+  flutter_svg: ^2.0.5
   flutter_otp_text_field: ^1.1.1
   google_fonts: ^4.0.3
   simple_gravatar: ^1.0.4
@@ -52,6 +52,7 @@ dependencies:
   flutter_inappwebview: ^5.7.2+3
   awesome_card: ^1.1.7
   dropdownfield2: ^1.0.7
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -86,6 +87,10 @@ flutter:
      - Images/anokha_circle.png
      - Images/anokha_2023_white_small.png
      - Images/anokha_circle.png
+     - Images/anokha_2023_black_small.png
+     - Images/campus.svg
+     - Images/anokha_text.svg
+     - Images/clg.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

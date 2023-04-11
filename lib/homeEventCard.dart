@@ -135,7 +135,10 @@ class _EventCardState extends State<EventCard> {
                               }
                             });
                           },
-                          icon: Icon(Icons.star),
+                          icon: Icon(
+                            Icons.star_border,
+                            color: Colors.black,
+                          ),
                         ),
                       ],
                     ),
@@ -147,10 +150,6 @@ class _EventCardState extends State<EventCard> {
                   width: MediaQuery.of(context).size.width * 0.42),
               decoration: (BoxDecoration(
                 color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey, spreadRadius: 1.0, blurRadius: 10.0)
-                ],
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(25.0),
                     bottomRight: Radius.circular(25.0)),

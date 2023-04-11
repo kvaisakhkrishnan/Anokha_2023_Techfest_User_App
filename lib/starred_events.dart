@@ -69,10 +69,11 @@ class _WheelState extends State<Wheel> {
   Widget build(BuildContext context) {
     ctx1 = context;
     return Scaffold(
+      backgroundColor: Color(0xff002845),
       appBar: AppBar(
         toolbarHeight: 0,
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xff002845),
         centerTitle: true,
       ),
       body: (widget.starr_map?.length == 0)
@@ -128,12 +129,12 @@ class _New_WidgetState extends State<New_Widget> {
         padding: EdgeInsets.only(bottom: 20),
         child: Material(
           elevation: 10,
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(40),
           child: Container(
               decoration: BoxDecoration(
-                  color: Color(0xff002845),
+                  color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(30))),
-              height: MediaQuery.of(context).size.height * 0.28,
+              height: MediaQuery.of(context).size.height * 0.26,
               width: MediaQuery.of(context).size.width * 0.9,
               child: Column(
                 children: [
@@ -146,7 +147,7 @@ class _New_WidgetState extends State<New_Widget> {
                           "Starred Card",
 
                          style: TextStyle(
-                           color: Color(0xffbeb7a4),
+                           color: Colors.black,
                            fontSize: 18.0,
                            fontWeight: FontWeight.w500
                          ),
@@ -155,7 +156,7 @@ class _New_WidgetState extends State<New_Widget> {
                             height: MediaQuery.of(context).size.height * 0.1,
                             width: MediaQuery.of(context).size.width * 0.2,
                             image:
-                                AssetImage("Images/anokha_2023_white_small.png"))
+                                AssetImage("Images/anokha_2023_black_small.png"))
                       ],
                     ),
                   ),
@@ -172,7 +173,7 @@ class _New_WidgetState extends State<New_Widget> {
                         ),),
                       Text(widget.starrs!["eventName"]
                           ,style: TextStyle(
-                              color: Colors.white
+                              color: Colors.black
                           )),
                       SizedBox(height: MediaQuery.of(context).size.height * 0.01,),
                       Text("Date",
@@ -181,7 +182,7 @@ class _New_WidgetState extends State<New_Widget> {
                         ),),
                       Text(widget.starrs!["date"]
                           ,style: TextStyle(
-                              color: Colors.white
+                              color: Colors.black
                           )),
                       SizedBox(height: MediaQuery.of(context).size.height * 0.01,),
                       Text("Venue",
@@ -190,7 +191,7 @@ class _New_WidgetState extends State<New_Widget> {
                         ),),
                       Text(widget.starrs!["venue"]
                           ,style: TextStyle(
-                              color: Colors.white
+                              color: Colors.black
                           )),
                     ],
                   ),
@@ -203,7 +204,7 @@ class _New_WidgetState extends State<New_Widget> {
                         ),),
                       Text(widget.starrs!["eventOrWorkshop"] == 0 ? "Event" : "Workshop"
                           ,style: TextStyle(
-                              color: Colors.white
+                              color: Colors.black
                           )),
                       SizedBox(height: MediaQuery.of(context).size.height * 0.01,),
                       Text("Time",
@@ -212,7 +213,7 @@ class _New_WidgetState extends State<New_Widget> {
                         ),),
                       Text(widget.starrs!["eventTime"]
                           ,style: TextStyle(
-                              color: Colors.white
+                              color: Colors.black
                           ))
                     ],
                   ),
