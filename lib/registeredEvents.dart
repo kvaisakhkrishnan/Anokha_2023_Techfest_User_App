@@ -22,6 +22,27 @@ class RegisteredEvents extends StatefulWidget {
 }
 
 class _RegisteredEventsState extends State<RegisteredEvents> {
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        title: Text('Are you sure?'),
+        content: Text('Do you want to exit the app?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text('No',style: TextStyle(color: Color(0xFF002845))),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text('Yes',style: TextStyle(color: Color(0xFF002845))),
+          ),
+        ],
+      ),
+    )) ??
+        false;
+  }
   final scrollController = ScrollController();
   final searchController = TextEditingController();
 
@@ -65,62 +86,65 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
+      home: WillPopScope(
+        onWillPop: _onWillPop,
+        child: Scaffold(
 
-        appBar: AppBar(
+          appBar: AppBar(
+            backgroundColor: Color(0xff002845),
+            elevation: 0,
+            toolbarHeight: 0,
+          ),
           backgroundColor: Color(0xff002845),
-          elevation: 0,
-          toolbarHeight: 0,
-        ),
-        backgroundColor: Color(0xff002845),
-        body: _isLoading
-            ? Center(child: Events_Loading_screen())
-            : Padding(
-          padding: const EdgeInsets.all(0.0),
-          child: CustomScrollView(
-            controller: scrollController,
-            slivers: [
-              SliverToBoxAdapter(
-                child: Container(
-                  constraints: BoxConstraints.expand(
-                      height: MediaQuery.of(context).size.height * 0.13),
+          body: _isLoading
+              ? Center(child: Events_Loading_screen())
+              : Padding(
+            padding: const EdgeInsets.all(0.0),
+            child: CustomScrollView(
+              controller: scrollController,
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Container(
+                    constraints: BoxConstraints.expand(
+                        height: MediaQuery.of(context).size.height * 0.13),
+                  ),
                 ),
-              ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                    if (index < registeredEvents.length) {
-                      final itemPositionOffset = index * itemSize * 0.7;
-                      final difference =
-                          scrollController.offset - itemPositionOffset;
-                      final percent = 1.2 - difference / itemSize * 0.7;
-                      double opacity = percent;
-                      double scale = percent;
-                      if (opacity >= 1.0) opacity = 1.0;
-                      if (opacity < 0.0) opacity = 0.0;
-                      if (percent >= 1.0) scale = 1.0;
-                      return Align(
-                        heightFactor: 0.7,
-                        child: Opacity(
-                          opacity: opacity,
-                          child: Transform(
-                            alignment: Alignment.center,
-                            transform: Matrix4.identity()
-                              ..scale(scale, 1.0),
-                            child: RegisteredEventCard(
-                              event: registeredEvents[index],
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                      if (index < registeredEvents.length) {
+                        final itemPositionOffset = index * itemSize * 0.7;
+                        final difference =
+                            scrollController.offset - itemPositionOffset;
+                        final percent = 1.2 - difference / itemSize * 0.7;
+                        double opacity = percent;
+                        double scale = percent;
+                        if (opacity >= 1.0) opacity = 1.0;
+                        if (opacity < 0.0) opacity = 0.0;
+                        if (percent >= 1.0) scale = 1.0;
+                        return Align(
+                          heightFactor: 0.7,
+                          child: Opacity(
+                            opacity: opacity,
+                            child: Transform(
+                              alignment: Alignment.center,
+                              transform: Matrix4.identity()
+                                ..scale(scale, 1.0),
+                              child: RegisteredEventCard(
+                                event: registeredEvents[index],
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    } else {
-                      return null;
-                    }
-                  },
-                  childCount: registeredEvents.length,
+                        );
+                      } else {
+                        return null;
+                      }
+                    },
+                    childCount: registeredEvents.length,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

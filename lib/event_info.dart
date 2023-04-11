@@ -13,7 +13,9 @@ class EventInfo extends StatefulWidget {
   bool txt_visible = false;
   var event_map;
   var data;
-  EventInfo({Key? key, required this.event_map, this.data}) : super(key: key) {
+  var star_map;
+  EventInfo({Key? key, required this.event_map, this.data, this.star_map})
+      : super(key: key) {
     txt_visible = true;
   }
 
@@ -54,9 +56,14 @@ class _EventInfoState extends State<EventInfo> {
                     Container(
                         height: MediaQuery.of(context).size.height * 0.4,
                         width: MediaQuery.of(context).size.width * 1,
-                        child: Image(
-                            fit: BoxFit.fill,
-                            image: NetworkImage(widget.event_map.url))),
+                        child: AspectRatio(
+                          aspectRatio: 1 / 1,
+                          child: Image(
+                              fit: BoxFit.cover,
+                              image: NetworkImage((widget.event_map == null)
+                                  ? widget.star_map["url"]
+                                  : widget.event_map.url)),
+                        )),
                     Align(
                       alignment: Alignment.center,
                       child: IconButton(
@@ -112,7 +119,10 @@ class _EventInfoState extends State<EventInfo> {
                                                       .width *
                                                   0.5,
                                               child: Text(
-                                                widget.event_map.name,
+                                                (widget.event_map == null)
+                                                    ? widget
+                                                        .star_map["eventName"]
+                                                    : widget.event_map.name,
                                                 maxLines: 3,
                                                 style: TextStyle(
                                                   fontSize: 18.0,
@@ -128,9 +138,15 @@ class _EventInfoState extends State<EventInfo> {
                                               icon: Icon(
                                                 Icons.star,
                                                 size: 30,
-                                                color: (widget.event_map
-                                                                .isStarred ==
-                                                            1 ||
+                                                color: (((widget
+                                                                    .event_map ==
+                                                                null)
+                                                            ? (widget.star_map[
+                                                                    "isStarred"] ==
+                                                                1)
+                                                            : (widget.event_map
+                                                                    .isStarred ==
+                                                                1)) ||
                                                         liked == true)
                                                     ? Colors.yellow.shade700
                                                     : Colors.black,
@@ -154,7 +170,7 @@ class _EventInfoState extends State<EventInfo> {
                                                 0.7,
                                       ),
                                       Text(
-                                        "₹${widget.event_map.fees}",
+                                        "₹${(widget.event_map == null) ? widget.star_map["fees"] : widget.event_map.fees}",
                                         style: TextStyle(
                                             backgroundColor: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -228,7 +244,9 @@ class _EventInfoState extends State<EventInfo> {
                                                   .width *
                                               0.5,
                                           child: Text(
-                                            widget.event_map.venue,
+                                            (widget.event_map == null)
+                                                ? widget.star_map["venue"]
+                                                : widget.event_map.venue,
                                             maxLines: 3,
                                             style: TextStyle(
                                                 color: HexColor("#A0A0A0"),
@@ -274,7 +292,7 @@ class _EventInfoState extends State<EventInfo> {
                                                   height: 10,
                                                 ),
                                                 Text(
-                                                  "${widget.event_map.maxCount - widget.event_map.noOfRegistrations}\nAvailable Seats",
+                                                  "${(widget.event_map == null) ? (widget.star_map["maxCount"] - widget.star_map["noOfRegistrations"]) : (widget.event_map.maxCount - widget.event_map.noOfRegistrations)}\nAvailable Seats",
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       color: Colors.white,
@@ -321,7 +339,9 @@ class _EventInfoState extends State<EventInfo> {
                                                   height: 10,
                                                 ),
                                                 Text(
-                                                  "${widget.event_map.date}\n${widget.event_map.time}",
+                                                  (widget.event_map == null)
+                                                      ? "${widget.star_map["date"]}\n${widget.star_map["eventTime"]}"
+                                                      : "${widget.event_map.date}\n${widget.event_map.time}",
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       color: Colors.white,
@@ -348,7 +368,9 @@ class _EventInfoState extends State<EventInfo> {
                                   Padding(
                                     padding: const EdgeInsets.all(15.0),
                                     child: Text(
-                                      widget.event_map.description,
+                                      (widget.event_map == null)
+                                          ? widget.star_map["description"]
+                                          : widget.event_map.description,
                                       textDirection: TextDirection.ltr,
                                     ),
                                   )
@@ -393,13 +415,17 @@ class _EventInfoState extends State<EventInfo> {
                                     onPressed: () {
                                       Navigator.push(context,
                                           MaterialPageRoute(builder: (context) {
-                                        return (widget.event_map
-                                                    .individualOrGroup ==
-                                                1)
+                                        return ((widget.event_map == null)
+                                                ? widget.star_map[
+                                                    "grpupOrIndividual"]
+                                                : widget.event_map
+                                                        .individualOrGroup ==
+                                                    1)
                                             ? EventRegistrationForm(
                                                 jsonData: widget.event_map,
                                                 data: widget.data)
                                             : PayU(
+                                                star_map: widget.star_map,
                                                 data: widget.data,
                                                 event_data: widget.event_map);
                                       }));

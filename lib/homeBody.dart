@@ -131,7 +131,7 @@ class _HomeBodyState extends State<HomeBody> {
                       onChanged: (value) {
                         search(value);
                       },
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: 18,color: Color(0xffbeb7a4)),
                       decoration: InputDecoration(
 
                         hintText: 'Search Events, Departments',

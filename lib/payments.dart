@@ -10,6 +10,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:http/http.dart' as http;
 
+import 'package:android_intent_plus/android_intent.dart';
+import 'package:android_intent_plus/flag.dart';
+import 'package:platform/platform.dart';
+
 late String trans_token;
 late String name,
     phoneNumber,
@@ -33,12 +37,22 @@ final _stateController = TextEditingController();
 final _countryController = TextEditingController();
 final _zipController = TextEditingController();
 
+var eventdata;
+var star_data;
+
 class PayU extends StatelessWidget {
   var data;
   var event_data;
-  PayU({super.key, required this.data, this.event_data}) {
+  var star_map;
+  PayU({super.key, required this.data, this.event_data, this.star_map}) {
     user_data = data;
-    event_details = event_data;
+    event_data = this.event_data;
+    star_data = this.star_map;
+    if (this.event_data != null) {
+      event_details = event_data;
+    } else {
+      event_details = star_map;
+    }
   }
 
   @override
@@ -88,7 +102,7 @@ class _MyCardWidgetState extends State<MyCardWidget> {
                 child: CreditCard(
                   frontTextColor: Colors.black,
                   width: MediaQuery.of(context).size.width * 0.8,
-                  height: MediaQuery.of(context).size.height * 0.22,
+                  height: MediaQuery.of(context).size.height * 0.25,
                   cardNumber: '2323 4343 5353 6363',
                   cardExpiry: '10/25',
                   cardHolderName: 'Name 0 ',
@@ -111,7 +125,7 @@ class _MyCardWidgetState extends State<MyCardWidget> {
                 child: CreditCard(
                   frontTextColor: Colors.black,
                   width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.22,
+                  height: MediaQuery.of(context).size.height * 0.23,
                   cardNumber: '2323 4343 **** ****',
                   cardExpiry: '10/25',
                   cardHolderName: 'Name 0 ',
@@ -278,7 +292,9 @@ class _PaymentPageState extends State<PaymentPage> {
     String url =
         "http://52.66.236.118:3000/userApp/transaction/initiateTransaction";
     Map<String, String> body = {
-      "productId": "E${event_details.eventId}",
+      "productId": (eventdata == null)
+          ? "E${event_details["eventId"]}"
+          : "E${event_details.eventId}",
       "firstName": _nameController.text,
       "userEmail": user_data.userEmail,
       "address": _addressController.text,
@@ -337,10 +353,13 @@ class Nextpage extends StatefulWidget {
 class _NextpageState extends State<Nextpage> {
   late Map<String, String> postbody;
   late String encodedBody;
+  var url = "https://payu-nodejs-demo.herokuapp.com/response.html?page=ejs";
   @override
   void initState() {
     postbody = {
-      "productInfo": "E${event_details.eventId}",
+      "productInfo": (eventdata == null)
+          ? "E${event_details["eventId"]}"
+          : "E${event_details.eventId}",
       "txnid": widget.trans_map?["txid"],
       "amount": "${widget.trans_map?["amount"]}",
       "firstname": user_data.fullName,
@@ -354,9 +373,9 @@ class _NextpageState extends State<Nextpage> {
       "country": country,
       "Zipcode": zipcode,
       "hash": widget.trans_map?["hash"],
-      "surl": "https://payu-nodejs-demo.herokuapp.com/response.html?page=ejs",
-      "furl": "https://payu-nodejs-demo.herokuapp.com/response.html?page=ejs",
-      "curl": "https://payu-nodejs-demo.herokuapp.com/response.html?page=ejs",
+      "surl": "https://www.google.com/",
+      "furl": "https://www.google.com/",
+      "curl": "",
       "key": "ypfBaj"
     };
 
@@ -384,6 +403,22 @@ class _NextpageState extends State<Nextpage> {
               _controller = controller;
               _loadHtmlFromAssets();
             }*/
+
+          onLoadStart: (InAppWebViewController controller, url) {
+            setState(() {
+              this.url = url.toString();
+            });
+
+            if (url.toString().startsWith("upi:")) {}
+
+            if (url.toString() == "hello") {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          Success(txid: widget.trans_map?["txid"])));
+            }
+          },
         ),
       ),
     );
@@ -403,6 +438,21 @@ class _NextpageState extends State<Nextpage> {
     /*await _controller.postUrl(url,
         body: postbody,
         headers: {'Content-Type': 'application/x-www-form-urlencoded'});*/
+  }
+}
+
+class Success extends StatefulWidget {
+  var txid;
+  Success({super.key, required this.txid});
+
+  @override
+  State<Success> createState() => _SuccessState();
+}
+
+class _SuccessState extends State<Success> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: Center(child: Text("${widget.txid}")));
   }
 }
 
