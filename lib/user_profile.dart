@@ -34,16 +34,17 @@ class _userProfState extends State<userProf> {
     return (await showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         title: Text('Are you sure?'),
         content: Text('Do you want to exit the app?'),
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: Text('No'),
+            child: Text('No',style: TextStyle(color: Color(0xFF002845))),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: Text('Yes'),
+            child: Text('Yes',style: TextStyle(color: Color(0xFF002845))),
           ),
         ],
       ),

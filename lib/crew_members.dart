@@ -15,6 +15,27 @@ class GetCrew extends StatefulWidget {
 }
 
 class _GetCrewState extends State<GetCrew> {
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        title: Text('Are you sure?'),
+        content: Text('Do you want to exit the app?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text('No',style: TextStyle(color: Color(0xFF002845))),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text('Yes',style: TextStyle(color: Color(0xFF002845))),
+          ),
+        ],
+      ),
+    )) ??
+        false;
+  }
   String url = "http://52.66.236.118:3000/userApp/getCrew";
 
   Future<List> getData() async {
@@ -24,19 +45,22 @@ class _GetCrewState extends State<GetCrew> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: FutureBuilder<List>(
-            future: getData(),
-            builder: (context, ss) {
-              if (ss.hasError) {
-                print("error");
-              }
-              if (ss.hasData) {
-                return CrewMembers(list: ss.data);
-              } else {
-                return Events_Loading_screen();
-              }
-            }));
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+          body: FutureBuilder<List>(
+              future: getData(),
+              builder: (context, ss) {
+                if (ss.hasError) {
+                  print("error");
+                }
+                if (ss.hasData) {
+                  return CrewMembers(list: ss.data);
+                } else {
+                  return Events_Loading_screen();
+                }
+              })),
+    );
   }
 }
 

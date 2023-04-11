@@ -24,6 +24,28 @@ class GetStarrs extends StatefulWidget {
 }
 
 class _GetStarrsState extends State<GetStarrs> {
+
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        title: Text('Are you sure?'),
+        content: Text('Do you want to exit the app?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text('No',style: TextStyle(color: Color(0xFF002845))),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text('Yes',style: TextStyle(color: Color(0xFF002845))),
+          ),
+        ],
+      ),
+    )) ??
+        false;
+  }
   Future<List> getData() async {
     String url = __url + "userApp/getStarredEvents";
 
@@ -35,20 +57,23 @@ class _GetStarrsState extends State<GetStarrs> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: FutureBuilder<List>(
-          future: getData(),
-          builder: (context, ss) {
-            if (ss.hasError) {
-              print(ss.error);
-              print("error");
-            }
-            if (ss.hasData) {
-              return Wheel(starr_map: ss.data);
-            } else {
-              return Events_Loading_screen();
-            }
-          }),
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        body: FutureBuilder<List>(
+            future: getData(),
+            builder: (context, ss) {
+              if (ss.hasError) {
+                print(ss.error);
+                print("error");
+              }
+              if (ss.hasData) {
+                return Wheel(starr_map: ss.data);
+              } else {
+                return Events_Loading_screen();
+              }
+            }),
+      ),
     );
   }
 }
