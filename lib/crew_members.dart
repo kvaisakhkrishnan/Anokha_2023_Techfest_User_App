@@ -4,7 +4,6 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
-import 'package:anokha_home/Loading_Screens/events_loading.dart';
 import 'dart:convert';
 
 class GetCrew extends StatefulWidget {
@@ -34,7 +33,7 @@ class _GetCrewState extends State<GetCrew> {
               if (ss.hasData) {
                 return CrewMembers(list: ss.data);
               } else {
-                return Events_Loading_screen();
+                return CircularProgressIndicator();
               }
             }));
   }
@@ -72,21 +71,22 @@ class _CrewMembersState extends State<CrewMembers> {
         crew_list.length, (index) => crew_list[index]["teamName"]);
     final List<int> a = List.generate(crew_list.length, (index) => index);
 
-    return  Container(
+    return MaterialApp(
+      home: Container(
           child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFF002845),
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Color(0xFF002845),
           elevation: 0,
           leading: IconButton(
               onPressed: () {},
               splashRadius: 20,
               icon: Icon(
                 Icons.arrow_back_ios,
-                color: HexColor("#002845"),
+                color: Colors.white,
               )),
           title: Text("Crew Members",
-              style: GoogleFonts.dmSans(color: Color(0xFF002845))),
+              style: GoogleFonts.dmSans(color: Colors.white)),
           centerTitle: true,
         ),
         body: Column(
@@ -104,15 +104,14 @@ class _CrewMembersState extends State<CrewMembers> {
                             padding: EdgeInsets.fromLTRB(8, 15, 8, 2),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                side:
-                                    (items.indexOf(item) + 1 == selected_index)
-                                        ? BorderSide(color: Colors.white)
-                                        : BorderSide(
-                                            color: Color(0xFF002845), width: 2),
+                                side: (items.indexOf(item) + 1 ==
+                                        selected_index)
+                                    ? BorderSide(color: Colors.white)
+                                    : BorderSide(color: Colors.white, width: 2),
                                 primary:
                                     (items.indexOf(item) + 1 == selected_index)
-                                        ? HexColor("#002845")
-                                        : Colors.white,
+                                        ? Colors.white
+                                        : HexColor("#002845"),
                                 shape: StadiumBorder(),
                               ),
                               onPressed: () {
@@ -132,8 +131,8 @@ class _CrewMembersState extends State<CrewMembers> {
                                       fontWeight: FontWeight.bold,
                                       color: (items.indexOf(item) + 1 ==
                                               selected_index)
-                                          ? HexColor("#FFFFFC")
-                                          : HexColor("#002845")),
+                                          ? HexColor("#002845")
+                                          : Colors.white),
                                 ),
                               ),
                             ),
@@ -169,7 +168,7 @@ class _CrewMembersState extends State<CrewMembers> {
                                       padding:
                                           EdgeInsets.only(top: circleRadius),
                                       child: Card(
-                                        color: Color(0xFF002845),
+                                        color: Colors.white,
                                         shape: RoundedRectangleBorder(
                                             side:
                                                 BorderSide(color: Colors.white),
@@ -197,7 +196,7 @@ class _CrewMembersState extends State<CrewMembers> {
                                                       ["member"][index]["name"],
                                                   maxLines: 5,
                                                   style: GoogleFonts.dmSans(
-                                                      color: Colors.white,
+                                                      color: Color(0xFF002845),
                                                       fontSize: 20,
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -260,7 +259,8 @@ class _CrewMembersState extends State<CrewMembers> {
             ),
           ],
         ),
-      ));
+      )),
+    );
     ;
   }
 }

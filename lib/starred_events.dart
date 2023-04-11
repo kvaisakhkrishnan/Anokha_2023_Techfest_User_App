@@ -12,12 +12,14 @@ import 'dart:convert';
 
 import 'Loading_Screens/events_loading.dart';
 
-
 final __url = serverUrl().url;
+var token;
 
 class GetStarrs extends StatefulWidget {
   var data;
-  GetStarrs({Key? key, required this.data}) : super(key: key);
+  GetStarrs({Key? key, required this.data}) : super(key: key) {
+    token = data;
+  }
 
   @override
   State<GetStarrs> createState() => _GetStarrsState();
@@ -90,7 +92,9 @@ class _WheelState extends State<Wheel> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => EventInfo(
-                                  event_map: widget.starr_map?[index])));
+                                  event_map: null,
+                                  data: token,
+                                  star_map: widget.starr_map?[index])));
                     },
                   ),
                 );
@@ -145,80 +149,76 @@ class _New_WidgetState extends State<New_Widget> {
                       children: [
                         Text(
                           "Starred Card",
-
-                         style: TextStyle(
-                           color: Colors.black,
-                           fontSize: 18.0,
-                           fontWeight: FontWeight.w500
-                         ),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.w500),
                         ),
                         Image(
                             height: MediaQuery.of(context).size.height * 0.1,
                             width: MediaQuery.of(context).size.width * 0.2,
-                            image:
-                                AssetImage("Images/anokha_2023_black_small.png"))
+                            image: AssetImage(
+                                "Images/anokha_2023_black_small.png"))
                       ],
                     ),
                   ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text("Event Name",
-                        style: TextStyle(
-                            color: Color(0xffbeb7a4)
-                        ),),
-                      Text(widget.starrs!["eventName"]
-                          ,style: TextStyle(
-                              color: Colors.black
-                          )),
-                      SizedBox(height: MediaQuery.of(context).size.height * 0.01,),
-                      Text("Date",
-                        style: TextStyle(
-                            color: Color(0xffbeb7a4)
-                        ),),
-                      Text(widget.starrs!["date"]
-                          ,style: TextStyle(
-                              color: Colors.black
-                          )),
-                      SizedBox(height: MediaQuery.of(context).size.height * 0.01,),
-                      Text("Venue",
-                        style: TextStyle(
-                            color: Color(0xffbeb7a4)
-                        ),),
-                      Text(widget.starrs!["venue"]
-                          ,style: TextStyle(
-                              color: Colors.black
-                          )),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Event Name",
+                            style: TextStyle(color: Color(0xffbeb7a4)),
+                          ),
+                          Text(widget.starrs!["eventName"],
+                              style: TextStyle(color: Colors.black)),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01,
+                          ),
+                          Text(
+                            "Date",
+                            style: TextStyle(color: Color(0xffbeb7a4)),
+                          ),
+                          Text(widget.starrs!["date"],
+                              style: TextStyle(color: Colors.black)),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01,
+                          ),
+                          Text(
+                            "Venue",
+                            style: TextStyle(color: Color(0xffbeb7a4)),
+                          ),
+                          Text(widget.starrs!["venue"],
+                              style: TextStyle(color: Colors.black)),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Event Type",
+                            style: TextStyle(color: Color(0xffbeb7a4)),
+                          ),
+                          Text(
+                              widget.starrs!["eventOrWorkshop"] == 0
+                                  ? "Event"
+                                  : "Workshop",
+                              style: TextStyle(color: Colors.black)),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01,
+                          ),
+                          Text(
+                            "Time",
+                            style: TextStyle(color: Color(0xffbeb7a4)),
+                          ),
+                          Text(widget.starrs!["eventTime"],
+                              style: TextStyle(color: Colors.black))
+                        ],
+                      ),
                     ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Event Type",
-                        style: TextStyle(
-                            color: Color(0xffbeb7a4)
-                        ),),
-                      Text(widget.starrs!["eventOrWorkshop"] == 0 ? "Event" : "Workshop"
-                          ,style: TextStyle(
-                              color: Colors.black
-                          )),
-                      SizedBox(height: MediaQuery.of(context).size.height * 0.01,),
-                      Text("Time",
-                        style: TextStyle(
-                            color: Color(0xffbeb7a4)
-                        ),),
-                      Text(widget.starrs!["eventTime"]
-                          ,style: TextStyle(
-                              color: Colors.black
-                          ))
-                    ],
-                  ),
-
-                ],)
+                  )
                 ],
               )),
         ));
