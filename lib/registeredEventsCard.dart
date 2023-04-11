@@ -49,7 +49,7 @@ class _RegisteredEventCardState extends State<RegisteredEventCard> {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(25.0),
-
+              boxShadow: [BoxShadow(color: Color(0xff002845), blurRadius: 100, spreadRadius: 10)]
             ),
             child: Column(
               children: [

@@ -117,7 +117,7 @@ class _HomeBodyState extends State<HomeBody> {
                 child: Container(
                   decoration: BoxDecoration(
                       color: Color(0xff002845),
-                      borderRadius: BorderRadius.circular(30.0),
+                      borderRadius: BorderRadius.circular(10.0),
                       border: Border.all(
                       color: Color(0xffbeb7a4), // set the desired border color here
                       width: 2.0, // set the desired border width here
