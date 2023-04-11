@@ -53,6 +53,27 @@ class CrewMembers extends StatefulWidget {
 }
 
 class _CrewMembersState extends State<CrewMembers> {
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Are you sure?'),
+            content: Text('Do you want to exit the app?'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text('No'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text('Yes'),
+              ),
+            ],
+          ),
+        )) ??
+        false;
+  }
+
   late List crew_list;
 
   @override
@@ -72,10 +93,12 @@ class _CrewMembersState extends State<CrewMembers> {
         crew_list.length, (index) => crew_list[index]["teamName"]);
     final List<int> a = List.generate(crew_list.length, (index) => index);
 
-    return  Container(
+    return Container(
+        child: WillPopScope(
+          onWillPop: _onWillPop,
           child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
           leading: IconButton(
@@ -88,8 +111,8 @@ class _CrewMembersState extends State<CrewMembers> {
           title: Text("Crew Members",
               style: GoogleFonts.dmSans(color: Color(0xFF002845))),
           centerTitle: true,
-        ),
-        body: Column(
+      ),
+      body: Column(
           children: [
             Container(
               height: MediaQuery.of(context).size.height * 0.15,
@@ -104,11 +127,10 @@ class _CrewMembersState extends State<CrewMembers> {
                             padding: EdgeInsets.fromLTRB(8, 15, 8, 2),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                side:
-                                    (items.indexOf(item) + 1 == selected_index)
-                                        ? BorderSide(color: Colors.white)
-                                        : BorderSide(
-                                            color: Color(0xFF002845), width: 2),
+                                side: (items.indexOf(item) + 1 == selected_index)
+                                    ? BorderSide(color: Colors.white)
+                                    : BorderSide(
+                                        color: Color(0xFF002845), width: 2),
                                 primary:
                                     (items.indexOf(item) + 1 == selected_index)
                                         ? HexColor("#002845")
@@ -166,28 +188,23 @@ class _CrewMembersState extends State<CrewMembers> {
                                   // ignore: prefer_const_literals_to_create_immutables
                                   children: [
                                     Padding(
-                                      padding:
-                                          EdgeInsets.only(top: circleRadius),
+                                      padding: EdgeInsets.only(top: circleRadius),
                                       child: Card(
                                         color: Color(0xFF002845),
                                         shape: RoundedRectangleBorder(
-                                            side:
-                                                BorderSide(color: Colors.white),
+                                            side: BorderSide(color: Colors.white),
                                             borderRadius:
                                                 BorderRadius.circular(10)),
                                         child: SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.3,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
+                                          height:
+                                              MediaQuery.of(context).size.height *
+                                                  0.3,
+                                          width:
+                                              MediaQuery.of(context).size.width *
+                                                  0.4,
                                           child: Center(
                                             child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(3.0),
+                                              padding: const EdgeInsets.all(3.0),
                                               child: Column(children: [
                                                 SizedBox(
                                                   height: 30,
@@ -203,12 +220,11 @@ class _CrewMembersState extends State<CrewMembers> {
                                                           FontWeight.bold),
                                                 ),
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 5),
+                                                  padding: const EdgeInsets.only(
+                                                      top: 5),
                                                   child: Text(
-                                                    crew_list[selected_index -
-                                                            1]["member"][index]
+                                                    crew_list[selected_index - 1]
+                                                            ["member"][index]
                                                         ["departmentname"],
                                                     style: TextStyle(
                                                         fontSize: 15,
@@ -239,8 +255,7 @@ class _CrewMembersState extends State<CrewMembers> {
                                           },
                                           child: CircleAvatar(
                                             radius: circleRadius,
-                                            backgroundColor:
-                                                HexColor("#002845"),
+                                            backgroundColor: HexColor("#002845"),
                                             backgroundImage: NetworkImage(
                                               "https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg",
                                             ),
@@ -259,8 +274,9 @@ class _CrewMembersState extends State<CrewMembers> {
               ),
             ),
           ],
-        ),
-      ));
+      ),
+    ),
+        ));
     ;
   }
 }
