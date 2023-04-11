@@ -89,6 +89,8 @@ flutter:
      - Images/anokha_circle.png
      - Images/anokha_2023_black_small.png
      - Images/campus.svg
+     - Images/anokha_text.svg
+     - Images/clg.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
