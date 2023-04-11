@@ -64,16 +64,41 @@ class HomeWidget extends StatefulWidget {
 
 class _HomeWidgetState extends State<HomeWidget> {
 
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        title: Text('Are you sure?'),
+        content: Text('Do you want to exit the app?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text('No',style: TextStyle(color: Color(0xFF002845))),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text('Yes',style: TextStyle(color: Color(0xFF002845))),
+          ),
+        ],
+      ),
+    )) ??
+        false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Color(0xff002845),
-        appBar: AppBar(
-          elevation: 0,
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
           backgroundColor: Color(0xff002845),
-          toolbarHeight: 0.0,
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Color(0xff002845),
+            toolbarHeight: 0.0,
 
-        ),
-        body: HomeBody(data: widget.data, eventsList: widget.eventsList));
+          ),
+          body: HomeBody(data: widget.data, eventsList: widget.eventsList)),
+    );
   }
 }

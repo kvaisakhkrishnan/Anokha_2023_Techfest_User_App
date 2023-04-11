@@ -98,21 +98,15 @@ class _CountdownPageState extends State<CountdownPage> {
     return Column(mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Row(children: [
-          buildTimeCard(time: days, header: 'DAYS'),
-          const SizedBox(width: 8),
-          buildTimeCard(time: hours, header: 'HOURS'),
-          const SizedBox(width: 8),
+          buildTimeCard(time: days, header: 'Days'),
+          const SizedBox(width: 15),
+          buildTimeCard(time: hours, header: 'Hours'),
+          const SizedBox(width: 15),
+          buildTimeCard(time: minutes, header: 'Minutes'),
+          const SizedBox(width: 15),
+          buildTimeCard(time: seconds,header: 'Seconds'),
 
         ],),
-        SizedBox(height: 30.0,),
-        Row(
-          children: [
-            buildTimeCard(time: minutes, header: 'MINUTES'),
-            const SizedBox(width: 8),
-            buildTimeCard(time: seconds,header: 'SECONDS'),
-          ],
-        )
-
 
       ],
     );
@@ -121,8 +115,8 @@ class _CountdownPageState extends State<CountdownPage> {
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       Container(
-        height: MediaQuery.of(context).size.height * 0.15,
-        width: MediaQuery.of(context).size.width * 0.30,
+        height: MediaQuery.of(context).size.height * 0.09,
+        width: MediaQuery.of(context).size.width * 0.17,
         padding: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -134,13 +128,13 @@ class _CountdownPageState extends State<CountdownPage> {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black,
-              fontSize: MediaQuery.of(context).size.height * 0.08,
+              fontSize: MediaQuery.of(context).size.height * 0.04,
             ),
           ),
         ),
       ),
       const SizedBox(height: 15),
-      Text(header),
+      Text(header,style: TextStyle(color: Color(0xFFBEB7A4)),),
     ],
   );
 }
