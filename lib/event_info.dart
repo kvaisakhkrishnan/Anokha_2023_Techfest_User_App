@@ -412,6 +412,15 @@ class _EventInfoState extends State<EventInfo> {
                                     shape: StadiumBorder(),
                                     color: Colors.white),
                                 child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    foregroundColor: HexColor("#002845"), backgroundColor: Colors.white, // Background color
+                                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20), // Padding
+                                    textStyle: TextStyle(fontSize: 30), // Text style
+                                    shape: RoundedRectangleBorder( // Button shape
+                                      borderRadius: BorderRadius.circular(15),
+                                      side: BorderSide(color: Colors.black, width: 2),
+                                    ),
+                                  ),
                                     onPressed: () {
                                       Navigator.push(context,
                                           MaterialPageRoute(builder: (context) {
@@ -434,7 +443,7 @@ class _EventInfoState extends State<EventInfo> {
                                         child: Text("Register",
                                             style: TextStyle(
                                                 color: HexColor("#002845"),
-                                                fontSize: 30))),style: ButtonStyle()),
+                                                fontSize: 30))),),
                               ),
                             ),
                           ),

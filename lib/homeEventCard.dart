@@ -136,9 +136,10 @@ class _EventCardState extends State<EventCard> {
                             });
                           },
                           icon: Icon(
-                            Icons.star_border,
-                            color: Colors.black,
+                            widget.event_data.isStarred == 1 ? Icons.star : Icons.star_border,
+                            color: widget.event_data.isStarred == 1 ? Color(0xFFFF7F11) : Colors.black,
                           ),
+
                         ),
                       ],
                     ),
