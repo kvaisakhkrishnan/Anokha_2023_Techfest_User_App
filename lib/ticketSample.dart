@@ -7,6 +7,8 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 import 'Loading_Screens/events_loading.dart';
 import 'homePage.dart';
+import 'ticketSample.dart';
+
 
 
 
@@ -25,7 +27,7 @@ class MyTicketView extends StatelessWidget {
   Widget build(BuildContext context) {
     return TicketWidget(
 
-              color: Color(0xFF002845),
+              color: Colors.white,
               width: 0.85 * MediaQuery.of(context).size.width,
               height: 0.633 * MediaQuery.of(context).size.height,
               isCornerRounded: true,
@@ -100,7 +102,7 @@ class TicketData extends StatelessWidget {
                             padding: EdgeInsets.only(right: 4.0),
                             child: Text(
                               word,
-                              style: TextStyle(fontSize: 15.0, color: Colors.white),
+                              style: TextStyle(fontSize: 15.0, color: Colors.black),
                             ),
                           );
                         }).toList(),
@@ -113,7 +115,7 @@ class TicketData extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                      child: Text(event[0]["eventName"], style: TextStyle(fontSize: 15.0,color: Colors.white),),
+                      child: Text(event[0]["eventName"], style: TextStyle(fontSize: 15.0,color: Colors.black),),
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
@@ -121,7 +123,7 @@ class TicketData extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                      child: Text(event[0]["type"] == 0 ? "Event" : "Workshop", style: TextStyle(fontSize: 15.0,color: Colors.white),),
+                      child: Text(event[0]["type"] == 0 ? "Event" : "Workshop", style: TextStyle(fontSize: 15.0,color: Colors.black),),
                     ),
 
                   ],
@@ -138,7 +140,7 @@ class TicketData extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                      child: Text(event[0]["date"], style: TextStyle(fontSize: 15.0,color: Colors.white),),
+                      child: Text(event[0]["date"], style: TextStyle(fontSize: 15.0,color: Colors.black),),
                     ),
 
                     Padding(
@@ -147,7 +149,7 @@ class TicketData extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                      child: Text(event[0]["eventTime"], style: TextStyle(fontSize: 15.0,color: Colors.white),),
+                      child: Text(event[0]["eventTime"], style: TextStyle(fontSize: 15.0,color: Colors.black),),
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
@@ -155,7 +157,7 @@ class TicketData extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                      child: Text(event[0]["venue"], style: TextStyle(fontSize: 15.0,color: Colors.white),),
+                      child: Text(event[0]["venue"], style: TextStyle(fontSize: 15.0,color: Colors.black),),
                     ),
 
                   ],
@@ -166,10 +168,10 @@ class TicketData extends StatelessWidget {
         ),
 
         QrImage(
-          foregroundColor : Colors.white,
+          foregroundColor : Colors.black,
           data: "{json data to be passed}",
           version: QrVersions.auto,
-          size: MediaQuery.of(context).size.height * 0.2,
+          size: MediaQuery.of(context).size.height * 0.19,
           gapless: false,
 
           embeddedImageStyle: QrEmbeddedImageStyle(
