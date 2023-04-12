@@ -82,6 +82,7 @@ class _RegisterPageState extends State<RegisterPage>
 
   final _fullNameController = TextEditingController();
   final _emailController = TextEditingController();
+  final _mobileNumberController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _collegeController = TextEditingController();
@@ -98,6 +99,7 @@ class _RegisterPageState extends State<RegisterPage>
         body: jsonEncode(<String, dynamic>{
           'fullName': _fullNameController.text,
           'userEmail': _emailController.text,
+          'mobileNumber': _mobileNumberController.text,
           'password': _passwordController.text,
           'collegeId': int.parse(_collegeController.text.split("-")[0].trim()),
         }),
@@ -142,11 +144,11 @@ class _RegisterPageState extends State<RegisterPage>
                         width: MediaQuery.of(context).size.width * 0.3,
                       ),
                       constraints: BoxConstraints.expand(
-                          height: MediaQuery.of(context).size.width * 0.25),
+                          height: MediaQuery.of(context).size.width * 0.19),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 40.0, bottom: 20.0),
+                    padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
                     child: Text(
                       "Register",
                       style: TextStyle(
@@ -225,6 +227,29 @@ class _RegisterPageState extends State<RegisterPage>
                                       },
                                     ),
                                   ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                                    child: TextFormField(
+                                      controller: _mobileNumberController,
+                                      keyboardType: TextInputType.phone,
+                                      decoration: InputDecoration(
+                                        hintText: "Mobile Number",
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(width: 1, color: Color(0xffF3F2F7)),
+                                        ),
+                                      ),
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your mobile number';
+                                        }
+                                        if (value.length != 10) {
+                                          return 'Mobile number should be 10 digits';
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ),
+
                                   Padding(
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 10.0),

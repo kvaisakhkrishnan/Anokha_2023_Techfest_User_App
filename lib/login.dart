@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Loading_Screens/events_loading.dart';
 import 'controllerPage.dart';
 import 'forgotPassword.dart';
 
@@ -136,6 +137,9 @@ class _loginPageState extends State<loginPage>{
   }
 
   Future<int> loginUser(String username, String password) async {
+    showDialog(context: context, builder: (context){
+      return Events_Loading_screen();
+    },);
     String url = __url + 'userApp/login';
     Map<String, String> data = {
       'userEmail': username,
