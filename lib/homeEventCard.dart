@@ -73,10 +73,10 @@ class _EventCardState extends State<EventCard> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey, spreadRadius: 1.0, blurRadius: 10.0)
-                  ],
+                  // boxShadow: [
+                  //   BoxShadow(
+                  //       color: Colors.grey, spreadRadius: 1.0, blurRadius: 10.0)
+                  // ],
                   image: DecorationImage(
                       image: NetworkImage(widget.event_data.url),
                       fit: BoxFit.fill),
