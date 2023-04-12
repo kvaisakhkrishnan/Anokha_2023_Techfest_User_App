@@ -45,16 +45,10 @@ var star_data;
 class PayU extends StatelessWidget {
   var data;
   var event_data;
-  var star_map;
-  PayU({super.key, required this.data, this.event_data, this.star_map}) {
+
+  PayU({super.key, required this.data, this.event_data}) {
     user_data = data;
-    event_data = this.event_data;
-    star_data = this.star_map;
-    if (this.event_data != null) {
-      event_details = event_data;
-    } else {
-      event_details = star_map;
-    }
+    eventdata = this.event_data;
   }
 
   @override
@@ -127,7 +121,7 @@ class _MyCardWidgetState extends State<MyCardWidget> {
                 child: CreditCard(
                   frontTextColor: Colors.black,
                   width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.23,
+                  height: MediaQuery.of(context).size.height * 0.24,
                   cardNumber: '2323 4343 **** ****',
                   cardExpiry: '10/25',
                   cardHolderName: 'Name 0 ',
@@ -204,7 +198,8 @@ class _MyCardWidgetState extends State<MyCardWidget> {
           style: ElevatedButton.styleFrom(
               elevation: 30,
               padding: EdgeInsets.all(10),
-              fixedSize: Size(350, 60),
+              fixedSize: Size(MediaQuery.of(context).size.width * 0.8,
+                  MediaQuery.of(context).size.height * 0.07),
               shape: StadiumBorder(),
               backgroundColor: Colors.white),
         )
@@ -297,7 +292,7 @@ class _PaymentPageState extends State<PaymentPage> {
         ? "E${event_details["eventId"]}"
         : "E${event_details.eventId}";*/
     Map<String, String> body = {
-      "productId": "E1",
+      "productId": "E${eventdata.eventId}",
       "firstName": _nameController.text,
       "userEmail": user_data.userEmail,
       "address": _addressController.text,
@@ -364,7 +359,7 @@ class _NextpageState extends State<Nextpage> {
   @override
   void initState() {
     postbody = {
-      "productInfo": "E1",
+      "productInfo": "E${eventdata.eventId}",
       "txnid": widget.trans_map?["txid"],
       "amount": "${widget.trans_map?["amount"]}",
       "firstname": user_data.fullName,
@@ -525,8 +520,8 @@ class _UserFormState extends State<UserForm> {
     return SingleChildScrollView(
       physics: ClampingScrollPhysics(),
       child: Container(
-          width: 320,
-          height: 550,
+          width: MediaQuery.of(context).size.width * 0.77,
+          height: MediaQuery.of(context).size.height * 0.7,
           child: Form(
               key: _formKey,
               child: Column(children: [

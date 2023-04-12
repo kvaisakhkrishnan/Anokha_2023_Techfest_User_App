@@ -26,28 +26,29 @@ class GetStarrs extends StatefulWidget {
 }
 
 class _GetStarrsState extends State<GetStarrs> {
-
   Future<bool> _onWillPop() async {
     return (await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        title: Text('Are you sure?'),
-        content: Text('Do you want to exit the app?'),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: Text('No',style: TextStyle(color: Color(0xFF002845))),
+          context: context,
+          builder: (context) => AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            title: Text('Are you sure?'),
+            content: Text('Do you want to exit the app?'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text('No', style: TextStyle(color: Color(0xFF002845))),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text('Yes', style: TextStyle(color: Color(0xFF002845))),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: Text('Yes',style: TextStyle(color: Color(0xFF002845))),
-          ),
-        ],
-      ),
-    )) ??
+        )) ??
         false;
   }
+
   Future<List> getData() async {
     String url = __url + "userApp/getStarredEvents";
 
@@ -104,7 +105,12 @@ class _WheelState extends State<Wheel> {
         centerTitle: true,
       ),
       body: (widget.starr_map?.length == 0)
-          ? Center(child: Text("You have not starred any events"))
+          ? Center(
+              child: Text(
+              "You have not starred any events",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+              maxLines: 3,
+            ))
           : ListView.builder(
               itemBuilder: ((context, index) {
                 return Padding(
