@@ -66,10 +66,7 @@ class _GetStarrsState extends State<GetStarrs> {
         body: FutureBuilder<List>(
             future: getData(),
             builder: (context, ss) {
-              if (ss.hasError) {
-                print(ss.error);
-                print("error");
-              }
+              if (ss.hasError) {}
               if (ss.hasData) {
                 return Wheel(starr_map: ss.data);
               } else {
