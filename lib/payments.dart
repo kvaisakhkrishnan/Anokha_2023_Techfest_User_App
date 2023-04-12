@@ -14,6 +14,8 @@ import 'package:android_intent_plus/android_intent.dart';
 import 'package:android_intent_plus/flag.dart';
 import 'package:platform/platform.dart';
 
+import 'package:lottie/lottie.dart';
+
 late String trans_token;
 late String name,
     phoneNumber,
@@ -291,10 +293,11 @@ class _PaymentPageState extends State<PaymentPage> {
     print("hello");
     String url =
         "http://52.66.236.118:3000/userApp/transaction/initiateTransaction";
+    /*var productId = (eventdata == null)
+        ? "E${event_details["eventId"]}"
+        : "E${event_details.eventId}";*/
     Map<String, String> body = {
-      "productId": (eventdata == null)
-          ? "E${event_details["eventId"]}"
-          : "E${event_details.eventId}",
+      "productId": "E1",
       "firstName": _nameController.text,
       "userEmail": user_data.userEmail,
       "address": _addressController.text,
@@ -325,7 +328,7 @@ class _PaymentPageState extends State<PaymentPage> {
         builder: ((context, snapshot) {
           if (snapshot.hasError) {
             return Center(
-              child: Text("Error Occurred"),
+              child: Text(snapshot.error.toString()),
             );
           }
 
@@ -354,12 +357,14 @@ class _NextpageState extends State<Nextpage> {
   late Map<String, String> postbody;
   late String encodedBody;
   var url = "https://payu-nodejs-demo.herokuapp.com/response.html?page=ejs";
+  /*var info = (eventdata != null)
+      ? "E${event_details.eventId}"
+      : "E${event_details["eventId"]}";*/
+
   @override
   void initState() {
     postbody = {
-      "productInfo": (eventdata == null)
-          ? "E${event_details["eventId"]}"
-          : "E${event_details.eventId}",
+      "productInfo": "E1",
       "txnid": widget.trans_map?["txid"],
       "amount": "${widget.trans_map?["amount"]}",
       "firstname": user_data.fullName,
@@ -392,6 +397,19 @@ class _NextpageState extends State<Nextpage> {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: InAppWebView(
+          /*initialOptions: InAppWebViewGroupOptions(
+            android: AndroidInAppWebViewOptions(
+              disableDefaultErrorPage: false,
+              // useHybridComposition: true,
+              supportMultipleWindows: false,
+              cacheMode: AndroidCacheMode.LOAD_DEFAULT,
+            ),
+            crossPlatform: InAppWebViewOptions(
+              javaScriptEnabled: true,
+              mediaPlaybackRequiresUserGesture: false,
+              // debuggingEnabled: true,
+            ),
+          ),*/
           initialUrlRequest: URLRequest(
               url: Uri.parse("https://secure.payu.in/_payment"),
               method: 'POST',
@@ -405,14 +423,13 @@ class _NextpageState extends State<Nextpage> {
             }*/
 
           onLoadStart: (InAppWebViewController controller, url) {
+            controller.clearCache();
             setState(() {
               this.url = url.toString();
             });
 
-            if (url.toString().startsWith("upi:")) {}
-
-            if (url.toString() == "hello") {
-              Navigator.pushReplacement(
+            if (url.toString() == "https://www.google.com/") {
+              Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
@@ -424,21 +441,23 @@ class _NextpageState extends State<Nextpage> {
     );
   }
 
-  _loadHtmlFromAssets() async {
+  /* _loadHtmlFromAssets() async {
     final url = Uri.parse("https://test.payu.in/_payment");
 
     //final headers = {'Content-Type': 'text/html'};
-    final encodedBody = postbody.keys
-        .map((key) =>
-            '${Uri.encodeQueryComponent(key)}=${Uri.encodeQueryComponent(postbody[key]!)}')
-        .join('&');
-    //print(encodedBody);
-    print(Uri(queryParameters: postbody).query);
 
-    /*await _controller.postUrl(url,
+    if (postbody != null) {
+      final encodedBody = postbody.keys
+          .map((key) =>
+              '${Uri.encodeQueryComponent(key)}=${Uri.encodeQueryComponent(postbody[key]!)}')
+          .join('&');
+    }*/
+  //print(encodedBody);
+  // print(Uri(queryParameters: postbody).query);
+
+  /*await _controller.postUrl(url,
         body: postbody,
         headers: {'Content-Type': 'application/x-www-form-urlencoded'});*/
-  }
 }
 
 class Success extends StatefulWidget {
@@ -452,7 +471,18 @@ class Success extends StatefulWidget {
 class _SuccessState extends State<Success> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text("${widget.txid}")));
+    return Scaffold(
+        body: Column(
+      children: [
+        Lottie.asset("../assets/success.json"),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.1,
+        ),
+        Center(
+          child: Text("Transaction ID : ${widget.txid}"),
+        )
+      ],
+    ));
   }
 }
 

@@ -119,9 +119,9 @@ class _CrewMembersState extends State<CrewMembers> {
 
     return Container(
         child: Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFF002845),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFF002845),
         elevation: 0,
         leading: IconButton(
             onPressed: () {},
@@ -151,8 +151,7 @@ class _CrewMembersState extends State<CrewMembers> {
                             style: ElevatedButton.styleFrom(
                               side: (items.indexOf(item) + 1 == selected_index)
                                   ? BorderSide(color: Colors.white)
-                                  : BorderSide(
-                                      color: Color(0xFF002845), width: 2),
+                                  : BorderSide(color: Colors.white, width: 2),
                               primary:
                                   (items.indexOf(item) + 1 == selected_index)
                                       ? Colors.white
@@ -237,7 +236,7 @@ class _CrewMembersState extends State<CrewMembers> {
                                                 maxLines: 5,
                                                 style: GoogleFonts.dmSans(
                                                     color: Color(0xFF002845),
-                                                    fontSize: 20,
+                                                    fontSize: 17,
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
