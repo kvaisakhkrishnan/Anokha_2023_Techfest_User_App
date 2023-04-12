@@ -73,10 +73,10 @@ class _EventCardState extends State<EventCard> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey, spreadRadius: 1.0, blurRadius: 10.0)
-                  ],
+                  // boxShadow: [
+                  //   BoxShadow(
+                  //       color: Colors.grey, spreadRadius: 1.0, blurRadius: 10.0)
+                  // ],
                   image: DecorationImage(
                       image: NetworkImage(widget.event_data.url),
                       fit: BoxFit.fill),
@@ -136,9 +136,10 @@ class _EventCardState extends State<EventCard> {
                             });
                           },
                           icon: Icon(
-                            Icons.star_border,
-                            color: Colors.black,
+                            widget.event_data.isStarred == 1 ? Icons.star : Icons.star_border,
+                            color: widget.event_data.isStarred == 1 ? Color(0xFFFF7F11) : Colors.black,
                           ),
+
                         ),
                       ],
                     ),

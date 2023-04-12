@@ -133,7 +133,7 @@ class _EventInfoState extends State<EventInfo> {
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.fromLTRB(
-                                                0, 0, 10, 0),
+                                                0, 0, 0, 0),
                                             child: IconButton(
                                               icon: Icon(
                                                 Icons.star,
@@ -191,7 +191,7 @@ class _EventInfoState extends State<EventInfo> {
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.33,
+                                              0.4,
                                           decoration: BoxDecoration(
                                               gradient: LinearGradient(colors: [
                                                 HexColor("#FF7F11"),
@@ -205,7 +205,7 @@ class _EventInfoState extends State<EventInfo> {
                                             children: [
                                               Padding(
                                                 padding: EdgeInsets.fromLTRB(
-                                                    10, 10, 0, 10),
+                                                    10, 10, 10, 10),
                                                 child: Row(children: [
                                                   Icon(
                                                     Icons.location_on,
@@ -236,13 +236,13 @@ class _EventInfoState extends State<EventInfo> {
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.05,
+                                              0.08,
                                         ),
                                         Container(
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.5,
+                                              0.4,
                                           child: Text(
                                             (widget.event_map == null)
                                                 ? widget.star_map["venue"]
@@ -394,7 +394,7 @@ class _EventInfoState extends State<EventInfo> {
                 ),
                 SizedBox(height: 0),
                 Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 760, 0, 0),
+                    padding:  EdgeInsets.fromLTRB(0, MediaQuery.of(context).size.height * 0.9, 0, 0),
                     child: Container(
                         decoration: BoxDecoration(
                             color: HexColor("#002845"),
@@ -412,6 +412,15 @@ class _EventInfoState extends State<EventInfo> {
                                     shape: StadiumBorder(),
                                     color: Colors.white),
                                 child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    foregroundColor: HexColor("#002845"), backgroundColor: Colors.white, // Background color
+                                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20), // Padding
+                                    textStyle: TextStyle(fontSize: 30), // Text style
+                                    shape: RoundedRectangleBorder( // Button shape
+                                      borderRadius: BorderRadius.circular(15),
+                                      side: BorderSide(color: Colors.black, width: 2),
+                                    ),
+                                  ),
                                     onPressed: () {
                                       Navigator.push(context,
                                           MaterialPageRoute(builder: (context) {
@@ -434,7 +443,7 @@ class _EventInfoState extends State<EventInfo> {
                                         child: Text("Register",
                                             style: TextStyle(
                                                 color: HexColor("#002845"),
-                                                fontSize: 30)))),
+                                                fontSize: 30))),),
                               ),
                             ),
                           ),
