@@ -63,7 +63,7 @@ class TicketData extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
             ),
-            Image(image: AssetImage('./Images/anokha_2023_white_small.png'),
+            Image(image: AssetImage('./Images/anokha_2023_black_small.png'),
                 width: 120.0),
           ],
         ),
@@ -73,7 +73,7 @@ class TicketData extends StatelessWidget {
           child: Text(
             "Entry Ticket",
             style: TextStyle(fontSize: 23.0,
-                color: Color(0xFFBEB7AA),
+                color: Color(0xFF002845),
                 fontWeight: FontWeight.w700),
             textAlign: TextAlign.left,
           ),
