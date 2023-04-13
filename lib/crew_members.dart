@@ -39,7 +39,7 @@ class _GetCrewState extends State<GetCrew> {
         false;
   }
 
-  String url = "http://52.66.236.118:3000/userApp/getCrew";
+  String url = "https://anokha.amrita.edu/api/userApp/getCrew";
 
   Future<List> getData() async {
     final response = await http.get(Uri.parse(url));

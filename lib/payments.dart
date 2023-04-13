@@ -14,6 +14,7 @@ import 'package:android_intent_plus/android_intent.dart';
 import 'package:android_intent_plus/flag.dart';
 import 'package:platform/platform.dart';
 
+import 'package:url_launcher/url_launcher.dart';
 import 'package:lottie/lottie.dart';
 
 late String trans_token;
@@ -210,7 +211,7 @@ class _MyCardWidgetState extends State<MyCardWidget> {
   void collectTransToken() async {
     showAlertDialog();
     String url =
-        "http://52.66.236.118:3000/userApp/transaction/moveToTransaction";
+        "https://anokha.amrita.edu/api/userApp/transaction/moveToTransaction";
     String user_token = user_data.SECRET_TOKEN;
 
     final response = await http
@@ -287,7 +288,7 @@ class _PaymentPageState extends State<PaymentPage> {
   Future<Map<String, dynamic>> getHash() async {
     print("hello");
     String url =
-        "http://52.66.236.118:3000/userApp/transaction/initiateTransaction";
+        "https://anokha.amrita.edu/api/userApp/transaction/initiateTransaction";
     /*var productId = (eventdata == null)
         ? "E${event_details["eventId"]}"
         : "E${event_details.eventId}";*/
@@ -405,6 +406,13 @@ class _NextpageState extends State<Nextpage> {
               // debuggingEnabled: true,
             ),
           ),*/
+          initialOptions: InAppWebViewGroupOptions(
+              android: AndroidInAppWebViewOptions(
+            disableDefaultErrorPage: false,
+            // useHybridComposition: true,
+            supportMultipleWindows: false,
+            cacheMode: AndroidCacheMode.LOAD_NO_CACHE,
+          )),
           initialUrlRequest: URLRequest(
               url: Uri.parse("https://secure.payu.in/_payment"),
               method: 'POST',
@@ -418,11 +426,16 @@ class _NextpageState extends State<Nextpage> {
             }*/
 
           onLoadStart: (InAppWebViewController controller, url) {
-            controller.clearCache();
+            // controller.clearCache();
             setState(() {
               this.url = url.toString();
             });
-
+            if (url.toString().startsWith("upi://")) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => UPI_Pay(upi_url: url.toString())));
+            }
             if (url.toString() == "https://www.google.com/") {
               Navigator.push(
                   context,
@@ -453,6 +466,39 @@ class _NextpageState extends State<Nextpage> {
   /*await _controller.postUrl(url,
         body: postbody,
         headers: {'Content-Type': 'application/x-www-form-urlencoded'});*/
+}
+
+class UPI_Pay extends StatefulWidget {
+  String upi_url;
+  UPI_Pay({super.key, required this.upi_url});
+
+  @override
+  State<UPI_Pay> createState() => _UPI_PayState();
+}
+
+class _UPI_PayState extends State<UPI_Pay> {
+  void _launchUPIPayment(String upiUrl) async {
+    // Launch UPI payment intent
+    final uri = Uri.parse(upiUrl);
+    if (await canLaunch(uri.toString())) {
+      await launch(uri.toString());
+    } else {
+      throw 'Could not launch $uri';
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _launchUPIPayment(widget.upi_url);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(),
+    );
+  }
 }
 
 class Success extends StatefulWidget {
