@@ -65,28 +65,25 @@ class _EventCardState extends State<EventCard> {
       padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
       child: InkWell(
         onTap: () {
-          if(widget.data.activePassport == 1)
-            {
-
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => EventInfo(
-                          event_map: widget.event_data, data: widget.data)));
-            }
-          else{
-
+          if (widget.data.activePassport == 1) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => EventInfo(
+                        event_map: widget.event_data, data: widget.data)));
+          } else {
             showDialog(
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)),
                     title: Text('Buy Passport'),
                     content: Text('You have to buy a passport to view events'),
                     actions: [
                       TextButton(
                         child: Text('Buy Passport',
-                        style: TextStyle(color: Color(0xff002845))),
+                            style: TextStyle(color: Color(0xff002845))),
                         onPressed: () {
                           // Close the pop-up notification
                           Navigator.of(context).pop();
@@ -94,38 +91,29 @@ class _EventCardState extends State<EventCard> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => PassportBuy()));
-
-
+                                  builder: (context) =>
+                                      PassportBuy(data: widget.data)));
                         },
                       ),
-
                       TextButton(
-                        child: Text('Cancel',
-                        style: TextStyle(color: Colors.red),),
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(color: Colors.red),
+                        ),
                         onPressed: () {
                           // Close the pop-up notification
                           Navigator.of(context).pop();
-
-
-
                         },
                       ),
                     ],
                   );
-                }
-            );
-
-
-
+                });
           }
-
         },
         child: Column(
           children: [
             Container(
               decoration: BoxDecoration(
-
                   image: DecorationImage(
                       image: NetworkImage(widget.event_data.url),
                       fit: BoxFit.fill),
@@ -185,10 +173,13 @@ class _EventCardState extends State<EventCard> {
                             });
                           },
                           icon: Icon(
-                            widget.event_data.isStarred == 1 ? Icons.star : Icons.star_border,
-                            color: widget.event_data.isStarred == 1 ? Color(0xFFFF7F11) : Colors.black,
+                            widget.event_data.isStarred == 1
+                                ? Icons.star
+                                : Icons.star_border,
+                            color: widget.event_data.isStarred == 1
+                                ? Color(0xFFFF7F11)
+                                : Colors.black,
                           ),
-
                         ),
                       ],
                     ),

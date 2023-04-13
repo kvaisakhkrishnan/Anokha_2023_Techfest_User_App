@@ -42,14 +42,16 @@ final _zipController = TextEditingController();
 
 var eventdata;
 var star_data;
+var isPassport;
 
 class PayU extends StatelessWidget {
   var data;
   var event_data;
-
-  PayU({super.key, required this.data, this.event_data}) {
+  var isPassport;
+  PayU({super.key, required this.data, this.event_data, this.isPassport}) {
     user_data = data;
     eventdata = this.event_data;
+    isPassport = this.isPassport;
   }
 
   @override
@@ -229,50 +231,64 @@ class _MyCardWidgetState extends State<MyCardWidget> {
         context: context,
         barrierDismissible: true,
         builder: (context) {
-          return AlertDialog(
-            title: Text(
-              "Provide your details",
-              style:
-                  GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-            content: UserForm(),
-            actions: [
-              ElevatedButton(
-                onPressed: () => {Navigator.pop(context)},
-                // ignore: sort_child_properties_last
-                child: Text(
-                  "Cancel",
-                  style: GoogleFonts.roboto(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-                style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.all(15),
-                    backgroundColor: Colors.white,
-                    // ignore: prefer_const_constructors
-                    shape: StadiumBorder(
-                        side: BorderSide(color: Color(0xFFd3d3d3), width: 1))),
-              ),
-              ElevatedButton(
-                onPressed: () => {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) => PaymentPage())))
-                  /*PaymentPage(
-                    transact_token: transaction_token,
-                  )*/
-                },
-                child: Text(
-                  "Proceed to pay",
-                  style: GoogleFonts.roboto(fontSize: 18),
-                ),
-                style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.all(15),
-                    backgroundColor: Color(0xFF002845),
-                    shape: StadiumBorder()),
-              ),
-            ],
-          );
+          return FutureBuilder(
+              future: Future.delayed(Duration(seconds: 2)),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  // While the future is loading, show a loading screen
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  return AlertDialog(
+                    title: Text(
+                      "Provide your details",
+                      style: GoogleFonts.lato(
+                          fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
+                    content: UserForm(),
+                    actions: [
+                      ElevatedButton(
+                        onPressed: () => {Navigator.pop(context)},
+                        // ignore: sort_child_properties_last
+                        child: Text(
+                          "Cancel",
+                          style: GoogleFonts.roboto(
+                              fontSize: 18,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.all(15),
+                            backgroundColor: Colors.white,
+                            // ignore: prefer_const_constructors
+                            shape: StadiumBorder(
+                                side: BorderSide(
+                                    color: Color(0xFFd3d3d3), width: 1))),
+                      ),
+                      ElevatedButton(
+                        onPressed: () => {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => PaymentPage())))
+                          /*PaymentPage(
+                      transact_token: transaction_token,
+                    )*/
+                        },
+                        child: Text(
+                          "Proceed to pay",
+                          style: GoogleFonts.roboto(fontSize: 18),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.all(15),
+                            backgroundColor: Color(0xFF002845),
+                            shape: StadiumBorder()),
+                      ),
+                    ],
+                  );
+                }
+              });
         });
   }
 }
@@ -292,8 +308,16 @@ class _PaymentPageState extends State<PaymentPage> {
     /*var productId = (eventdata == null)
         ? "E${event_details["eventId"]}"
         : "E${event_details.eventId}";*/
+
+    var productId;
+    //var productId = (eventdata == true) ? "P" : "E${eventdata.eventId}";
+    if (eventdata == null) {
+      productId = "P";
+    } else {
+      productId = "E${eventdata.eventId}";
+    }
     Map<String, String> body = {
-      "productId": "E${eventdata.eventId}",
+      "productId": productId,
       "firstName": _nameController.text,
       "userEmail": user_data.userEmail,
       "address": _addressController.text,
@@ -359,8 +383,14 @@ class _NextpageState extends State<Nextpage> {
 
   @override
   void initState() {
+    var info;
+    if (eventdata == null) {
+      info = "PASSPORT";
+    } else {
+      info = "E${eventdata.eventId}";
+    }
     postbody = {
-      "productInfo": "E${eventdata.eventId}",
+      "productInfo": info,
       "txnid": widget.trans_map?["txid"],
       "amount": "${widget.trans_map?["amount"]}",
       "firstname": user_data.fullName,
@@ -591,6 +621,15 @@ class _UserFormState extends State<UserForm> {
                   height: 20,
                 ),
                 TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Enter your phone number";
+                      } else if (value.length != 10) {
+                        return "Phone Number invalid";
+                      }
+
+                      return null;
+                    },
                     controller: _phoneController,
                     decoration: InputDecoration(
                         labelStyle: TextStyle(color: Color(0xFF002845)),
@@ -629,6 +668,12 @@ class _UserFormState extends State<UserForm> {
                   height: 20,
                 ),
                 TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Enter your address";
+                      }
+                      return null;
+                    },
                     controller: _addressController,
                     decoration: InputDecoration(
                         labelStyle: TextStyle(color: Color(0xFF002845)),
@@ -647,6 +692,12 @@ class _UserFormState extends State<UserForm> {
                   height: 20,
                 ),
                 TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Enter your city";
+                      }
+                      return null;
+                    },
                     controller: _cityController,
                     decoration: InputDecoration(
                         labelStyle: TextStyle(color: Color(0xFF002845)),
@@ -665,6 +716,12 @@ class _UserFormState extends State<UserForm> {
                   height: 20,
                 ),
                 TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Enter your state";
+                      }
+                      return null;
+                    },
                     controller: _stateController,
                     decoration: InputDecoration(
                         labelStyle: TextStyle(color: Color(0xFF002845)),
@@ -683,6 +740,12 @@ class _UserFormState extends State<UserForm> {
                   height: 20,
                 ),
                 TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Enter your country";
+                      }
+                      return null;
+                    },
                     controller: _countryController,
                     decoration: InputDecoration(
                         labelStyle: TextStyle(color: Color(0xFF002845)),

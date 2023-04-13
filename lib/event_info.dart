@@ -447,7 +447,8 @@ class _EventInfoState extends State<EventInfo> {
                                               data: widget.data)
                                           : PayU(
                                               data: widget.data,
-                                              event_data: widget.event_map);
+                                              event_data: widget.event_map,
+                                            );
                                     }));
                                   },
                                   child: Center(

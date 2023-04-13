@@ -191,18 +191,25 @@ class _userProfState extends State<userProf> {
                                       fontFamily: "Roboto"),
                                 ),
                               ),
-
-
-                              (widget.data.activePassport == 0 ) ?
-                                  Padding(
-                                    padding:  EdgeInsets.only(top : 20.0),
-                                    child: ElevatedButton(onPressed: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => PassportBuy(),));
-                                    }, child: Text("Buy Passport"),
-                                      style: ElevatedButton.styleFrom(
-                                        elevation: 0,
-                                        primary: Color(0xff002845),),
-                                  ))
+                              (widget.data.activePassport == 0)
+                                  ? Padding(
+                                      padding: EdgeInsets.only(top: 20.0),
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PassportBuy(
+                                                        data: widget.data),
+                                              ));
+                                        },
+                                        child: Text("Buy Passport"),
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          primary: Color(0xff002845),
+                                        ),
+                                      ))
                                   : Text(widget.data.passportId),
                               Container(
                                 height:
