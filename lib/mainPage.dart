@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:anokha_home/SessionExpired/sessionExpired.dart';
 import 'package:anokha_home/serverUrl.dart';
 import 'package:anokha_home/ticketSample.dart';
 import 'package:anokha_home/timer.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
@@ -79,6 +81,10 @@ class _MainPageState extends State<MainPage> {
     String url = __url + "userApp/events/nextEvent";
     final response = await http.get(Uri.parse(url),
         headers: {'authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
+    if(response.statusCode == 401)
+      {
+        return ["TOKENEXPIREDERROR"];
+      }
     return json.decode(response.body);
   }
 
@@ -147,6 +153,12 @@ class _MainPageState extends State<MainPage> {
                         print("error");
                       }
                       if (snapshot.hasData) {
+
+                        if(listEquals(snapshot.data, ["TOKENEXPIREDERROR"]))
+                          {
+                            return SessionExpired();
+                          }
+
                         return Align(
                           alignment: Alignment.center,
                           child: Center(
@@ -265,7 +277,7 @@ class _MainPageState extends State<MainPage> {
                             Container(
                               margin: EdgeInsets.only(
                                   top: MediaQuery.of(context).size.height *
-                                      0.03),
+                                      0.02),
                               child: Text("Begins In",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 22.0)),

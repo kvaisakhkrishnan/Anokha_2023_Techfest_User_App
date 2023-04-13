@@ -1,7 +1,9 @@
 import 'dart:collection';
 
+import 'package:anokha_home/SessionExpired/sessionExpired.dart';
 import 'package:anokha_home/event_info.dart';
 import 'package:anokha_home/serverUrl.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -54,7 +56,10 @@ class _GetStarrsState extends State<GetStarrs> {
 
     final response = await http.get(Uri.parse(url),
         headers: {'authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
-
+   if(response.statusCode == 401)
+     {
+       return ["SESSIONEXPIRATIONERROR"];
+     }
     return json.decode(response.body);
   }
 
@@ -67,8 +72,15 @@ class _GetStarrsState extends State<GetStarrs> {
             future: getData(),
             builder: (context, ss) {
               if (ss.hasError) {}
-              if (ss.hasData) {
-                return Wheel(starr_map: ss.data);
+             if (ss.hasData) {
+               if(listEquals(ss.data,["SESSIONEXPIRATIONERROR"]))
+                 {
+                      return SessionExpired();
+                 }
+               else{
+                 return Wheel(starr_map: ss.data);
+               }
+
               } else {
                 return Events_Loading_screen();
               }

@@ -54,8 +54,7 @@ class PayU extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
             decoration: BoxDecoration(
@@ -64,8 +63,7 @@ class PayU extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter)),
             child: MyCardWidget()),
-      ),
-    );
+      );
   }
 }
 
