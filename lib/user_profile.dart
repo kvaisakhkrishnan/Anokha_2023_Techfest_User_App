@@ -192,25 +192,25 @@ class _userProfState extends State<userProf> {
                                       fontFamily: "Roboto"),
                                 ),
                               ),
-
-
-                              (widget.data.activePassport == 0 ) ?
-                                  Padding(
-                                    padding:  EdgeInsets.only(top : 20.0),
-                                    child: ElevatedButton(onPressed: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => PassportBuy(),));
-                                    }, child: Text("Buy Passport"),
-                                      style: ElevatedButton.styleFrom(
-                                        elevation: 0,
-                                        primary: Color(0xff002845),),
-                                  ))
-                                  : Padding(
-                                    padding: EdgeInsets.only(top : 20.0),
-                                    child: Text("Passport Id: ${widget.data.passportId}",style: TextStyle(fontSize: 16,
-                                    color: Color(0xffff7f11),
-                                    fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
+                              (widget.data.activePassport == 0)
+                                  ? Padding(
+                                      padding: EdgeInsets.only(top: 20.0),
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PassportBuy(data: widget.data,),
+                                              ));
+                                        },
+                                        child: Text("Buy Passport"),
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          primary: Color(0xff002845),
+                                        ),
+                                      ))
+                                  : Text(widget.data.passportId),
                               Container(
                                 height:
                                     MediaQuery.of(context).size.height * 0.22,

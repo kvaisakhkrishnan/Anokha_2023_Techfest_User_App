@@ -78,12 +78,13 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
     String url = __url + "userApp/events/myRegistered";
     final response = await http.get(Uri.parse(url),
         headers: {'authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
-    if(response.statusCode == 200)
+    if(response.statusCode == 401)
       {
         registeredEvents = ["SESSIONEXPIRATIONERROR"];
       }
-    registeredEvents = json.decode(response.body);
-
+    else {
+      registeredEvents = json.decode(response.body);
+    }
 
   }
 

@@ -64,6 +64,20 @@ class _EventInfoState extends State<EventInfo> {
     super.dispose();
   }
 
+  Future<void> _addStarred() async {
+    final String url = "https://anokha.amrita.edu/api/userApp/insertStarrs";
+    final response = await http.post(Uri.parse(url),
+        body: {'eventId': widget.event_map.eventId},
+        headers: {'Authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
+  }
+
+  Future<void> _deleteStarred() async {
+    final String url = "https://anokha.amrita.edu/api/userApp/deleteStarrs";
+    final response = await http.post(Uri.parse(url),
+        body: {'eventId': widget.event_map.eventId},
+        headers: {'Authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -160,6 +174,11 @@ class _EventInfoState extends State<EventInfo> {
                                                     : Colors.black,
                                               ),
                                               onPressed: () {
+                                                if (liked == false) {
+                                                  _addStarred();
+                                                } else if (liked == true) {
+                                                  _deleteStarred();
+                                                }
                                                 setState(() {
                                                   liked = !liked;
                                                 });
@@ -443,7 +462,8 @@ class _EventInfoState extends State<EventInfo> {
                                               data: widget.data)
                                           : PayU(
                                               data: widget.data,
-                                              event_data: widget.event_map);
+                                              event_data: widget.event_map,
+                                            );
                                     }));
                                   },
                                   child: Center(
