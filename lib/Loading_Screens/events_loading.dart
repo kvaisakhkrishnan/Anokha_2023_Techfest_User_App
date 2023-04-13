@@ -13,6 +13,7 @@ class _Events_Loading_screenState extends State<Events_Loading_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       backgroundColor: Color(0xff002845),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40.0),

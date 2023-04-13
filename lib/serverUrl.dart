@@ -1,4 +1,4 @@
 class serverUrl{
-  final url = "http://52.66.236.118:3000/";
+  final url = "https://anokha.amrita.edu/api/userApp/";
   serverUrl();
 }
