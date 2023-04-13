@@ -22,14 +22,21 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
 
   Future<void> _sendEmailToBackend(String email) async {
     // Your API endpoint URL here
-    final String url = "https://yourapi.com/endpoint";
+    final String url = "https://anokha.amrita.edu/api/userApp/forgotPassword";
 
     final response = await http.post(
       Uri.parse(url),
-      body: {'email': email},
+      body: {'userEmail': email},
     );
 
     if (response.statusCode == 200) {
+      final url2 =
+          "https://anokha.amrita.edu/api/userApp/forgotPassword/verifyOtp";
+
+      final response2 = await http.post(Uri.parse(url2), body: {}, headers: {
+        'authorization': 'Bearer ${json.decode(response.body)["SECRET_TOKEN"]}',
+        'Content-Type': 'application/json'
+      });
       // Handle successful response here
     } else {
       // Handle unsuccessful response here
@@ -94,7 +101,6 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
                       child: Form(
                         key: _formKey,
                         child: SingleChildScrollView(
-                          
                           child: Column(
                             children: [
                               SizedBox(height: screenSize.height * 0.05),

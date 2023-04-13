@@ -1,6 +1,6 @@
-import 'package:anokha_home/buyPassport.dart';
 import 'package:flutter/material.dart';
 
+import 'buyPassport.dart';
 import 'login.dart';
 
 class userProf extends StatefulWidget {
@@ -107,7 +107,7 @@ class _userProfState extends State<userProf> {
                     alignment: Alignment.center,
                     children: [
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.8,
+                        height: MediaQuery.of(context).size.height * 0.9,
                         width: MediaQuery.of(context).size.width,
                         margin: EdgeInsets.only(
                             top: MediaQuery.of(context).size.height * 0.05),
@@ -127,7 +127,7 @@ class _userProfState extends State<userProf> {
                                 height:
                                     MediaQuery.of(context).size.height * 0.08,
                                 child: Image(
-                                  image: AssetImage('Images/anokha_circle.png'),
+                                  image: AssetImage('Images/logo.png'),
                                 ),
                               ),
                               Container(
@@ -183,6 +183,7 @@ class _userProfState extends State<userProf> {
                                 child: Text(
                                   widget.data.userEmail,
                                   style: TextStyle(
+                                      fontWeight: FontWeight.w500,
                                       fontSize: 0.018 *
                                           MediaQuery.of(context).size.height,
                                       color: islight
@@ -200,8 +201,7 @@ class _userProfState extends State<userProf> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    PassportBuy(
-                                                        data: widget.data),
+                                                    PassportBuy(),
                                               ));
                                         },
                                         child: Text("Buy Passport"),

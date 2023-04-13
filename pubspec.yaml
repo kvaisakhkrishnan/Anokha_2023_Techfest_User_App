@@ -55,6 +55,7 @@ dependencies:
   android_intent_plus: ^3.1.7
   lottie: ^2.3.2
   url_launcher: ^6.1.4
+  crypto: ^3.0.2
 
 dev_dependencies:
   flutter_test:
@@ -95,6 +96,8 @@ flutter:
      - Images/anokha_text.svg
      - Images/clg.svg
      - Images/passport.png
+     - Images/anokha_black_text.png
+     - assets/success.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

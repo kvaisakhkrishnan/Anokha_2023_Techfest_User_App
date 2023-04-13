@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'Loading_Screens/events_loading.dart';
 import 'controllerPage.dart';
 import 'forgotPassword.dart';
+import 'package:crypto/crypto.dart';
 
 var userData;
 
@@ -97,7 +98,7 @@ class loginPage extends StatefulWidget {
   State<loginPage> createState() => _loginPageState();
 }
 
-class _loginPageState extends State<loginPage>{
+class _loginPageState extends State<loginPage> {
   List<events_grouped_by_category> list_of_events = [];
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
@@ -139,13 +140,18 @@ class _loginPageState extends State<loginPage>{
   }
 
   Future<int> loginUser(String username, String password) async {
-    showDialog(context: context, builder: (context){
-      return Events_Loading_screen();
-    },);
+    var bytes = utf8.encode(password);
+    var digest = sha512.convert(bytes);
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Events_Loading_screen();
+      },
+    );
     String url = __url + 'userApp/login';
     Map<String, String> data = {
       'userEmail': username,
-      'password': password,
+      'password': digest.toString(),
     };
     String body = json.encode(data);
 
@@ -157,7 +163,7 @@ class _loginPageState extends State<loginPage>{
         body: body,
       );
 
-      print("response" );
+      print("response");
       print(response.statusCode.toString());
       // Check the response status
       if (response.statusCode == 200) {
@@ -173,7 +179,7 @@ class _loginPageState extends State<loginPage>{
             state: userDetails["userData"]['state'],
             country: userDetails["userData"]['country'],
             SECRET_TOKEN: userDetails["userData"]['SECRET_TOKEN'],
-            passportId : "hello");
+            passportId: userDetails["userData"]["passportId"]);
 
         for (var individual_data in userDetails["events"]) {
           String temp_title = individual_data["department"];
@@ -266,9 +272,7 @@ class _loginPageState extends State<loginPage>{
                 child: Stack(
                   children: [
                     Container(
-
                       color: Color(0xff002845),
-
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 25.0, vertical: 40.0),
@@ -351,10 +355,12 @@ class _loginPageState extends State<loginPage>{
                                               Navigator.pushReplacement(
                                                 context,
                                                 MaterialPageRoute(
-                                                  builder: (context) => ControllerPage(
+                                                  builder: (context) =>
+                                                      ControllerPage(
                                                     data: userData,
                                                     eventsList: list_of_events,
-                                                    onLogout: removeLoginCredentials,
+                                                    onLogout:
+                                                        removeLoginCredentials,
                                                   ),
                                                 ),
                                               );

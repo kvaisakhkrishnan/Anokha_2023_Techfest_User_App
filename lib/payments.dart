@@ -405,7 +405,7 @@ class _NextpageState extends State<Nextpage> {
       "Zipcode": zipcode,
       "hash": widget.trans_map?["hash"],
       "surl": "https://www.google.com/",
-      "furl": "https://www.google.com/",
+      "furl": "https://www.youtube.com/",
       "curl": "",
       "key": "ypfBaj"
     };
@@ -472,6 +472,13 @@ class _NextpageState extends State<Nextpage> {
                   MaterialPageRoute(
                       builder: (context) =>
                           Success(txid: widget.trans_map?["txid"])));
+            } else if (url.toString() == "https://www.youtube.com/") {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        Failure(txid: widget.trans_map?["txid"]),
+                  ));
             }
           },
         ),
@@ -496,6 +503,46 @@ class _NextpageState extends State<Nextpage> {
   /*await _controller.postUrl(url,
         body: postbody,
         headers: {'Content-Type': 'application/x-www-form-urlencoded'});*/
+}
+
+class Failure extends StatefulWidget {
+  var txid;
+  Failure({super.key, required this.txid});
+
+  @override
+  State<Failure> createState() => _FailureState();
+}
+
+class _FailureState extends State<Failure> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: Color(0xFF002845),
+        body: Center(
+          child: Column(children: [
+            Lottie.asset("assets/success.json", repeat: false),
+            SizedBox(
+              height: 30,
+            ),
+            Text(
+              "Transaction Successful",
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text("Your Payment will be reflected in 5-10",
+                style: TextStyle(color: Colors.white, fontSize: 18)),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "Transaction ID : ${widget.txid}",
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            )
+          ]),
+        ));
+  }
 }
 
 class UPI_Pay extends StatefulWidget {
@@ -543,17 +590,26 @@ class _SuccessState extends State<Success> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        Lottie.asset("../assets/success.json"),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.1,
-        ),
-        Center(
-          child: Text("Transaction ID : ${widget.txid}"),
-        )
-      ],
-    ));
+        backgroundColor: Color(0xFF002845),
+        body: Center(
+          child: Column(children: [
+            Lottie.asset("assets/success.json", repeat: false),
+            SizedBox(
+              height: 30,
+            ),
+            Text(
+              "Transaction Successful",
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "Transaction ID : ${widget.txid}",
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            )
+          ]),
+        ));
   }
 }
 
