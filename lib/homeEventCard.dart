@@ -121,7 +121,7 @@ class _EventCardState extends State<EventCard> {
                       topLeft: Radius.circular(25.0),
                       topRight: Radius.circular(25.0))),
               constraints: BoxConstraints.expand(
-                  height: MediaQuery.of(context).size.width * 0.4 * 1.0,
+                  height: MediaQuery.of(context).size.width * 0.5 * 1.0,
                   width: MediaQuery.of(context).size.width * 0.42),
             ),
             Container(
@@ -138,8 +138,8 @@ class _EventCardState extends State<EventCard> {
                         fontSize: 19.0,
                         fontWeight: FontWeight.w500,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      overflow: TextOverflow.fade,
                     ),
                     // SizedBox(height: MediaQuery.of(context).size.height * 0.001),
                     Row(
