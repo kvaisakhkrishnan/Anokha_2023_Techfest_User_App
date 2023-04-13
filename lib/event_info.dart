@@ -75,7 +75,7 @@ class _EventInfoState extends State<EventInfo> {
   }
 
   Future<void> _deleteStarred() async {
-    final String url = "https://anokha.amrita.edu/api/userApp/deleteStarrs";
+    final String url = "https://anokha.amrita.edu/api/userApp/dropStarrs";
     final response = await http.post(Uri.parse(url),
         body: {'eventId': widget.event_map.eventId},
         headers: {'Authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
