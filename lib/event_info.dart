@@ -69,6 +69,9 @@ class _EventInfoState extends State<EventInfo> {
     final response = await http.post(Uri.parse(url),
         body: {'eventId': widget.event_map.eventId},
         headers: {'Authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
+
+    if (response.statusCode == 200) {
+    } else {}
   }
 
   Future<void> _deleteStarred() async {
@@ -76,6 +79,9 @@ class _EventInfoState extends State<EventInfo> {
     final response = await http.post(Uri.parse(url),
         body: {'eventId': widget.event_map.eventId},
         headers: {'Authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
+
+    if (response.statusCode == 200) {
+    } else {}
   }
 
   @override
