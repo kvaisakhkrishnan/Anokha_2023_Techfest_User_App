@@ -1,3 +1,4 @@
+import 'package:anokha_home/buyPassport.dart';
 import 'package:flutter/material.dart';
 
 import 'login.dart';
@@ -136,9 +137,9 @@ class _userProfState extends State<userProf> {
                                 child: Text(
                                   widget.data.activePassport == 1
                                       ? 'PASSPORT'
-                                      : 'WELCOME',
+                                      : 'PROFILE',
                                   style: TextStyle(
-                                      fontSize: 30.0,
+                                      fontSize: 25.0,
                                       color: islight
                                           ? Color(0xFFBEB7AA)
                                           : Color(0xFF002845),
@@ -190,9 +191,19 @@ class _userProfState extends State<userProf> {
                                       fontFamily: "Roboto"),
                                 ),
                               ),
-                              SizedBox(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.05),
+
+
+                              (widget.data.activePassport == 0 ) ?
+                                  Padding(
+                                    padding:  EdgeInsets.only(top : 20.0),
+                                    child: ElevatedButton(onPressed: (){
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => PassportBuy(),));
+                                    }, child: Text("Buy Passport"),
+                                      style: ElevatedButton.styleFrom(
+                                        elevation: 0,
+                                        primary: Color(0xff002845),),
+                                  ))
+                                  : Text(widget.data.passportId),
                               Container(
                                 height:
                                     MediaQuery.of(context).size.height * 0.22,

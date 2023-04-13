@@ -62,6 +62,7 @@ class User {
   final String userEmail;
   final String fullName;
   final int activePassport;
+  final String passportId;
   final int isAmritaCBE;
   final String collegeName;
   final String district;
@@ -83,7 +84,8 @@ class User {
       required this.district,
       required this.state,
       required this.country,
-      required this.SECRET_TOKEN});
+      required this.SECRET_TOKEN,
+      required this.passportId});
 }
 
 final __url = serverUrl().url;
@@ -170,7 +172,8 @@ class _loginPageState extends State<loginPage>{
             district: userDetails["userData"]['district'],
             state: userDetails["userData"]['state'],
             country: userDetails["userData"]['country'],
-            SECRET_TOKEN: userDetails["userData"]['SECRET_TOKEN']);
+            SECRET_TOKEN: userDetails["userData"]['SECRET_TOKEN'],
+            passportId : userDetails["userData"]["passportId"]);
 
         for (var individual_data in userDetails["events"]) {
           String temp_title = individual_data["department"];
