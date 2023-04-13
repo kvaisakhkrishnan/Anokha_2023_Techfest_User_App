@@ -1,6 +1,6 @@
-import 'package:anokha_home/buyPassport.dart';
 import 'package:flutter/material.dart';
 
+import 'buyPassport.dart';
 import 'login.dart';
 
 class userProf extends StatefulWidget {
