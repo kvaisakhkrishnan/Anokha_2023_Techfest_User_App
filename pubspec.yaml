@@ -94,6 +94,7 @@ flutter:
      - Images/campus.svg
      - Images/anokha_text.svg
      - Images/clg.svg
+     - Images/passport.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

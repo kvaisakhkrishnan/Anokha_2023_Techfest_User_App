@@ -155,6 +155,8 @@ class _loginPageState extends State<loginPage>{
         body: body,
       );
 
+      print("response" );
+      print(response.statusCode.toString());
       // Check the response status
       if (response.statusCode == 200) {
         var userDetails = jsonDecode(response.body);

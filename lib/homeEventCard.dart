@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:anokha_home/buyPassport.dart';
 import 'package:anokha_home/serverUrl.dart';
+import 'package:anokha_home/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -63,11 +65,61 @@ class _EventCardState extends State<EventCard> {
       padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
       child: InkWell(
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => EventInfo(
-                      event_map: widget.event_data, data: widget.data)));
+          if(widget.data.activePassport == 1)
+            {
+
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => EventInfo(
+                          event_map: widget.event_data, data: widget.data)));
+            }
+          else{
+
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                    title: Text('Buy Passport'),
+                    content: Text('You have to buy a passport to view events'),
+                    actions: [
+                      TextButton(
+                        child: Text('Buy Passport',
+                        style: TextStyle(color: Color(0xff002845))),
+                        onPressed: () {
+                          // Close the pop-up notification
+                          Navigator.of(context).pop();
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PassportBuy()));
+
+
+                        },
+                      ),
+
+                      TextButton(
+                        child: Text('Cancel',
+                        style: TextStyle(color: Colors.red),),
+                        onPressed: () {
+                          // Close the pop-up notification
+                          Navigator.of(context).pop();
+
+
+
+                        },
+                      ),
+                    ],
+                  );
+                }
+            );
+
+
+
+          }
+
         },
         child: Column(
           children: [
