@@ -211,7 +211,7 @@ class _MyCardWidgetState extends State<MyCardWidget> {
   void collectTransToken() async {
     showAlertDialog();
     String url =
-        "http://52.66.236.118:3000/userApp/transaction/moveToTransaction";
+        "https://anokha.amrita.edu/api/userApp/transaction/moveToTransaction";
     String user_token = user_data.SECRET_TOKEN;
 
     final response = await http
@@ -288,7 +288,7 @@ class _PaymentPageState extends State<PaymentPage> {
   Future<Map<String, dynamic>> getHash() async {
     print("hello");
     String url =
-        "http://52.66.236.118:3000/userApp/transaction/initiateTransaction";
+        "https://anokha.amrita.edu/api/userApp/transaction/initiateTransaction";
     /*var productId = (eventdata == null)
         ? "E${event_details["eventId"]}"
         : "E${event_details.eventId}";*/

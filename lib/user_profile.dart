@@ -32,23 +32,24 @@ class _userProfState extends State<userProf> {
 
   Future<bool> _onWillPop() async {
     return (await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        title: Text('Are you sure?'),
-        content: Text('Do you want to exit the app?'),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: Text('No',style: TextStyle(color: Color(0xFF002845))),
+          context: context,
+          builder: (context) => AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            title: Text('Are you sure?'),
+            content: Text('Do you want to exit the app?'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text('No', style: TextStyle(color: Color(0xFF002845))),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text('Yes', style: TextStyle(color: Color(0xFF002845))),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: Text('Yes',style: TextStyle(color: Color(0xFF002845))),
-          ),
-        ],
-      ),
-    )) ??
+        )) ??
         false;
   }
 
@@ -73,24 +74,22 @@ class _userProfState extends State<userProf> {
       child: Scaffold(
           backgroundColor: islight ? Color(0xFFFFFFFC) : Color(0xFF002845),
           appBar: AppBar(
-
             backgroundColor: Color(0xff002845),
             elevation: 0.0,
             actions: [
-
               IconButton(
                 onPressed: () {
                   widget.onLogout(); // Call the callback function
                   Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (BuildContext context) => loginPage()),
-                        (Route<dynamic> route) => false,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => loginPage()),
+                    (Route<dynamic> route) => false,
                   );
                 },
                 icon: Icon(Icons.power_settings_new),
                 color: Color(0xFFFF3F00),
               ),
-
             ],
           ),
           body: Column(
@@ -98,7 +97,10 @@ class _userProfState extends State<userProf> {
               Expanded(
                 child: Container(
                   margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.00, left: MediaQuery.of(context).size.width * 0.05, right: MediaQuery.of(context).size.width * 0.05, bottom: MediaQuery.of(context).size.height * 0.01),
+                      top: MediaQuery.of(context).size.height * 0.00,
+                      left: MediaQuery.of(context).size.width * 0.05,
+                      right: MediaQuery.of(context).size.width * 0.05,
+                      bottom: MediaQuery.of(context).size.height * 0.01),
                   alignment: Alignment.center,
                   child: Stack(
                     alignment: Alignment.center,
@@ -106,24 +108,35 @@ class _userProfState extends State<userProf> {
                       Container(
                         height: MediaQuery.of(context).size.height * 0.8,
                         width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
+                        margin: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height * 0.05),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                          color: islight ? Color(0xFF002845) : Color(0xFFFFFFFC),
+                          color:
+                              islight ? Color(0xFF002845) : Color(0xFFFFFFFC),
                         ),
                         // color: Colors.black,
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
                               Container(
-                                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.09),
-                                height: MediaQuery.of(context).size.height * 0.08,
-                                child: Image(image: AssetImage('Images/anokha_circle.png'),),
+                                margin: EdgeInsets.only(
+                                    top: MediaQuery.of(context).size.height *
+                                        0.09),
+                                height:
+                                    MediaQuery.of(context).size.height * 0.08,
+                                child: Image(
+                                  image: AssetImage('Images/anokha_circle.png'),
+                                ),
                               ),
                               Container(
-                                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
+                                margin: EdgeInsets.only(
+                                    top: MediaQuery.of(context).size.height *
+                                        0.03),
                                 child: Text(
-                                  widget.data.activePassport == 1 ? 'PASSPORT' : 'WELCOME',
+                                  widget.data.activePassport == 1
+                                      ? 'PASSPORT'
+                                      : 'WELCOME',
                                   style: TextStyle(
                                       fontSize: 30.0,
                                       color: islight
@@ -133,10 +146,12 @@ class _userProfState extends State<userProf> {
                                 ),
                               ),
                               SizedBox(
-                                height: MediaQuery.of(context).size.height*0,
+                                height: MediaQuery.of(context).size.height * 0,
                                 width: MediaQuery.of(context).size.width * 0.35,
                                 child: Container(
-                                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.004),
+                                  margin: EdgeInsets.only(
+                                      top: MediaQuery.of(context).size.height *
+                                          0.004),
                                   alignment: Alignment.topCenter,
                                   child: Divider(
                                     color: islight
@@ -146,11 +161,14 @@ class _userProfState extends State<userProf> {
                                 ),
                               ),
                               Container(
-                                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.03),
+                                margin: EdgeInsets.only(
+                                    top: MediaQuery.of(context).size.height *
+                                        0.03),
                                 child: Text(
                                   widget.data.fullName,
                                   style: TextStyle(
-                                      fontSize: 0.027 * MediaQuery.of(context).size.height,
+                                      fontSize: 0.027 *
+                                          MediaQuery.of(context).size.height,
                                       color: islight
                                           ? Color(0xFFFFFFFC)
                                           : Color(0xFF002845),
@@ -158,20 +176,26 @@ class _userProfState extends State<userProf> {
                                 ),
                               ),
                               Container(
-                                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+                                margin: EdgeInsets.only(
+                                    top: MediaQuery.of(context).size.height *
+                                        0.02),
                                 child: Text(
                                   widget.data.userEmail,
                                   style: TextStyle(
-                                      fontSize: 0.018 * MediaQuery.of(context).size.height,
+                                      fontSize: 0.018 *
+                                          MediaQuery.of(context).size.height,
                                       color: islight
                                           ? Color(0xFFBEB7AA)
                                           : Color(0xFF002845),
                                       fontFamily: "Roboto"),
                                 ),
                               ),
-                             SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+                              SizedBox(
+                                  height: MediaQuery.of(context).size.height *
+                                      0.05),
                               Container(
-                                height: MediaQuery.of(context).size.height * 0.22,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.22,
                                 child: GestureDetector(
                                   onTap: () {
                                     _showImageDialog(context);
@@ -188,7 +212,6 @@ class _userProfState extends State<userProf> {
                                   ),
                                 ),
                               ),
-
                             ],
                           ),
                         ),
@@ -201,7 +224,7 @@ class _userProfState extends State<userProf> {
                         ),
                       ),
                       Positioned(
-                        top: MediaQuery.of(context).size.width * 0.9,
+                          top: MediaQuery.of(context).size.width * 0.9,
                           left: MediaQuery.of(context).size.width * -0.095,
                           child: Container(
                             height: 50,
@@ -219,8 +242,9 @@ class _userProfState extends State<userProf> {
                           height: 50,
                           width: 50,
                           decoration: BoxDecoration(
-                              color:
-                              islight ? Color(0xFFFFFFFC) : Color(0xFF002845),
+                              color: islight
+                                  ? Color(0xFFFFFFFC)
+                                  : Color(0xFF002845),
                               shape: BoxShape.circle),
                         ),
                       ),
