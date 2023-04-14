@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:dropdownfield2/dropdownfield2.dart';
 
+import 'otpValidation.dart';
+
 class RegisterPage extends StatefulWidget {
   RegisterPage({Key? key}) : super(key: key);
 
@@ -86,6 +88,8 @@ class _RegisterPageState extends State<RegisterPage>
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _collegeController = TextEditingController();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
 
   final _formKey = GlobalKey<FormState>();
 
@@ -99,19 +103,51 @@ class _RegisterPageState extends State<RegisterPage>
         body: jsonEncode(<String, dynamic>{
           'fullName': _fullNameController.text,
           'userEmail': _emailController.text,
-          'mobileNumber': _mobileNumberController.text,
+          'phoneNumber': _mobileNumberController.text,
           'password': _passwordController.text,
           'collegeId': int.parse(_collegeController.text.split("-")[0].trim()),
         }),
       );
-      // Handle the response as needed
-      print(_collegeController.text);
+
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
+
+      if (response.statusCode == 200) {
+        // Extract the token from the response body
+        final responseBody = jsonDecode(response.body);
+        final String token = responseBody['token'];
+
+        // Navigate to the new page and pass the token
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OTPVerify(token: token),
+          ),
+        );
+      } else if (response.statusCode == 409) {
+        // Show an error below the register button
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('You have already registered'),
+            duration: Duration(seconds: 3),
+          ),
+        );
+      } else {
+        // Show a generic error message
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('An error occurred. Please try again.'),
+            duration: Duration(seconds: 3),
+          ),
+        );
+      }
     } catch (e) {
       print('Error: $e');
     }
   }
+
+
+
 
 
   @override
@@ -119,6 +155,7 @@ class _RegisterPageState extends State<RegisterPage>
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
+          key: _scaffoldKey,
           appBar: AppBar(
             elevation: 0.0,
             backgroundColor: Colors.transparent,
