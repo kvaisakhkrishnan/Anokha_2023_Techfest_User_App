@@ -15,29 +15,8 @@ class EventInfo extends StatefulWidget {
   bool txt_visible = false;
   var event_map;
   var data;
-  var star_map;
-  EventInfo({Key? key, required this.event_map, this.data, this.star_map})
-      : super(key: key) {
-    if (this.event_map == null) {
-      this.event_map = events(
-          eventId: this.star_map["eventId"],
-          date: this.star_map["date"],
-          day: this.star_map["day"],
-          department: this.star_map["departmentAbbr"],
-          description: this.star_map["description"],
-          fees: this.star_map["fees"],
-          individualOrGroup: this.star_map["groupOrIndividual"],
-          isStarred: 1,
-          maxCount: this.star_map["maxCount"],
-          name: this.star_map["eventName"],
-          noOfRegistrations: this.star_map["noOfRegistrations"],
-          technical: this.star_map["technical"],
-          time: this.star_map["eventTime"],
-          type: this.star_map["type"],
-          url: this.star_map["url"],
-          venue: this.star_map["venue"],
-          totalNumberOfSeats: this.star_map["totalNumberOfSeats"]);
-    }
+
+  EventInfo({Key? key, required this.event_map, this.data}) : super(key: key) {
     txt_visible = true;
   }
 
@@ -72,6 +51,7 @@ class _EventInfoState extends State<EventInfo> {
         headers: {'Authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
 
     if (response.statusCode == 200) {
+      print("");
     } else {}
   }
 
@@ -309,7 +289,7 @@ class _EventInfoState extends State<EventInfo> {
                                               height: 10,
                                             ),
                                             Text(
-                                              "${(widget.event_map.totalNoOfSeats)}\nTotal Seats",
+                                              "${(widget.event_map.maxCount)}\nTotal Seats",
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   color: Colors.white,
@@ -439,18 +419,10 @@ class _EventInfoState extends State<EventInfo> {
                               onPressed: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return ((widget.event_map == null)
-                                          ? widget.star_map["grpupOrIndividual"]
-                                          : widget.event_map
-                                                  .individualOrGroup ==
-                                              1)
-                                      ? EventRegistrationForm(
-                                          jsonData: widget.event_map,
-                                          data: widget.data)
-                                      : PayU(
-                                          data: widget.data,
-                                          event_data: widget.event_map,
-                                        );
+                                  return PayU(
+                                    data: widget.data,
+                                    event_data: widget.event_map,
+                                  );
                                 }));
                               },
                               child: Center(

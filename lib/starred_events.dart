@@ -13,6 +13,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'Loading_Screens/events_loading.dart';
+import 'homePage.dart';
 
 final __url = serverUrl().url;
 var token;
@@ -124,13 +125,36 @@ class _WheelState extends State<Wheel> {
                     child: New_Widget(
                         index: index, starrs: widget.starr_map![index]),
                     onTap: () {
-                      /*Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => EventInfo(
-                            event_map: null,
-                            data: token,
-                            star_map: widget.starr_map?[index])));*/
+                      var event_map = events(
+                          totalNumberOfSeats: widget.starr_map![index]
+                              ["totalNumberofSeats"],
+                          eventId: widget.starr_map![index]["eventId"],
+                          date: widget.starr_map![index]["date"],
+                          day: widget.starr_map![index]["day"],
+                          department: widget.starr_map![index]
+                              ["departmentAbbr"],
+                          description: widget.starr_map![index]["description"],
+                          fees: widget.starr_map![index]["fees"],
+                          individualOrGroup: widget.starr_map![index]
+                              ["groupOrIndividual"],
+                          isStarred: 1,
+                          maxCount: widget.starr_map![index]["maxCount"],
+                          name: widget.starr_map![index]["eventName"],
+                          noOfRegistrations: widget.starr_map![index]
+                              ["noOfRegistrations"],
+                          technical: widget.starr_map![index]["technical"],
+                          time: widget.starr_map![index]["eventTime"],
+                          type: widget.starr_map![index]["type"],
+                          url: widget.starr_map![index]["url"],
+                          venue: widget.starr_map![index]["venue"]);
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EventInfo(
+                                    event_map: event_map,
+                                    data: token,
+                                  )));
                     },
                   ),
                 );
