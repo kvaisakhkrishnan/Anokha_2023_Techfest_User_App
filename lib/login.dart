@@ -3,6 +3,7 @@ import 'package:anokha_home/serverUrl.dart';
 import 'package:anokha_home/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
@@ -33,25 +34,26 @@ class event_list {
   int isStarred;
   int fees;
   int totalNumberOfSeats;
+  String errorMessage="";
 
   event_list(
       {required this.eventId,
-      required this.name,
-      required this.description,
-      required this.date,
-      required this.type,
-      required this.venue,
-      required this.time,
-      required this.department,
-      required this.day,
-      required this.technical,
-      required this.noOfRegistrations,
-      required this.url,
-      required this.individualOrGroup,
-      required this.maxCount,
-      required this.isStarred,
-      required this.fees,
-      required this.totalNumberOfSeats});
+        required this.name,
+        required this.description,
+        required this.date,
+        required this.type,
+        required this.venue,
+        required this.time,
+        required this.department,
+        required this.day,
+        required this.technical,
+        required this.noOfRegistrations,
+        required this.url,
+        required this.individualOrGroup,
+        required this.maxCount,
+        required this.isStarred,
+        required this.fees,
+        required this.totalNumberOfSeats});
 }
 
 class events_grouped_by_category {
@@ -80,15 +82,15 @@ class User {
 
   User(
       {required this.userEmail,
-      required this.fullName,
-      required this.activePassport,
-      required this.isAmritaCBE,
-      required this.collegeName,
-      required this.district,
-      required this.state,
-      required this.country,
-      required this.SECRET_TOKEN,
-      required this.passportId});
+        required this.fullName,
+        required this.activePassport,
+        required this.isAmritaCBE,
+        required this.collegeName,
+        required this.district,
+        required this.state,
+        required this.country,
+        required this.SECRET_TOKEN,
+        required this.passportId});
 }
 
 final __url = serverUrl().url;
@@ -103,7 +105,7 @@ class loginPage extends StatefulWidget {
 class _loginPageState extends State<loginPage> {
   List<events_grouped_by_category> list_of_events = [];
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
-      GlobalKey<ScaffoldMessengerState>();
+  GlobalKey<ScaffoldMessengerState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -134,22 +136,23 @@ class _loginPageState extends State<loginPage> {
     super.initState();
     loadLoginCredentials();
   }
+  String errorMessage="";
 
   bool isValidEmail(String email) {
     final RegExp emailRegex =
-        RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
     return emailRegex.hasMatch(email);
   }
 
   Future<int> loginUser(String username, String password) async {
     var bytes = utf8.encode(password);
     var digest = sha512.convert(bytes);
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Events_Loading_screen();
-      },
-    );
+    // showDialog(
+    //   context: context,
+    //   builder: (context) {
+    //     return Events_Loading_screen();
+    //   },
+    // );
     String url = __url + 'userApp/login';
     Map<String, String> data = {
       'userEmail': username,
@@ -168,14 +171,15 @@ class _loginPageState extends State<loginPage> {
       print("response");
       print(response.statusCode.toString());
       // Check the response status
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200)
+      {
 
 
         var userDetails = jsonDecode(response.body);
         if(userDetails["userData"]['passportId'] == null)
-          {
-            userDetails["userData"]['passportId'] = "NA";
-          }
+        {
+          userDetails["userData"]['passportId'] = "NA";
+        }
 
         userData = User(
             userEmail: userDetails["userData"]['userEmail'],
@@ -222,6 +226,9 @@ class _loginPageState extends State<loginPage> {
 
         return 1;
       } else {
+        setState(() {
+          errorMessage="Check your Credentials";
+        });
         return 0;
       }
     } catch (e) {
@@ -297,8 +304,13 @@ class _loginPageState extends State<loginPage> {
                                   SizedBox(),
                                   Padding(
                                     padding:
-                                        EdgeInsets.symmetric(horizontal: 10.0),
+                                    EdgeInsets.symmetric(horizontal: 10.0),
                                     child: TextFormField(
+                                      onTap: (){
+                                        setState(() {
+                                          errorMessage="";
+                                        });
+                                      },
                                       controller: _usernameController,
                                       decoration: InputDecoration(
                                         hintText: "Registered Email",
@@ -320,8 +332,13 @@ class _loginPageState extends State<loginPage> {
                                   ),
                                   Padding(
                                     padding:
-                                        EdgeInsets.symmetric(horizontal: 10.0),
+                                    EdgeInsets.symmetric(horizontal: 10.0),
                                     child: TextFormField(
+                                      onTap: (){
+                                        setState(() {
+                                          errorMessage="";
+                                        });
+                                      },
                                       controller: _passwordController,
                                       obscureText: _obscureText,
                                       decoration: InputDecoration(
@@ -345,7 +362,7 @@ class _loginPageState extends State<loginPage> {
                                   ),
                                   Padding(
                                     padding:
-                                        EdgeInsets.symmetric(vertical: 30.0),
+                                    EdgeInsets.only(top: 30.0),
                                     child: OutlinedButton(
                                       onPressed: () async {
                                         if (_formKey.currentState!.validate()) {
@@ -357,24 +374,31 @@ class _loginPageState extends State<loginPage> {
                                             );
 
                                             if (status == 1) {
+                                              print("in status 1");
                                               await saveLoginCredentials(
                                                 _usernameController.text,
                                                 _passwordController.text,
                                               );
+                                              // ignore: use_build_context_synchronously
                                               Navigator.pushReplacement(
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
                                                       ControllerPage(
-                                                    data: userData,
-                                                    eventsList: list_of_events,
-                                                    onLogout:
+                                                        data: userData,
+                                                        eventsList: list_of_events,
+                                                        onLogout:
                                                         removeLoginCredentials,
-                                                  ),
+                                                      ),
                                                 ),
                                               );
                                             } else {
-
+                                              _scaffoldMessengerKey.currentState
+                                                  ?.showSnackBar(
+                                                SnackBar(
+                                                    content: Text(
+                                                        'Invalid login credentials')),
+                                              );
                                             }
                                           } catch (e) {
                                             print("Error: $e");
@@ -387,28 +411,31 @@ class _loginPageState extends State<loginPage> {
                                           }
                                         }
                                       },
-                                      child: Text(
+                                      style: OutlinedButton.styleFrom(
+                                        backgroundColor: Color(0xFFFF7F11),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(10.0)),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 13.0,
+                                            horizontal: MediaQuery.of(context)
+                                                .size
+                                                .width *
+                                                0.3),
+                                      ),
+                                      child: const Text(
                                         "LOGIN",
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 15.0),
                                       ),
-                                      style: OutlinedButton.styleFrom(
-                                        backgroundColor: Color(0xFFFF7F11),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0)),
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 13.0,
-                                            horizontal: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.3),
-                                      ),
                                     ),
+
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 20.0),
+                                  if (errorMessage!="")
+                                    Text(errorMessage,style: GoogleFonts.dmSans(color: Colors.red),),
+                                  const Padding(
+                                    padding: EdgeInsets.only(top: 30.0),
                                     child: Text(
                                       "New to Anokha 2023?",
                                       style: TextStyle(fontSize: 17.0),

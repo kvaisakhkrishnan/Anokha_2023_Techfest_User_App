@@ -157,7 +157,7 @@ class _EventInfoState extends State<EventInfo> {
                                             widget.event_map.name,
                                             maxLines: 3,
                                             style: TextStyle(
-                                              fontSize: 25.0,
+                                              fontSize: 20.0,
                                               fontWeight: FontWeight.w700,
                                             ),
                                           ),

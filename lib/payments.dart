@@ -650,7 +650,7 @@ class _UserFormState extends State<UserForm> {
       physics: ClampingScrollPhysics(),
       child: Container(
           width: MediaQuery.of(context).size.width * 0.77,
-          height: MediaQuery.of(context).size.height * 0.7,
+          height: MediaQuery.of(context).size.height * 0.8,
           child: Form(
               key: _formKey,
               child: Column(children: [
