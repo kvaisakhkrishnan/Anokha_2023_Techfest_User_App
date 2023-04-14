@@ -243,7 +243,7 @@ class _loginPageState extends State<loginPage> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          backgroundColor: Color(0xff002845),
+          backgroundColor: Colors.white,
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
             elevation: 0.0,
@@ -270,7 +270,7 @@ class _loginPageState extends State<loginPage> {
                       "Login Portal",
                       style: TextStyle(
                         fontSize: 30.0,
-                        color: Color(0xffbeb7a4),
+                        color: Color(0xff002845),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -281,7 +281,7 @@ class _loginPageState extends State<loginPage> {
                 child: Stack(
                   children: [
                     Container(
-                      color: Color(0xff002845),
+                      color: Color(0xffF3F2F7),
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 25.0, vertical: 40.0),

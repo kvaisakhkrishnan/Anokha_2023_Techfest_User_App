@@ -45,14 +45,16 @@ class _HomeBodyState extends State<HomeBody> {
 
         for (var eventDetail in eventUnderDept.events_list) {
           if (eventDetail.eventId
-              .toString()
-              .toLowerCase()
-              .contains(search.toLowerCase()) ||
+                  .toString()
+                  .toLowerCase()
+                  .contains(search.toLowerCase()) ||
               eventDetail.name.toLowerCase().contains(search.toLowerCase()) ||
               eventDetail.description
                   .toLowerCase()
                   .contains(search.toLowerCase()) ||
               eventDetail.date.toLowerCase().contains(search.toLowerCase()) ||
+              ((search.toLowerCase() == "event" ||search.toLowerCase() == "events") && eventDetail.type == 0) ||
+              ((search.toLowerCase() == "workshop" ||search.toLowerCase() == "workshops") && eventDetail.type == 1) ||
               eventDetail.venue.toLowerCase().contains(search.toLowerCase()) ||
               eventDetail.department
                   .toLowerCase()
@@ -69,19 +71,17 @@ class _HomeBodyState extends State<HomeBody> {
   }
 
   void sortEventsByRegistrations() {
-    allEvents.sort((a, b) => b.noOfRegistrations.compareTo(a.noOfRegistrations));
+    allEvents
+        .sort((a, b) => b.noOfRegistrations.compareTo(a.noOfRegistrations));
   }
-
-
 
   @override
   void initState() {
-    for(var eventsUnderDept in widget.eventsList)
-      {
-        for (var eventDetail in eventsUnderDept.events_list) {
-          allEvents.add(eventDetail);
-        }
+    for (var eventsUnderDept in widget.eventsList) {
+      for (var eventDetail in eventsUnderDept.events_list) {
+        allEvents.add(eventDetail);
       }
+    }
     sortEventsByRegistrations();
   }
 
@@ -96,19 +96,19 @@ class _HomeBodyState extends State<HomeBody> {
                 children: [
                   Padding(
                     padding:
-                    EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0),
+                        EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0),
                     child: Container(
                       alignment: Alignment.topLeft,
                       child: Text(
                         "Trending Now",
                         style: TextStyle(
-                          color: Color(0xffbeb7a4),
-                            fontSize: 25.0, fontWeight: FontWeight.w600),
-
+                            color: Color(0xffbeb7a4),
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.w600),
                       ),
                     ),
                   ),
-                  AnokhaCards(data: allEvents),
+                  AnokhaCards(data: allEvents, token: widget.data),
                 ],
               ),
               Padding(
@@ -116,29 +116,27 @@ class _HomeBodyState extends State<HomeBody> {
                     vertical: 15.0, horizontal: 20.0),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Color(0xff002845),
-
-                      borderRadius: BorderRadius.circular(15.0),
-
-                      border: Border.all(
-                      color: Color(0xffbeb7a4), // set the desired border color here
+                    color: Color(0xff002845),
+                    borderRadius: BorderRadius.circular(15.0),
+                    border: Border.all(
+                      color: Color(
+                          0xffbeb7a4), // set the desired border color here
                       width: 2.0, // set the desired border width here
-                    ),),
-
+                    ),
+                  ),
                   child: Padding(
                     padding:
-                    EdgeInsets.only(left: 10, top: 3, bottom: 3, right: 20),
+                        EdgeInsets.only(left: 10, top: 3, bottom: 3, right: 20),
                     child: TextFormField(
-
                       onChanged: (value) {
                         search(value);
                       },
-                      style: TextStyle(fontSize: 18,color: Color(0xffbeb7a4)),
+                      style: TextStyle(fontSize: 18, color: Color(0xffbeb7a4)),
                       decoration: InputDecoration(
-
                         hintText: 'Search Events, Departments',
                         hintStyle: TextStyle(
-                          color: Color(0xffbeb7a4), // set the desired hint text color here
+                          color: Color(
+                              0xffbeb7a4), // set the desired hint text color here
                         ),
                         prefixIcon: Icon(Icons.search, color: Colors.grey),
                         border: InputBorder.none,
@@ -153,26 +151,26 @@ class _HomeBodyState extends State<HomeBody> {
         if (searchInitiated == 0)
           SliverList(
             delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
+              (BuildContext context, int index) {
                 return Column(
                   children: [
                     Padding(
                       padding:
-                      EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0),
+                          EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0),
                       child: Container(
                         alignment: Alignment.topLeft,
                         child: Text(
                           "${widget.eventsList[index].title}",
                           style: TextStyle(
                               color: Color(0xffbeb7a4),
-                              fontSize: 20.0, fontWeight: FontWeight.w500),
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w500),
                         ),
                       ),
                     ),
                     CardRow(
-                      list_of_events: widget.eventsList[index].events_list,
-                      data: widget.data
-                    ),
+                        list_of_events: widget.eventsList[index].events_list,
+                        data: widget.data),
                   ],
                 );
               },
@@ -192,10 +190,10 @@ class _HomeBodyState extends State<HomeBody> {
           crossAxisCount: 2,
           crossAxisSpacing: 10.0,
           mainAxisSpacing: 10.0,
-          childAspectRatio:5 / 8,
+          childAspectRatio: 5 / 8,
         ),
         delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
+          (BuildContext context, int index) {
             return _buildEventCard(eventsSearch[index]);
           },
           childCount: eventsSearch.length,
@@ -205,6 +203,9 @@ class _HomeBodyState extends State<HomeBody> {
   }
 
   Widget _buildEventCard(event_list event) {
-    return EventCard(event_data: event, data: widget.data,);
+    return EventCard(
+      event_data: event,
+      data: widget.data,
+    );
   }
 }
