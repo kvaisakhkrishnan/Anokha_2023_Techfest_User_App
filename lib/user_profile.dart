@@ -201,7 +201,9 @@ class _userProfState extends State<userProf> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    PassportBuy(data:widget.data),
+                                                    PassportBuy(
+                                                  data: widget.data,
+                                                ),
                                               ));
                                         },
                                         child: Text("Buy Passport"),

@@ -192,7 +192,7 @@ class _HomeBodyState extends State<HomeBody> {
           crossAxisCount: 2,
           crossAxisSpacing: 10.0,
           mainAxisSpacing: 10.0,
-          childAspectRatio: 2 / 3,
+          childAspectRatio:5 / 8,
         ),
         delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {

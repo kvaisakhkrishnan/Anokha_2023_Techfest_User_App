@@ -179,7 +179,7 @@ class _loginPageState extends State<loginPage> {
             state: userDetails["userData"]['state'],
             country: userDetails["userData"]['country'],
             SECRET_TOKEN: userDetails["userData"]['SECRET_TOKEN'],
-            passportId: userDetails["userData"]["passportId"]);
+            passportId: userDetails["userData"]['passportId']);
 
         for (var individual_data in userDetails["events"]) {
           String temp_title = individual_data["department"];

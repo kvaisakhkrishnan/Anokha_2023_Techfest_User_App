@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:anokha_home/homeBody.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -57,7 +58,22 @@ class _GetCrewState extends State<GetCrew> {
                 print("error");
               }
               if (ss.hasData) {
-                return CrewMembers(list: ss.data);
+                if(listEquals(ss.data, []))
+                  {
+                    return Scaffold(
+                      backgroundColor: Color(0xff002845),
+                      body: Center(
+                          child: Text(
+                            "Page under development",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                            maxLines: 3,
+                          )),
+                    );
+                  }
+                else{
+                  return CrewMembers(list: ss.data);
+                }
+
               } else {
                 return Events_Loading_screen();
               }

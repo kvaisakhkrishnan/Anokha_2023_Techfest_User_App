@@ -116,18 +116,18 @@ class _EventCardState extends State<EventCard> {
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: NetworkImage(widget.event_data.url),
-                      fit: BoxFit.fill),
+                      fit: BoxFit.cover),
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(25.0),
                       topRight: Radius.circular(25.0))),
               constraints: BoxConstraints.expand(
-                  height: MediaQuery.of(context).size.width * 0.4 * 1.0,
-                  width: MediaQuery.of(context).size.width * 0.42),
+                  height: MediaQuery.of(context).size.width * 0.42 * 1.0,
+                  width: MediaQuery.of(context).size.width * 0.4),
             ),
             Container(
               child: Padding(
                 padding: EdgeInsets.only(
-                    left: 10.0, top: MediaQuery.of(context).size.height * 0.02),
+                    left: 10.0, top: MediaQuery.of(context).size.height * 0.01),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -135,11 +135,11 @@ class _EventCardState extends State<EventCard> {
                       widget.event_data.name,
                       style: TextStyle(
                         color: Color(0xFF002845),
-                        fontSize: 19.0,
+                        fontSize: 17.0,
                         fontWeight: FontWeight.w500,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      overflow: TextOverflow.fade,
                     ),
                     // SizedBox(height: MediaQuery.of(context).size.height * 0.001),
                     Row(
@@ -148,7 +148,7 @@ class _EventCardState extends State<EventCard> {
                           widget.event_data.type == 0 ? "Event" : "Workshop",
                           style: TextStyle(
                             color: Color(0xFFFF7F11),
-                            fontSize: 17.0,
+                            fontSize: 15.0,
                           ),
                         ),
                         Spacer(),
@@ -187,8 +187,8 @@ class _EventCardState extends State<EventCard> {
                 ),
               ),
               constraints: BoxConstraints.expand(
-                  height: MediaQuery.of(context).size.width * 0.4 * 0.6,
-                  width: MediaQuery.of(context).size.width * 0.42),
+                  height: MediaQuery.of(context).size.width * 0.41 * 0.6,
+                  width: MediaQuery.of(context).size.width * 0.4),
               decoration: (BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(

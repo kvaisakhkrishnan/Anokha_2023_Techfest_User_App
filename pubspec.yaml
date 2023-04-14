@@ -56,6 +56,7 @@ dependencies:
   lottie: ^2.3.2
   url_launcher: ^6.1.4
   crypto: ^3.0.2
+  youtube_player_flutter: ^8.1.2
 
 dev_dependencies:
   flutter_test:
@@ -98,6 +99,12 @@ flutter:
      - Images/passport.png
      - Images/anokha_black_text.png
      - assets/success.json
+     - Images/raga.jpeg
+     - Images/natya.jpeg
+     - Images/clg.jpeg
+     - Images/clg2.jpeg
+     - Images/event1.jpg
+     - Images/event2.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

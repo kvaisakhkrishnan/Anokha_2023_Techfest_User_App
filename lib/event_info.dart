@@ -86,9 +86,7 @@ class _EventInfoState extends State<EventInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
+    return Scaffold(
             backgroundColor: HexColor("#002845"),
             body: Stack(
               children: [
@@ -151,7 +149,7 @@ class _EventInfoState extends State<EventInfo> {
                                         children: [
                                           Padding(
                                             padding: EdgeInsets.fromLTRB(
-                                                40.0, 0.0, 40.0, 10.0),
+                                                10.0, 0.0, 40.0, 10.0),
                                             child: Container(
                                               width: MediaQuery.of(context)
                                                       .size
@@ -161,8 +159,8 @@ class _EventInfoState extends State<EventInfo> {
                                                 widget.event_map.name,
                                                 maxLines: 3,
                                                 style: TextStyle(
-                                                  fontSize: 18.0,
-                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 25.0,
+                                                  fontWeight: FontWeight.w700,
                                                 ),
                                               ),
                                             ),
@@ -178,7 +176,7 @@ class _EventInfoState extends State<EventInfo> {
                                                                 .isStarred ==
                                                             1)) ||
                                                         liked == true)
-                                                    ? Colors.yellow.shade700
+                                                    ? Color(0xffff7f11)
                                                     : Colors.black,
                                               ),
                                               onPressed: () {
@@ -209,7 +207,7 @@ class _EventInfoState extends State<EventInfo> {
                                         style: TextStyle(
                                             backgroundColor: Colors.white,
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 30.0),
+                                            fontSize: 25.0),
                                       ),
                                     ],
                                   ),
@@ -228,10 +226,7 @@ class _EventInfoState extends State<EventInfo> {
                                                   .width *
                                               0.4,
                                           decoration: BoxDecoration(
-                                              gradient: LinearGradient(colors: [
-                                                HexColor("#FF7F11"),
-                                                HexColor("#FF3F00")
-                                              ]),
+                                             color: Color(0xffff7f11),
                                               borderRadius:
                                                   BorderRadius.circular(10)),
                                           child: Row(
@@ -282,9 +277,9 @@ class _EventInfoState extends State<EventInfo> {
                                             widget.event_map.venue,
                                             maxLines: 3,
                                             style: TextStyle(
-                                                color: HexColor("#A0A0A0"),
+                                                color: Color(0xffbeb7a4),
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 15),
+                                                fontSize: 20),
                                           ),
                                         )
                                       ],
@@ -392,8 +387,8 @@ class _EventInfoState extends State<EventInfo> {
                                     child: Text(
                                       "Description",
                                       style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
+                                          fontSize: 21,
+                                          fontWeight: FontWeight.w600),
                                     ),
                                   ),
                                   Padding(
@@ -401,6 +396,7 @@ class _EventInfoState extends State<EventInfo> {
                                     child: Text(
                                       widget.event_map.description,
                                       textDirection: TextDirection.ltr,
+                                      style: TextStyle(fontSize: 15),
                                     ),
                                   )
                                 ],
@@ -435,7 +431,7 @@ class _EventInfoState extends State<EventInfo> {
                           child: Visibility(
                             visible: widget.txt_visible,
                             child: SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.07,
+                              height: MediaQuery.of(context).size.height * 0.06,
                               width: MediaQuery.of(context).size.width * 0.45,
                               child: Container(
                                 decoration: ShapeDecoration(
@@ -477,16 +473,17 @@ class _EventInfoState extends State<EventInfo> {
                                     }));
                                   },
                                   child: Center(
-                                      child: Text("Register",
+                                      child: Text("REGISTER",
                                           style: TextStyle(
+                                            fontWeight: FontWeight.w500,
                                               color: HexColor("#002845"),
-                                              fontSize: 30))),
+                                              fontSize: 20))),
                                 ),
                               ),
                             ),
                           ),
                         ))),
               ],
-            )));
+            ));
   }
 }
