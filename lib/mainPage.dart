@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:anokha_home/SessionExpired/sessionExpired.dart';
 import 'package:anokha_home/serverUrl.dart';
 import 'package:anokha_home/ticketSample.dart';
@@ -15,6 +15,8 @@ final __url = serverUrl().url;
 const itemSize = 280.0;
 
 class CardWidget extends StatefulWidget {
+  var index;
+  CardWidget({required this.index});
   @override
   _CardWidgetState createState() => _CardWidgetState();
 }
@@ -39,24 +41,50 @@ class _CardWidgetState extends State<CardWidget> {
           0.0,
         ),
         child: Container(
-          width: 300,
-          height: 200,
+          width: MediaQuery.of(context).size.width * 0.90,
+          height: MediaQuery.of(context).size.width * 0.90 * 0.7,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 5,
-                blurRadius: 7,
+                color: Color(0xff002845),
+                spreadRadius: 10,
+                blurRadius: 100,
                 offset: Offset(0, 3),
               ),
             ],
           ),
-          child: Center(
-            child: Text('Card Content'),
-          ),
-        ),
+          child: (widget.index == 0) ? Center(child: Image(image: AssetImage("Images/anokha_2023_black_small.png"),),) :
+          (widget.index == 1) ? Center(child: Text("About Anokha", style: TextStyle(fontSize: 25),),) :
+          (widget.index == 2) ? Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(child: Text("Anokha, the national techfest of Amrita Vishwa Vidyapeetham Coimbatore, is a 3-day congregation of some of the brightest minds in India. Founded in 2010, Anokha has grown by leaps and bounds and has progressed to become one of the leading techfests in India. Anokha has successfully completed eight editions and boasts an average annual participation of over 10,000 outstanding students from top-ranking engineering institutions in India like IITs, BITS, NITs and IIITs as well as partner universities in USA and Europe namely University of New Mexico, EVRY France and Uppsala University-Sweden."),),
+          ) :
+          (widget.index == 3) ? Center(child: Image(image: AssetImage("Images/raga.jpeg"),),) :
+          (widget.index == 4) ? Center(child: Image(image: AssetImage("Images/natya.jpeg"),),) :
+          (widget.index == 5) ? Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(child: Text("Amrita Vishwa Vidyapeetham University's Coimbatore campus is a picturesque and serene educational institution located in the foothills of the Western Ghats. With state-of-the-art facilities and a commitment to academic excellence, the university offers a wide range of undergraduate and postgraduate programs in various fields, including engineering, management, medicine, arts, and sciences. The campus boasts of world-class research facilities and is known for its focus on innovation and entrepreneurship.")),
+          ):
+          (widget.index == 6) ? Center(child: Image(image: AssetImage("Images/clg.jpeg"),),) :
+          (widget.index == 7) ? Center(child: Image(image: AssetImage("Images/clg2.jpeg"),),) :
+
+          (widget.index == 8) ? Center(child: Text("C20 G20", style: TextStyle(fontSize: 25),)) :
+          (widget.index == 9) ? Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(child: Text("Anokha 2023 techfest is proud to be recognized as a supporting event of the prestigious Civil20 (C20), official engagement group of G20. The fest orchestrates a plethora of workshops, innovation showcases and a techfair aligning to the various working groups of C20, which are hosted by Amrita University under the guidance of world-renowned humanitarian leader, Sri Mata Amritanandamayi Devi (AMMA), the Chancellor of the university."),),
+          ) :
+
+          (widget.index == 10) ? Center(child: Text("EVENTIDE", style: TextStyle(fontSize: 25),)) :
+          (widget.index == 11) ? Center(child: Text("Eventide, the cultural extravaganza of Anokha, has brought joy to thousands over the past decade through explosive performances from talented and captivating artists. The performances leave our audience in awe, showcasing the magnificence of human expression through art. Some passionate artists who have previously graced the stage include percussionist Sivamani; playback singers Vijay Prakash, Karthik, Benny Dayal, Haricharan, Rahul Nambiar, Alaap Raju, Shaktisree Gopalan, Sunitha Sarathy, Ranjani-Gayatri, and Nikita Gandhi. Eventide has become a platform for the celebration of India's rich cultural heritage and diversity.")) :
+          (widget.index == 12) ? Center(child: Image(image: AssetImage("Images/event1.jpg"),),) :
+          (widget.index == 13) ? Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(child: Text("TECHFAIR", style: TextStyle(fontSize: 25),)),
+          ) :
+           Center(child: Text("Anokha, the national engineering techfest of Amrita School of Engineering, Coimbatore, is a 3-day congregation of some of the brightest minds in India. Founded in 2010, Anokha has grown by leaps and bounds and has progressed to become one of the most popular and top techfests in India. Having successfully completed eight editions, Anokha has had an average annual participation of over 10,000 of the best undergraduate engineering students from top-ranking engineering institutions in India like IITs, BITS, NITs and IIITs participating as well as partner universities in USA and Europe like University of New Mexico, EVRY France and Uppsala University-Sweden."))
+    ),
       ),
     );
   }
@@ -328,14 +356,12 @@ class _MainPageState extends State<MainPage> {
                           ),
                           SliverList(
                             delegate: SliverChildBuilderDelegate(
-                              (context, index) {
+                                  (context, index) {
                                 if (index < 15) {
-                                  final itemPositionOffset =
-                                      index * itemSize * 0.9;
-                                  final difference = scrollController.offset -
-                                      itemPositionOffset;
-                                  final percent =
-                                      1.2 - difference / itemSize * 0.7;
+                                  final itemPositionOffset = index * itemSize * 0.7;
+                                  final difference =
+                                      scrollController.offset - itemPositionOffset;
+                                  final percent = 1.2 - difference / itemSize * 0.7;
                                   double opacity = percent;
                                   double scale = percent;
                                   if (opacity >= 1.0) opacity = 1.0;
@@ -349,17 +375,17 @@ class _MainPageState extends State<MainPage> {
                                         alignment: Alignment.center,
                                         transform: Matrix4.identity()
                                           ..scale(scale, 1.0),
-                                        child: CardWidget(),
+                                        child: CardWidget(index: index),
+                                        ),
                                       ),
-                                    ),
-                                  );
+                                    );
                                 } else {
                                   return null;
                                 }
                               },
                               childCount: 15,
                             ),
-                          ),
+                          )
                         ],
                       )
                     ],
