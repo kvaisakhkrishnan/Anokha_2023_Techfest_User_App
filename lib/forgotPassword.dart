@@ -1,3 +1,4 @@
+import 'package:anokha_home/otpValidation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -30,13 +31,7 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
     );
 
     if (response.statusCode == 200) {
-      final url2 =
-          "https://anokha.amrita.edu/api/userApp/forgotPassword/verifyOtp";
-
-      final response2 = await http.post(Uri.parse(url2), body: {}, headers: {
-        'authorization': 'Bearer ${json.decode(response.body)["SECRET_TOKEN"]}',
-        'Content-Type': 'application/json'
-      });
+      Navigator.push(context,MaterialPageRoute(builder: ((context) => OTPVerify(token:json.decode(response.body)["SECRET_TOKEN"]))));
       // Handle successful response here
     } else {
       // Handle unsuccessful response here
