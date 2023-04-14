@@ -22,6 +22,8 @@ class _RegisteredEventCardState extends State<RegisteredEventCard> {
 
   _RegisteredEventCardState({required this.event});
 
+
+
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
@@ -135,7 +137,7 @@ class _RegisteredEventCardState extends State<RegisteredEventCard> {
                           padding: const EdgeInsets.only(bottom: 20.0),
                           child: QrImage(
                             foregroundColor : Colors.black,
-                            data: "${widget.data["userEmail"]}/${widget.event["eventId"]}",
+                            data: "${widget.data.userEmail}/${widget.event["eventId"]}",
                             version: QrVersions.auto,
                             size: MediaQuery.of(context).size.height * 0.19,
                             gapless: false,

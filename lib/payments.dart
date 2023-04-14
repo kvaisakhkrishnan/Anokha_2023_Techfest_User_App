@@ -119,12 +119,12 @@ class _MyCardWidgetState extends State<MyCardWidget> {
               transform: Matrix4.identity()..rotateZ(0.25),
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.25,
+                height: MediaQuery.of(context).size.height * 0.28,
                 margin: EdgeInsets.only(top: 70, left: 50, bottom: 0),
                 child: CreditCard(
                   frontTextColor: Colors.black,
                   width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.25,
+                  height: MediaQuery.of(context).size.height * 0.28,
                   cardNumber: '2323 4343 **** ****',
                   cardExpiry: '10/25',
                   cardHolderName: 'Name 0 ',
@@ -624,9 +624,11 @@ class _SuccessState extends State<Success> {
             SizedBox(
               height: 10,
             ),
-            Text(
-              "Transaction ID : ANOKHA1234",
-              style: TextStyle(color: Colors.white, fontSize: 18),
+            Center(
+              child: Text(
+                "Transaction ID : ANOKHA1234",
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
             )
           ]),
         ));
@@ -674,7 +676,7 @@ class _UserFormState extends State<UserForm> {
       physics: ClampingScrollPhysics(),
       child: Container(
           width: MediaQuery.of(context).size.width * 0.77,
-          height: MediaQuery.of(context).size.height * 0.7,
+          height: MediaQuery.of(context).size.height * 0.8,
           child: Form(
               key: _formKey,
               child: Column(children: [

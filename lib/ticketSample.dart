@@ -169,7 +169,7 @@ class TicketData extends StatelessWidget {
 
         QrImage(
           foregroundColor : Colors.black,
-          data: "${data.userEmail}/${data.eventId}",
+          data: "${data.userEmail}/${event["eventId"]}",
           version: QrVersions.auto,
           size: MediaQuery.of(context).size.height * 0.19,
           gapless: false,

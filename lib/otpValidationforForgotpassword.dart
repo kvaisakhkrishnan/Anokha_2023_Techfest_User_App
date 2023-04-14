@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+import 'package:anokha_home/confirmPassword.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -8,6 +11,8 @@ import 'package:http/http.dart' as http;
 class OTPverifyforgot extends StatefulWidget {
   var token;
   String email;
+
+
   OTPverifyforgot({Key? key, required this.token, required this.email})
       : super(key: key);
 
@@ -18,10 +23,13 @@ class OTPverifyforgot extends StatefulWidget {
 class _OTPverifyforgotState extends State<OTPverifyforgot> {
   late Timer _timer;
   int _remainingTime = 300;
+  String otp = "";
+  late String _errormessage;
 
   @override
   void initState() {
     super.initState();
+    _errormessage="";
     _startTimer();
   }
 
@@ -44,12 +52,34 @@ class _OTPverifyforgotState extends State<OTPverifyforgot> {
     });
   }
 
-  Future<void> _sendtoBackend(String value) async {
+  Future<void> _sendtoBackend(String value1) async {
+
     final String url =
         "https://anokha.amrita.edu/api/userApp/forgotPassword/verifyOtp";
-    final response = await http.post(Uri.parse(url),
-        body: {'otp': value},
-        headers: {'authorization': 'Bearer ${widget.token}'});
+    final body = jsonEncode(<String,String>{
+      'otp': value1,
+    });
+    final headers = <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      HttpHeaders.authorizationHeader: "Bearer ${widget.token}"
+    };
+
+    final response1 = await http.post(Uri.parse(url),
+        body: body,
+        headers: headers);
+    //print(value1);
+    //print("sent");
+    print(jsonDecode(response1.body));
+    if (response1.statusCode == 200) {
+      Navigator.pop(context);
+      Navigator.push(context,MaterialPageRoute(builder: ((context) => confirmPassword(token:json.decode(response1.body)["token"]))));
+      // Handle successful response here
+    } else {
+      // Handle unsuccessful response here
+      setState(() {
+        _errormessage=jsonDecode(response1.body)['error'];
+      });
+    }
   }
 
   @override
@@ -121,8 +151,14 @@ class _OTPverifyforgotState extends State<OTPverifyforgot> {
                   numberOfFields: 6,
                   filled: true,
                   fillColor: Color(0xffF3F2F7),
-                  onSubmit: (value) {
-                    _sendtoBackend(value);
+                  onSubmit: (String value) {
+                    print("otp::");
+                    print(value);
+                    //_sendtoBackend(value);
+                    setState(() {
+                      otp=value;
+                      print(otp);
+                    });
                   },
                 ),
               ),
@@ -136,18 +172,22 @@ class _OTPverifyforgotState extends State<OTPverifyforgot> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Resend OTP",
-                        style:
-                        TextStyle(fontSize: 18.0, color: Color(0xFFFF7F11)),
-                      ),
-                    ),
+                    // TextButton(
+                    //   onPressed: () {},
+                    //   child: Text(
+                    //     "Resend OTP",
+                    //     style:
+                    //     TextStyle(fontSize: 18.0, color: Color(0xFFFF7F11)),
+                    //   ),
+                    // ),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 30.0),
                       child: OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          print('otp');
+                          print(otp);
+                          _sendtoBackend(otp);
+                        },
                         child: Text(
                           "VERIFY",
                           style: TextStyle(color: Colors.white, fontSize: 18.0),
@@ -164,7 +204,9 @@ class _OTPverifyforgotState extends State<OTPverifyforgot> {
                     ),
                   ],
                 ),
-              )
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height*0.05,),
+              Text(_errormessage,style: TextStyle(color: Colors.red),)
             ],
           ),
         ),

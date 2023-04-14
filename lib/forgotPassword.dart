@@ -1,5 +1,6 @@
 import 'package:anokha_home/otpValidation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -16,26 +17,39 @@ class forgotPasswordclass extends StatefulWidget {
 class _forgotPasswordclassState extends State<forgotPasswordclass> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
+  String _errormessage="";
   bool isValidEmail(String email) {
     final RegExp emailRegex =
-        RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
     return emailRegex.hasMatch(email);
   }
 
   Future<void> _sendEmailToBackend(String email) async {
     // Your API endpoint URL here
     final String url = "https://anokha.amrita.edu/api/userApp/forgotPassword";
-
+    print(email);
+    final headers = <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    };
+    final body = jsonEncode(<String,String>{
+      'userEmail':email,
+    });
     final response = await http.post(
       Uri.parse(url),
-      body: {'userEmail': email},
+      headers: headers,
+      body: body,
     );
-
+    print("body");
+    print(jsonDecode(response.body));
     if (response.statusCode == 200) {
+      Navigator.pop(context);
       Navigator.push(context,MaterialPageRoute(builder: ((context) => OTPverifyforgot(token:json.decode(response.body)["SECRET_TOKEN"], email: email,))));
       // Handle successful response here
     } else {
       // Handle unsuccessful response here
+      setState(() {
+        _errormessage=jsonDecode(response.body)['error'];
+      });
     }
   }
 
@@ -44,6 +58,18 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
+      appBar:AppBar(
+        elevation: 0,
+        backgroundColor: Color(0xffF3F2F7),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          color: Colors.black,
+          icon: const Icon(Icons.arrow_back_ios_new),
+
+        ),
+      ),
       body: Column(
         children: [
           SizedBox(height: screenSize.height * 0.1),
@@ -132,6 +158,7 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
                                 child: OutlinedButton(
                                   onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
+                                      print("button pressed");
                                       await _sendEmailToBackend(
                                           _usernameController.text);
 // Navigate to the next page or show a message
@@ -147,13 +174,15 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
                                     backgroundColor: Color(0xFFFF7F11),
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(10.0)),
+                                        BorderRadius.circular(10.0)),
                                     padding: EdgeInsets.symmetric(
                                         vertical: screenSize.height * 0.01,
                                         horizontal: screenSize.width * 0.25),
                                   ),
                                 ),
                               ),
+                              SizedBox(height: MediaQuery.of(context).size.height*0.05,),
+                              Text(_errormessage,style: TextStyle(color: Colors.red),)
                             ],
 
                           ),
