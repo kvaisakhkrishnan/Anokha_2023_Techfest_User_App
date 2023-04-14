@@ -42,7 +42,7 @@ class _CardWidgetState extends State<CardWidget> {
         ),
         child: Container(
           width: MediaQuery.of(context).size.width * 0.90,
-          height: MediaQuery.of(context).size.width * 0.90 * 0.7,
+          height: MediaQuery.of(context).size.width * 0.90 * 0.8,
           decoration: BoxDecoration(
             color: Color(0xffbeb7a4),
             borderRadius: BorderRadius.circular(20),
