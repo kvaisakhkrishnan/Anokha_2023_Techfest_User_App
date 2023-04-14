@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 
 
 class RegisteredEventCard extends StatefulWidget {
   final Map<String, dynamic> event;
-
-  RegisteredEventCard({Key? key, required this.event}) : super(key: key);
+var data;
+  RegisteredEventCard({Key? key, required this.event, required this.data}) : super(key: key);
   bool selected = false;
   bool takeThere = false;
 
@@ -132,10 +133,26 @@ class _RegisteredEventCardState extends State<RegisteredEventCard> {
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.only(bottom: 20.0),
-                          child: Image(
-                            image: NetworkImage(
-                                'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png'),
-                            color: Color(0xFFBEB7A4),
+                          child: QrImage(
+                            foregroundColor : Colors.black,
+                            data: "${widget.data["userEmail"]}/${widget.event["eventId"]}",
+                            version: QrVersions.auto,
+                            size: MediaQuery.of(context).size.height * 0.19,
+                            gapless: false,
+
+                            embeddedImageStyle: QrEmbeddedImageStyle(
+                              size: Size(MediaQuery.of(context).size.height * 0.05, MediaQuery.of(context).size.height * 0.05),
+                            ),
+                            errorStateBuilder: (cxt, err) {
+                              return Container(
+                                child: Center(
+                                  child: Text(
+                                    "Please Conatct User App Developers",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ),

@@ -144,6 +144,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                               ..scale(scale, 1.0),
                             child: RegisteredEventCard(
                               event: registeredEvents[index],
+                              data: widget.data
                             ),
                           ),
                         ),

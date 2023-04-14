@@ -149,20 +149,7 @@ class _OTPVerifyState extends State<OTPVerify> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10.0),
-                child: Container(
-                  alignment: Alignment.topLeft,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Change Email?",
-                      style:
-                          TextStyle(fontSize: 18.0, color: Color(0xFFFF7F11)),
-                    ),
-                  ),
-                ),
-              ),
+
               Padding(
                 padding: EdgeInsets.only(top: 40.0),
                 child: OtpTextField(
@@ -190,22 +177,7 @@ class _OTPVerifyState extends State<OTPVerify> {
                   ),
                 ),
               Expanded(child: SizedBox()),
-              Padding(
-                padding: EdgeInsets.only(bottom: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Resend OTP",
-                        style:
-                            TextStyle(fontSize: 18.0, color: Color(0xFFFF7F11)),
-                      ),
-                    ),
-                  ],
-                ),
-              )
+
             ],
           ),
         ),
