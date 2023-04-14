@@ -43,42 +43,44 @@ class _EventInfoState extends State<EventInfo> {
     _controller.removeListener(_onScrollEvent);
     super.dispose();
   }
-
   Future<void> _addStarred() async {
-    print("hii add");
-    final String url = "https://anokha.amrita.edu/api/userApp/insertStarrs";
-    print(widget.data.SECRET_TOKEN);
-    final response = await http.post(Uri.parse(url),
-        body: jsonEncode({"eventId": widget.event_map.eventId}),
-        headers: {
-          'Authorization': 'Bearer ${widget.data.SECRET_TOKEN}',
-          'Content-Type': 'application/json'
-        });
-
+  final String url = "https://anokha.amrita.edu/api/userApp/insertStarrs";
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${widget.data.SECRET_TOKEN}',
+      },
+      body: jsonEncode({"eventId":widget.event_map.eventId}),
+    );
     if (response.statusCode == 200) {
-      print("hello");
+      // Successful response
+      print('POST request successful: ${response.body}');
     } else {
-      print(response.body);
+      // Error response
+      print('POST request failed: ${response.statusCode} - ${response.body}');
     }
   }
 
   Future<void> _deleteStarred() async {
-    print("hii depo");
-    print(widget.data.SECRET_TOKEN);
     final String url = "https://anokha.amrita.edu/api/userApp/dropStarrs";
-    final response = await http.post(Uri.parse(url),
-        body: jsonEncode({"eventId": widget.event_map.eventId}),
-        headers: {
-          'Authorization': 'Bearer ${widget.data.SECRET_TOKEN}',
-          'Content-Type': 'application/json'
-        });
-
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${widget.data.SECRET_TOKEN}',
+      },
+      body: jsonEncode({"eventId": widget.event_map.eventId}),
+    );
     if (response.statusCode == 200) {
-      print("hello");
+      // Successful response
+      print('POST request successful: ${response.body}');
     } else {
-      print(response.body);
+      // Error response
+      print('POST request failed: ${response.statusCode} - ${response.body}');
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -176,19 +178,6 @@ class _EventInfoState extends State<EventInfo> {
                                                     : Colors.black,
                                           ),
                                           onPressed: () {
-                                            if (liked == false) {
-                                              _addStarred();
-                                            } else if (liked == true) {
-                                              _deleteStarred();
-                                            }
-                                            setState(() {
-                                              liked = !liked;
-                                              if (liked == false) {
-                                                widget.event_map.isStarred = 0;
-                                              } else if (liked == true) {
-                                                widget.event_map.isStarred = 1;
-                                              }
-                                            });
                                           },
                                         ),
                                       )

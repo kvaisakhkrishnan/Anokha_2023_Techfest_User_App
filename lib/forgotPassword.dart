@@ -55,7 +55,7 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
                 ),
                 child: Container(
                   child: Image(
-                    image: AssetImage('Images/anokha_circle.png'),
+                    image: AssetImage('Images/logo.png'),
                     width: screenSize.width * 0.3,
                   ),
                   constraints: BoxConstraints.expand(
@@ -69,9 +69,9 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
                   bottom: screenSize.height * 0.025,
                 ),
                 child: Text(
-                  "Login Portal",
+                  "Password Reset Portal",
                   style: TextStyle(
-                    fontSize: screenSize.height * 0.04,
+                    fontSize: 25,
                     color: Color(0xFF002845),
                     fontWeight: FontWeight.w500,
                   ),
@@ -87,7 +87,7 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: screenSize.width * 0.05,
-                      vertical: screenSize.height * 0.15,
+                      vertical: screenSize.height * 0.1,
                     ),
                     child: Container(
                       decoration: BoxDecoration(
@@ -99,10 +99,10 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              SizedBox(height: screenSize.height * 0.05),
+                              SizedBox(height: screenSize.height * 0.01),
                               Padding(
                                 padding: EdgeInsets.symmetric(
-                                  horizontal: screenSize.width * 0.05,
+                                  horizontal: screenSize.width * 0.01,
                                 ),
                                 child: TextFormField(
                                   controller: _usernameController,
@@ -119,7 +119,7 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter an email address';
                                     } else if (!isValidEmail(value)) {
-                                      return 'Please enter a validemail address';
+                                      return 'Please enter a valid email address';
                                     }
                                     return null;
                                   },
@@ -141,7 +141,7 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
                                     "SUBMIT",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: screenSize.height * 0.025),
+                                        fontSize: 16),
                                   ),
                                   style: OutlinedButton.styleFrom(
                                     backgroundColor: Color(0xFFFF7F11),
@@ -149,12 +149,13 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
                                         borderRadius:
                                             BorderRadius.circular(10.0)),
                                     padding: EdgeInsets.symmetric(
-                                        vertical: screenSize.height * 0.02,
-                                        horizontal: screenSize.width * 0.3),
+                                        vertical: screenSize.height * 0.01,
+                                        horizontal: screenSize.width * 0.25),
                                   ),
                                 ),
                               ),
                             ],
+
                           ),
                         ),
                       ),
@@ -164,6 +165,8 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
               ],
             ),
           ),
+
+
         ],
       ),
     );

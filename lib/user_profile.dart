@@ -62,8 +62,30 @@ class _userProfState extends State<userProf> {
         context: context,
         builder: (_) => AlertDialog(
           content: Container(
-            child: Image.network(
-                'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png'),
+            child: Center(
+              child: QrImage(
+
+                foregroundColor : Colors.black,
+                data: "https://anokha.amrita.edu/api/adminApp/verifyUser/${widget.data.userEmail}",
+                version: QrVersions.auto,
+                size: MediaQuery.of(context).size.height * 0.19,
+                gapless: false,
+
+                embeddedImageStyle: QrEmbeddedImageStyle(
+                  size: Size(MediaQuery.of(context).size.height * 0.05, MediaQuery.of(context).size.height * 0.05),
+                ),
+                errorStateBuilder: (cxt, err) {
+                  return Container(
+                    child: Center(
+                      child: Text(
+                        "Please Conatct User App Developers",
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
             height: MediaQuery.of(context).size.height * 0.3,
             width: MediaQuery.of(context).size.width * 0.3,
           ),
@@ -76,6 +98,7 @@ class _userProfState extends State<userProf> {
       child: Scaffold(
           backgroundColor: islight ? Color(0xFFFFFFFC) : Color(0xFF002845),
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: Color(0xff002845),
             elevation: 0.0,
             actions: [

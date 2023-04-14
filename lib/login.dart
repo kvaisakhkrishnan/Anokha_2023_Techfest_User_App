@@ -257,7 +257,7 @@ class _loginPageState extends State<loginPage> {
                     padding: EdgeInsets.only(left: 20.0, right: 20.0),
                     child: Container(
                       child: Image(
-                        image: AssetImage('Images/anokha_circle.png'),
+                        image: AssetImage('Images/logo.png'),
                         width: MediaQuery.of(context).size.width * 0.3,
                       ),
                       constraints: BoxConstraints.expand(
@@ -374,12 +374,7 @@ class _loginPageState extends State<loginPage> {
                                                 ),
                                               );
                                             } else {
-                                              _scaffoldMessengerKey.currentState
-                                                  ?.showSnackBar(
-                                                SnackBar(
-                                                    content: Text(
-                                                        'Invalid login credentials')),
-                                              );
+
                                             }
                                           } catch (e) {
                                             print("Error: $e");
