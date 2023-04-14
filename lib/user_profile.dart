@@ -201,7 +201,9 @@ class _userProfState extends State<userProf> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    PassportBuy(data: widget.data,),
+                                                    PassportBuy(
+                                                  data: widget.data,
+                                                ),
                                               ));
                                         },
                                         child: Text("Buy Passport"),
@@ -210,7 +212,12 @@ class _userProfState extends State<userProf> {
                                           primary: Color(0xff002845),
                                         ),
                                       ))
-                                  : Text(widget.data.passportId),
+                                  : Padding(
+                                    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+                                    child: Text("Passport Id: ${widget.data.passportId}",
+                              style: TextStyle(color: Color(0xffff7f11),
+                              fontWeight: FontWeight.w500),),
+                                  ),
                               Container(
                                 height:
                                     MediaQuery.of(context).size.height * 0.22,

@@ -167,7 +167,12 @@ class _loginPageState extends State<loginPage> {
       print(response.statusCode.toString());
       // Check the response status
       if (response.statusCode == 200) {
+
         var userDetails = jsonDecode(response.body);
+        if(userDetails["userData"]['passportId'] == null)
+          {
+            userDetails["userData"]['passportId'] = "NA";
+          }
 
         userData = User(
             userEmail: userDetails["userData"]['userEmail'],
