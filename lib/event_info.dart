@@ -45,24 +45,39 @@ class _EventInfoState extends State<EventInfo> {
   }
 
   Future<void> _addStarred() async {
+    print("hii add");
     final String url = "https://anokha.amrita.edu/api/userApp/insertStarrs";
+    print(widget.data.SECRET_TOKEN);
     final response = await http.post(Uri.parse(url),
-        body: {'eventId': widget.event_map.eventId},
-        headers: {'Authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
+        body: jsonEncode({"eventId": widget.event_map.eventId}),
+        headers: {
+          'Authorization': 'Bearer ${widget.data.SECRET_TOKEN}',
+          'Content-Type': 'application/json'
+        });
 
     if (response.statusCode == 200) {
       print("hello");
-    } else {}
+    } else {
+      print(response.body);
+    }
   }
 
   Future<void> _deleteStarred() async {
+    print("hii depo");
+    print(widget.data.SECRET_TOKEN);
     final String url = "https://anokha.amrita.edu/api/userApp/dropStarrs";
     final response = await http.post(Uri.parse(url),
-        body: {'eventId': widget.event_map.eventId},
-        headers: {'Authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
+        body: jsonEncode({"eventId": widget.event_map.eventId}),
+        headers: {
+          'Authorization': 'Bearer ${widget.data.SECRET_TOKEN}',
+          'Content-Type': 'application/json'
+        });
 
     if (response.statusCode == 200) {
-    } else {}
+      print("hello");
+    } else {
+      print(response.body);
+    }
   }
 
   @override
@@ -168,6 +183,11 @@ class _EventInfoState extends State<EventInfo> {
                                             }
                                             setState(() {
                                               liked = !liked;
+                                              if (liked == false) {
+                                                widget.event_map.isStarred = 0;
+                                              } else if (liked == true) {
+                                                widget.event_map.isStarred = 1;
+                                              }
                                             });
                                           },
                                         ),
