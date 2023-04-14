@@ -12,9 +12,6 @@ import 'animated_bar.dart';
 import 'homeBody.dart';
 import 'homeEventCard.dart';
 
-
-
-
 class events {
   final int eventId;
   final String name;
@@ -36,55 +33,56 @@ class events {
 
   events(
       {required this.eventId,
-        required this.name,
-        required this.description,
-        required this.date,
-        required this.type,
-        required this.venue,
-        required this.time,
-        required this.department,
-        required this.day,
-        required this.technical,
-        required this.noOfRegistrations,
-        required this.url,
-        required this.individualOrGroup,
-        required this.maxCount,
-        required this.isStarred,
-        required this.fees,
-        required this.totalNumberOfSeats});
+      required this.name,
+      required this.description,
+      required this.date,
+      required this.type,
+      required this.venue,
+      required this.time,
+      required this.department,
+      required this.day,
+      required this.technical,
+      required this.noOfRegistrations,
+      required this.url,
+      required this.individualOrGroup,
+      required this.maxCount,
+      required this.isStarred,
+      required this.fees,
+      required this.totalNumberOfSeats});
 }
 
 class HomeWidget extends StatefulWidget {
   var data;
 
   var eventsList;
-  HomeWidget({Key? key, required this.data, required this.eventsList}) : super(key: key);
+  HomeWidget({Key? key, required this.data, required this.eventsList})
+      : super(key: key);
 
   @override
   State<HomeWidget> createState() => _HomeWidgetState();
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-
   Future<bool> _onWillPop() async {
     return (await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        title: Text('Are you sure?'),
-        content: Text('Do you want to exit the app?'),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: Text('No',style: TextStyle(color: Color(0xFF002845))),
+          context: context,
+          builder: (context) => AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            title: Text('Are you sure?'),
+            content: Text('Do you want to exit the app?'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text('No', style: TextStyle(color: Color(0xFF002845))),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text('Yes', style: TextStyle(color: Color(0xFF002845))),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: Text('Yes',style: TextStyle(color: Color(0xFF002845))),
-          ),
-        ],
-      ),
-    )) ??
+        )) ??
         false;
   }
 
@@ -98,7 +96,6 @@ class _HomeWidgetState extends State<HomeWidget> {
             elevation: 0,
             backgroundColor: Color(0xff002845),
             toolbarHeight: 0.0,
-
           ),
           body: HomeBody(data: widget.data, eventsList: widget.eventsList)),
     );
