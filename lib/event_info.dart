@@ -289,7 +289,7 @@ class _EventInfoState extends State<EventInfo> {
                                               height: 10,
                                             ),
                                             Text(
-                                              "${(widget.event_map.maxCount)}\nTotal Seats",
+                                              "${(widget.event_map.totalNumberOfSeats)}\nTotal Seats",
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   color: Colors.white,
