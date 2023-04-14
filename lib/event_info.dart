@@ -51,7 +51,7 @@ class _EventInfoState extends State<EventInfo> {
         headers: {'Authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
 
     if (response.statusCode == 200) {
-      print("");
+      print("hello");
     } else {}
   }
 
