@@ -17,6 +17,8 @@ import 'package:platform/platform.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:lottie/lottie.dart';
 
+import 'homeBody.dart';
+
 late String trans_token;
 late String name,
     phoneNumber,
@@ -536,6 +538,22 @@ class _FailureState extends State<Failure> {
             Text(
               "Transaction ID : ${widget.txid}",
               style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context)
+                  ..pop()
+                  ..pop();
+              },
+              child: Text(
+                "Go to Home",
+                style: TextStyle(color: Color(0xff002845)),
+              ),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white, padding: EdgeInsets.all(8)),
             )
           ]),
         ));
@@ -601,12 +619,18 @@ class _SuccessState extends State<Success> {
             SizedBox(
               height: 10,
             ),
+            Text("Your Payment will be reflected in 5-10",
+                style: TextStyle(color: Colors.white, fontSize: 18)),
+            SizedBox(
+              height: 10,
+            ),
             Text(
-              "Transaction ID : ${widget.txid}",
+              "Transaction ID : ANOKHA1234",
               style: TextStyle(color: Colors.white, fontSize: 18),
             )
           ]),
         ));
+    ;
   }
 }
 
