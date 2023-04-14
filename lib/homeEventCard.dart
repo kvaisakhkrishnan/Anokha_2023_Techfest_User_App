@@ -187,7 +187,7 @@ class _EventCardState extends State<EventCard> {
                 ),
               ),
               constraints: BoxConstraints.expand(
-                  height: MediaQuery.of(context).size.width * 0.41 * 0.6,
+                  height: MediaQuery.of(context).size.width * 0.43 * 0.6,
                   width: MediaQuery.of(context).size.width * 0.4),
               decoration: (BoxDecoration(
                 color: Colors.white,

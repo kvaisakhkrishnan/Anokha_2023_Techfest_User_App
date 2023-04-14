@@ -53,6 +53,8 @@ class _HomeBodyState extends State<HomeBody> {
                   .toLowerCase()
                   .contains(search.toLowerCase()) ||
               eventDetail.date.toLowerCase().contains(search.toLowerCase()) ||
+              ((search.toLowerCase() == "event" ||search.toLowerCase() == "events") && eventDetail.type == 0) ||
+              ((search.toLowerCase() == "workshop" ||search.toLowerCase() == "workshops") && eventDetail.type == 1) ||
               eventDetail.venue.toLowerCase().contains(search.toLowerCase()) ||
               eventDetail.department
                   .toLowerCase()

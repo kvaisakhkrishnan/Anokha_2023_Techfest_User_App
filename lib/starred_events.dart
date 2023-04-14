@@ -198,7 +198,7 @@ class _New_WidgetState extends State<New_Widget> {
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(30))),
-              height: MediaQuery.of(context).size.height * 0.28,
+              height: MediaQuery.of(context).size.height * 0.33,
               width: MediaQuery.of(context).size.width * 0.9,
               child: Column(
                 children: [
