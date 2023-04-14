@@ -174,7 +174,7 @@ class _EventInfoState extends State<EventInfo> {
                                                 size: 30,
                                                 color: (((widget.event_map
                                                                 .isStarred ==
-                                                            1)) &&
+                                                            1)) ||
                                                         liked == true)
                                                     ? Color(0xffff7f11)
                                                     : Colors.black,
