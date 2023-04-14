@@ -35,7 +35,8 @@ class EventInfo extends StatefulWidget {
           time: this.star_map["eventTime"],
           type: this.star_map["type"],
           url: this.star_map["url"],
-          venue: this.star_map["venue"]);
+          venue: this.star_map["venue"],
+          totalNumberOfSeats: this.star_map["totalNumberOfSeats"]);
     }
     txt_visible = true;
   }

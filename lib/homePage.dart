@@ -32,6 +32,7 @@ class events {
   final int maxCount;
   int isStarred;
   int fees;
+  int totalNumberOfSeats;
 
   events(
       {required this.eventId,
@@ -49,7 +50,8 @@ class events {
         required this.individualOrGroup,
         required this.maxCount,
         required this.isStarred,
-        required this.fees});
+        required this.fees,
+        required this.totalNumberOfSeats});
 }
 
 class HomeWidget extends StatefulWidget {
