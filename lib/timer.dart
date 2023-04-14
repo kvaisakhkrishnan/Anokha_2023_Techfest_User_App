@@ -63,17 +63,24 @@ class _CountdownPageState extends State<CountdownPage> {
     }
   }
 
+  @override
+  void dispose() {
+    timer?.cancel(); // Cancel the timer when disposing the widget
+    super.dispose();
+  }
+
   void addTime() {
+    if (!mounted) return; // Ensure the state is still mounted before calling setState
+
     final addSeconds = isCountdown ? -1 : 1;
 
     setState(() {
       final seconds = duration.inSeconds + addSeconds;
 
-      if(seconds <1) {
+      if (seconds < 1) {
         timer?.cancel();
         widget.onCountdownComplete();
-      }
-      else{
+      } else {
         duration = Duration(seconds: seconds);
       }
 

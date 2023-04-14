@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+
+import 'login.dart';
 
 class OTPVerify extends StatefulWidget {
   var token;
@@ -16,6 +19,7 @@ class OTPVerify extends StatefulWidget {
 }
 
 class _OTPVerifyState extends State<OTPVerify> {
+  bool _showError = false; // Add this line
   late Timer _timer;
   int _remainingTime = 300;
   final TextEditingController _otpController = TextEditingController();
@@ -46,15 +50,57 @@ class _OTPVerifyState extends State<OTPVerify> {
     });
   }
 
+
+
   Future<void> _sendtoBackend(String value) async {
-    print(value);
-    final String url =
-        "https://anokha.amrita.edu/api/userApp/verifyOTP";
-    final response = await http.post(Uri.parse(url),
-        body: {'otp': int.parse(value)},
-        headers: {'authorization': 'Bearer ${widget.token}'});
-    print("response is" +response.body);
-    print(value.runtimeType);
+    final response = await http.post(
+      Uri.parse("https://anokha.amrita.edu/api/userApp/verifyOTP"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'authorization': 'Bearer ${widget.token}'
+      },
+      body: jsonEncode(<String, dynamic>{
+        'otp' : int.parse(value)
+      }),
+    );
+
+    if (response.statusCode == 400) {
+      _handleError();
+    } else if (response.statusCode == 201) {
+      _showSuccessDialog();
+    }
+  }
+
+  void _showSuccessDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("You have registered successfully"),
+          content: Text("Click \"OK\" to go back to the login page."),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => loginPage()),
+                      (route) => false,
+                );
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
+
+  void _handleError() { // Add this function
+    setState(() {
+      _showError = true;
+    });
   }
 
   @override
@@ -135,6 +181,14 @@ class _OTPVerifyState extends State<OTPVerify> {
                   padding: EdgeInsets.only(top: 40.0),
                   child: Text(
                       "Time Remaining: $_remainingTime seconds")),
+              if (_showError) // Add this block
+                Padding(
+                  padding: EdgeInsets.only(top: 10.0),
+                  child: Text(
+                    "Invalid OTP",
+                    style: TextStyle(color: Colors.red, fontSize: 18.0),
+                  ),
+                ),
               Expanded(child: SizedBox()),
               Padding(
                 padding: EdgeInsets.only(bottom: 20.0),

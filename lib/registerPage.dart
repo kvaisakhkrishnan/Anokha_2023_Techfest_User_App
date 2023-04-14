@@ -93,6 +93,26 @@ class _RegisterPageState extends State<RegisterPage>
 
   final _formKey = GlobalKey<FormState>();
 
+  String? customEmailValidator(String? value) {
+    final emailRegExp = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+    if (value == null || value.isEmpty) {
+      return 'Please enter your email address';
+    }
+    if (!emailRegExp.hasMatch(value)) {
+      return 'Please enter a valid email address';
+    }
+    if (!value.endsWith('amrita.edu')) {
+      int collegeId = int.parse(_collegeController.text.split("-")[0].trim());
+      print(collegeId);
+      if (collegeId == 633 || collegeId == 638 || collegeId == 641 || collegeId == 645) {
+        return 'You are an Amrita student\nplease register with your college email address';
+      }
+    }
+    return null;
+  }
+
+
+
   Future<void> _sendDataToBackend() async {
     try {
       final response = await http.post(
@@ -240,31 +260,19 @@ class _RegisterPageState extends State<RegisterPage>
                                     ),
                                   ),
                                   Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 10.0),
+                                    padding: EdgeInsets.symmetric(horizontal: 10.0),
                                     child: TextFormField(
                                       controller: _emailController,
                                       decoration: InputDecoration(
                                         hintText: "Email Address",
                                         enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                              width: 1,
-                                              color: Color(0xffF3F2F7)),
+                                          borderSide: BorderSide(width: 1, color: Color(0xffF3F2F7)),
                                         ),
                                       ),
-                                      validator: (value) {
-                                        final emailRegExp =
-                                            RegExp(r'^[^@]+@[^@]+\.[^@]+');
-                                        if (value == null || value.isEmpty) {
-                                          return 'Please enter your email address';
-                                        }
-                                        if (!emailRegExp.hasMatch(value)) {
-                                          return 'Please enter a valid email address';
-                                        }
-                                        return null;
-                                      },
+                                      validator: customEmailValidator,
                                     ),
                                   ),
+
                                   Padding(
                                     padding: EdgeInsets.symmetric(horizontal: 10.0),
                                     child: TextFormField(
