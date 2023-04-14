@@ -671,7 +671,7 @@ class _UserFormState extends State<UserForm> {
                           borderRadius: BorderRadius.all(Radius.circular(10)))),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: MediaQuery.of(context).size.height * 0.02,
                 ),
                 TextFormField(
                     validator: (value) {
@@ -699,7 +699,7 @@ class _UserFormState extends State<UserForm> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))))),
                 SizedBox(
-                  height: 20,
+                  height: MediaQuery.of(context).size.height * 0.02,
                 ),
                 TextFormField(
                     enabled: false,
@@ -718,7 +718,7 @@ class _UserFormState extends State<UserForm> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))))),
                 SizedBox(
-                  height: 20,
+                  height: MediaQuery.of(context).size.height * 0.02,
                 ),
                 TextFormField(
                     validator: (value) {
@@ -742,7 +742,7 @@ class _UserFormState extends State<UserForm> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))))),
                 SizedBox(
-                  height: 20,
+                  height: MediaQuery.of(context).size.height * 0.02,
                 ),
                 TextFormField(
                     validator: (value) {
@@ -766,7 +766,7 @@ class _UserFormState extends State<UserForm> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))))),
                 SizedBox(
-                  height: 20,
+                  height: MediaQuery.of(context).size.height * 0.02,
                 ),
                 TextFormField(
                     validator: (value) {
@@ -790,7 +790,7 @@ class _UserFormState extends State<UserForm> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))))),
                 SizedBox(
-                  height: 20,
+                  height: MediaQuery.of(context).size.height * 0.02,
                 ),
                 TextFormField(
                     validator: (value) {
