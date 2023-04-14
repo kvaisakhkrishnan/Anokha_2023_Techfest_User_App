@@ -203,24 +203,6 @@ class _OTPVerifyState extends State<OTPVerify> {
                             TextStyle(fontSize: 18.0, color: Color(0xFFFF7F11)),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 30.0),
-                      child: OutlinedButton(
-                        onPressed: () {},
-                        child: Text(
-                          "VERIFY",
-                          style: TextStyle(color: Colors.white, fontSize: 18.0),
-                        ),
-                        style: OutlinedButton.styleFrom(
-                            backgroundColor: Color(0xFFFF7F11),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0)),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 13.0,
-                                horizontal:
-                                    MediaQuery.of(context).size.width * 0.15)),
-                      ),
-                    ),
                   ],
                 ),
               )
