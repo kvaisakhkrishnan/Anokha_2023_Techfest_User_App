@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:dropdownfield2/dropdownfield2.dart';
 
 import 'otpValidation.dart';
+import 'package:crypto/crypto.dart';
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({Key? key}) : super(key: key);
@@ -78,6 +79,7 @@ List<Map<String, dynamic>> collegeData = [
 class _RegisterPageState extends State<RegisterPage>
     with TickerProviderStateMixin {
 
+  bool _showCollegeError = false;
   bool _isCollegeValid = false;
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
@@ -102,19 +104,32 @@ class _RegisterPageState extends State<RegisterPage>
       return 'Please enter a valid email address';
     }
     if (!value.endsWith('amrita.edu')) {
-      int collegeId = int.parse(_collegeController.text.split("-")[0].trim());
-      print(collegeId);
-      if (collegeId == 633 || collegeId == 638 || collegeId == 641 || collegeId == 645) {
-        return 'You are an Amrita student\nplease register with your college email address';
+      try {
+        int collegeId = int.parse(_collegeController.text.split("-")[0].trim());
+        print(collegeId);
+        if (collegeId == 633 || collegeId == 638 || collegeId == 641 || collegeId == 645) {
+          return 'You are an Amrita student\nplease register with your college email address';
+        }
+      } catch (e) {
+        setState(() {
+          _showCollegeError = true;
+        });
+        return null;
       }
     }
+    setState(() {
+      _showCollegeError = false;
+    });
     return null;
   }
 
 
 
+
   Future<void> _sendDataToBackend() async {
     try {
+      var bytes = utf8.encode(_passwordController.text);
+      var digest = sha512.convert(bytes);
       final response = await http.post(
         Uri.parse(__url + "userApp/registerUser"),
         headers: <String, String>{
@@ -124,7 +139,7 @@ class _RegisterPageState extends State<RegisterPage>
           'fullName': _fullNameController.text,
           'userEmail': _emailController.text,
           'phoneNumber': _mobileNumberController.text,
-          'password': _passwordController.text,
+          'password': digest.toString(),
           'collegeId': int.parse(_collegeController.text.split("-")[0].trim()),
         }),
       );
@@ -385,6 +400,17 @@ class _RegisterPageState extends State<RegisterPage>
                                       },
                                     ),
                                   ),
+                                  if (_showCollegeError)
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(8, 0, 0, 8),
+                                      child: Text(
+                                        'Please select a college',
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ),
 
 
                                   Padding(
