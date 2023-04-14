@@ -122,7 +122,7 @@ class _MyCardWidgetState extends State<MyCardWidget> {
                 child: CreditCard(
                   frontTextColor: Colors.black,
                   width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.24,
+                  height: MediaQuery.of(context).size.height * 0.25,
                   cardNumber: '2323 4343 **** ****',
                   cardExpiry: '10/25',
                   cardHolderName: 'Name 0 ',
@@ -402,8 +402,8 @@ class _NextpageState extends State<Nextpage> {
       "country": country,
       "Zipcode": zipcode,
       "hash": widget.trans_map?["hash"],
-      "surl": "https://www.google.com/",
-      "furl": "https://www.youtube.com/",
+      "surl": "https://anokha.amrita.edu/",
+      "furl": "https://anokha.amrita.edu/events",
       "curl": "",
       "key": "ypfBaj"
     };
@@ -464,13 +464,13 @@ class _NextpageState extends State<Nextpage> {
                   MaterialPageRoute(
                       builder: (context) => UPI_Pay(upi_url: url.toString())));
             }
-            if (url.toString() == "https://www.google.com/") {
+            if (url.toString() == "https://anokha.amrita.edu/") {
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
                           Success(txid: widget.trans_map?["txid"])));
-            } else if (url.toString() == "https://www.youtube.com/") {
+            } else if (url.toString() == "https://anokha.amrita.edu/events") {
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -650,7 +650,7 @@ class _UserFormState extends State<UserForm> {
       physics: ClampingScrollPhysics(),
       child: Container(
           width: MediaQuery.of(context).size.width * 0.77,
-          height: MediaQuery.of(context).size.height * 0.8,
+          height: MediaQuery.of(context).size.height * 0.7,
           child: Form(
               key: _formKey,
               child: Column(children: [
