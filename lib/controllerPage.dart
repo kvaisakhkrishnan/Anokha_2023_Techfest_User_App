@@ -38,7 +38,7 @@ class _ControllerPageState extends State<ControllerPage> {
     var gravatar = Gravatar(widget.data.userEmail);
     var url = gravatar.imageUrl(
       size: 100,
-      defaultImage: GravatarImage.identicon,
+      defaultImage: GravatarImage.robohash,
       rating: GravatarRating.pg,
       fileExtension: true,
     );

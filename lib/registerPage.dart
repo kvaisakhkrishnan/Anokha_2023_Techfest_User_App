@@ -198,7 +198,7 @@ class _RegisterPageState extends State<RegisterPage>
                     padding: EdgeInsets.only(left: 20.0, right: 20.0),
                     child: Container(
                       child: Image(
-                        image: AssetImage('Images/anokha_circle.png'),
+                        image: AssetImage('Images/logo.png'),
                         width: MediaQuery.of(context).size.width * 0.3,
                       ),
                       constraints: BoxConstraints.expand(
