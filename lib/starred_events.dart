@@ -198,7 +198,7 @@ class _New_WidgetState extends State<New_Widget> {
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(30))),
-              height: MediaQuery.of(context).size.height * 0.26,
+              height: MediaQuery.of(context).size.height * 0.28,
               width: MediaQuery.of(context).size.width * 0.9,
               child: Column(
                 children: [
@@ -232,8 +232,13 @@ class _New_WidgetState extends State<New_Widget> {
                             "Event Name",
                             style: TextStyle(color: Color(0xffbeb7a4)),
                           ),
-                          Text(widget.starrs!["eventName"],
-                              style: TextStyle(color: Colors.black)),
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            child: Text(widget.starrs!["eventName"],
+                                style: TextStyle(color: Colors.black),
+                                maxLines: 2,
+                                overflow: TextOverflow.fade,),
+                          ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.01,
                           ),
