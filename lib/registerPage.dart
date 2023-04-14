@@ -115,16 +115,17 @@ class _RegisterPageState extends State<RegisterPage>
       if (response.statusCode == 200) {
         // Extract the token from the response body
         final responseBody = jsonDecode(response.body);
-        final String token = responseBody['token'];
+        final String token = responseBody['SECRET_TOKEN'];
 
         // Navigate to the new page and pass the token
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => OTPVerify(token: token),
+            builder: (context) => OTPVerify(token: token,email:_emailController.text),
           ),
         );
       } else if (response.statusCode == 409) {
+        print("in");
         // Show an error below the register button
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
