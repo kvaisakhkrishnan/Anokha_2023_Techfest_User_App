@@ -44,7 +44,7 @@ class _CardWidgetState extends State<CardWidget> {
           width: MediaQuery.of(context).size.width * 0.90,
           height: MediaQuery.of(context).size.width * 0.90 * 0.7,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Color(0xffbeb7a4),
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
@@ -55,35 +55,38 @@ class _CardWidgetState extends State<CardWidget> {
               ),
             ],
           ),
-          child: (widget.index == 0) ? Center(child: Image(image: AssetImage("Images/anokha_2023_black_small.png"),),) :
-          (widget.index == 1) ? Center(child: Text("About Anokha", style: TextStyle(fontSize: 25),),) :
+          child: (widget.index == 0) ? Center(child: Image(image: AssetImage("Images/anokha_2023_black_small.png"), width: MediaQuery.of(context).size.width * 0.6,),) :
+          (widget.index == 1) ? Center(child: Text("ABOUT ANOKHA", style: TextStyle(fontSize: 25, color: Color(0xff002845), fontWeight: FontWeight.w600),),) :
           (widget.index == 2) ? Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Center(child: Text("Anokha, the national techfest of Amrita Vishwa Vidyapeetham Coimbatore, is a 3-day congregation of some of the brightest minds in India. Founded in 2010, Anokha has grown by leaps and bounds and has progressed to become one of the leading techfests in India. Anokha has successfully completed eight editions and boasts an average annual participation of over 10,000 outstanding students from top-ranking engineering institutions in India like IITs, BITS, NITs and IIITs as well as partner universities in USA and Europe namely University of New Mexico, EVRY France and Uppsala University-Sweden."),),
+            child: Center(child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Anokha, the national techfest of Amrita Vishwa Vidyapeetham Coimbatore, is a 3-day congregation of some of the brightest minds in India. Founded in 2010, Anokha has grown by leaps and bounds and has progressed to become one of the leading techfests in India. Anokha has successfully completed eight editions and boasts an average annual participation of over 10,000 outstanding students from top-ranking engineering institutions in India like IITs, BITS, NITs and IIITs as well as partner universities in USA and Europe namely University of New Mexico, EVRY France and Uppsala University-Sweden.", style: TextStyle(color: Color(0xff002845)),),
+            ),),
           ) :
           (widget.index == 3) ? Center(child: Image(image: AssetImage("Images/raga.jpeg"),),) :
           (widget.index == 4) ? Center(child: Image(image: AssetImage("Images/natya.jpeg"),),) :
-          (widget.index == 5) ? Padding(
+          (widget.index == 5) ? Center(child: Text("ABOUT AMRITA", style: TextStyle(fontSize: 25, color: Color(0xff002845), fontWeight: FontWeight.w600),),) :
+
+          (widget.index == 6) ? Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Center(child: Text("Amrita Vishwa Vidyapeetham University's Coimbatore campus is a picturesque and serene educational institution located in the foothills of the Western Ghats. With state-of-the-art facilities and a commitment to academic excellence, the university offers a wide range of undergraduate and postgraduate programs in various fields, including engineering, management, medicine, arts, and sciences. The campus boasts of world-class research facilities and is known for its focus on innovation and entrepreneurship.")),
+            child: Center(child: Text("Amrita Vishwa Vidyapeetham University's Coimbatore campus is a picturesque and serene educational institution located in the foothills of the Western Ghats. With state-of-the-art facilities and a commitment to academic excellence, the university offers a wide range of undergraduate and postgraduate programs in various fields, including engineering, management, medicine, arts, and sciences. The campus boasts of world-class research facilities and is known for its focus on innovation and entrepreneurship.",style: TextStyle(color: Color(0xff002845)))),
           ):
-          (widget.index == 6) ? Center(child: Image(image: AssetImage("Images/clg.jpeg"),),) :
-          (widget.index == 7) ? Center(child: Image(image: AssetImage("Images/clg2.jpeg"),),) :
+          (widget.index == 7) ? Center(child: Image(image: AssetImage("Images/clg.jpeg"),),) :
+          (widget.index == 8) ? Center(child: Image(image: AssetImage("Images/clg2.jpeg"),),) :
 
-          (widget.index == 8) ? Center(child: Text("C20 G20", style: TextStyle(fontSize: 25),)) :
-          (widget.index == 9) ? Padding(
+          (widget.index == 9) ? Center(child: Text("C20 G20", style: TextStyle(fontSize: 25, color: Color(0xff002845), fontWeight: FontWeight.w600),),) :
+          (widget.index == 10) ? Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Center(child: Text("Anokha 2023 techfest is proud to be recognized as a supporting event of the prestigious Civil20 (C20), official engagement group of G20. The fest orchestrates a plethora of workshops, innovation showcases and a techfair aligning to the various working groups of C20, which are hosted by Amrita University under the guidance of world-renowned humanitarian leader, Sri Mata Amritanandamayi Devi (AMMA), the Chancellor of the university."),),
+            child: Center(child: Text("Anokha 2023 techfest is proud to be recognized as a supporting event of the prestigious Civil20 (C20), official engagement group of G20. The fest orchestrates a plethora of workshops, innovation showcases and a techfair aligning to the various working groups of C20, which are hosted by Amrita University under the guidance of world-renowned humanitarian leader, Sri Mata Amritanandamayi Devi (AMMA), the Chancellor of the university.",style: TextStyle(color: Color(0xff002845))),),
           ) :
 
-          (widget.index == 10) ? Center(child: Text("EVENTIDE", style: TextStyle(fontSize: 25),)) :
-          (widget.index == 11) ? Center(child: Text("Eventide, the cultural extravaganza of Anokha, has brought joy to thousands over the past decade through explosive performances from talented and captivating artists. The performances leave our audience in awe, showcasing the magnificence of human expression through art. Some passionate artists who have previously graced the stage include percussionist Sivamani; playback singers Vijay Prakash, Karthik, Benny Dayal, Haricharan, Rahul Nambiar, Alaap Raju, Shaktisree Gopalan, Sunitha Sarathy, Ranjani-Gayatri, and Nikita Gandhi. Eventide has become a platform for the celebration of India's rich cultural heritage and diversity.")) :
-          (widget.index == 12) ? Center(child: Image(image: AssetImage("Images/event1.jpg"),),) :
-          (widget.index == 13) ? Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(child: Text("TECHFAIR", style: TextStyle(fontSize: 25),)),
-          ) :
-           Center(child: Text("Anokha, the national engineering techfest of Amrita School of Engineering, Coimbatore, is a 3-day congregation of some of the brightest minds in India. Founded in 2010, Anokha has grown by leaps and bounds and has progressed to become one of the most popular and top techfests in India. Having successfully completed eight editions, Anokha has had an average annual participation of over 10,000 of the best undergraduate engineering students from top-ranking engineering institutions in India like IITs, BITS, NITs and IIITs participating as well as partner universities in USA and Europe like University of New Mexico, EVRY France and Uppsala University-Sweden."))
+          (widget.index == 11) ? Center(child: Text("EVENTIDE", style: TextStyle(fontSize: 25, color: Color(0xff002845), fontWeight: FontWeight.w600),)) :
+          (widget.index == 12) ? Center(child: Text("Eventide, the cultural extravaganza of Anokha, has brought joy to thousands over the past decade through explosive performances from talented and captivating artists. The performances leave our audience in awe, showcasing the magnificence of human expression through art. Some passionate artists who have previously graced the stage include percussionist Sivamani; playback singers Vijay Prakash, Karthik, Benny Dayal, Haricharan, Rahul Nambiar, Alaap Raju, Shaktisree Gopalan, Sunitha Sarathy, Ranjani-Gayatri, and Nikita Gandhi. Eventide has become a platform for the celebration of India's rich cultural heritage and diversity.",style: TextStyle(color: Color(0xff002845)))) :
+          (widget.index == 13) ? Center(child: Image(image: AssetImage("Images/event1.jpg"),),) :
+          (widget.index == 14) ? Center(child: Text("TECHFAIR", style: TextStyle(fontSize: 25, color: Color(0xff002845), fontWeight: FontWeight.w600),),) :
+
+           Center(child: Text("Anokha, the national engineering techfest of Amrita School of Engineering, Coimbatore, is a 3-day congregation of some of the brightest minds in India. Founded in 2010, Anokha has grown by leaps and bounds and has progressed to become one of the most popular and top techfests in India. Having successfully completed eight editions, Anokha has had an average annual participation of over 10,000 of the best undergraduate engineering students from top-ranking engineering institutions in India like IITs, BITS, NITs and IIITs participating as well as partner universities in USA and Europe like University of New Mexico, EVRY France and Uppsala University-Sweden.",style: TextStyle(color: Color(0xff002845))))
     ),
       ),
     );
@@ -357,7 +360,7 @@ class _MainPageState extends State<MainPage> {
                           SliverList(
                             delegate: SliverChildBuilderDelegate(
                                   (context, index) {
-                                if (index < 15) {
+                                if (index < 16) {
                                   final itemPositionOffset = index * itemSize * 0.7;
                                   final difference =
                                       scrollController.offset - itemPositionOffset;
@@ -383,7 +386,7 @@ class _MainPageState extends State<MainPage> {
                                   return null;
                                 }
                               },
-                              childCount: 15,
+                              childCount: 16,
                             ),
                           )
                         ],

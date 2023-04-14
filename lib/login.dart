@@ -32,6 +32,7 @@ class event_list {
   final int maxCount;
   int isStarred;
   int fees;
+  int totalNumberOfSeats;
 
   event_list(
       {required this.eventId,
@@ -49,7 +50,8 @@ class event_list {
       required this.individualOrGroup,
       required this.maxCount,
       required this.isStarred,
-      required this.fees});
+      required this.fees,
+      required this.totalNumberOfSeats});
 }
 
 class events_grouped_by_category {
@@ -206,7 +208,8 @@ class _loginPageState extends State<loginPage> {
                 individualOrGroup: events_in_a_row["groupOrIndividual"],
                 maxCount: events_in_a_row["maxCount"],
                 isStarred: events_in_a_row["isStarred"],
-                fees: events_in_a_row["fees"]);
+                fees: events_in_a_row["fees"],
+                totalNumberOfSeats: events_in_a_row["totalNumberOfSeats"]);
 
             temp_event_list.add(temp_event_data);
           }
