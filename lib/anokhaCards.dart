@@ -19,182 +19,200 @@ class _AnokhaCardsState extends State<AnokhaCards> {
         children: [
 
 
-          Column(
-            children: [
-              Padding(
+          GestureDetector(
+            onTap: (){},
+            child: Column(
+              children: [
+                Padding(
 
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage(widget.data[0].url),
-                      fit: BoxFit.cover,),
-                    borderRadius: BorderRadius.circular(20.0),
-                    color: Color(0xFFFEFECF0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(image: NetworkImage(widget.data[0].url),
+                        fit: BoxFit.cover,),
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: Color(0xFFFEFECF0),
 
-                  ),
-                  width: MediaQuery.of(context).size.width * 0.80,
-                  height: MediaQuery.of(context).size.width * 0.50,
-                ),
-              ),
-
-
-
-              Padding(
-                padding: const EdgeInsets.only(top: 15.0),
-                child: Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width * 0.80,
-                  child: Text(widget.data[0].name,
-                  softWrap: false,
-                  overflow: TextOverflow.fade,
-                  style: TextStyle(fontSize: 20.0,
-                  fontWeight: FontWeight.w500,
-                    color: Colors.white,),
+                    ),
+                    width: MediaQuery.of(context).size.width * 0.80,
+                    height: MediaQuery.of(context).size.width * 0.50,
                   ),
                 ),
-              )
-            ],
+
+
+
+                Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width * 0.80,
+                    child: Text(widget.data[0].name,
+                    softWrap: false,
+                    overflow: TextOverflow.fade,
+                    style: TextStyle(fontSize: 20.0,
+                    fontWeight: FontWeight.w500,
+                      color: Colors.white,),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
-          Column(
-            children: [
-              Padding(
+          GestureDetector(
+            onTap: (){},
+            child: Column(
+              children: [
+                Padding(
 
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage(widget.data[1].url),
-                      fit: BoxFit.cover,),
-                    borderRadius: BorderRadius.circular(20.0),
-                    color: Color(0xFFFEFECF0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(image: NetworkImage(widget.data[1].url),
+                        fit: BoxFit.cover,),
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: Color(0xFFFEFECF0),
 
-                  ),
-                  width: MediaQuery.of(context).size.width * 0.80,
-                  height: MediaQuery.of(context).size.width * 0.50,
-                ),
-              ),
-
-
-
-              Padding(
-                padding: const EdgeInsets.only(top: 15.0),
-                child: Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width * 0.80,
-                  child: Text(widget.data[1].name,
-                    softWrap: false,
-                    overflow: TextOverflow.fade,
-                    style: TextStyle(fontSize: 20.0,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,),
+                    ),
+                    width: MediaQuery.of(context).size.width * 0.80,
+                    height: MediaQuery.of(context).size.width * 0.50,
                   ),
                 ),
-              )
-            ],
-          ),  Column(
-            children: [
-              Padding(
 
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage(widget.data[2].url),
-                      fit: BoxFit.cover,),
-                    borderRadius: BorderRadius.circular(20.0),
-                    color: Color(0xFFFEFECF0),
 
+
+                Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width * 0.80,
+                    child: Text(widget.data[1].name,
+                      softWrap: false,
+                      overflow: TextOverflow.fade,
+                      style: TextStyle(fontSize: 20.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,),
+                    ),
                   ),
-                  width: MediaQuery.of(context).size.width * 0.80,
-                  height: MediaQuery.of(context).size.width * 0.50,
-                ),
-              ),
+                )
+              ],
+            ),
+          ),
+          GestureDetector(
+            onTap: (){},
+            child: Column(
+              children: [
+                Padding(
 
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(image: NetworkImage(widget.data[2].url),
+                        fit: BoxFit.cover,),
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: Color(0xFFFEFECF0),
 
-
-              Padding(
-                padding: const EdgeInsets.only(top: 15.0),
-                child: Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width * 0.80,
-                  child: Text(widget.data[2].name,
-                    softWrap: false,
-                    overflow: TextOverflow.fade,
-                    style: TextStyle(fontSize: 20.0,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,),
-                  ),
-                ),
-              )
-            ],
-          ),  Column(
-            children: [
-              Padding(
-
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage(widget.data[3].url),
-                      fit: BoxFit.cover,),
-                    borderRadius: BorderRadius.circular(20.0),
-                    color: Color(0xFFFEFECF0),
-
-                  ),
-                  width: MediaQuery.of(context).size.width * 0.80,
-                  height: MediaQuery.of(context).size.width * 0.50,
-                ),
-              ),
-
-
-
-              Padding(
-                padding: const EdgeInsets.only(top: 15.0),
-                child: Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width * 0.80,
-                  child: Text(widget.data[3].name,
-                    softWrap: false,
-                    overflow: TextOverflow.fade,
-                    style: TextStyle(fontSize: 20.0,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,),
+                    ),
+                    width: MediaQuery.of(context).size.width * 0.80,
+                    height: MediaQuery.of(context).size.width * 0.50,
                   ),
                 ),
-              )
-            ],
-          ),  Column(
-            children: [
-              Padding(
 
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage(widget.data[4].url),
-                      fit: BoxFit.cover,),
-                    borderRadius: BorderRadius.circular(20.0),
-                    color: Color(0xFFFEFECF0),
 
+
+                Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width * 0.80,
+                    child: Text(widget.data[2].name,
+                      softWrap: false,
+                      overflow: TextOverflow.fade,
+                      style: TextStyle(fontSize: 20.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,),
+                    ),
                   ),
-                  width: MediaQuery.of(context).size.width * 0.80,
-                  height: MediaQuery.of(context).size.width * 0.50,
-                ),
-              ),
+                )
+              ],
+            ),
+          ),
+          GestureDetector(
+            onTap: (){},
+            child: Column(
+              children: [
+                Padding(
 
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(image: NetworkImage(widget.data[3].url),
+                        fit: BoxFit.cover,),
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: Color(0xFFFEFECF0),
 
-
-              Padding(
-                padding: const EdgeInsets.only(top: 15.0),
-                child: Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width * 0.80,
-                  child: Text(widget.data[4].name,
-                    softWrap: false,
-                    overflow: TextOverflow.fade,
-                    style: TextStyle(fontSize: 20.0,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,),
+                    ),
+                    width: MediaQuery.of(context).size.width * 0.80,
+                    height: MediaQuery.of(context).size.width * 0.50,
                   ),
                 ),
-              )
-            ],
+
+
+
+                Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width * 0.80,
+                    child: Text(widget.data[3].name,
+                      softWrap: false,
+                      overflow: TextOverflow.fade,
+                      style: TextStyle(fontSize: 20.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          GestureDetector(
+            onTap: (){},
+            child: Column(
+              children: [
+                Padding(
+
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(image: NetworkImage(widget.data[4].url),
+                        fit: BoxFit.cover,),
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: Color(0xFFFEFECF0),
+
+                    ),
+                    width: MediaQuery.of(context).size.width * 0.80,
+                    height: MediaQuery.of(context).size.width * 0.50,
+                  ),
+                ),
+
+
+
+                Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width * 0.80,
+                    child: Text(widget.data[4].name,
+                      softWrap: false,
+                      overflow: TextOverflow.fade,
+                      style: TextStyle(fontSize: 20.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
 
 
