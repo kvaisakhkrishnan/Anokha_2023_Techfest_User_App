@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'confirmPassword.dart';
+import 'otpValidationforForgotpassword.dart';
 
 class forgotPasswordclass extends StatefulWidget {
   const forgotPasswordclass({Key? key}) : super(key: key);
@@ -31,7 +32,7 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
     );
 
     if (response.statusCode == 200) {
-      Navigator.push(context,MaterialPageRoute(builder: ((context) => OTPVerify(token:json.decode(response.body)["SECRET_TOKEN"]))));
+      Navigator.push(context,MaterialPageRoute(builder: ((context) => OTPverifyforgot(token:json.decode(response.body)["SECRET_TOKEN"], email: email,))));
       // Handle successful response here
     } else {
       // Handle unsuccessful response here

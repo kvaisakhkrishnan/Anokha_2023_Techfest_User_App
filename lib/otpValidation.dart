@@ -1,26 +1,60 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
-int timer = 300;
-
 class OTPVerify extends StatefulWidget {
   var token;
-  OTPVerify({Key? key, required this.token}) : super(key: key);
+  String email;
+  OTPVerify({Key? key, required this.token, required this.email})
+      : super(key: key);
 
   @override
   State<OTPVerify> createState() => _OTPVerifyState();
 }
 
 class _OTPVerifyState extends State<OTPVerify> {
+  late Timer _timer;
+  int _remainingTime = 300;
+  final TextEditingController _otpController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    _otpController.dispose();
+    super.dispose();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_remainingTime > 0) {
+          _remainingTime--;
+        } else {
+          timer.cancel();
+          Navigator.pop(context); // Go back to the previous page
+        }
+      });
+    });
+  }
+
   Future<void> _sendtoBackend(String value) async {
+    print(value);
     final String url =
-        "https://anokha.amrita.edu/api/userApp/forgotPassword/verifyOtp";
+        "https://anokha.amrita.edu/api/userApp/verifyOTP";
     final response = await http.post(Uri.parse(url),
-        body: {'otp': value},
+        body: {'otp': int.parse(value)},
         headers: {'authorization': 'Bearer ${widget.token}'});
+    print("response is" +response.body);
+    print(value.runtimeType);
   }
 
   @override
@@ -64,7 +98,7 @@ class _OTPVerifyState extends State<OTPVerify> {
                 child: Container(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    "cb.en.u4cse*********",
+                    widget.email, // Replace hardcoded email with the passed email
                     style: TextStyle(fontSize: 18.0),
                   ),
                 ),
@@ -99,7 +133,8 @@ class _OTPVerifyState extends State<OTPVerify> {
               ),
               Padding(
                   padding: EdgeInsets.only(top: 40.0),
-                  child: Text("Time Remaining: ${timer} seconds")),
+                  child: Text(
+                      "Time Remaining: $_remainingTime seconds")),
               Expanded(child: SizedBox()),
               Padding(
                 padding: EdgeInsets.only(bottom: 20.0),
