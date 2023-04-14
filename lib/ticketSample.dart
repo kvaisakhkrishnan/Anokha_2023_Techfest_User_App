@@ -169,7 +169,7 @@ class TicketData extends StatelessWidget {
 
         QrImage(
           foregroundColor : Colors.black,
-          data: "{json data to be passed}",
+          data: "${data.userEmail}/${data.eventId}",
           version: QrVersions.auto,
           size: MediaQuery.of(context).size.height * 0.19,
           gapless: false,
