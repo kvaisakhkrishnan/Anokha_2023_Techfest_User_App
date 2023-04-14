@@ -57,15 +57,15 @@ class PayU extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Color(0xFF193d57), Color(0xFF001422)],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter)),
-            child: MyCardWidget()),
-      );
+      resizeToAvoidBottomInset: false,
+      body: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [Color(0xFF193d57), Color(0xFF001422)],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter)),
+          child: MyCardWidget()),
+    );
   }
 }
 
@@ -518,19 +518,18 @@ class _FailureState extends State<Failure> {
         backgroundColor: Color(0xFF002845),
         body: Center(
           child: Column(children: [
-            Lottie.asset("assets/success.json", repeat: false),
+            Lottie.asset("assets/warning.json", repeat: false),
             SizedBox(
               height: 30,
             ),
             Text(
-              "Transaction Successful",
+              "Transaction Unsuccessful",
               style: TextStyle(color: Colors.white, fontSize: 18),
             ),
             SizedBox(
               height: 10,
             ),
-            Text("Your Payment will be reflected in 5-10",
-                style: TextStyle(color: Colors.white, fontSize: 18)),
+            Text("", style: TextStyle(color: Colors.white, fontSize: 18)),
             SizedBox(
               height: 10,
             ),

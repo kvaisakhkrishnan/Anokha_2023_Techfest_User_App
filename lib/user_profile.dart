@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 import 'buyPassport.dart';
 import 'login.dart';
@@ -228,11 +229,30 @@ class _userProfState extends State<userProf> {
                                   child: Hero(
                                     tag: 'imageTag',
                                     child: Container(
-                                      child: Image.network(
-                                          'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png',
-                                          color: islight
-                                              ? Color(0xFFBEB7AA)
-                                              : Color(0xFF002845)),
+                                      child:  Padding(
+                                        padding: EdgeInsets.only(top:  MediaQuery.of(context).size.height * 0.02,),
+                                        child: QrImage(
+                                          foregroundColor : Colors.black,
+                                          data: "https://anokha.amrita.edu/api/adminApp/verifyUser/${widget.data.userEmail}",
+                                          version: QrVersions.auto,
+                                          size: MediaQuery.of(context).size.height * 0.19,
+                                          gapless: false,
+
+                                          embeddedImageStyle: QrEmbeddedImageStyle(
+                                            size: Size(MediaQuery.of(context).size.height * 0.05, MediaQuery.of(context).size.height * 0.05),
+                                          ),
+                                          errorStateBuilder: (cxt, err) {
+                                            return Container(
+                                              child: Center(
+                                                child: Text(
+                                                  "Please Conatct User App Developers",
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),

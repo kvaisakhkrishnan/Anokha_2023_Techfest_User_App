@@ -13,6 +13,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'Loading_Screens/events_loading.dart';
+import 'homePage.dart';
 
 final __url = serverUrl().url;
 var token;
@@ -30,24 +31,24 @@ class GetStarrs extends StatefulWidget {
 class _GetStarrsState extends State<GetStarrs> {
   Future<bool> _onWillPop() async {
     return (await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0)),
-        title: Text('Are you sure?'),
-        content: Text('Do you want to exit the app?'),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: Text('No', style: TextStyle(color: Color(0xFF002845))),
+          context: context,
+          builder: (context) => AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            title: Text('Are you sure?'),
+            content: Text('Do you want to exit the app?'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text('No', style: TextStyle(color: Color(0xFF002845))),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text('Yes', style: TextStyle(color: Color(0xFF002845))),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: Text('Yes', style: TextStyle(color: Color(0xFF002845))),
-          ),
-        ],
-      ),
-    )) ??
+        )) ??
         false;
   }
 
@@ -56,8 +57,7 @@ class _GetStarrsState extends State<GetStarrs> {
 
     final response = await http.get(Uri.parse(url),
         headers: {'authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
-    if(response.statusCode == 401)
-    {
+    if (response.statusCode == 401) {
       return ["SESSIONEXPIRATIONERROR"];
     }
     return json.decode(response.body);
@@ -73,14 +73,11 @@ class _GetStarrsState extends State<GetStarrs> {
             builder: (context, ss) {
               if (ss.hasError) {}
               if (ss.hasData) {
-                if(listEquals(ss.data,["SESSIONEXPIRATIONERROR"]))
-                {
+                if (listEquals(ss.data, ["SESSIONEXPIRATIONERROR"])) {
                   return SessionExpired();
-                }
-                else{
+                } else {
                   return Wheel(starr_map: ss.data);
                 }
-
               } else {
                 return Events_Loading_screen();
               }
@@ -115,32 +112,55 @@ class _WheelState extends State<Wheel> {
       ),
       body: (widget.starr_map?.length == 0)
           ? Center(
-          child: Text(
-            "You have not starred any events",
-            style: TextStyle(color: Colors.white, fontSize: 20),
-            maxLines: 3,
-          ))
+              child: Text(
+              "You have not starred any events",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+              maxLines: 3,
+            ))
           : ListView.builder(
-        itemBuilder: ((context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
-            child: InkWell(
-              child: New_Widget(
-                  index: index, starrs: widget.starr_map![index]),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => EventInfo(
-                            event_map: null,
-                            data: token,
-                            star_map: widget.starr_map?[index])));
-              },
-            ),
-          );
-        }),
-        itemCount: widget.starr_map?.length,
-        /*child: ListWheelScrollView.useDelegate(
+              itemBuilder: ((context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: InkWell(
+                    child: New_Widget(
+                        index: index, starrs: widget.starr_map![index]),
+                    onTap: () {
+                      var event_map = events(
+                          totalNumberOfSeats: widget.starr_map![index]
+                              ["totalNumberofSeats"],
+                          eventId: widget.starr_map![index]["eventId"],
+                          date: widget.starr_map![index]["date"],
+                          day: widget.starr_map![index]["day"],
+                          department: widget.starr_map![index]
+                              ["departmentAbbr"],
+                          description: widget.starr_map![index]["description"],
+                          fees: widget.starr_map![index]["fees"],
+                          individualOrGroup: widget.starr_map![index]
+                              ["groupOrIndividual"],
+                          isStarred: 1,
+                          maxCount: widget.starr_map![index]["maxCount"],
+                          name: widget.starr_map![index]["eventName"],
+                          noOfRegistrations: widget.starr_map![index]
+                              ["noOfRegistrations"],
+                          technical: widget.starr_map![index]["technical"],
+                          time: widget.starr_map![index]["eventTime"],
+                          type: widget.starr_map![index]["type"],
+                          url: widget.starr_map![index]["url"],
+                          venue: widget.starr_map![index]["venue"]);
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EventInfo(
+                                    event_map: event_map,
+                                    data: token,
+                                  )));
+                    },
+                  ),
+                );
+              }),
+              itemCount: widget.starr_map?.length,
+              /*child: ListWheelScrollView.useDelegate(
                 physics: FixedExtentScrollPhysics(),
                 itemExtent: MediaQuery.of(context).size.height * 0.26,
                 perspective: 0.001,
@@ -150,7 +170,7 @@ class _WheelState extends State<Wheel> {
                       return New_Widget(index: index, starrs: widget.starr_map);
                     }),
               ),*/
-      ),
+            ),
     );
   }
 }
@@ -178,7 +198,7 @@ class _New_WidgetState extends State<New_Widget> {
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(30))),
-              height: MediaQuery.of(context).size.height * 0.26,
+              height: MediaQuery.of(context).size.height * 0.28,
               width: MediaQuery.of(context).size.width * 0.9,
               child: Column(
                 children: [
@@ -212,8 +232,13 @@ class _New_WidgetState extends State<New_Widget> {
                             "Event Name",
                             style: TextStyle(color: Color(0xffbeb7a4)),
                           ),
-                          Text(widget.starrs!["eventName"],
-                              style: TextStyle(color: Colors.black)),
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            child: Text(widget.starrs!["eventName"],
+                                style: TextStyle(color: Colors.black),
+                                maxLines: 2,
+                                overflow: TextOverflow.fade,),
+                          ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.01,
                           ),
