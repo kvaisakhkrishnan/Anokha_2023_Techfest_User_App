@@ -99,6 +99,7 @@ flutter:
      - Images/passport.png
      - Images/anokha_black_text.png
      - assets/success.json
+     - assets/warning.json
      - Images/raga.jpeg
      - Images/natya.jpeg
      - Images/clg.jpeg
