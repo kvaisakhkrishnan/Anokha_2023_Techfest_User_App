@@ -13,6 +13,7 @@ import 'Loading_Screens/events_loading.dart';
 import 'controllerPage.dart';
 import 'forgotPassword.dart';
 import 'package:crypto/crypto.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 var userData;
 
@@ -34,26 +35,26 @@ class event_list {
   int isStarred;
   int fees;
   int totalNumberOfSeats;
-  String errorMessage="";
+  String errorMessage = "";
 
   event_list(
       {required this.eventId,
-        required this.name,
-        required this.description,
-        required this.date,
-        required this.type,
-        required this.venue,
-        required this.time,
-        required this.department,
-        required this.day,
-        required this.technical,
-        required this.noOfRegistrations,
-        required this.url,
-        required this.individualOrGroup,
-        required this.maxCount,
-        required this.isStarred,
-        required this.fees,
-        required this.totalNumberOfSeats});
+      required this.name,
+      required this.description,
+      required this.date,
+      required this.type,
+      required this.venue,
+      required this.time,
+      required this.department,
+      required this.day,
+      required this.technical,
+      required this.noOfRegistrations,
+      required this.url,
+      required this.individualOrGroup,
+      required this.maxCount,
+      required this.isStarred,
+      required this.fees,
+      required this.totalNumberOfSeats});
 }
 
 class events_grouped_by_category {
@@ -82,15 +83,15 @@ class User {
 
   User(
       {required this.userEmail,
-        required this.fullName,
-        required this.activePassport,
-        required this.isAmritaCBE,
-        required this.collegeName,
-        required this.district,
-        required this.state,
-        required this.country,
-        required this.SECRET_TOKEN,
-        required this.passportId});
+      required this.fullName,
+      required this.activePassport,
+      required this.isAmritaCBE,
+      required this.collegeName,
+      required this.district,
+      required this.state,
+      required this.country,
+      required this.SECRET_TOKEN,
+      required this.passportId});
 }
 
 final __url = serverUrl().url;
@@ -105,7 +106,7 @@ class loginPage extends StatefulWidget {
 class _loginPageState extends State<loginPage> {
   List<events_grouped_by_category> list_of_events = [];
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
-  GlobalKey<ScaffoldMessengerState>();
+      GlobalKey<ScaffoldMessengerState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -136,11 +137,12 @@ class _loginPageState extends State<loginPage> {
     super.initState();
     loadLoginCredentials();
   }
-  String errorMessage="";
+
+  String errorMessage = "";
 
   bool isValidEmail(String email) {
     final RegExp emailRegex =
-    RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+        RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
     return emailRegex.hasMatch(email);
   }
 
@@ -171,13 +173,9 @@ class _loginPageState extends State<loginPage> {
       print("response");
       print(response.statusCode.toString());
       // Check the response status
-      if (response.statusCode == 200)
-      {
-
-
+      if (response.statusCode == 200) {
         var userDetails = jsonDecode(response.body);
-        if(userDetails["userData"]['passportId'] == null)
-        {
+        if (userDetails["userData"]['passportId'] == null) {
           userDetails["userData"]['passportId'] = "NA";
         }
 
@@ -227,7 +225,7 @@ class _loginPageState extends State<loginPage> {
         return 1;
       } else {
         setState(() {
-          errorMessage="Check your Credentials";
+          errorMessage = "Check your Credentials";
         });
         return 0;
       }
@@ -275,10 +273,12 @@ class _loginPageState extends State<loginPage> {
                     padding: EdgeInsets.only(top: 40.0, bottom: 20.0),
                     child: Text(
                       "Login Portal",
-                      style: TextStyle(
-                        fontSize: 30.0,
-                        color: Color(0xff002845),
-                        fontWeight: FontWeight.w500,
+                      style: GoogleFonts.dmSans(
+                        textStyle: TextStyle(
+                          color: Color(0xff002845),
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ),
@@ -304,11 +304,12 @@ class _loginPageState extends State<loginPage> {
                                   SizedBox(),
                                   Padding(
                                     padding:
-                                    EdgeInsets.symmetric(horizontal: 10.0),
+                                        EdgeInsets.symmetric(horizontal: 10.0),
                                     child: TextFormField(
-                                      onTap: (){
+                                      style: GoogleFonts.dmSans(),
+                                      onTap: () {
                                         setState(() {
-                                          errorMessage="";
+                                          errorMessage = "";
                                         });
                                       },
                                       controller: _usernameController,
@@ -332,11 +333,12 @@ class _loginPageState extends State<loginPage> {
                                   ),
                                   Padding(
                                     padding:
-                                    EdgeInsets.symmetric(horizontal: 10.0),
+                                        EdgeInsets.symmetric(horizontal: 10.0),
                                     child: TextFormField(
-                                      onTap: (){
+                                      style: GoogleFonts.dmSans(),
+                                      onTap: () {
                                         setState(() {
-                                          errorMessage="";
+                                          errorMessage = "";
                                         });
                                       },
                                       controller: _passwordController,
@@ -361,84 +363,90 @@ class _loginPageState extends State<loginPage> {
                                     ),
                                   ),
                                   Padding(
-                                    padding:
-                                    EdgeInsets.only(top: 30.0),
+                                    padding: EdgeInsets.only(top: 30.0),
                                     child: OutlinedButton(
-                                      onPressed: () async {
-                                        if (_formKey.currentState!.validate()) {
-                                          // Add this line
-                                          try {
-                                            int status = await loginUser(
-                                              _usernameController.text,
-                                              _passwordController.text,
-                                            );
-
-                                            if (status == 1) {
-                                              print("in status 1");
-                                              await saveLoginCredentials(
+                                        onPressed: () async {
+                                          if (_formKey.currentState!
+                                              .validate()) {
+                                            // Add this line
+                                            try {
+                                              int status = await loginUser(
                                                 _usernameController.text,
                                                 _passwordController.text,
                                               );
-                                              // ignore: use_build_context_synchronously
-                                              Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ControllerPage(
-                                                        data: userData,
-                                                        eventsList: list_of_events,
-                                                        onLogout:
-                                                        removeLoginCredentials,
-                                                      ),
-                                                ),
-                                              );
-                                            } else {
+
+                                              if (status == 1) {
+                                                print("in status 1");
+                                                await saveLoginCredentials(
+                                                  _usernameController.text,
+                                                  _passwordController.text,
+                                                );
+                                                // ignore: use_build_context_synchronously
+                                                Navigator.pushReplacement(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ControllerPage(
+                                                      data: userData,
+                                                      eventsList:
+                                                          list_of_events,
+                                                      onLogout:
+                                                          removeLoginCredentials,
+                                                    ),
+                                                  ),
+                                                );
+                                              } else {
+                                                _scaffoldMessengerKey
+                                                    .currentState
+                                                    ?.showSnackBar(
+                                                  SnackBar(
+                                                      content: Text(
+                                                          'Invalid login credentials')),
+                                                );
+                                              }
+                                            } catch (e) {
+                                              print("Error: $e");
                                               _scaffoldMessengerKey.currentState
                                                   ?.showSnackBar(
                                                 SnackBar(
                                                     content: Text(
-                                                        'Invalid login credentials')),
+                                                        'An error occurred while logging in')),
                                               );
                                             }
-                                          } catch (e) {
-                                            print("Error: $e");
-                                            _scaffoldMessengerKey.currentState
-                                                ?.showSnackBar(
-                                              SnackBar(
-                                                  content: Text(
-                                                      'An error occurred while logging in')),
-                                            );
                                           }
-                                        }
-                                      },
-                                      style: OutlinedButton.styleFrom(
-                                        backgroundColor: Color(0xFFFF7F11),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(10.0)),
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 13.0,
-                                            horizontal: MediaQuery.of(context)
-                                                .size
-                                                .width *
-                                                0.3),
-                                      ),
-                                      child: const Text(
-                                        "LOGIN",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 15.0),
-                                      ),
-                                    ),
-
+                                        },
+                                        style: OutlinedButton.styleFrom(
+                                          backgroundColor: Color(0xFFFF7F11),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0)),
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 13.0,
+                                              horizontal: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.3),
+                                        ),
+                                        child: Text(
+                                          "LOGIN",
+                                          style: GoogleFonts.dmSans(
+                                            textStyle: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15.0),
+                                          ),
+                                        )),
                                   ),
-                                  if (errorMessage!="")
-                                    Text(errorMessage,style: GoogleFonts.dmSans(color: Colors.red),),
-                                  const Padding(
+                                  if (errorMessage != "")
+                                    Text(
+                                      errorMessage,
+                                      style:
+                                          GoogleFonts.dmSans(color: Colors.red),
+                                    ),
+                                  Padding(
                                     padding: EdgeInsets.only(top: 30.0),
                                     child: Text(
                                       "New to Anokha 2023?",
-                                      style: TextStyle(fontSize: 17.0),
+                                      style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 17.0)),
                                     ),
                                   ),
                                   Padding(
@@ -454,8 +462,8 @@ class _loginPageState extends State<loginPage> {
                                         },
                                         child: Text(
                                           "REGISTER",
-                                          style: TextStyle(
-                                              color: Color(0xFFFF7F11)),
+                                          style: GoogleFonts.dmSans(textStyle: TextStyle(
+                                              color: Color(0xFFFF7F11))),
                                         )),
                                   ),
                                   SizedBox(),
@@ -472,8 +480,8 @@ class _loginPageState extends State<loginPage> {
                                         },
                                         child: Text(
                                           "Forgot Password",
-                                          style: TextStyle(
-                                              color: Color(0xFFFF7F11)),
+                                          style: GoogleFonts.dmSans(textStyle: TextStyle(
+                                              color: Color(0xFFFF7F11))),
                                         )),
                                   ),
                                   SizedBox()
@@ -491,8 +499,8 @@ class _loginPageState extends State<loginPage> {
                 alignment: Alignment.topCenter,
                 height: MediaQuery.of(context).size.height * 0.1,
                 child: Text(
-                  'Made with ♥️ by WMD',
-                  style: TextStyle(fontSize: 17.0),
+                  'Made with 🖤️ by WMD',
+                  style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 17.0),)
                 ),
               ),
             ],

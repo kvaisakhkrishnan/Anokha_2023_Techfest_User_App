@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:anokha_home/SessionExpired/sessionExpired.dart';
 import 'package:anokha_home/serverUrl.dart';
 import 'package:anokha_home/ticketSample.dart';
@@ -7,6 +6,7 @@ import 'package:anokha_home/timer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
 import 'Loading_Screens/events_loading.dart';
@@ -56,37 +56,46 @@ class _CardWidgetState extends State<CardWidget> {
             ],
           ),
           child: (widget.index == 0) ? Center(child: Image(image: AssetImage("Images/anokha_2023_black_small.png"), width: MediaQuery.of(context).size.width * 0.6,),) :
-          (widget.index == 1) ? Center(child: Text("ABOUT ANOKHA", style: TextStyle(fontSize: 25, color: Color(0xff002845), fontWeight: FontWeight.w600),),) :
+          (widget.index == 1) ? Center(child: Text("ABOUT ANOKHA", style: GoogleFonts.dmSans(textStyle: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 25, color: Color(0xff002845), fontWeight: FontWeight.w600))),),) :
           (widget.index == 2) ? Padding(
             padding: const EdgeInsets.all(8.0),
             child: Center(child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text("Anokha, the national techfest of Amrita Vishwa Vidyapeetham Coimbatore, is a 3-day congregation of some of the brightest minds in India. Founded in 2010, Anokha has grown by leaps and bounds and has progressed to become one of the leading techfests in India. Anokha has successfully completed eight editions and boasts an average annual participation of over 10,000 outstanding students from top-ranking engineering institutions in India like IITs, BITS, NITs and IIITs as well as partner universities in USA and Europe namely University of New Mexico, EVRY France and Uppsala University-Sweden.", style: TextStyle(color: Color(0xff002845)),),
+              child: Text("Anokha, the national techfest of Amrita Vishwa Vidyapeetham Coimbatore, is a 3-day congregation of some of the brightest minds in India. Founded in 2010, Anokha has grown by leaps and bounds and has progressed to become one of the leading techfests in India. Anokha has successfully completed eight editions and boasts an average annual participation of over 10,000 outstanding students from top-ranking engineering institutions in India like IITs, BITS, NITs and IIITs as well as partner universities in USA and Europe namely University of New Mexico, EVRY France and Uppsala University-Sweden.", style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xff002845))),),
             ),),
           ) :
           (widget.index == 3) ? Center(child: Image(image: AssetImage("Images/raga.jpeg"),),) :
           (widget.index == 4) ? Center(child: Image(image: AssetImage("Images/natya.jpeg"),),) :
-          (widget.index == 5) ? Center(child: Text("ABOUT AMRITA", style: TextStyle(fontSize: 25, color: Color(0xff002845), fontWeight: FontWeight.w600),),) :
+          (widget.index == 5) ? Center(child: Text("ABOUT AMRITA", style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 25, color: Color(0xff002845), fontWeight: FontWeight.w600)),),) :
 
           (widget.index == 6) ? Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Center(child: Text("Amrita Vishwa Vidyapeetham University's Coimbatore campus is a picturesque and serene educational institution located in the foothills of the Western Ghats. With state-of-the-art facilities and a commitment to academic excellence, the university offers a wide range of undergraduate and postgraduate programs in various fields, including engineering, management, medicine, arts, and sciences. The campus boasts of world-class research facilities and is known for its focus on innovation and entrepreneurship.",style: TextStyle(color: Color(0xff002845)))),
+            child: Center(child: Text("Amrita Vishwa Vidyapeetham University's Coimbatore campus is a picturesque and serene educational institution located in the foothills of the Western Ghats. With state-of-the-art facilities and a commitment to academic excellence, the university offers a wide range of undergraduate and postgraduate programs in various fields, including engineering, management, medicine, arts, and sciences. The campus boasts of world-class research facilities and is known for its focus on innovation and entrepreneurship.",style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xff002845))))),
           ):
           (widget.index == 7) ? Center(child: Image(image: AssetImage("Images/clg.jpeg"),),) :
           (widget.index == 8) ? Center(child: Image(image: AssetImage("Images/clg2.jpeg"),),) :
 
-          (widget.index == 9) ? Center(child: Text("C20 G20", style: TextStyle(fontSize: 25, color: Color(0xff002845), fontWeight: FontWeight.w600),),) :
+          (widget.index == 9) ? Center(child: Text("C20 G20", style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 25, color: Color(0xff002845), fontWeight: FontWeight.w600)),),) :
           (widget.index == 10) ? Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Center(child: Text("Anokha 2023 techfest is proud to be recognized as a supporting event of the prestigious Civil20 (C20), official engagement group of G20. The fest orchestrates a plethora of workshops, innovation showcases and a techfair aligning to the various working groups of C20, which are hosted by Amrita University under the guidance of world-renowned humanitarian leader, Sri Mata Amritanandamayi Devi (AMMA), the Chancellor of the university.",style: TextStyle(color: Color(0xff002845))),),
+            child: Center(child: Text("Anokha 2023 techfest is proud to be recognized as a supporting event of the prestigious Civil20 (C20), official engagement group of G20. The fest orchestrates a plethora of workshops, innovation showcases and a techfair aligning to the various working groups of C20, which are hosted by Amrita University under the guidance of world-renowned humanitarian leader, Sri Mata Amritanandamayi Devi (AMMA), the Chancellor of the university.",style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xff002845)))),),
           ) :
 
-          (widget.index == 11) ? Center(child: Text("EVENTIDE", style: TextStyle(fontSize: 25, color: Color(0xff002845), fontWeight: FontWeight.w600),)) :
-          (widget.index == 12) ? Center(child: Text("Eventide, the cultural extravaganza of Anokha, has brought joy to thousands over the past decade through explosive performances from talented and captivating artists. The performances leave our audience in awe, showcasing the magnificence of human expression through art. Some passionate artists who have previously graced the stage include percussionist Sivamani; playback singers Vijay Prakash, Karthik, Benny Dayal, Haricharan, Rahul Nambiar, Alaap Raju, Shaktisree Gopalan, Sunitha Sarathy, Ranjani-Gayatri, and Nikita Gandhi. Eventide has become a platform for the celebration of India's rich cultural heritage and diversity.",style: TextStyle(color: Color(0xff002845)))) :
+          (widget.index == 11) ? Center(child: Text("EVENTIDE", style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 25, color: Color(0xff002845), fontWeight: FontWeight.w600)),)) :
+          (widget.index == 12) ? Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Center(child: Text("Eventide, the cultural extravaganza of Anokha, has brought joy to thousands over the past decade through explosive performances from talented and captivating artists. The performances leave our audience in awe, showcasing the magnificence of human expression through art. Some passionate artists who have previously graced the stage include percussionist Sivamani; playback singers Vijay Prakash, Karthik, Benny Dayal, Haricharan, Rahul Nambiar, Alaap Raju, Shaktisree Gopalan, Sunitha Sarathy, Ranjani-Gayatri, and Nikita Gandhi. Eventide has become a platform for the celebration of India's rich cultural heritage and diversity.",style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xff002845))))),
+          ) :
           (widget.index == 13) ? Center(child: Image(image: AssetImage("Images/event1.jpg"),),) :
-          (widget.index == 14) ? Center(child: Text("TECHFAIR", style: TextStyle(fontSize: 25, color: Color(0xff002845), fontWeight: FontWeight.w600),),) :
+          (widget.index == 14) ? Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Center(child: Text("TECHFAIR", style:GoogleFonts.dmSans(textStyle:  GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 25, color: Color(0xff002845), fontWeight: FontWeight.w600))),),),
+          ) :
 
-           Center(child: Text("Anokha, the national engineering techfest of Amrita School of Engineering, Coimbatore, is a 3-day congregation of some of the brightest minds in India. Founded in 2010, Anokha has grown by leaps and bounds and has progressed to become one of the most popular and top techfests in India. Having successfully completed eight editions, Anokha has had an average annual participation of over 10,000 of the best undergraduate engineering students from top-ranking engineering institutions in India like IITs, BITS, NITs and IIITs participating as well as partner universities in USA and Europe like University of New Mexico, EVRY France and Uppsala University-Sweden.",style: TextStyle(color: Color(0xff002845))))
+           Padding(
+             padding: const EdgeInsets.all(10.0),
+             child: Center(child: Text("Anokha, the national engineering techfest of Amrita School of Engineering, Coimbatore, is a 3-day congregation of some of the brightest minds in India. Founded in 2010, Anokha has grown by leaps and bounds and has progressed to become one of the most popular and top techfests in India. Anokha has had an average annual participation of over 10,000 of the best undergraduate engineering students from top-ranking engineering institutions in India like IITs, BITS, NITs and IIITs participating as well as partner universities in USA and Europe like University of New Mexico, EVRY France and Uppsala University-Sweden.",style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xff002845))))),
+           )
     ),
       ),
     );
@@ -108,15 +117,23 @@ class _MainPageState extends State<MainPage> {
   final pageController = PageController();
   String assetName = 'Images/campus.svg';
 
-  Future getEntryCard() async {
+  Future getEntryCard()  async {
     String url = __url + "userApp/events/nextEvent";
     final response = await http.get(Uri.parse(url),
         headers: {'authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
+
     if(response.statusCode == 401)
       {
         return ["TOKENEXPIREDERROR"];
       }
-    return json.decode(response.body);
+    else if(response.statusCode == 404)
+    {
+      return ["NOEVENTS"];
+    }
+    else {
+      return (json.decode(response.body));
+    }
+
   }
 
   Future<bool> _onWillPop() async {
@@ -185,92 +202,201 @@ class _MainPageState extends State<MainPage> {
                       }
                       if (snapshot.hasData) {
 
-                        if(listEquals(snapshot.data, ["TOKENEXPIREDERROR"]))
-                          {
-                            return SessionExpired();
-                          }
+                        if (snapshot.data is List<String> && listEquals(snapshot.data, ["TOKENEXPIREDERROR"])) {
+                          return SessionExpired();
+                        }
 
-                        return Align(
-                          alignment: Alignment.center,
-                          child: Center(
-                            child: AnimatedOpacity(
-                                duration: Duration(seconds: 5),
-                                curve: Curves.easeInOut,
-                                opacity: countdownEnded ? 1.0 : 0.0,
-                                child: SafeArea(
+                        else if(snapshot.data is List<String> && listEquals(snapshot.data, ["NOEVENTS"]))
+                          {
+                            return PageView(
+                              controller: pageController,
+                              scrollDirection: Axis.vertical,
+                              children: [
+                                Container(
                                   child: Column(
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.08,
-                                            vertical: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.005),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Image(
-                                              image: AssetImage(
-                                                  'Images/anokha_circle.png'),
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.08,
-                                            ),
-                                            ClipOval(
-                                              child: Image(
-                                                image: NetworkImage(
-                                                    widget.avatarLink),
-                                                fit: BoxFit.cover,
-                                                width:
-                                                    40.0, // set the width and height to make the image circular
-                                                height: 40.0,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.07,
-                                            vertical: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.01),
-                                        child: Container(
-                                            alignment: Alignment.centerLeft,
-                                            child: Text(
-                                              "Up Next For You",
-                                              style: TextStyle(color: Color(0xFFBEB7A4),
-                                                  fontSize: 25.0,
-                                                  fontWeight: FontWeight.w600),
-                                            )),
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            top: MediaQuery.of(context).size.height *
+                                                0.17),
+                                        child: Image.asset('Images/anokha_text_comp.png',
+                                            width:
+                                            MediaQuery.of(context).size.width * 0.8),
                                       ),
                                       Container(
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              top: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.017),
-                                          child: MyTicketView(
-                                              data: widget.data,
-                                              event: snapshot.data),
+                                        margin: EdgeInsets.only(
+                                            top: MediaQuery.of(context).size.height *
+                                                0.05),
+                                        child: Transform.scale(
+                                          scale: 2.0,
+                                          child: SvgPicture.asset(
+                                            'Images/clg.svg',
+                                            semanticsLabel: 'My SVG Image',
+                                            color: Colors.white,
+                                            height:
+                                            MediaQuery.of(context).size.height * 0.33,
+                                          ),
                                         ),
-                                      )
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            top: MediaQuery.of(context).size.height *
+                                                0.05),
+                                        child: Text("You have no evets for today",
+                                            style: GoogleFonts.dmSans(textStyle: TextStyle(
+                                                color: Color(0xffbeb7a4), fontSize: 22.0, fontWeight: FontWeight.w500))),
+                                      ),
+
                                     ],
                                   ),
-                                )),
-                          ),
-                        );
+                                ),
+                                CustomScrollView(
+                                  controller: scrollController,
+                                  slivers: [
+                                    SliverToBoxAdapter(
+                                      child: Container(
+                                        constraints: BoxConstraints.expand(
+                                            height: MediaQuery.of(context).size.height *
+                                                0.13),
+                                      ),
+                                    ),
+                                    SliverList(
+                                      delegate: SliverChildBuilderDelegate(
+                                            (context, index) {
+                                          if (index < 16) {
+                                            final itemPositionOffset = index * itemSize * 0.7;
+                                            final difference =
+                                                scrollController.offset - itemPositionOffset;
+                                            final percent = 1.2 - difference / itemSize * 0.7;
+                                            double opacity = percent;
+                                            double scale = percent;
+                                            if (opacity >= 1.0) opacity = 1.0;
+                                            if (opacity < 0.0) opacity = 0.0;
+                                            if (percent >= 1.0) scale = 1.0;
+                                            return Align(
+                                              heightFactor: 0.7,
+                                              child: Opacity(
+                                                opacity: opacity,
+                                                child: Transform(
+                                                  alignment: Alignment.center,
+                                                  transform: Matrix4.identity()
+                                                    ..scale(scale, 1.0),
+                                                  child: CardWidget(index: index),
+                                                ),
+                                              ),
+                                            );
+                                          } else {
+                                            return null;
+                                          }
+                                        },
+                                        childCount: 16,
+                                      ),
+                                    )
+                                  ],
+                                )
+                              ],
+                            );
+                          }
+
+                          if(true){
+                          return Align(
+                            alignment: Alignment.center,
+                            child: Center(
+                              child: AnimatedOpacity(
+                                  duration: Duration(seconds: 5),
+                                  curve: Curves.easeInOut,
+                                  opacity: countdownEnded ? 1.0 : 0.0,
+                                  child: SafeArea(
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width *
+                                                  0.08,
+                                              vertical: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .height *
+                                                  0.005),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Image(
+                                                image: AssetImage(
+                                                    'Images/anokha_circle.png'),
+                                                height: MediaQuery
+                                                    .of(context)
+                                                    .size
+                                                    .width *
+                                                    0.08,
+                                              ),
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: Colors.white,
+                                                ),
+                                                child: ClipOval(
+                                                  child: Image(
+                                                    image: NetworkImage(widget.avatarLink),
+                                                    fit: BoxFit.cover,
+                                                    width: 40.0,
+                                                    height: 40.0,
+                                                  ),
+                                                ),
+                                              ),
+
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width *
+                                                  0.07,
+                                              vertical: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .height *
+                                                  0.01),
+                                          child: Container(
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(
+                                                "Up Next For You",
+                                                style: GoogleFonts.dmSans(textStyle: TextStyle(
+                                                    color: Color(0xFFBEB7A4),
+                                                    fontSize: 25.0,
+                                                    fontWeight: FontWeight
+                                                        .w600)),
+                                              )),
+                                        ),
+                                        Container(
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                                top: MediaQuery
+                                                    .of(context)
+                                                    .size
+                                                    .height *
+                                                    0.017),
+                                            child: MyTicketView(
+                                                data: widget.data,
+                                                event: snapshot.data),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )),
+                            ),
+                          );
+                        }
+
+
+
                       } else {
                         return Events_Loading_screen();
                       }
@@ -309,14 +435,14 @@ class _MainPageState extends State<MainPage> {
                               margin: EdgeInsets.only(
                                   top: MediaQuery.of(context).size.height *
                                       0.02),
-                              child: Text("Begins In",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 22.0)),
+                              child: Text("Extravaganza In",
+                                  style: GoogleFonts.dmSans(textStyle: TextStyle(
+                                      color: Color(0xffbeb7a4), fontSize: 22.0, fontWeight: FontWeight.w500))),
                             ),
                             Container(
                               margin: EdgeInsets.only(
                                   top: MediaQuery.of(context).size.height *
-                                      0.03),
+                                      0.01),
                               child: Row(
                                 children: [
                                   Spacer(),

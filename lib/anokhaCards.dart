@@ -1,6 +1,7 @@
 import 'package:anokha_home/event_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AnokhaCards extends StatefulWidget {
   var data;
@@ -57,11 +58,11 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                           widget.data[0].name,
                           softWrap: false,
                           overflow: TextOverflow.fade,
-                          style: TextStyle(
+                          style: GoogleFonts.dmSans(textStyle: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.w500,
                             color: Colors.white,
-                          ),
+                          )),
                         ),
                       ),
                     )
@@ -104,11 +105,11 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                           widget.data[1].name,
                           softWrap: false,
                           overflow: TextOverflow.fade,
-                          style: TextStyle(
+                          style: GoogleFonts.dmSans(textStyle: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.w500,
                             color: Colors.white,
-                          ),
+                          )),
                         ),
                       ),
                     )
@@ -151,11 +152,11 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                           widget.data[2].name,
                           softWrap: false,
                           overflow: TextOverflow.fade,
-                          style: TextStyle(
+                          style: GoogleFonts.dmSans(textStyle: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.w500,
                             color: Colors.white,
-                          ),
+                          )),
                         ),
                       ),
                     )
@@ -198,11 +199,11 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                           widget.data[3].name,
                           softWrap: false,
                           overflow: TextOverflow.fade,
-                          style: TextStyle(
+                          style: GoogleFonts.dmSans(textStyle: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.w500,
                             color: Colors.white,
-                          ),
+                          )),
                         ),
                       ),
                     )
@@ -245,11 +246,11 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                           widget.data[4].name,
                           softWrap: false,
                           overflow: TextOverflow.fade,
-                          style: TextStyle(
+                          style: GoogleFonts.dmSans(textStyle: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.w500,
                             color: Colors.white,
-                          ),
+                          )),
                         ),
                       ),
                     )

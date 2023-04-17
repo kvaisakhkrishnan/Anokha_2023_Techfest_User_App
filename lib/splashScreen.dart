@@ -40,16 +40,23 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
           Positioned(
-            bottom: MediaQuery.of(context).size.width * 0.1,
+            bottom: MediaQuery.of(context).size.width * 0.3,
             left: 0,
             right: 0,
-            child: Image(width: MediaQuery.of(context).size.width * 0.2,
-              height: MediaQuery.of(context).size.width * 0.3 * 0.2,
-              image: AssetImage(
-                'Images/sponsor.png',
-                // Replace with the path of your desired image
-              ),
-            ),
+            child: Column(
+              children: [
+                Text("Title Sponsor",
+                style: TextStyle(color: Color(0xff002845)),),
+                Image(width: MediaQuery.of(context).size.width * 0.3,
+
+
+                  image: AssetImage(
+                    'Images/sponsor.png',
+                    // Replace with the path of your desired image
+                  ),
+                ),
+              ],
+            )
           ),
         ],
       ),

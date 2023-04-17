@@ -122,7 +122,7 @@ class _OTPVerifyState extends State<OTPVerify> {
                   alignment: Alignment.topLeft,
                   child: Text(
                     "VERIFY\nOTP",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.dmSans(
                       fontSize: 70.0,
                       fontWeight: FontWeight.bold,
                     ),
@@ -134,7 +134,7 @@ class _OTPVerifyState extends State<OTPVerify> {
                 child: Container(
                   child: Text(
                     "We have send the verification code to",
-                    style: TextStyle(fontSize: 18.0),
+                    style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 18.0)),
                   ),
                   alignment: Alignment.topLeft,
                 ),
@@ -167,13 +167,14 @@ class _OTPVerifyState extends State<OTPVerify> {
               Padding(
                   padding: EdgeInsets.only(top: 40.0),
                   child: Text(
-                      "Time Remaining: $_remainingTime seconds")),
+                      "Time Remaining: $_remainingTime seconds",
+                  style: GoogleFonts.dmSans(),),),
               if (_showError) // Add this block
                 Padding(
                   padding: EdgeInsets.only(top: 10.0),
                   child: Text(
                     "Invalid OTP",
-                    style: TextStyle(color: Colors.red, fontSize: 18.0),
+                    style: GoogleFonts.dmSans(textStyle: TextStyle(color: Colors.red, fontSize: 18.0)),
                   ),
                 ),
               Expanded(child: SizedBox()),

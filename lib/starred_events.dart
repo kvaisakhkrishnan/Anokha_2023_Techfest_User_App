@@ -112,11 +112,20 @@ class _WheelState extends State<Wheel> {
       ),
       body: (widget.starr_map?.length == 0)
           ? Center(
-              child: Text(
-              "You have not starred any events",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-              maxLines: 3,
-            ))
+            child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+
+                children: [Text(
+                "404",
+                style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xffbeb7a4), fontSize: MediaQuery.of(context).size.width * 0.2)),
+                maxLines: 3,
+              ),
+
+                Text("No Starred Events",
+                style: GoogleFonts.dmSans(
+                  textStyle: TextStyle(color:Colors.white, fontSize: 18 )
+                ),)]),
+          )
           : ListView.builder(
               itemBuilder: ((context, index) {
                 return Padding(
@@ -125,12 +134,13 @@ class _WheelState extends State<Wheel> {
                     child: New_Widget(
                         index: index, starrs: widget.starr_map![index]),
                     onTap: () {
+                   print( widget.starr_map![index]["type"]);
                       var event_map = events(
                           totalNumberOfSeats: widget.starr_map![index]
-                              ["totalNumberofSeats"],
+                              ["totalNumberOfSeats"],
                           eventId: widget.starr_map![index]["eventId"],
                           date: widget.starr_map![index]["date"],
-                          day: widget.starr_map![index]["day"],
+                          day: "",
                           department: widget.starr_map![index]
                               ["departmentAbbr"],
                           description: widget.starr_map![index]["description"],
@@ -144,10 +154,9 @@ class _WheelState extends State<Wheel> {
                               ["noOfRegistrations"],
                           technical: widget.starr_map![index]["technical"],
                           time: widget.starr_map![index]["eventTime"],
-                          type: widget.starr_map![index]["type"],
+                          type: widget.starr_map![index]["eventOrWorkshop"],
                           url: widget.starr_map![index]["url"],
                           venue: widget.starr_map![index]["venue"]);
-
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -198,21 +207,21 @@ class _New_WidgetState extends State<New_Widget> {
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(30))),
-              height: MediaQuery.of(context).size.height * 0.33,
+              height: MediaQuery.of(context).size.height * 0.27,
               width: MediaQuery.of(context).size.width * 0.9,
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.08),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           "Starred Card",
-                          style: TextStyle(
+                          style: GoogleFonts.dmSans(textStyle:  TextStyle(
                               color: Colors.black,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w500),
+                              fontSize: MediaQuery.of(context).size.height * 0.021,
+                              fontWeight: FontWeight.w500)),
                         ),
                         Image(
                             height: MediaQuery.of(context).size.height * 0.1,
@@ -230,12 +239,12 @@ class _New_WidgetState extends State<New_Widget> {
                         children: [
                           Text(
                             "Event Name",
-                            style: TextStyle(color: Color(0xffbeb7a4)),
+                            style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xffbeb7a4), fontSize: MediaQuery.of(context).size.height * 0.015)),
                           ),
                           Container(
                             width: MediaQuery.of(context).size.width * 0.4,
                             child: Text(widget.starrs!["eventName"],
-                                style: TextStyle(color: Colors.black),
+                                style: GoogleFonts.dmSans(textStyle: TextStyle(color: Colors.black, fontSize: MediaQuery.of(context).size.height * 0.015)),
                                 maxLines: 2,
                                 overflow: TextOverflow.fade,),
                           ),
@@ -244,19 +253,19 @@ class _New_WidgetState extends State<New_Widget> {
                           ),
                           Text(
                             "Date",
-                            style: TextStyle(color: Color(0xffbeb7a4)),
+                            style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xffbeb7a4), fontSize: MediaQuery.of(context).size.height * 0.015)),
                           ),
                           Text(widget.starrs!["date"],
-                              style: TextStyle(color: Colors.black)),
+                            style: GoogleFonts.dmSans(textStyle: TextStyle(color: Colors.black, fontSize: MediaQuery.of(context).size.height * 0.015))),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.01,
                           ),
                           Text(
                             "Venue",
-                            style: TextStyle(color: Color(0xffbeb7a4)),
+                            style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xffbeb7a4), fontSize: MediaQuery.of(context).size.height * 0.015)),
                           ),
                           Text(widget.starrs!["venue"],
-                              style: TextStyle(color: Colors.black)),
+                            style: GoogleFonts.dmSans(textStyle: TextStyle(color: Colors.black, fontSize: MediaQuery.of(context).size.height * 0.015))),
                         ],
                       ),
                       Column(
@@ -264,22 +273,22 @@ class _New_WidgetState extends State<New_Widget> {
                         children: [
                           Text(
                             "Event Type",
-                            style: TextStyle(color: Color(0xffbeb7a4)),
+                            style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xffbeb7a4), fontSize: MediaQuery.of(context).size.height * 0.015)),
                           ),
                           Text(
                               widget.starrs!["eventOrWorkshop"] == 0
                                   ? "Event"
                                   : "Workshop",
-                              style: TextStyle(color: Colors.black)),
+                            style: GoogleFonts.dmSans(textStyle: TextStyle(color: Colors.black, fontSize: MediaQuery.of(context).size.height * 0.015))),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.01,
                           ),
                           Text(
                             "Time",
-                            style: TextStyle(color: Color(0xffbeb7a4)),
+                            style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xffbeb7a4), fontSize: MediaQuery.of(context).size.height * 0.015)),
                           ),
                           Text(widget.starrs!["eventTime"],
-                              style: TextStyle(color: Colors.black))
+                            style: GoogleFonts.dmSans(textStyle: TextStyle(color: Colors.black, fontSize: MediaQuery.of(context).size.height * 0.015))),
                         ],
                       ),
                     ],
@@ -288,4 +297,5 @@ class _New_WidgetState extends State<New_Widget> {
               )),
         ));
   }
+
 }

@@ -6,6 +6,7 @@ import 'package:anokha_home/serverUrl.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'Loading_Screens/events_loading.dart';
 import 'homePage.dart';
@@ -49,8 +50,8 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
   final searchController = TextEditingController();
 
   var registeredEvents = [];
-  bool _isLoading = true;
 
+  bool _isLoading = false;
   void onListen() {
     setState(() {});
   }
@@ -59,9 +60,12 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
   void initState() {
     scrollController.addListener(onListen);
     super.initState();
+    setState(() {
+      _isLoading = true;
+    });
     getRegistered().then((_) {
       setState(() {
-        _isLoading = false;
+
       });
     });
   }
@@ -78,6 +82,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
     String url = __url + "userApp/events/myRegistered";
     final response = await http.get(Uri.parse(url),
         headers: {'authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
+    _isLoading = false;
     if(response.statusCode == 401)
       {
         registeredEvents = ["SESSIONEXPIRATIONERROR"];
@@ -86,18 +91,28 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
       registeredEvents = json.decode(response.body);
     }
 
+
   }
 
   @override
   Widget build(BuildContext context) {
-    return  registeredEvents.length == 0 ? Scaffold(
+    return  registeredEvents.length == 0  && _isLoading == false? Scaffold(
       backgroundColor: Color(0xff002845),
       body: Center(
-          child: Text(
-            "You have no registered events",
-            style: TextStyle(color: Colors.white, fontSize: 20),
-            maxLines: 3,
-          )),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+
+            children: [Text(
+              "404",
+              style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xffbeb7a4), fontSize: MediaQuery.of(context).size.width * 0.2)),
+              maxLines: 3,
+            ),
+
+              Text("No Registered Events",
+                style: GoogleFonts.dmSans(
+                    textStyle: TextStyle(color:Colors.white, fontSize: 18 )
+                ),)]),
+      ),
     ) : (listEquals(registeredEvents,["SESSIONEXPIRATIONERROR"]) ? SessionExpired() : WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(

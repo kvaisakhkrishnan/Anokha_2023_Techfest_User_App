@@ -17,6 +17,7 @@ import 'package:platform/platform.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:lottie/lottie.dart';
 
+import 'SessionExpired/sessionExpired.dart';
 import 'homeBody.dart';
 
 late String trans_token;
@@ -211,7 +212,7 @@ class _MyCardWidgetState extends State<MyCardWidget> {
   }
 
   void collectTransToken() async {
-    showAlertDialog();
+
     String url =
         "https://anokha.amrita.edu/api/userApp/transaction/moveToTransaction";
     String user_token = user_data.SECRET_TOKEN;
@@ -220,76 +221,96 @@ class _MyCardWidgetState extends State<MyCardWidget> {
         .post(Uri.parse(url), headers: {'authorization': 'Bearer $user_token'});
 
     var json_response = json.decode(response.body);
-    print(json_response["TRANSACTION_SECRET_TOKEN"]);
-    trans_token = json_response["TRANSACTION_SECRET_TOKEN"];
+    if(response.statusCode == 401)
+      {
+        trans_token = "TOKENEXPIRATIONERROR";
+
+      }
+    else {
+      trans_token = json_response["TRANSACTION_SECRET_TOKEN"];
+
+    }
+    showAlertDialog();
   }
 
-  void showAlertDialog() async {
-    final myController = TextEditingController();
+  showAlertDialog() async {
 
-    return showDialog(
-        context: context,
-        barrierDismissible: true,
-        builder: (context) {
-          return FutureBuilder(
-              future: Future.delayed(Duration(seconds: 2)),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  // While the future is loading, show a loading screen
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else {
-                  return AlertDialog(
-                    title: Text(
-                      "Provide your details",
-                      style: GoogleFonts.lato(
-                          fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                    content: UserForm(),
-                    actions: [
-                      ElevatedButton(
-                        onPressed: () => {Navigator.pop(context)},
-                        // ignore: sort_child_properties_last
-                        child: Text(
-                          "Cancel",
-                          style: GoogleFonts.roboto(
-                              fontSize: 18,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.all(15),
-                            backgroundColor: Colors.white,
-                            // ignore: prefer_const_constructors
-                            shape: StadiumBorder(
-                                side: BorderSide(
-                                    color: Color(0xFFd3d3d3), width: 1))),
+
+    if(trans_token == "TOKENEXPIRATIONERROR")
+      {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => SessionExpired()),
+              (Route<dynamic> route) => false,
+        );
+      }
+    else{
+      final myController = TextEditingController();
+      return showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (context) {
+            return FutureBuilder(
+                future: Future.delayed(Duration(seconds: 2)),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    // While the future is loading, show a loading screen
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    return AlertDialog(
+                      title: Text(
+                        "Provide your details",
+                        style: GoogleFonts.lato(
+                            fontWeight: FontWeight.bold, fontSize: 20),
                       ),
-                      ElevatedButton(
-                        onPressed: () => {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: ((context) => PaymentPage())))
-                          /*PaymentPage(
+                      content: UserForm(),
+                      actions: [
+                        ElevatedButton(
+                          onPressed: () => {Navigator.pop(context)},
+                          // ignore: sort_child_properties_last
+                          child: Text(
+                            "Cancel",
+                            style: GoogleFonts.roboto(
+                                fontSize: 18,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.all(15),
+                              backgroundColor: Colors.white,
+                              // ignore: prefer_const_constructors
+                              shape: StadiumBorder(
+                                  side: BorderSide(
+                                      color: Color(0xFFd3d3d3), width: 1))),
+                        ),
+                        ElevatedButton(
+                          onPressed: () => {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) => PaymentPage())))
+                            /*PaymentPage(
                       transact_token: transaction_token,
                     )*/
-                        },
-                        child: Text(
-                          "Proceed to pay",
-                          style: GoogleFonts.roboto(fontSize: 18),
+                          },
+                          child: Text(
+                            "Proceed to pay",
+                            style: GoogleFonts.roboto(fontSize: 18),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.all(15),
+                              backgroundColor: Color(0xFF002845),
+                              shape: StadiumBorder()),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.all(15),
-                            backgroundColor: Color(0xFF002845),
-                            shape: StadiumBorder()),
-                      ),
-                    ],
-                  );
-                }
-              });
-        });
+                      ],
+                    );
+                  }
+                });
+          });
+    }
   }
 }
 
@@ -524,20 +545,24 @@ class _FailureState extends State<Failure> {
             SizedBox(
               height: 30,
             ),
-            Text(
-              "Transaction Unsuccessful",
-              style: TextStyle(color: Colors.white, fontSize: 18),
+            Center(
+              child: Text(
+                "Transaction Unsuccessful",
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
             ),
             SizedBox(
               height: 10,
             ),
-            Text("", style: TextStyle(color: Colors.white, fontSize: 18)),
+            Center(child: Text("", style: TextStyle(color: Colors.white, fontSize: 18))),
             SizedBox(
               height: 10,
             ),
-            Text(
-              "Transaction ID : ${widget.txid}",
-              style: TextStyle(color: Colors.white, fontSize: 18),
+            Center(
+              child: Text(
+                "Transaction ID : ${widget.txid}",
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
             ),
             SizedBox(
               height: 10,
@@ -546,10 +571,12 @@ class _FailureState extends State<Failure> {
               onPressed: () {
                 Navigator.of(context)
                   ..pop()
+                  ..pop()
+                  ..pop()
                   ..pop();
               },
               child: Text(
-                "Go to Home",
+                "Go Back",
                 style: TextStyle(color: Color(0xff002845)),
               ),
               style: ElevatedButton.styleFrom(
@@ -612,23 +639,42 @@ class _SuccessState extends State<Success> {
             SizedBox(
               height: 30,
             ),
-            Text(
-              "Transaction Successful",
-              style: TextStyle(color: Colors.white, fontSize: 18),
+            Center(
+              child: Text(
+                "Transaction Successful",
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Text("Your Payment will be reflected in 5-10",
-                style: TextStyle(color: Colors.white, fontSize: 18)),
             SizedBox(
               height: 10,
             ),
             Center(
+              child: Text("Your Payment will be reflected in 5-10",
+                  style: TextStyle(color: Colors.white, fontSize: 18)),
+            ),
+            Center(
               child: Text(
-                "Transaction ID : ANOKHA1234",
+                "Transaction ID : ${widget.txid}",
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context)
+                  ..pop()
+                  ..pop()
+                  ..pop()
+                  ..pop();
+              },
+              child: Text(
+                "Go Back",
+                style: TextStyle(color: Color(0xff002845)),
+              ),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white, padding: EdgeInsets.all(8)),
             )
           ]),
         ));

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:anokha_home/login.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart';
 
@@ -71,7 +72,7 @@ class _confirmPasswordState extends State<confirmPassword> {
     //print("sent");
     print(jsonDecode(response1.body));
     if (response1.statusCode == 200) {
-      Navigator.push(
+      Navigator.pushReplacement(
           context, MaterialPageRoute(builder: ((context) => loginPage())));
       // Handle successful response here
     } else {
@@ -97,7 +98,8 @@ class _confirmPasswordState extends State<confirmPassword> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height:MediaQuery.of(context).size.height * 0.2),
+            Image(image: AssetImage("Images/logo.png"),width: MediaQuery.of(context).size.width * 0.5,),
+            SizedBox(height:MediaQuery.of(context).size.height * 0.1),
             Center(
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.4,
@@ -105,19 +107,7 @@ class _confirmPasswordState extends State<confirmPassword> {
                 decoration: BoxDecoration(
                   color: Color(0xFFFFFFFC),
                   borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 30.0,
-                      spreadRadius: 1.0,
-                    ), //BoxShadow
-                    BoxShadow(
-                      color: Colors.white,
-                      offset: const Offset(0.0, 0.0),
-                      blurRadius: 0.0,
-                      spreadRadius: 0.0,
-                    ), //BoxShadow
-                  ],
+
                 ),
                 child: SingleChildScrollView(
                   child: Column(
@@ -129,10 +119,10 @@ class _confirmPasswordState extends State<confirmPassword> {
                         ),
                         child: Text(
                           "Reset Password",
-                          style: TextStyle(
-                              color: Colors.black,
+                          style: GoogleFonts.dmSans(textStyle: TextStyle(
+                              color: Color(0xff002845),
                               fontSize:
-                              MediaQuery.of(context).size.height * 0.035),
+                              MediaQuery.of(context).size.height * 0.035)),
                         ),
                       ),
                       SizedBox(
@@ -141,6 +131,7 @@ class _confirmPasswordState extends State<confirmPassword> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: TextFormField(
+                          style: GoogleFonts.dmSans(),
                           controller: pass,
                           validator: customConfirmPasswordValidator,
                           decoration: InputDecoration(
@@ -164,6 +155,7 @@ class _confirmPasswordState extends State<confirmPassword> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: TextFormField(
+                          style: GoogleFonts.dmSans(),
                           controller: repass,
                           validator: customConfirmPasswordValidator,
                           decoration: InputDecoration(
@@ -204,7 +196,8 @@ class _confirmPasswordState extends State<confirmPassword> {
                               });
                             }
                           },
-                          child: Text('RESET PASSWORD'),
+                          child: Text('RESET PASSWORD',
+                          style: GoogleFonts.dmSans(),),
                         ),
                       ),
 

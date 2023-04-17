@@ -65,7 +65,7 @@ class _GetCrewState extends State<GetCrew> {
                       body: Center(
                           child: Text(
                             "Page under development",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
+                            style: GoogleFonts.dmSans(textStyle: TextStyle(color: Colors.white, fontSize: 20)),
                             maxLines: 3,
                           )),
                     );
@@ -136,18 +136,13 @@ class _CrewMembersState extends State<CrewMembers> {
 
     return (widget.list?.length == 0)
         ? Scaffold(
-            body: Center(child: Text("No Crew Members Yet")),
+            body: Center(child: Text("No Crew Members Yet",
+            style: GoogleFonts.dmSans(),)),
           )
         : Container(
             child: Scaffold(
             backgroundColor: Color(0xFF002845),
-            appBar: AppBar(
-              backgroundColor: Color(0xFF002845),
-              elevation: 0,
-              title: Text("Crew Members",
-                  style: GoogleFonts.dmSans(color: Colors.white)),
-              centerTitle: true,
-            ),
+            appBar: AppBar(backgroundColor: Color(0xff002845), elevation: 0,),
             body: Column(
               children: [
                 Container(

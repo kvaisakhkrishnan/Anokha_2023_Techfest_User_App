@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 
@@ -62,10 +63,10 @@ class _RegisteredEventCardState extends State<RegisteredEventCard> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20.0, top: 20.0),
                         child: Text("Entry Card",
-                          style: TextStyle(
-                            fontSize: 19.0,
-                            fontWeight: FontWeight.w500
-                          ),
+                          style: GoogleFonts.dmSans(textStyle: TextStyle(
+                              fontSize: 19.0,
+                              fontWeight: FontWeight.w500
+                          )),
                         ),
                       ),
                       flex: 2,
@@ -85,7 +86,7 @@ class _RegisteredEventCardState extends State<RegisteredEventCard> {
                         padding: const EdgeInsets.only(left: 20.0),
                         child: Text(
                           '${event['eventOrWorkshop'] == 0 ? "Event" : "Workshop"} | ${event['technical'] ==0 ? "Non Technical" : "Technical"}',
-                          style: TextStyle(color: Color(0xFFFF3F11)),
+                          style:GoogleFonts.dmSans(textStyle:  TextStyle(color: Color(0xFFFF3F11))),
                         ),
                       ),
                     ),
@@ -95,20 +96,20 @@ class _RegisteredEventCardState extends State<RegisteredEventCard> {
                   padding: const EdgeInsets.only(top: 20.0),
                   child: Text(
                     event['eventName'],
-                    style: TextStyle(
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.w500
-                    ),
+                    style: GoogleFonts.dmSans(textStyle: TextStyle(
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.w500
+                    )),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                   child: Text(
                     'Venue: ${event['venue']}',
-                    style: TextStyle(
-                        fontSize: 15.0,
+                    style: GoogleFonts.dmSans(textStyle: TextStyle(
+                      fontSize: 15.0,
 
-                    ),
+                    )),
                   ),
                 ),
                 Expanded(
@@ -119,7 +120,7 @@ class _RegisteredEventCardState extends State<RegisteredEventCard> {
                           padding: const EdgeInsets.only(left: 20.0),
                           child: Text(
                             'Valid on\n${event['date']}'  ?? 'Unknown Event',
-                            style: TextStyle(),
+                            style: GoogleFonts.dmSans(),
                           ),
                         ),
                       ),
@@ -128,7 +129,7 @@ class _RegisteredEventCardState extends State<RegisteredEventCard> {
                           padding: const EdgeInsets.only(left: 20.0),
                           child: Text(
                             'Time\n${event['eventTime']}'  ?? 'Unknown Event',
-                            style: TextStyle(),
+                            style: GoogleFonts.dmSans(),
                           ),
                         ),
                       ),
@@ -136,7 +137,7 @@ class _RegisteredEventCardState extends State<RegisteredEventCard> {
                         child: Padding(
                           padding: const EdgeInsets.only(bottom: 20.0),
                           child: QrImage(
-                            foregroundColor : Colors.black,
+                            foregroundColor : Color(0xffbeb7a4),
                             data: "${widget.data.userEmail}/${widget.event["eventId"]}",
                             version: QrVersions.auto,
                             size: MediaQuery.of(context).size.height * 0.19,

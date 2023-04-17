@@ -4,6 +4,7 @@ import 'package:anokha_home/searchCard.dart';
 import 'package:anokha_home/serverUrl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -49,12 +50,14 @@ class _HomeBodyState extends State<HomeBody> {
                   .toLowerCase()
                   .contains(search.toLowerCase()) ||
               eventDetail.name.toLowerCase().contains(search.toLowerCase()) ||
-              eventDetail.description
-                  .toLowerCase()
-                  .contains(search.toLowerCase()) ||
+              eventDetail.description.toLowerCase().contains(search.toLowerCase()) ||
               eventDetail.date.toLowerCase().contains(search.toLowerCase()) ||
               (search.toLowerCase().contains("events") && eventDetail.type == 0) ||
               (search.toLowerCase().contains("workshops") && eventDetail.type == 1) ||
+              (search.toLowerCase().contains("individual") && eventDetail.individualOrGroup == 0) ||
+              (search.toLowerCase().contains("single") && eventDetail.individualOrGroup == 0) ||
+
+              (search.toLowerCase().contains("group") && eventDetail.individualOrGroup == 1) ||
               eventDetail.venue.toLowerCase().contains(search.toLowerCase()) ||
               eventDetail.department
                   .toLowerCase()
@@ -101,10 +104,10 @@ class _HomeBodyState extends State<HomeBody> {
                       alignment: Alignment.topLeft,
                       child: Text(
                         "Trending Now",
-                        style: TextStyle(
+                        style: GoogleFonts.dmSans(textStyle: TextStyle(
                             color: Color(0xffbeb7a4),
                             fontSize: 25.0,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w600)),
                       ),
                     ),
                   ),
@@ -134,10 +137,10 @@ class _HomeBodyState extends State<HomeBody> {
                       style: TextStyle(fontSize: 18, color: Color(0xffbeb7a4)),
                       decoration: InputDecoration(
                         hintText: 'Search Events, Departments',
-                        hintStyle: TextStyle(
+                        hintStyle: GoogleFonts.dmSans(textStyle: TextStyle(
                           color: Color(
                               0xffbeb7a4), // set the desired hint text color here
-                        ),
+                        )),
                         prefixIcon: Icon(Icons.search, color: Colors.grey),
                         border: InputBorder.none,
                       ),
@@ -161,10 +164,10 @@ class _HomeBodyState extends State<HomeBody> {
                         alignment: Alignment.topLeft,
                         child: Text(
                           "${widget.eventsList[index].title}",
-                          style: TextStyle(
+                          style: GoogleFonts.dmSans(textStyle: TextStyle(
                               color: Color(0xffbeb7a4),
                               fontSize: 20.0,
-                              fontWeight: FontWeight.w500),
+                              fontWeight: FontWeight.w500)),
                         ),
                       ),
                     ),
@@ -190,7 +193,7 @@ class _HomeBodyState extends State<HomeBody> {
           crossAxisCount: 2,
           crossAxisSpacing: 10.0,
           mainAxisSpacing: 10.0,
-          childAspectRatio: 5 / 8,
+          childAspectRatio: 4 / 7,
         ),
         delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) {

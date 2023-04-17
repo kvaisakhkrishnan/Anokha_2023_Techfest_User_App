@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:anokha_home/serverUrl.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -37,6 +38,8 @@ class MyTicketView extends StatelessWidget {
 
     );
 
+
+
   }
 }
 
@@ -47,6 +50,8 @@ class TicketData extends StatelessWidget {
 
     Key? key, required this.data, required this.event,
   }) : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -72,9 +77,9 @@ class TicketData extends StatelessWidget {
           width: double.infinity,
           child: Text(
             "Entry Ticket",
-            style: TextStyle(fontSize: 23.0,
+            style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 23.0,
                 color: Color(0xFF002845),
-                fontWeight: FontWeight.w700),
+                fontWeight: FontWeight.w700)),
             textAlign: TextAlign.left,
           ),
         ),
@@ -91,7 +96,7 @@ class TicketData extends StatelessWidget {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
-                      child: Text("Name", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
+                      child: Text("Name", style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA))),),
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
@@ -102,7 +107,7 @@ class TicketData extends StatelessWidget {
                             padding: EdgeInsets.only(right: 4.0),
                             child: Text(
                               word,
-                              style: TextStyle(fontSize: 15.0, color: Colors.black),
+                              style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 15.0, color: Colors.black),)
                             ),
                           );
                         }).toList(),
@@ -111,19 +116,19 @@ class TicketData extends StatelessWidget {
 
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
-                      child: Text("Program Name", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
+                      child: Text("Program Name", style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA))),),
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                      child: Text(event[0]["eventName"], style: TextStyle(fontSize: 15.0,color: Colors.black),),
+                      child: Text(event[0]["eventName"], style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 15.0,color: Colors.black)),),
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
-                      child: Text("Type", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
+                      child: Text("Type", style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA))),),
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                      child: Text(event[0]["type"] == 0 ? "Event" : "Workshop", style: TextStyle(fontSize: 15.0,color: Colors.black),),
+                      child: Text(event[0]["type"] == 0 ? "Event" : "Workshop", style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 15.0,color: Colors.black)),),
                     ),
 
                   ],
@@ -136,28 +141,28 @@ class TicketData extends StatelessWidget {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
-                      child: Text("Date", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
+                      child: Text("Date", style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA))),),
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                      child: Text(event[0]["date"], style: TextStyle(fontSize: 15.0,color: Colors.black),),
+                      child: Text(event[0]["date"], style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 15.0,color: Colors.black)),),
                     ),
 
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
-                      child: Text("Time", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
+                      child: Text("Time", style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA))),),
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                      child: Text(event[0]["eventTime"], style: TextStyle(fontSize: 15.0,color: Colors.black),),
+                      child: Text(event[0]["eventTime"], style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 15.0,color: Colors.black)),),
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
-                      child: Text("Venue", style: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA)),),
+                      child: Text("Venue", style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 15.0, color: Color(0xFFBEB7AA))),),
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                      child: Text(event[0]["venue"], style: TextStyle(fontSize: 15.0,color: Colors.black),),
+                      child: Text(event[0]["venue"], style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 15.0,color: Colors.black)),),
                     ),
 
                   ],
@@ -168,8 +173,8 @@ class TicketData extends StatelessWidget {
         ),
 
         QrImage(
-          foregroundColor : Colors.black,
-          data: "${data.userEmail}/${event["eventId"]}",
+          foregroundColor : Color(0xff002845),
+          data: "${data.userEmail}/${event[0]["eventId"]}",
           version: QrVersions.auto,
           size: MediaQuery.of(context).size.height * 0.19,
           gapless: false,

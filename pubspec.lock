@@ -150,14 +150,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.7.2+3"
-  flutter_lints:
+  flutter_launcher_icons:
     dependency: "direct dev"
     description:
-      name: flutter_lints
-      sha256: aeb0b80a8b3709709c9cc496cdc027c5b3216796bc0af0ce1007eaf24464fd4c
+      name: flutter_launcher_icons
+      sha256: "559c600f056e7c704bd843723c21e01b5fba47e8824bd02422165bcc02a5de1d"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1"
+    version: "0.9.3"
+  flutter_markdown:
+    dependency: "direct main"
+    description:
+      name: flutter_markdown
+      sha256: "7b25c10de1fea883f3c4f9b8389506b54053cd00807beab69fd65c8653a2711f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.6.14"
   flutter_otp_text_field:
     dependency: "direct main"
     description:
@@ -256,6 +264,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  image:
+    dependency: transitive
+    description:
+      name: image
+      sha256: "8e9d133755c3e84c73288363e6343157c383a0c6c56fc51afcc5d4d7180306d6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.3.0"
   inview_notifier_list:
     dependency: "direct main"
     description:
@@ -272,14 +288,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.5"
-  lints:
-    dependency: transitive
-    description:
-      name: lints
-      sha256: "5e4a9cd06d447758280a8ac2405101e0e2094d2a1dbdd3756aec3fe7775ba593"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.1"
   lottie:
     dependency: "direct main"
     description:
@@ -288,6 +296,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.2"
+  markdown:
+    dependency: transitive
+    description:
+      name: markdown
+      sha256: d95a9d12954aafc97f984ca29baaa7690ed4d9ec4140a23ad40580bcdb6c87f5
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.2"
   matcher:
     dependency: transitive
     description:
@@ -709,14 +725,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.2.2"
-  youtube_player_flutter:
-    dependency: "direct main"
+  yaml:
+    dependency: transitive
     description:
-      name: youtube_player_flutter
-      sha256: "72d487e1a1b9155a2dc9d448c137380791101a0ff623723195275ac275ac6942"
+      name: yaml
+      sha256: "23812a9b125b48d4007117254bca50abb6c712352927eece9e155207b1db2370"
       url: "https://pub.dev"
     source: hosted
-    version: "8.1.2"
+    version: "3.1.1"
 sdks:
   dart: ">=2.19.2 <3.0.0"
   flutter: ">=3.7.0-0"

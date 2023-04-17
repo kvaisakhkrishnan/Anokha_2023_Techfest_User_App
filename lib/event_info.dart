@@ -1,14 +1,14 @@
 import 'dart:collection';
-
 import 'package:anokha_home/payments.dart';
 import 'package:faded_widget/faded_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:anokha_home/eventregistrationForm.dart';
-
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'buyPassport.dart';
 import 'homePage.dart';
 
 class EventInfo extends StatefulWidget {
@@ -43,15 +43,16 @@ class _EventInfoState extends State<EventInfo> {
     _controller.removeListener(_onScrollEvent);
     super.dispose();
   }
+
   Future<void> _addStarred() async {
-  final String url = "https://anokha.amrita.edu/api/userApp/insertStarrs";
+    final String url = "https://anokha.amrita.edu/api/userApp/insertStarrs";
     final response = await http.post(
       Uri.parse(url),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${widget.data.SECRET_TOKEN}',
       },
-      body: jsonEncode({"eventId":widget.event_map.eventId}),
+      body: jsonEncode({"eventId": widget.event_map.eventId}),
     );
     if (response.statusCode == 200) {
       // Successful response
@@ -80,7 +81,6 @@ class _EventInfoState extends State<EventInfo> {
       print('POST request failed: ${response.statusCode} - ${response.body}');
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -156,10 +156,11 @@ class _EventInfoState extends State<EventInfo> {
                                           child: Text(
                                             widget.event_map.name,
                                             maxLines: 3,
-                                            style: TextStyle(
-                                              fontSize: 20.0,
+                                            style: GoogleFonts.dmSans(textStyle: TextStyle(
+                                              fontSize: 25.0,
                                               fontWeight: FontWeight.w700,
-                                            ),
+                                              color: Color(0xff002845)
+                                            )),
                                           ),
                                         ),
                                       ),
@@ -177,8 +178,7 @@ class _EventInfoState extends State<EventInfo> {
                                                     ? Color(0xffff7f11)
                                                     : Colors.black,
                                           ),
-                                          onPressed: () {
-                                          },
+                                          onPressed: () {},
                                         ),
                                       )
                                     ],
@@ -193,10 +193,11 @@ class _EventInfoState extends State<EventInfo> {
                                   ),
                                   Text(
                                     "₹${widget.event_map.fees}",
-                                    style: TextStyle(
+                                    style:GoogleFonts.dmSans(textStyle:  TextStyle(
+                                      color: Color(0xff002845),
                                         backgroundColor: Colors.white,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 25.0),
+                                        fontSize: 25.0)),
                                   ),
                                 ],
                               ),
@@ -236,11 +237,11 @@ class _EventInfoState extends State<EventInfo> {
                                               ),
                                               Text(
                                                 "Location",
-                                                style: TextStyle(
+                                                style: GoogleFonts.dmSans(textStyle: TextStyle(
                                                     fontSize: 20,
                                                     color: Colors.white,
                                                     fontWeight:
-                                                        FontWeight.bold),
+                                                    FontWeight.bold)),
                                               )
                                             ]),
                                           ),
@@ -257,10 +258,10 @@ class _EventInfoState extends State<EventInfo> {
                                       child: Text(
                                         widget.event_map.venue,
                                         maxLines: 3,
-                                        style: TextStyle(
+                                        style: GoogleFonts.dmSans(textStyle: TextStyle(
                                             color: Color(0xffbeb7a4),
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 20),
+                                            fontSize: 20)),
                                       ),
                                     )
                                   ],
@@ -300,10 +301,10 @@ class _EventInfoState extends State<EventInfo> {
                                             Text(
                                               "${(widget.event_map.totalNumberOfSeats)}\nTotal Seats",
                                               textAlign: TextAlign.center,
-                                              style: TextStyle(
+                                              style: GoogleFonts.dmSans(textStyle: TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 15),
+                                                  fontSize: 15)),
                                             )
                                           ],
                                         ),
@@ -343,10 +344,10 @@ class _EventInfoState extends State<EventInfo> {
                                             Text(
                                               "${widget.event_map.date}\n${widget.event_map.time}",
                                               textAlign: TextAlign.center,
-                                              style: TextStyle(
+                                              style: GoogleFonts.dmSans(textStyle: TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 15),
+                                                  fontSize: 15)),
                                             )
                                           ],
                                         ),
@@ -356,22 +357,39 @@ class _EventInfoState extends State<EventInfo> {
                                 ],
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: Text(
-                                  "Description",
-                                  style: TextStyle(
-                                      fontSize: 21,
-                                      fontWeight: FontWeight.w600),
+                                padding: const EdgeInsets.only(top: 25.0, left: 15, right: 15, bottom: 25),
+                                child: MarkdownBody(
+                                  data: widget.event_map.description,
+                                  styleSheet: MarkdownStyleSheet.fromTheme(
+                                          Theme.of(context))
+                                      .copyWith(
+                                    h1: GoogleFonts.dmSans(textStyle: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                                    h2: GoogleFonts.dmSans(textStyle: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                                    h3:GoogleFonts.dmSans(textStyle:  TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                                    h4: GoogleFonts.dmSans(textStyle: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                                    h5:GoogleFonts.dmSans(textStyle:  TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                                    h6: GoogleFonts.dmSans(textStyle: TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                                  ),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Text(
-                                  widget.event_map.description,
-                                  textDirection: TextDirection.ltr,
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                              )
                             ],
                           ),
                         ),
@@ -426,20 +444,66 @@ class _EventInfoState extends State<EventInfo> {
                                 ),
                               ),
                               onPressed: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return PayU(
-                                    data: widget.data,
-                                    event_data: widget.event_map,
-                                  );
-                                }));
+                                if (widget.data.activePassport == 1) {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return PayU(
+                                      data: widget.data,
+                                      event_data: widget.event_map,
+                                    );
+                                  }));
+                                } else {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(25)),
+                                          title: Text('Buy Passport'),
+                                          content: Text(
+                                              'You have to buy a passport to view events'),
+                                          actions: [
+                                            TextButton(
+                                              child: Text('Buy Passport',
+                                                  style: TextStyle(
+                                                      color:
+                                                          Color(0xff002845))),
+                                              onPressed: () {
+                                                // Close the pop-up notification
+                                                Navigator.of(context).pop();
+
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            PassportBuy(
+                                                                data: widget
+                                                                    .data)));
+                                              },
+                                            ),
+                                            TextButton(
+                                              child: Text(
+                                                'Cancel',
+                                                style: TextStyle(
+                                                    color: Colors.red),
+                                              ),
+                                              onPressed: () {
+                                                // Close the pop-up notification
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      });
+                                }
                               },
                               child: Center(
                                   child: Text("REGISTER",
-                                      style: TextStyle(
+                                      style:GoogleFonts.dmSans(textStyle:  TextStyle(
                                           fontWeight: FontWeight.w500,
                                           color: HexColor("#002845"),
-                                          fontSize: 20))),
+                                          fontSize: 20)))),
                             ),
                           ),
                         ),

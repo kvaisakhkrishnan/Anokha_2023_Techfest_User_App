@@ -101,7 +101,7 @@ class _OTPverifyforgotState extends State<OTPverifyforgot> {
                   alignment: Alignment.topLeft,
                   child: Text(
                     "VERIFY\nOTP",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.dmSans(
                       fontSize: 70.0,
                       fontWeight: FontWeight.bold,
                     ),
@@ -113,7 +113,7 @@ class _OTPverifyforgotState extends State<OTPverifyforgot> {
                 child: Container(
                   child: Text(
                     "We have send the verification code to",
-                    style: TextStyle(fontSize: 18.0),
+                    style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 18.0),)
                   ),
                   alignment: Alignment.topLeft,
                 ),
@@ -130,17 +130,7 @@ class _OTPverifyforgotState extends State<OTPverifyforgot> {
               ),
               Padding(
                 padding: EdgeInsets.only(left: 10.0),
-                child: Container(
-                  alignment: Alignment.topLeft,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Change Email?",
-                      style:
-                      TextStyle(fontSize: 18.0, color: Color(0xFFFF7F11)),
-                    ),
-                  ),
-                ),
+
               ),
               Padding(
                 padding: EdgeInsets.only(top: 40.0),
@@ -165,7 +155,8 @@ class _OTPverifyforgotState extends State<OTPverifyforgot> {
               Padding(
                   padding: EdgeInsets.only(top: 40.0),
                   child: Text(
-                      "Time Remaining: $_remainingTime seconds")),
+                      "Time Remaining: $_remainingTime seconds",
+                  style: GoogleFonts.dmSans(),)),
               Expanded(child: SizedBox()),
               Padding(
                 padding: EdgeInsets.only(bottom: 20.0),

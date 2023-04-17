@@ -60,7 +60,7 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
     return Scaffold(
       appBar:AppBar(
         elevation: 0,
-        backgroundColor: Color(0xffF3F2F7),
+        backgroundColor: Colors.white24,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -72,7 +72,7 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
       ),
       body: Column(
         children: [
-          SizedBox(height: screenSize.height * 0.1),
+          SizedBox(height: screenSize.height * 0.01),
           Column(
             children: [
               Padding(
@@ -96,11 +96,11 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
                 ),
                 child: Text(
                   "Password Reset Portal",
-                  style: TextStyle(
+                  style: GoogleFonts.dmSans(textStyle:  TextStyle(
                     fontSize: 25,
                     color: Color(0xFF002845),
                     fontWeight: FontWeight.w500,
-                  ),
+                  )),
                 ),
               ),
             ],
@@ -130,25 +130,29 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
                                 padding: EdgeInsets.symmetric(
                                   horizontal: screenSize.width * 0.01,
                                 ),
-                                child: TextFormField(
-                                  controller: _usernameController,
-                                  decoration: InputDecoration(
-                                    hintText: "Enter email address",
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        width: 1,
-                                        color: Color(0xffF3F2F7),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: TextFormField(
+                                    style: GoogleFonts.dmSans(),
+                                    controller: _usernameController,
+                                    decoration: InputDecoration(
+                                      hintText: "Enter email address",
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          width: 1,
+                                          color: Color(0xffF3F2F7),
+                                        ),
                                       ),
                                     ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter an email address';
+                                      } else if (!isValidEmail(value)) {
+                                        return 'Please enter a valid email address';
+                                      }
+                                      return null;
+                                    },
                                   ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter an email address';
-                                    } else if (!isValidEmail(value)) {
-                                      return 'Please enter a valid email address';
-                                    }
-                                    return null;
-                                  },
                                 ),
                               ),
                               Padding(
@@ -166,9 +170,9 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
                                   },
                                   child: Text(
                                     "SUBMIT",
-                                    style: TextStyle(
+                                    style: GoogleFonts.dmSans(textStyle: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 16),
+                                        fontSize: 16)),
                                   ),
                                   style: OutlinedButton.styleFrom(
                                     backgroundColor: Color(0xFFFF7F11),
@@ -176,8 +180,8 @@ class _forgotPasswordclassState extends State<forgotPasswordclass> {
                                         borderRadius:
                                         BorderRadius.circular(10.0)),
                                     padding: EdgeInsets.symmetric(
-                                        vertical: screenSize.height * 0.01,
-                                        horizontal: screenSize.width * 0.25),
+                                        vertical: screenSize.height * 0.015,
+                                        horizontal: screenSize.width * 0.27),
                                   ),
                                 ),
                               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import 'buyPassport.dart';
@@ -162,12 +163,12 @@ class _userProfState extends State<userProf> {
                                   widget.data.activePassport == 1
                                       ? 'PASSPORT'
                                       : 'PROFILE',
-                                  style: TextStyle(
-                                      fontSize: 25.0,
-                                      color: islight
-                                          ? Color(0xFFBEB7AA)
-                                          : Color(0xFF002845),
-                                      fontFamily: 'Roboto'),
+                                  style: GoogleFonts.dmSans(textStyle: TextStyle(
+                                    fontSize: 25.0,
+                                    color: islight
+                                        ? Color(0xFFBEB7AA)
+                                        : Color(0xFF002845),
+                                  )),
                                 ),
                               ),
                               SizedBox(
@@ -191,13 +192,13 @@ class _userProfState extends State<userProf> {
                                         0.03),
                                 child: Text(
                                   widget.data.fullName,
-                                  style: TextStyle(
-                                      fontSize: 0.027 *
-                                          MediaQuery.of(context).size.height,
-                                      color: islight
-                                          ? Color(0xFFFFFFFC)
-                                          : Color(0xFF002845),
-                                      fontFamily: "Roboto"),
+                                  style: GoogleFonts.dmSans(textStyle: TextStyle(
+                                    fontSize: 0.027 *
+                                        MediaQuery.of(context).size.height,
+                                    color: islight
+                                        ? Color(0xFFFFFFFC)
+                                        : Color(0xFF002845),
+                                  )),
                                 ),
                               ),
                               Container(
@@ -206,14 +207,13 @@ class _userProfState extends State<userProf> {
                                         0.02),
                                 child: Text(
                                   widget.data.userEmail,
-                                  style: TextStyle(
+                                  style: GoogleFonts.dmSans(textStyle: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 0.018 *
                                           MediaQuery.of(context).size.height,
                                       color: islight
                                           ? Color(0xFFBEB7AA)
-                                          : Color(0xFF002845),
-                                      fontFamily: "Roboto"),
+                                          : Color(0xFF002845))),
                                 ),
                               ),
                               (widget.data.activePassport == 0)
@@ -230,7 +230,8 @@ class _userProfState extends State<userProf> {
                                                 ),
                                               ));
                                         },
-                                        child: Text("Buy Passport"),
+                                        child: Text("Buy Passport",
+                                        style: GoogleFonts.dmSans(),),
                                         style: ElevatedButton.styleFrom(
                                           elevation: 0,
                                           primary: Color(0xff002845),
@@ -239,8 +240,8 @@ class _userProfState extends State<userProf> {
                                   : Padding(
                                     padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
                                     child: Text("Passport Id: ${widget.data.passportId}",
-                              style: TextStyle(color: Color(0xffff7f11),
-                              fontWeight: FontWeight.w500),),
+                              style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xffff7f11),
+                                  fontWeight: FontWeight.w500)),),
                                   ),
                               Container(
                                 height:
@@ -255,7 +256,7 @@ class _userProfState extends State<userProf> {
                                       child:  Padding(
                                         padding: EdgeInsets.only(top:  MediaQuery.of(context).size.height * 0.02,),
                                         child: QrImage(
-                                          foregroundColor : Colors.black,
+                                          foregroundColor : Color(0xff002845),
                                           data: "https://anokha.amrita.edu/api/adminApp/verifyUser/${widget.data.userEmail}",
                                           version: QrVersions.auto,
                                           size: MediaQuery.of(context).size.height * 0.19,
