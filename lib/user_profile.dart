@@ -21,6 +21,8 @@ class userProf extends StatefulWidget {
   State<userProf> createState() => _userProfState();
 }
 
+
+//Profile page which displays the users details and passport.2
 class _userProfState extends State<userProf> {
   bool islight = false;
 

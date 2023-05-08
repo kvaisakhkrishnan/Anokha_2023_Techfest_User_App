@@ -15,6 +15,9 @@ import 'forgotPassword.dart';
 import 'package:crypto/crypto.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+
+//Login page which takes userEmail and password and verifies with the backend.
+
 var userData;
 
 class event_list {
@@ -138,6 +141,9 @@ class _loginPageState extends State<loginPage> {
     loadLoginCredentials();
   }
 
+
+  var loadingScreen = 0;
+
   String errorMessage = "";
 
   bool isValidEmail(String email) {
@@ -170,11 +176,12 @@ class _loginPageState extends State<loginPage> {
         body: body,
       );
 
-      print("response");
+
       print(response.statusCode.toString());
       // Check the response status
       if (response.statusCode == 200) {
         var userDetails = jsonDecode(response.body);
+        print(userDetails["userData"]['collegeName']);
         if (userDetails["userData"]['passportId'] == null) {
           userDetails["userData"]['passportId'] = "NA";
         }
@@ -185,13 +192,14 @@ class _loginPageState extends State<loginPage> {
             activePassport: userDetails["userData"]['activePassport'],
             isAmritaCBE: userDetails["userData"]['isAmritaCBE'],
             collegeName: userDetails["userData"]['collegeName'],
-            district: userDetails["userData"]['district'],
-            state: userDetails["userData"]['state'],
-            country: userDetails["userData"]['country'],
+            district: "",
+            state: "",
+            country: "",
             SECRET_TOKEN: userDetails["userData"]['SECRET_TOKEN'],
             passportId: userDetails["userData"]['passportId']);
 
         for (var individual_data in userDetails["events"]) {
+
           String temp_title = individual_data["department"];
           List<event_list> temp_event_list = [];
           for (var events_in_a_row in individual_data["events"]) {

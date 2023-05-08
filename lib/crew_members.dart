@@ -10,6 +10,9 @@ import 'dart:convert';
 
 import 'Loading_Screens/events_loading.dart';
 
+
+//The crew members page shows the details of crew members who were involved in Anokha 2023.
+
 class GetCrew extends StatefulWidget {
   const GetCrew({Key? key}) : super(key: key);
 
@@ -58,22 +61,21 @@ class _GetCrewState extends State<GetCrew> {
                 print("error");
               }
               if (ss.hasData) {
-                if(listEquals(ss.data, []))
-                  {
-                    return Scaffold(
-                      backgroundColor: Color(0xff002845),
-                      body: Center(
-                          child: Text(
-                            "Page under development",
-                            style: GoogleFonts.dmSans(textStyle: TextStyle(color: Colors.white, fontSize: 20)),
-                            maxLines: 3,
-                          )),
-                    );
-                  }
-                else{
+                if (listEquals(ss.data, [])) {
+                  return Scaffold(
+                    backgroundColor: Color(0xff002845),
+                    body: Center(
+                        child: Text(
+                      "Crew Coming Soon!",
+                      style: GoogleFonts.dmSans(
+                          textStyle:
+                              TextStyle(color: Colors.white, fontSize: 20)),
+                      maxLines: 3,
+                    )),
+                  );
+                } else {
                   return CrewMembers(list: ss.data);
                 }
-
               } else {
                 return Events_Loading_screen();
               }
@@ -136,13 +138,20 @@ class _CrewMembersState extends State<CrewMembers> {
 
     return (widget.list?.length == 0)
         ? Scaffold(
-            body: Center(child: Text("No Crew Members Yet",
-            style: GoogleFonts.dmSans(),)),
+            body: Center(
+                child: Text(
+              "No Crew Members Yet",
+              style: GoogleFonts.dmSans(),
+            )),
           )
         : Container(
             child: Scaffold(
             backgroundColor: Color(0xFF002845),
-            appBar: AppBar(backgroundColor: Color(0xff002845), elevation: 0,),
+            appBar: AppBar(
+              backgroundColor: Color(0xff002845),
+              elevation: 0,
+              toolbarHeight: 5,
+            ),
             body: Column(
               children: [
                 Container(
@@ -182,8 +191,10 @@ class _CrewMembersState extends State<CrewMembers> {
                                     child: Text(
                                       item,
                                       style: GoogleFonts.dmSans(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.bold,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.015,
                                           color: (items.indexOf(item) + 1 ==
                                                   selected_index)
                                               ? HexColor("#002845")
@@ -197,8 +208,11 @@ class _CrewMembersState extends State<CrewMembers> {
                 Expanded(
                   flex: 4,
                   child: AnimationLimiter(
+
                     child: Container(
+
                       child: GridView.builder(
+
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
@@ -207,7 +221,7 @@ class _CrewMembersState extends State<CrewMembers> {
                               ? crew_list[0]["member"].length
                               : numbers,
                           padding: EdgeInsets.only(
-                              left: 20, right: 10, top: 10, bottom: 10),
+                              left: 15),
                           itemBuilder: (context, index) {
                             return AnimationConfiguration.staggeredGrid(
                               position: index,
@@ -238,7 +252,7 @@ class _CrewMembersState extends State<CrewMembers> {
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *
-                                                  0.4,
+                                                  0.43,
                                               child: Center(
                                                 child: Padding(
                                                   padding:
@@ -251,34 +265,65 @@ class _CrewMembersState extends State<CrewMembers> {
                                                       crew_list[selected_index -
                                                               1]["member"]
                                                           [index]["name"],
-                                                      maxLines: 5,
+                                                      maxLines: 2,
                                                       style: GoogleFonts.dmSans(
-                                                          color:
-                                                              Color(0xFF002845),
-                                                          fontSize: 17,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                        color:
+                                                            Color(0xFF002845),
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height *
+                                                            0.019,
+                                                      ),
                                                     ),
+                                                    Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(top: 5),
+                                                        child: Center(
+                                                            child: Text(
+
+                                                          crew_list[selected_index -
+                                                                  1]["member"]
+                                                              [index]["role"],
+                                                              maxLines: 2,
+                                                          style: TextStyle(
+
+                                                              fontSize: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .height *
+                                                                  0.015,
+                                                              color: Colors
+                                                                  .orange),
+                                                        ))),
                                                     Padding(
                                                       padding:
                                                           const EdgeInsets.only(
                                                               top: 5),
-                                                      child: Text(
-                                                        crew_list[selected_index -
-                                                                    1]["member"]
-                                                                [index]
-                                                            ["departmentname"],
-                                                        style: TextStyle(
-                                                            fontSize: 15,
-                                                            color:
-                                                                Colors.orange),
+                                                      child: Center(
+                                                        child: Text(
+                                                          crew_list[selected_index -
+                                                                      1]["member"]
+                                                                  [index]
+                                                              ["departmentname"],
+                                                          maxLines: 2,
+                                                          style: TextStyle(
+                                                              fontSize: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .height *
+                                                                  0.015,
+                                                              color:
+                                                                  Color(0xffbeb7a4)),
+                                                        ),
                                                       ),
-                                                    )
+                                                    ),
                                                   ]),
                                                 ),
                                               ),
                                             ),
-                                            elevation: 10,
+                                            elevation: 0,
                                           ),
                                         ),
                                         Align(
@@ -294,16 +339,20 @@ class _CrewMembersState extends State<CrewMembers> {
                                               onTap: () async {
                                                 await showDialog(
                                                     context: context,
-                                                    builder: (_) =>
-                                                        ImageDialog());
+                                                    builder: (_) => ImageDialog(
+                                                        img_url: crew_list[
+                                                                selected_index -
+                                                                    1]["member"]
+                                                            [index]["url"]));
                                               },
                                               child: CircleAvatar(
                                                 radius: circleRadius,
                                                 backgroundColor:
                                                     HexColor("#002845"),
                                                 backgroundImage: NetworkImage(
-                                                  "https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg",
-                                                ),
+                                                    crew_list[selected_index -
+                                                            1]["member"][index]
+                                                        ["url"]),
                                               ),
                                             ),
                                           ),
@@ -325,6 +374,7 @@ class _CrewMembersState extends State<CrewMembers> {
   }
 }
 
+/*
 class ImageDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -339,6 +389,32 @@ class ImageDialog extends StatelessWidget {
                 image: NetworkImage(
                     "https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg"),
                 fit: BoxFit.fill)),
+      ),
+    );
+  }
+}
+*/
+
+class ImageDialog extends StatefulWidget {
+  String img_url;
+  ImageDialog({super.key, required this.img_url});
+
+  @override
+  State<ImageDialog> createState() => _ImageDialogState();
+}
+
+class _ImageDialogState extends State<ImageDialog> {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      backgroundColor: Colors.white,
+      content: Container(
+        width: MediaQuery.of(context).size.width * 0.1,
+        height: MediaQuery.of(context).size.height * 0.35,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage(widget.img_url), fit: BoxFit.fill)),
       ),
     );
   }

@@ -18,6 +18,8 @@ import 'homePage.dart';
 final __url = serverUrl().url;
 var token;
 
+//Shows the list of starred events.
+
 class GetStarrs extends StatefulWidget {
   var data;
   GetStarrs({Key? key, required this.data}) : super(key: key) {
@@ -105,7 +107,7 @@ class _WheelState extends State<Wheel> {
     return Scaffold(
       backgroundColor: Color(0xff002845),
       appBar: AppBar(
-        toolbarHeight: 0,
+        toolbarHeight: 5,
         elevation: 0,
         backgroundColor: Color(0xff002845),
         centerTitle: true,

@@ -16,6 +16,8 @@ import 'animated_bar.dart';
 import 'crew_members.dart';
 import 'mainPage.dart';
 
+//Controller page is the page that the control will land on after login. The page allows us to navigate through main pages like home, events page, starred events, registered events, crew members.
+
 class ControllerPage extends StatefulWidget {
   final data;
   final VoidCallback onLogout;

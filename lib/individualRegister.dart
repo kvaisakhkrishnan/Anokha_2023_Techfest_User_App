@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+
+
+//Registration form to register for each events.
 class RegisterIndividualPage extends StatefulWidget {
   const RegisterIndividualPage({Key? key}) : super(key: key);
 

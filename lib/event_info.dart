@@ -1,4 +1,7 @@
 import 'dart:collection';
+import 'dart:io';
+import 'dart:math';
+import 'package:anokha_home/Loading_Screens/events_loading.dart';
 import 'package:anokha_home/payments.dart';
 import 'package:faded_widget/faded_widget.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +11,16 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:shimmer/shimmer.dart';
 import 'buyPassport.dart';
 import 'homePage.dart';
+import 'package:share/share.dart';
+import 'package:path_provider/path_provider.dart';
+
+
+
+
+//This page shows complete information of various events and workshops that were organized.
 
 class EventInfo extends StatefulWidget {
   bool txt_visible = false;
@@ -44,7 +55,11 @@ class _EventInfoState extends State<EventInfo> {
     super.dispose();
   }
 
+
+
+
   Future<void> _addStarred() async {
+
     final String url = "https://anokha.amrita.edu/api/userApp/insertStarrs";
     final response = await http.post(
       Uri.parse(url),
@@ -82,21 +97,61 @@ class _EventInfoState extends State<EventInfo> {
     }
   }
 
+  Future<void> shareImageUrl(String imageUrl) async {
+    try {
+      // Download the image
+      final response = await http.get(Uri.parse(widget.event_map.url));
+
+      print(response.statusCode);
+
+      if (response.statusCode == 200) {
+        // Get the temporary directory to store the image
+
+
+        Directory tempDir = await getTemporaryDirectory();
+        String tempPath = tempDir.path;
+        var rng = new Random();
+        File file = new File('$tempPath'+ (rng.nextInt(100)).toString() +'.png');
+        // Create a temporary file with a random name and '.png' extension
+
+        // Write the downloaded image data to the temporary file
+        await file.writeAsBytes(response.bodyBytes);
+
+        // Share the image using the file path
+        await Share.shareFiles([file.path], text: 'Take a look at the ${widget.event_map.name} organized by Anokha 2023 at Amrita Vishwa Vidyapeetham, Coimbatore Campus on ${widget.event_map.date}. Do check it out at Anokha 2023 App by following this link https://play.google.com/store/apps/details?id=com.vaisakhkrishnank.anokha_home or the Anokha official website https://anokha.amrita.edu/');
+
+
+         }
+      else {
+        throw Exception('Failed to download the image.');
+      }
+    } catch (e) {
+      print('Error sharing image: $e');
+    }
+
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: HexColor("#002845"),
-        body: Stack(
+        body:
+
+        Stack(
           children: [
+
             Stack(
               children: [
                 Container(
-                    height: MediaQuery.of(context).size.height * 0.4,
+                    height: MediaQuery.of(context).size.height * 0.5,
                     width: MediaQuery.of(context).size.width * 1,
                     child: AspectRatio(
                       aspectRatio: 1 / 1,
                       child: Image(
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fitWidth,
                           image: NetworkImage(widget.event_map.url)),
                     )),
                 Align(
@@ -157,28 +212,27 @@ class _EventInfoState extends State<EventInfo> {
                                             widget.event_map.name,
                                             maxLines: 3,
                                             style: GoogleFonts.dmSans(textStyle: TextStyle(
-                                              fontSize: 25.0,
+                                              fontSize: MediaQuery.of(context).size.width * 0.06,
                                               fontWeight: FontWeight.w700,
                                               color: Color(0xff002845)
                                             )),
                                           ),
                                         ),
                                       ),
+
+
                                       Padding(
                                         padding: const EdgeInsets.fromLTRB(
                                             0, 0, 0, 0),
                                         child: IconButton(
                                           icon: Icon(
-                                            Icons.star,
-                                            size: 30,
-                                            color:
-                                                (((widget.event_map.isStarred ==
-                                                            1)) ||
-                                                        liked == true)
-                                                    ? Color(0xffff7f11)
-                                                    : Colors.black,
+                                            Icons.ios_share_rounded,
+                                            size: 25,
+
                                           ),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            shareImageUrl(widget.event_map.url);
+                                          },
                                         ),
                                       )
                                     ],
@@ -187,6 +241,7 @@ class _EventInfoState extends State<EventInfo> {
                               ),
                               Row(
                                 children: [
+
                                   SizedBox(
                                     width:
                                         MediaQuery.of(context).size.width * 0.7,
@@ -409,7 +464,7 @@ class _EventInfoState extends State<EventInfo> {
               ),
             ),
             SizedBox(height: 0),
-            Padding(
+            (widget.event_map.totalNumberOfSeats > widget.event_map.noOfRegistrations) ? Padding(
                 padding: EdgeInsets.fromLTRB(
                     0, MediaQuery.of(context).size.height * 0.9, 0, 0),
                 child: Container(
@@ -431,27 +486,27 @@ class _EventInfoState extends State<EventInfo> {
                               style: TextButton.styleFrom(
                                 foregroundColor: HexColor("#002845"),
                                 backgroundColor:
-                                    Colors.white, // Background color
+                                Colors.white, // Background color
                                 padding: EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 20), // Padding
                                 textStyle:
-                                    TextStyle(fontSize: 30), // Text style
+                                TextStyle(fontSize: 30), // Text style
                                 shape: RoundedRectangleBorder(
                                   // Button shape
                                   borderRadius: BorderRadius.circular(15),
                                   side:
-                                      BorderSide(color: Colors.black, width: 2),
+                                  BorderSide(color: Colors.black, width: 2),
                                 ),
                               ),
                               onPressed: () {
                                 if (widget.data.activePassport == 1) {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return PayU(
-                                      data: widget.data,
-                                      event_data: widget.event_map,
-                                    );
-                                  }));
+                                        return PayU(
+                                          data: widget.data,
+                                          event_data: widget.event_map,
+                                        );
+                                      }));
                                 } else {
                                   showDialog(
                                       context: context,
@@ -459,7 +514,7 @@ class _EventInfoState extends State<EventInfo> {
                                         return AlertDialog(
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(25)),
+                                              BorderRadius.circular(25)),
                                           title: Text('Buy Passport'),
                                           content: Text(
                                               'You have to buy a passport to view events'),
@@ -468,7 +523,7 @@ class _EventInfoState extends State<EventInfo> {
                                               child: Text('Buy Passport',
                                                   style: TextStyle(
                                                       color:
-                                                          Color(0xff002845))),
+                                                      Color(0xff002845))),
                                               onPressed: () {
                                                 // Close the pop-up notification
                                                 Navigator.of(context).pop();
@@ -508,7 +563,58 @@ class _EventInfoState extends State<EventInfo> {
                           ),
                         ),
                       ),
+                    ))) : Padding(
+                padding: EdgeInsets.fromLTRB(
+                    0, MediaQuery.of(context).size.height * 0.9, 0, 0),
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: HexColor("#002845"),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20))),
+                    child: Center(
+                      child: Visibility(
+                        visible: widget.txt_visible,
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.06,
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          child: Container(
+                            decoration: ShapeDecoration(
+                                shape: StadiumBorder(), color: Colors.white),
+                            child: TextButton(
+
+                              style: TextButton.styleFrom(
+                                foregroundColor: HexColor("#002845"),
+                                backgroundColor:
+                                Colors.white, // Background color
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 20), // Padding
+                                textStyle:
+                                TextStyle(fontSize: 30), // Text style
+                                shape: RoundedRectangleBorder(
+                                  // Button shape
+                                  borderRadius: BorderRadius.circular(15),
+                                  side:
+                                  BorderSide(color: Colors.black, width: 2),
+                                ),
+                              ),
+                            onPressed: (){
+                            },
+                              child: Center(
+                                  child: Text("HOUSE FULL",
+                                      style:GoogleFonts.dmSans(textStyle:  TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          color: HexColor("#002845"),
+                                          fontSize: 20)))),
+                            ),
+                          ),
+                        ),
+                      ),
                     ))),
+
+
+
+
           ],
         ));
   }

@@ -12,6 +12,8 @@ import 'animated_bar.dart';
 import 'homeBody.dart';
 import 'homeEventCard.dart';
 
+//All events are displayed here
+
 class events {
   final int eventId;
   final String name;
@@ -95,7 +97,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Color(0xff002845),
-            toolbarHeight: 0.0,
+            toolbarHeight: 5.0,
           ),
           body: HomeBody(data: widget.data, eventsList: widget.eventsList)),
     );

@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+
+//Cards for trending events
+
 class AnokhaCards extends StatefulWidget {
   var data;
   var token;
@@ -40,13 +43,13 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: NetworkImage(widget.data[0].url),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
                           ),
                           borderRadius: BorderRadius.circular(20.0),
                           color: Color(0xFFFEFECF0),
                         ),
                         width: MediaQuery.of(context).size.width * 0.80,
-                        height: MediaQuery.of(context).size.width * 0.50,
+                        height: MediaQuery.of(context).size.width * 0.90,
                       ),
                     ),
                     Padding(
@@ -81,19 +84,21 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                 },
                 child: Column(
                   children: [
+
+
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: Container(
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: NetworkImage(widget.data[1].url),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
                           ),
                           borderRadius: BorderRadius.circular(20.0),
                           color: Color(0xFFFEFECF0),
                         ),
                         width: MediaQuery.of(context).size.width * 0.80,
-                        height: MediaQuery.of(context).size.width * 0.50,
+                        height: MediaQuery.of(context).size.width * 0.90,
                       ),
                     ),
                     Padding(
@@ -134,13 +139,13 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: NetworkImage(widget.data[2].url),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
                           ),
                           borderRadius: BorderRadius.circular(20.0),
                           color: Color(0xFFFEFECF0),
                         ),
                         width: MediaQuery.of(context).size.width * 0.80,
-                        height: MediaQuery.of(context).size.width * 0.50,
+                        height: MediaQuery.of(context).size.width * 0.90,
                       ),
                     ),
                     Padding(
@@ -181,13 +186,13 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: NetworkImage(widget.data[3].url),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
                           ),
                           borderRadius: BorderRadius.circular(20.0),
                           color: Color(0xFFFEFECF0),
                         ),
                         width: MediaQuery.of(context).size.width * 0.80,
-                        height: MediaQuery.of(context).size.width * 0.50,
+                        height: MediaQuery.of(context).size.width * 0.90,
                       ),
                     ),
                     Padding(
@@ -228,13 +233,13 @@ class _AnokhaCardsState extends State<AnokhaCards> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: NetworkImage(widget.data[4].url),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
                           ),
                           borderRadius: BorderRadius.circular(20.0),
                           color: Color(0xFFFEFECF0),
                         ),
                         width: MediaQuery.of(context).size.width * 0.80,
-                        height: MediaQuery.of(context).size.width * 0.50,
+                        height: MediaQuery.of(context).size.width * 0.90,
                       ),
                     ),
                     Padding(

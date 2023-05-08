@@ -13,6 +13,8 @@ import 'homePage.dart';
 
 const itemSize = 280.0;
 
+//Shows the lift of registered events.
+
 final __url = serverUrl().url;
 
 class RegisteredEvents extends StatefulWidget {
@@ -120,7 +122,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
         appBar: AppBar(
           backgroundColor: Color(0xff002845),
           elevation: 0,
-          toolbarHeight: 0,
+          toolbarHeight: 5,
         ),
         backgroundColor: Color(0xff002845),
         body: _isLoading

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+
+//Animated Navigation Bar
+
 class AnimatedBar extends StatelessWidget {
   const AnimatedBar({
     super.key,

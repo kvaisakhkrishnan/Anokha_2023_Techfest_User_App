@@ -93,11 +93,12 @@ class _RegisteredEventCardState extends State<RegisteredEventCard> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
+                  padding: const EdgeInsets.only(top: 20.0, left: 10),
                   child: Text(
                     event['eventName'],
+                    maxLines: 2,
                     style: GoogleFonts.dmSans(textStyle: TextStyle(
-                        fontSize: 22.0,
+                        fontSize: 18.0,
                         fontWeight: FontWeight.w500
                     )),
                   ),

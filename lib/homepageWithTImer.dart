@@ -15,6 +15,9 @@ import 'Loading_Screens/events_loading.dart';
 
 final __url = serverUrl().url;
 
+
+//This is the home page which shows timer till Anokha and upcoming events after copuntdown.
+
 class homepageWithTImer extends StatefulWidget {
   final String avatarLink;
   var data;

@@ -12,7 +12,7 @@ import 'ticketSample.dart';
 
 
 
-
+//Shows the upcoming event of a person in the form of a ticket.
 
 
 class MyTicketView extends StatelessWidget {
@@ -50,6 +50,10 @@ class TicketData extends StatelessWidget {
 
     Key? key, required this.data, required this.event,
   }) : super(key: key);
+
+
+
+
 
 
 
@@ -120,7 +124,9 @@ class TicketData extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                      child: Text(event[0]["eventName"], style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 15.0,color: Colors.black)),),
+                      child: Text(event[0]["eventName"],
+                        maxLines: 2,
+                        style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 15.0,color: Colors.black)),),
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.007),
@@ -128,7 +134,7 @@ class TicketData extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
-                      child: Text(event[0]["type"] == 0 ? "Event" : "Workshop", style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 15.0,color: Colors.black)),),
+                      child: Text(event[0]["eventOrWorkshop"] == 0 ? "Event" : "Workshop", style: GoogleFonts.dmSans(textStyle: TextStyle(fontSize: 15.0,color: Colors.black)),),
                     ),
 
                   ],
@@ -174,9 +180,10 @@ class TicketData extends StatelessWidget {
 
         QrImage(
           foregroundColor : Color(0xff002845),
-          data: "${data.userEmail}/${event[0]["eventId"]}",
+          data: (event[0]["eventId"]) == 111 ? "${data.userEmail}" : "${data.userEmail}/${event[0]["eventId"]}",
+
           version: QrVersions.auto,
-          size: MediaQuery.of(context).size.height * 0.19,
+          size: MediaQuery.of(context).size.height * 0.18,
           gapless: false,
 
           embeddedImageStyle: QrEmbeddedImageStyle(

@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+
+//This page shows a registration form which should be filled by the users during registration.
+
 class EventRegistrationForm extends StatefulWidget {
   final jsonData;
   final data;

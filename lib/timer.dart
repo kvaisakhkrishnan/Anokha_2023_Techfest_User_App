@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-
+//Countdown timer
 
 class MyClass {
   DateTime now = DateTime.now(); // instance member
@@ -18,7 +18,7 @@ class MyClass {
   DateTime destination = DateTime(2023, 4, 27, 9, 0, 0); // instance member
 
   MyClass2() {
-    destination = DateTime(2023, 4, 27, 9, 0, 0); // initialize in constructor
+    destination = DateTime(2023, 4, 27, 0, 9, 0); // initialize in constructor
   }
 
   void someMethod() {

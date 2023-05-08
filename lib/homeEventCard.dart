@@ -13,6 +13,8 @@ import 'login.dart';
 
 final __url = serverUrl().url;
 
+
+//Each events is represented in a tile format.
 class EventCard extends StatefulWidget {
   final event_list event_data;
   var data;

@@ -7,6 +7,8 @@ import 'dart:convert';
 import 'confirmPassword.dart';
 import 'otpValidationforForgotpassword.dart';
 
+
+//Page to reset password if someone forgets it.
 class forgotPasswordclass extends StatefulWidget {
   const forgotPasswordclass({Key? key}) : super(key: key);
 

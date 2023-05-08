@@ -16,12 +16,15 @@ const itemSize = 280.0;
 
 class CardWidget extends StatefulWidget {
   var index;
+
   CardWidget({required this.index});
   @override
   _CardWidgetState createState() => _CardWidgetState();
+
 }
 
 class _CardWidgetState extends State<CardWidget> {
+
   bool selected = false;
 
   @override
@@ -33,11 +36,11 @@ class _CardWidgetState extends State<CardWidget> {
         });
       },
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
+        duration: Duration(milliseconds: 50),
+        curve: Curves.easeInOutQuad,
         transform: Matrix4.translationValues(
           0.0,
-          selected ? -100.0 : 0.0,
+          selected ? -50.0 : 0.0,
           0.0,
         ),
         child: Container(
@@ -61,7 +64,7 @@ class _CardWidgetState extends State<CardWidget> {
             padding: const EdgeInsets.all(8.0),
             child: Center(child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text("Anokha, the national techfest of Amrita Vishwa Vidyapeetham Coimbatore, is a 3-day congregation of some of the brightest minds in India. Founded in 2010, Anokha has grown by leaps and bounds and has progressed to become one of the leading techfests in India. Anokha has successfully completed eight editions and boasts an average annual participation of over 10,000 outstanding students from top-ranking engineering institutions in India like IITs, BITS, NITs and IIITs as well as partner universities in USA and Europe namely University of New Mexico, EVRY France and Uppsala University-Sweden.", style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xff002845))),),
+              child: Text("Anokha, the national techfest of Amrita Vishwa Vidyapeetham Coimbatore, is a 3-day congregation of some of the brightest minds in India. Founded in 2010, Anokha has grown by leaps and bounds and has progressed to become one of the leading techfests in India. Anokha has successfully completed ten editions and boasts an average annual participation of over 10,000 outstanding students from top-ranking engineering institutions in India like IITs, BITS, NITs and IIITs as well as partner universities in USA and Europe namely University of New Mexico, EVRY France and Uppsala University-Sweden.", style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xff002845))),),
             ),),
           ) :
           (widget.index == 3) ? Center(child: Image(image: AssetImage("Images/raga.jpeg"),),) :
@@ -70,7 +73,7 @@ class _CardWidgetState extends State<CardWidget> {
 
           (widget.index == 6) ? Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Center(child: Text("Amrita Vishwa Vidyapeetham University's Coimbatore campus is a picturesque and serene educational institution located in the foothills of the Western Ghats. With state-of-the-art facilities and a commitment to academic excellence, the university offers a wide range of undergraduate and postgraduate programs in various fields, including engineering, management, medicine, arts, and sciences. The campus boasts of world-class research facilities and is known for its focus on innovation and entrepreneurship.",style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xff002845))))),
+            child: Center(child: Text("Amrita Vishwa Vidyapeetham Coimbatore campus is a picturesque and serene educational institution located in the foothills of the Western Ghats. With state-of-the-art facilities and a commitment to academic excellence, the university offers a wide range of undergraduate and postgraduate programs in various fields, including engineering, management, medicine, arts, and sciences. The campus boasts of world-class research facilities and is known for its focus on innovation and entrepreneurship.",style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xff002845))))),
           ):
           (widget.index == 7) ? Center(child: Image(image: AssetImage("Images/clg.jpeg"),),) :
           (widget.index == 8) ? Center(child: Image(image: AssetImage("Images/clg2.jpeg"),),) :
@@ -94,7 +97,7 @@ class _CardWidgetState extends State<CardWidget> {
 
            Padding(
              padding: const EdgeInsets.all(10.0),
-             child: Center(child: Text("Anokha, the national engineering techfest of Amrita School of Engineering, Coimbatore, is a 3-day congregation of some of the brightest minds in India. Founded in 2010, Anokha has grown by leaps and bounds and has progressed to become one of the most popular and top techfests in India. Anokha has had an average annual participation of over 10,000 of the best undergraduate engineering students from top-ranking engineering institutions in India like IITs, BITS, NITs and IIITs participating as well as partner universities in USA and Europe like University of New Mexico, EVRY France and Uppsala University-Sweden.",style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xff002845))))),
+             child: Center(child: Text("Techfair brings students from different universities across the country and gives them an opportunity to showcase their novelty to industrialists and resource persons. One of the best platforms to exhibit talent and innovation, this extravagant showcase brought together under a single roof not only helps students showcase their talent, but also acts as a fantastic opportunity to learn & grow.",style: GoogleFonts.dmSans(textStyle: TextStyle(color: Color(0xff002845))))),
            )
     ),
       ),
@@ -109,53 +112,52 @@ class MainPage extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<Offset> _animation;
   static bool countdownEnded = false;
   final pageController = PageController();
   String assetName = 'Images/campus.svg';
 
-  Future getEntryCard()  async {
+  Future getEntryCard() async {
     String url = __url + "userApp/events/nextEvent";
     final response = await http.get(Uri.parse(url),
         headers: {'authorization': 'Bearer ${widget.data.SECRET_TOKEN}'});
 
-    if(response.statusCode == 401)
-      {
-        return ["TOKENEXPIREDERROR"];
-      }
-    else if(response.statusCode == 404)
-    {
+    if (response.statusCode == 401) {
+      return ["TOKENEXPIREDERROR"];
+    } else if (response.statusCode == 404) {
       return ["NOEVENTS"];
-    }
-    else {
+    } else {
       return (json.decode(response.body));
     }
-
   }
 
   Future<bool> _onWillPop() async {
     return (await showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0)),
-            title: Text('Are you sure?'),
-            content: Text('Do you want to exit the app?'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: Text('No', style: TextStyle(color: Color(0xFF002845))),
-              ),
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                child: Text('Yes', style: TextStyle(color: Color(0xFF002845))),
-              ),
-            ],
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0)),
+        title: Text('Are you sure?'),
+        content: Text('Do you want to exit the app?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child:
+            Text('No', style: TextStyle(color: Color(0xFF002845))),
           ),
-        )) ??
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child:
+            Text('Yes', style: TextStyle(color: Color(0xFF002845))),
+          ),
+        ],
+      ),
+    )) ??
         false;
   }
 
@@ -177,10 +179,27 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     scrollController.addListener(onListen);
     super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    )..repeat(reverse: true);
+
+    // Create a Tween that changes the vertical position of the icon between -0.5 and 0.5
+    final tween = Tween<Offset>(
+      begin: const Offset(0, -0.5),
+      end: const Offset(0, 0.5),
+    );
+
+    // Create an animation that gradually changes the position of the icon over time
+    _animation = tween.animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOut,
+    ));
   }
 
   @override
   void dispose() {
+    _controller.dispose();
     scrollController.removeListener(onListen);
     super.dispose();
   }
@@ -190,6 +209,7 @@ class _MainPageState extends State<MainPage> {
     return WillPopScope(
         onWillPop: _onWillPop,
         child: Scaffold(
+
           backgroundColor: Color(0xFF002845),
           body: Scaffold(
             backgroundColor: Color(0xFF002845),
@@ -242,9 +262,27 @@ class _MainPageState extends State<MainPage> {
                                         margin: EdgeInsets.only(
                                             top: MediaQuery.of(context).size.height *
                                                 0.05),
-                                        child: Text("You have no evets for today",
-                                            style: GoogleFonts.dmSans(textStyle: TextStyle(
-                                                color: Color(0xffbeb7a4), fontSize: 22.0, fontWeight: FontWeight.w500))),
+                                        child: Column(
+                                          children: [
+                                            Text("You have no event for today",
+                                                style: GoogleFonts.dmSans(textStyle: TextStyle(
+                                                    color: Color(0xffbeb7a4), fontSize: 22.0, fontWeight: FontWeight.w500))),
+                                            Padding(
+                                              padding: const EdgeInsets.all(10.0),
+                                              child: Text("Swipe up to know more about us!",
+                                                  style: GoogleFonts.dmSans(textStyle: TextStyle(
+                                                      color: Colors.white, fontSize: 15.0, fontWeight: FontWeight.w500))),
+                                            ),
+
+                                            Padding(
+                                              padding: const EdgeInsets.only(top : 15.0),
+                                              child: SlideTransition(
+                                                position: _animation,
+                                                child: Icon(Icons.keyboard_arrow_up_outlined, color: Colors.white,size: 30.0),
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
 
                                     ],
@@ -487,10 +525,10 @@ class _MainPageState extends State<MainPage> {
                             delegate: SliverChildBuilderDelegate(
                                   (context, index) {
                                 if (index < 16) {
-                                  final itemPositionOffset = index * itemSize * 0.7;
+                                  final itemPositionOffset = index * itemSize * 0.68;
                                   final difference =
                                       scrollController.offset - itemPositionOffset;
-                                  final percent = 1.2 - difference / itemSize * 0.7;
+                                  final percent = 1.2 - difference / itemSize * 0.68;
                                   double opacity = percent;
                                   double scale = percent;
                                   if (opacity >= 1.0) opacity = 1.0;

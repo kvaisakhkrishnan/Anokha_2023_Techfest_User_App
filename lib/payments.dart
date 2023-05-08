@@ -20,6 +20,9 @@ import 'package:lottie/lottie.dart';
 import 'SessionExpired/sessionExpired.dart';
 import 'homeBody.dart';
 
+
+//Once the registration form is filled, the user will be taken to this page for payment.
+
 late String trans_token;
 late String name,
     phoneNumber,

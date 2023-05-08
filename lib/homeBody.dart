@@ -13,6 +13,7 @@ import 'Loading_Screens/events_loading.dart';
 import 'anokhaCards.dart';
 import 'homeEventCard.dart';
 
+//This page shows lst if all events in a tile format.
 final __url = serverUrl().url;
 
 class HomeBody extends StatefulWidget {
@@ -52,8 +53,8 @@ class _HomeBodyState extends State<HomeBody> {
               eventDetail.name.toLowerCase().contains(search.toLowerCase()) ||
               eventDetail.description.toLowerCase().contains(search.toLowerCase()) ||
               eventDetail.date.toLowerCase().contains(search.toLowerCase()) ||
-              (search.toLowerCase().contains("events") && eventDetail.type == 0) ||
-              (search.toLowerCase().contains("workshops") && eventDetail.type == 1) ||
+              (search.toLowerCase().contains("event") && eventDetail.type == 0) ||
+              (search.toLowerCase().contains("workshop") && eventDetail.type == 1) ||
               (search.toLowerCase().contains("individual") && eventDetail.individualOrGroup == 0) ||
               (search.toLowerCase().contains("single") && eventDetail.individualOrGroup == 0) ||
 
@@ -78,15 +79,29 @@ class _HomeBodyState extends State<HomeBody> {
         .sort((a, b) => b.noOfRegistrations.compareTo(a.noOfRegistrations));
   }
 
+  var eventideCount = -1;
+
   @override
   void initState() {
+    var count = 0;
     for (var eventsUnderDept in widget.eventsList) {
+      if(eventsUnderDept.title == "Eventide")
+        {
+          eventideCount = count;
+        }
+      count += 1;
       for (var eventDetail in eventsUnderDept.events_list) {
         allEvents.add(eventDetail);
       }
     }
     sortEventsByRegistrations();
+
+
+
+
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -155,27 +170,76 @@ class _HomeBodyState extends State<HomeBody> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return Column(
-                  children: [
-                    Padding(
-                      padding:
-                          EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0),
-                      child: Container(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          "${widget.eventsList[index].title}",
-                          style: GoogleFonts.dmSans(textStyle: TextStyle(
-                              color: Color(0xffbeb7a4),
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w500)),
-                        ),
-                      ),
-                    ),
-                    CardRow(
-                        list_of_events: widget.eventsList[index].events_list,
-                        data: widget.data),
-                  ],
-                );
+               if(index == 0)
+                 {
+                   return Column(
+                     children: [
+                       Padding(
+                         padding:
+                         EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0),
+                         child: Container(
+                           alignment: Alignment.topLeft,
+                           child: Text(
+                             "Event - Eventide",
+                             style: GoogleFonts.dmSans(textStyle: TextStyle(
+                                 color: Color(0xffbeb7a4),
+                                 fontSize: 20.0,
+                                 fontWeight: FontWeight.w500)),
+                           ),
+                         ),
+                       ),
+                       CardRow(
+                           list_of_events: widget.eventsList[eventideCount].events_list,
+                           data: widget.data),
+                     ],
+                   );
+                 }
+               else if(index < eventideCount){
+                 return Column(
+                   children: [
+                     Padding(
+                       padding:
+                       EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0),
+                       child: Container(
+                         alignment: Alignment.topLeft,
+                         child: Text(
+                           "${widget.eventsList[index-1].title}",
+                           style: GoogleFonts.dmSans(textStyle: TextStyle(
+                               color: Color(0xffbeb7a4),
+                               fontSize: 20.0,
+                               fontWeight: FontWeight.w500)),
+                         ),
+                       ),
+                     ),
+                     CardRow(
+                         list_of_events: widget.eventsList[index-1].events_list,
+                         data: widget.data),
+                   ],
+                 );
+               }
+               else{
+                 return Column(
+                   children: [
+                     Padding(
+                       padding:
+                       EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0),
+                       child: Container(
+                         alignment: Alignment.topLeft,
+                         child: Text(
+                           "${widget.eventsList[index].title}",
+                           style: GoogleFonts.dmSans(textStyle: TextStyle(
+                               color: Color(0xffbeb7a4),
+                               fontSize: 20.0,
+                               fontWeight: FontWeight.w500)),
+                         ),
+                       ),
+                     ),
+                     CardRow(
+                         list_of_events: widget.eventsList[index].events_list,
+                         data: widget.data),
+                   ],
+                 );
+               }
               },
               childCount: widget.eventsList.length,
             ),
